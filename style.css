@@ -578,9 +578,12 @@ section {
   border-radius: 2rem;
   border: rgb(53, 53, 53) 0.1rem solid;
   border-color: rgb(163, 163, 163);
-  background: (250, 250, 250);
-  margin: auto;
+  background: white;
+  margin: 2rem auto;
   padding: 0.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+  max-width: 95%;
 }
 
 .contact-info-container {
@@ -588,11 +591,17 @@ section {
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  margin: 1rem;
+  padding: 1rem;
 }
 
-.contact-info-container p {
-  font-size: larger;
+.contact-info-container a {
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.contact-info-container a:hover {
+  color: #4ca5ff;
 }
 
 .contact-icon {
@@ -606,8 +615,9 @@ section {
 /* FOOTER SECTION */
 
 footer {
+  padding: 2rem 0;
+  margin-bottom: 2rem;
   height: 25vh;
-  margin-bottom: 60px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -622,11 +632,9 @@ footer nav {
 }
 
 footer .nav-links {
-  margin: 0;
-  padding: 0;
-  display: flex;
-  justify-content: center;
-  gap: 3rem;
+  flex-wrap: wrap;
+  gap: 2rem;
+  padding: 0 1rem;
 }
 
 footer p {
@@ -835,4 +843,41 @@ footer p {
 
 .experience-sub-title.project-title {
   font-size: 1rem;
+}
+
+/* Media Queries for Mobile */
+@media screen and (max-width: 400px) {
+  .contact-info-upper-container {
+    flex-direction: column;
+    padding: 1rem;
+    gap: 0.5rem;
+  }
+
+  .contact-info-container {
+    width: 100%;
+    padding: 0.5rem;
+  }
+
+  .contact-info-container p {
+    font-size: 0.9rem;
+    word-break: break-all;
+  }
+
+  footer {
+    padding: 1.5rem 0;
+    margin-bottom: 1rem;
+  }
+
+  footer .nav-links {
+    gap: 1rem;
+  }
+
+  footer .nav-links a {
+    font-size: 0.9rem;
+  }
+
+  footer p {
+    font-size: 0.8rem;
+    padding: 0 1rem;
+  }
 }

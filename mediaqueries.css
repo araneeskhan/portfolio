@@ -19,6 +19,10 @@
     }
     #hamburger-nav {
       display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 2rem;
+      background: transparent;
     }
     #experience,
     .experience-details-container {
@@ -42,13 +46,28 @@
       width: 275px;
       height: 275px;
       margin: 0 auto 2rem;
+      border-radius: 50%;
     }
     .about-containers {
       margin-top: 0;
     }
   }
   
-  @media screen and (max-width: 600px) {
+  @media screen and (min-width: 401px) and (max-width: 1000px) {
+    #profile {
+      height: 83vh;
+      margin-bottom: 6rem;
+    }
+    .about-containers {
+      flex-wrap: wrap;
+    }
+    #contact,
+    #projects {
+      height: fit-content;
+    }
+  }
+  
+  @media screen and (max-width: 400px) {
     #contact,
     footer {
       height: 40vh;
@@ -81,6 +100,7 @@
     }
     .logo {
       font-size: 1.5rem;
+      margin: 1rem 0;
     }
     .nav-links {
       flex-direction: column;
@@ -88,9 +108,10 @@
       text-align: center;
     }
     .section__pic-container {
-      width: auto;
-      height: 46vw;
+      width: 275px;
+      height: 275px;
       justify-content: center;
+      border-radius: 50%;
     }
     .section__text__p2 {
       font-size: 1.25rem;
@@ -100,6 +121,46 @@
     }
     .text-container {
       text-align: justify;
+    }
+    #hamburger-menu {
+      width: 2rem;
+      height: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+    .menu-links {
+      display: none;
+      position: absolute;
+      top: 100%;
+      right: 0;
+      background-color: white;
+      width: 100%;
+      padding: 1.5rem;
+      border-radius: 0 0 15px 15px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      z-index: 999;
+      transition: all 0.3s ease-in-out;
+      backdrop-filter: blur(10px);
+      background-color: rgba(255, 255, 255, 0.95);
+    }
+    .menu-links.open {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      animation: slideDown 0.3s ease-in-out;
+    }
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
   }
   
