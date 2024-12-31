@@ -16,6 +16,7 @@
           <li><a href="#about">About</a></li>
           <li><a href="#experience">Skills</a></li>
           <li><a href="#projects">Projects</a></li>
+          <li><a href="#achievements">Achievements</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
       </div>
@@ -32,15 +33,16 @@
           <li><a href="#about" onclick="toggleMenu()">About</a></li>
           <li><a href="#experience" onclick="toggleMenu()">Skills</a></li>
           <li><a href="#projects" onclick="toggleMenu()">Projects</a></li>
+          <li><a href="#achievements" onclick="toggleMenu()">Achievements</a></li>
           <li><a href="#contact" onclick="toggleMenu()">Contact</a></li>
         </div>
       </div>
     </nav>
     <section id="profile">
-      <div class="section__pic-container">
+      <div class="section__pic-container" data-aos="fade-right">
         <img src="./assets/profile-pic.png" alt="Anees profile picture" />
       </div>
-      <div class="section__text">
+      <div class="section__text" data-aos="fade-left">
         <p class="section__text__p1">Hello, I'm</p>
         <h1 class="title">Anees Ur Rehman</h1>
         <p class="section__text__p2">Frontend Developer</p>
@@ -72,13 +74,13 @@
       </div>
     </section>
     <section id="about">
-      <p class="section__text__p1">Get To Know More</p>
-      <h1 class="title">About Me</h1>
+      <p class="section__text__p1" data-aos="fade-up">Get To Know More</p>
+      <h1 class="title" data-aos="fade-up" data-aos-delay="100">About Me</h1>
       <div class="section-container">
        
         <div class="about-details-container">
           <div class="about-containers">
-            <div class="details-container">
+            <div class="details-container" data-aos="zoom-in" data-aos-delay="200">
               <img
                 src="./assets/experience.png"
                 alt="Experience icon"
@@ -87,7 +89,7 @@
               <h3>Experience</h3>
               <p>Fresh Graduate <br />Frontend Development</p>
             </div>
-            <div class="details-container">
+            <div class="details-container" data-aos="zoom-in" data-aos-delay="300">
               <img
                 src="./assets/education.png"
                 alt="Education icon"
@@ -97,10 +99,9 @@
               <p>Bachelors Degree<br />Bachelors of Computer Science</p>
             </div>
           </div>
-          <div class="text-container">
+          <div class="text-container" data-aos="fade-up" data-aos-delay="400">
             <p>
-              <strong>Highly motivated fresh graduate</strong> with a passion for technology and innovation, seeking opportunities in
-              <span ><strong>Web and App development</strong></span>. I have a strong foundation in both 
+              <strong>Fresh graduate having a strong foundation in both 
               <span ><strong>frontend</strong></span> and 
               <span ><strong>backend development</strong></span>,
               with experience in modern technologies like 
@@ -128,8 +129,8 @@
       />
     </section>
     <section id="experience">
-      <p class="section__text__p1">Explore My</p>
-      <h1 class="title">Skills</h1>
+      <p class="section__text__p1" data-aos="fade-up">Explore My</p>
+      <h1 class="title" data-aos="fade-up" data-aos-delay="100">Skills</h1>
       <div class="experience-details-container">
         <!-- Frontend Development -->
         <div class="skills-category">
@@ -143,7 +144,7 @@
             </div>
             <div class="skill-card" style="--i:1">
               <div class="skill-icon-wrapper">
-                <img src="./assets/skills/html.jpg" alt="HTML" class="skill-icon" />
+                <img src="./assets/skills/html.png" alt="HTML" class="skill-icon" />
               </div>
               <h3>HTML</h3>
             </div>
@@ -261,17 +262,17 @@
                 class="project-img"
               />
             </div>
-            <h2 class="experience-sub-title project-title">Project One</h2>
+            <h2 class="experience-sub-title project-title">Campus Sports Sphere</h2>
             <div class="btn-container">
               <button
                 class="btn btn-color-2 project-btn"
-                onclick="location.href='https://github.com/'"
+                onclick="location.href='https://github.com/araneeskhan/CampusSportsSphere'"
               >
                 Github
               </button>
               <button
                 class="btn btn-color-2 project-btn"
-                onclick="location.href='https://github.com/'"
+                onclick="location.href='https://github.com/araneeskhan/CampusSportsSphere'"
               >
                 Live Demo
               </button>
@@ -285,17 +286,17 @@
                 class="project-img"
               />
             </div>
-            <h2 class="experience-sub-title project-title">Project Two</h2>
+            <h2 class="experience-sub-title project-title">QuickBite</h2>
             <div class="btn-container">
               <button
                 class="btn btn-color-2 project-btn"
-                onclick="location.href='https://github.com/'"
+                onclick="location.href='https://github.com/araneeskhan/QuickBite'"
               >
                 Github
               </button>
               <button
                 class="btn btn-color-2 project-btn"
-                onclick="location.href='https://github.com/'"
+                onclick="location.href='https://github.com/araneeskhan/QuickBite'"
               >
                 Live Demo
               </button>
@@ -309,21 +310,46 @@
                 class="project-img"
               />
             </div>
-            <h2 class="experience-sub-title project-title">Project Three</h2>
+            <h2 class="experience-sub-title project-title">College Management System</h2>
             <div class="btn-container">
               <button
                 class="btn btn-color-2 project-btn"
-                onclick="location.href='https://github.com/'"
+                onclick="location.href='https://github.com/araneeskhan/CollegeManagmentSystem'"
               >
                 Github
               </button>
               <button
                 class="btn btn-color-2 project-btn"
-                onclick="location.href='https://github.com/'"
+                onclick="location.href='https://github.com/araneeskhan/CollegeManagmentSystem'"
               >
                 Live Demo
               </button>
             </div>
+          </div>
+        </div>
+      </div>
+      <img
+        src="./assets/arrow.png"
+        alt="Arrow icon"
+        class="icon arrow"
+        onclick="location.href='./#contact'"
+      />
+    </section>
+    <section id="achievements">
+      <p class="section__text__p1">Check Out My</p>
+      <h1 class="title">Achievements</h1>
+      <div class="section-container">
+        <div class="achievement-container">
+          <div class="achievement-image">
+            <img src="./assets/achievement-1.jpg" alt="Achievement" />
+          </div>
+          <div class="achievement-text">
+            <h2>Career Expo 2024 - 1st Position</h2>
+            <p>
+              Secured first position in the Hybrid category at Career Expo 2024 for the project
+              "Campus Sports Sphere" - a comprehensive Automated sports management system combining web and
+              mobile technologies to streamline University sports activities.
+            </p>
           </div>
         </div>
       </div>
@@ -363,11 +389,12 @@
             <li><a href="#about">About</a></li>
             <li><a href="#experience">Skills</a></li>
             <li><a href="#projects">Projects</a></li>
+            <li><a href="#achievements">Achievements</a></li>
             <li><a href="#contact">Contact</a></li>
           </ul>
         </div>
       </nav>
-      <p>Copyright &#169; 2024 Anees. All Rights Reserved.</p>
+      <p>Copyright &#169; 2024 Anees Ur Rehman. All Rights Reserved.</p>
     </footer>
     <script src="script.js"></script>
   </body>
