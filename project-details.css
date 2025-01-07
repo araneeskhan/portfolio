@@ -1,0 +1,193 @@
+/* Project Details Container */
+.project-details-container {
+    padding-top: calc(var(--nav-height) + 2rem);
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
+
+.project-content {
+    background: white;
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Project Title */
+.project-title {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    color: var(--text-primary);
+    text-align: center;
+}
+
+/* Cover Image */
+.project-cover {
+    width: 100%;
+    height: 500px;
+    border-radius: 15px;
+    overflow: hidden;
+    margin-bottom: 3rem;
+    box-shadow: 
+        0 4px 15px rgba(76, 165, 255, 0.3),
+        0 4px 15px rgba(182, 115, 248, 0.3);
+}
+
+.project-cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 15px;
+}
+
+/* Project Info Sections */
+.project-info {
+    display: grid;
+    gap: 3rem;
+}
+
+.project-info h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    color: var(--text-primary);
+}
+
+.project-description p {
+    line-height: 1.8;
+    color: var(--text-secondary);
+    text-align: justify;
+}
+
+/* Technologies Stack */
+.tech-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.tech-badge {
+    padding: 0.5rem 1.5rem;
+    border-radius: 50px;
+    background: rgba(76, 165, 255, 0.1);
+    color: #4ca5ff;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.tech-badge:hover {
+    background: var(--gradient-primary);
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* Features List */
+.project-features ul {
+    list-style: none;
+    padding: 0;
+}
+
+.project-features li {
+    margin-bottom: 1rem;
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.project-features li::before {
+    content: "•";
+    color: #4ca5ff;
+    position: absolute;
+    left: 0;
+    font-weight: bold;
+}
+
+/* Video Container */
+.video-container {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+    margin: 1rem auto;
+    border-radius: 15px;
+    overflow: hidden;
+    background: #000;
+}
+
+.project-video {
+    width: 100%;
+    height: auto;
+    max-height: 700px;
+    display: block;
+    border-radius: 15px;
+    object-fit: contain;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 1024px) {
+    .project-details-container {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+    }
+
+    .project-title {
+        font-size: 2.2rem;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .project-content {
+        padding: 1.5rem;
+    }
+
+    .project-cover {
+        height: 400px;
+        margin-bottom: 2rem;
+    }
+
+    .project-title {
+        font-size: 2rem;
+    }
+
+    .project-info h2 {
+        font-size: 1.5rem;
+    }
+
+    .tech-badge {
+        padding: 0.4rem 1.2rem;
+        font-size: 0.9rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .project-details-container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    .project-content {
+        padding: 1rem;
+    }
+
+    .project-cover {
+        height: 300px;
+        margin-bottom: 1.5rem;
+    }
+
+    .project-title {
+        font-size: 1.8rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .project-info {
+        gap: 2rem;
+    }
+
+    .tech-stack {
+        gap: 0.8rem;
+    }
+
+    .tech-badge {
+        padding: 0.3rem 1rem;
+        font-size: 0.85rem;
+    }
+}
