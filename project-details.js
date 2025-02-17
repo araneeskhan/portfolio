@@ -21,7 +21,7 @@ const projectsData = {
         description: 'A modern food delivery platform that lets you Order FastFood, featuring real-time order History Tracking and seamless payment integration.',
         videoPath: 'assets/projects/quickbite/demo.mp4',
         technologies: [
-            'ReactNative', 'Firebase', 'Zustand', 
+            'ReactNative', 'Firebase', 'Zustand', 'AsyncStorage'
         ],
         features: [
             'Real-time order tracking system',
@@ -29,6 +29,23 @@ const projectsData = {
             'Restaurant dashboard for ordering Food',
             'Customer rating and review system',
             'Dynamic menu management',
+        ]
+    },
+    'ai-showcase': {
+        title: 'AI Showcase',
+        coverImage: 'assets/ai-showcase/cover.png',
+        description: 'A modern, feature-rich AI development platform that combines multiple AI-powered tools to enhance developer productivity.',
+        videoPath: 'assets/projects/ai-showcase/demo.mp4',
+        technologies: [
+            'React.js', 'Chakra UI', 'Framer Motion', 'Node.js', 'OpenAI API'
+        ],
+        features: [
+            '🎯 AI Code Assistant - Real-time code suggestions and pair programming',
+            '📝 Resume Analyzer - AI-powered resume optimization',
+            '👥 Dev Community - Collaborative development environment',
+            '📊 Smart Analytics - Track coding progress with AI insights',
+            '☁️ Cloud Workspace - Secure, integrated development environment',
+            '🔌 API Integration - Connect with your favorite dev tools'
         ]
     },
     // ... other projects
