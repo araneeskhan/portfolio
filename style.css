@@ -13,12 +13,32 @@
   --text-secondary: #555555;
   --nav-height: 80px;
   --transition: all 0.3s ease;
+  --background: #ffffff;
+  --surface: #ffffff;
+  --accent-primary: #4ca5ff;
+  --accent-secondary: #b673f8;
+  --nav-bg: rgba(255, 255, 255, 0.98);
+  --card-bg: #ffffff;
+  --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="dark"] {
+  --background: #0f172a;
+  --surface: #1e293b;
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --accent-primary: #38bdf8;
+  --accent-secondary: #818cf8;
+  --nav-bg: rgba(15, 23, 42, 0.98);
+  --card-bg: #1e293b;
+  --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
 body {
   font-family: "Poppins", sans-serif;
   color: var(--text-primary);
   line-height: 1.6;
+  background-color: var(--background);
 }
 
 html {
@@ -26,7 +46,7 @@ html {
 }
 
 p {
-  color: rgb(85, 85, 85);
+  color: var(--text-secondary);
 }
 
 /* TRANSITION */
@@ -47,20 +67,27 @@ a,
   left: 2rem;
   right: 2rem;
   height: var(--nav-height);
-  background: rgba(255, 255, 255, 0.98);
+  background: var(--nav-bg);
   backdrop-filter: blur(10px);
   z-index: 1000;
-  padding: 0 3rem;
+  padding: 0 2rem;
   border-radius: 50px;
   box-shadow: 
     0 4px 15px rgba(76, 165, 255, 0.3),
     0 4px 15px rgba(182, 115, 248, 0.3);
 }
 
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
 .nav-links {
   display: flex;
-  gap: 4rem;
+  gap: 2rem;
   list-style: none;
+  align-items: center;
 }
 
 .nav-links a {
@@ -211,6 +238,7 @@ section {
   padding-left: 2rem;
   padding-right: 2rem;
   padding-bottom: 2rem;
+  background-color: var(--background);
 }
 
 .section-container {
@@ -384,7 +412,7 @@ section {
 .details-container {
   padding: 1.5rem;
   flex: 1;
-  background: white;
+  background: var(--surface);
   border-radius: 2rem;
   border: rgb(53, 53, 53) 0.1rem solid;
   border-color: rgb(163, 163, 163);
@@ -619,7 +647,8 @@ section {
 footer {
   padding: 2rem 0;
   margin-bottom: 2rem;
-  background: rgba(255, 255, 255, 0.98);
+  background: var(--background);
+  color: var(--text-primary);
 }
 
 footer nav {
@@ -955,39 +984,15 @@ footer p {
 }
 
 .theme-toggle {
-    display: flex;
-    gap: 0.5rem;
-    align-items: center;
-}
-
-.theme-icon {
     width: 24px;
     height: 24px;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: transform 0.3s ease;
+    margin-left: 1rem;
 }
 
-.theme-icon:hover {
+.theme-toggle:hover {
     transform: scale(1.1);
-}
-
-/* Dark Theme Colors */
-[data-theme="dark"] {
-    --text-primary: #ffffff;
-    --text-secondary: #b3b3b3;
-    --background: #121212;
-    --surface: #1e1e1e;
-    --surface-2: #2d2d2d;
-}
-
-[data-theme="dark"] .color-container {
-    background: var(--surface);
-    border-color: var(--surface-2);
-}
-
-[data-theme="dark"] .btn-color-2 {
-    background: var(--surface);
-    color: var(--text-primary);
 }
 
 /* Projects Section Styling */

@@ -15,30 +15,22 @@
   <body>
     <nav id="desktop-nav">
       <div class="logo">Anees Ur Rehman</div>
-      <div class="nav-content">
+      <div class="nav-right">
         <ul class="nav-links">
           <li><a href="#about">About</a></li>
           <li><a href="#experience">Skills</a></li>
           <li><a href="#projects">Projects</a></li>
           <li><a href="#achievements">Achievements</a></li>
           <li><a href="#contact">Contact</a></li>
+          <li>
+            <img 
+              src="./assets/light-dark.png" 
+              alt="Theme Toggle" 
+              class="theme-toggle" 
+              onclick="toggleTheme()"
+            />
+          </li>
         </ul>
-        <div class="theme-toggle">
-          <img
-            src="./assets/theme-light.png"
-            alt="Light theme"
-            class="theme-icon"
-            id="theme-light"
-            onclick="toggleTheme('light')"
-          />
-          <img
-            src="./assets/theme-dark.png"
-            alt="Dark theme"
-            class="theme-icon"
-            id="theme-dark"
-            onclick="toggleTheme('dark')"
-          />
-        </div>
       </div>
     </nav>
     <nav id="hamburger-nav">
@@ -60,10 +52,10 @@
       </div>
     </nav>
     <section id="profile">
-      <div class="section__pic-container" data-aos="fade-right">
+      <div class="section__pic-container" data-aos="fade-right" data-aos-delay="0" data-aos-once="true" data-aos-duration="1000">
         <img src="./assets/profile-pic.png" alt="Anees profile picture" />
       </div>
-      <div class="section__text" data-aos="fade-left">
+      <div class="section__text" data-aos="fade-left" data-aos-delay="200" data-aos-once="true" data-aos-duration="1000">
         <p class="section__text__p1">Hello, I'm</p>
         <h1 class="title">Anees Ur Rehman</h1>
         <p class="section__text__p2">Frontend Developer</p>
@@ -277,7 +269,7 @@
         <!-- Project 1: Campus Sports Sphere -->
         <div class="project-card" data-aos="fade-up" data-aos-delay="200">
           <div class="project-image">
-            <img src="./assets/project-1.png" alt="Campus Sports Sphere" />
+            <img src="./assets/css/landing-image.png" alt="Campus Sports Sphere" />
           </div>
           <div class="project-content">
             <h3>Campus Sports Sphere</h3>
@@ -290,11 +282,11 @@
             </div>
             <div class="project-links">
               <button class="btn btn-color-2" onclick="location.href='https://github.com/araneeskhan/CampusSportsSphere'">
-                <img src="./assets/github.png" alt="GitHub" class="btn-icon" />
+                <i class="fab fa-github"></i>
                 Code
               </button>
               <button class="btn btn-color-1" onclick="location.href='project-details.html?id=campus-sports-sphere'">
-                <img src="./assets/link.png" alt="Demo" class="btn-icon" />
+                <i class="fas fa-external-link-alt"></i>
                 Demo
               </button>
             </div>
@@ -317,11 +309,11 @@
             </div>
             <div class="project-links">
               <button class="btn btn-color-2" onclick="location.href='https://github.com/araneeskhan/QuickBite'">
-                <img src="./assets/github.png" alt="GitHub" class="btn-icon" />
+                <i class="fab fa-github"></i>
                 Code
               </button>
               <button class="btn btn-color-1" onclick="location.href='project-details.html?id=quickbite'">
-                <img src="./assets/link.png" alt="Demo" class="btn-icon" />
+                <i class="fas fa-external-link-alt"></i>
                 Demo
               </button>
             </div>
@@ -339,16 +331,16 @@
             <div class="project-tech">
               <span>React.js</span>
               <span>Node.js</span>
-              <span>OpenAI</span>
+           <span>Framer Motion</span>
               <span>Chakra UI</span>
             </div>
             <div class="project-links">
               <button class="btn btn-color-2" onclick="location.href='https://github.com/araneeskhan/AiShowCase'">
-                <img src="./assets/github.png" alt="GitHub" class="btn-icon" />
+                <i class="fab fa-github"></i>
                 Code
               </button>
               <button class="btn btn-color-1" onclick="location.href='project-details.html?id=ai-showcase'">
-                <img src="./assets/link.png" alt="Demo" class="btn-icon" />
+                <i class="fas fa-external-link-alt"></i>
                 Demo
               </button>
             </div>

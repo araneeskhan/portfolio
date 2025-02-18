@@ -4,9 +4,10 @@ const projectsData = {
         title: 'Campus Sports Sphere',
         coverImage: 'assets/css/cover.png',
         description: 'A comprehensive Automated sports management system combining web and mobile technologies to streamline University sports activities.',
-        videoPath: 'assets/projects/css/demo.mp4',
+        videoPath: 'br6cqm',
+        videoAspectRatio: '9-16',
         technologies: [
-            'JavaScript', 'Python', 'React', 'React Native', 'Node.js', 'Flask','Firebase', 'Express'
+            'JavaScript', 'Python', 'React', 'React Native', 'Node.js', 'Flask','Firebase'
         ],
         features: [
             'Real-time sports event management',
@@ -33,9 +34,14 @@ const projectsData = {
     },
     'ai-showcase': {
         title: 'AI Showcase',
-        coverImage: 'assets/ai-showcase/cover.png',
+        
+        coverImage: [
+            'assets/ai-showcase/cover.png',
+            'assets/ai-showcase/cover1.png'
+        ],
         description: 'A modern, feature-rich AI development platform that combines multiple AI-powered tools to enhance developer productivity.',
-        videoPath: 'assets/projects/ai-showcase/demo.mp4',
+        videoPath: 'i7l7i2',
+        videoAspectRatio: '16-9',
         technologies: [
             'React.js', 'Chakra UI', 'Framer Motion', 'Node.js', 'OpenAI API'
         ],
@@ -51,6 +57,17 @@ const projectsData = {
     // ... other projects
 };
 
+function createFullscreenIndicator() {
+    return `
+        <div class="fullscreen-indicator">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M3 3h7v2H5v5H3V3m18 0h-7v2h5v5h2V3M3 21h7v-2H5v-5H3v7m18 0h-7v-2h5v-5h2v7"/>
+            </svg>
+            Click to expand
+        </div>
+    `;
+}
+
 // Load project details based on URL parameter
 function loadProjectDetails() {
     const urlParams = new URLSearchParams(window.location.search);
@@ -65,8 +82,57 @@ function loadProjectDetails() {
     // Set project title
     document.getElementById('projectTitle').textContent = project.title;
     
-    // Set cover image
-    document.getElementById('coverImage').src = project.coverImage;
+    // Add fullscreen overlay to the body
+    const overlay = document.createElement('div');
+    overlay.className = 'fullscreen-overlay';
+    document.body.appendChild(overlay);
+
+    // Handle click events for both single image and slider cases
+    if (Array.isArray(project.coverImage)) {
+        const coverImageContainer = document.getElementById('coverImage').parentElement;
+        coverImageContainer.innerHTML = `
+            <div class="slider-container">
+                <div class="slider">
+                    ${project.coverImage.map(img => `
+                        <div class="slide-wrapper">
+                            <img src="${img}" alt="Project Cover Image" class="slide">
+                            ${createFullscreenIndicator()}
+                        </div>
+                    `).join('')}
+                </div>
+                <button class="slider-btn prev">❮</button>
+                <button class="slider-btn next">❯</button>
+                <div class="slider-dots">
+                    ${project.coverImage.map((_, index) => `
+                        <span class="dot${index === 0 ? ' active' : ''}" data-index="${index}"></span>
+                    `).join('')}
+                </div>
+            </div>
+        `;
+
+        // Initialize slider
+        initializeSlider();
+
+        // Add click handlers to slides
+        document.querySelectorAll('.slide').forEach(slide => {
+            slide.addEventListener('click', () => {
+                showFullscreen(slide.src);
+            });
+        });
+    } else {
+        const coverImageContainer = document.getElementById('coverImage').parentElement;
+        coverImageContainer.innerHTML = `
+            <div class="image-wrapper">
+                <img id="coverImage" src="${project.coverImage}" alt="Project Cover Image">
+                ${createFullscreenIndicator()}
+            </div>
+        `;
+
+        // Add click handler to single image
+        document.getElementById('coverImage').addEventListener('click', (e) => {
+            showFullscreen(e.target.src);
+        });
+    }
     
     // Set description
     document.getElementById('projectDescription').textContent = project.description;
@@ -91,19 +157,91 @@ function loadProjectDetails() {
     // Load video
     if (project.videoPath) {
         const videoContainer = document.getElementById('videoContainer');
+        const aspectRatioClass = `aspect-${project.videoAspectRatio}`;
+        
+        videoContainer.className = `video-container ${aspectRatioClass}`;
+        
+        // Different padding-bottom for different aspect ratios
+        const paddingBottom = project.videoAspectRatio === '16-9' ? '56.25%' : '177.778%';
+        
         videoContainer.innerHTML = `
-            <video 
-                controls 
-                autoplay 
-                muted 
-                loop 
-                class="project-video"
-            >
-                <source src="${project.videoPath}" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
+            <div style="position:relative; width:100%; height:0px; padding-bottom:${paddingBottom}">
+                <iframe 
+                    src="https://streamable.com/e/${project.videoPath}?autoplay=1"
+                    frameborder="0"
+                    width="100%"
+                    height="100%"
+                    allowfullscreen
+                    allow="autoplay"
+                    style="border:none; width:100%; height:100%; position:absolute; left:0px; top:0px; overflow:hidden;"
+                ></iframe>
+            </div>
         `;
     }
+}
+
+function initializeSlider() {
+    let currentSlide = 0;
+    const slider = document.querySelector('.slider');
+    const slideWrappers = document.querySelectorAll('.slide-wrapper');
+    const dots = document.querySelectorAll('.dot');
+    const prevBtn = document.querySelector('.slider-btn.prev');
+    const nextBtn = document.querySelector('.slider-btn.next');
+
+    function updateSlider() {
+        slider.style.transform = `translateX(-${currentSlide * 100}%)`;
+        // Update dots
+        dots.forEach((dot, index) => {
+            dot.classList.toggle('active', index === currentSlide);
+        });
+    }
+
+    function nextSlide() {
+        currentSlide = (currentSlide + 1) % slideWrappers.length;
+        updateSlider();
+    }
+
+    function prevSlide() {
+        currentSlide = (currentSlide - 1 + slideWrappers.length) % slideWrappers.length;
+        updateSlider();
+    }
+
+    // Event listeners
+    prevBtn.addEventListener('click', prevSlide);
+    nextBtn.addEventListener('click', nextSlide);
+    
+    // Dot navigation
+    dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => {
+            currentSlide = index;
+            updateSlider();
+        });
+    });
+
+    // Optional: Auto-slide every 5 seconds
+    setInterval(nextSlide, 5000);
+
+    // Initial state
+    updateSlider();
+}
+
+function showFullscreen(imageSrc) {
+    const overlay = document.querySelector('.fullscreen-overlay');
+    overlay.innerHTML = `<img src="${imageSrc}" class="fullscreen-image" alt="Fullscreen Image">`;
+    overlay.classList.add('active');
+
+    // Close on click
+    overlay.addEventListener('click', () => {
+        overlay.classList.remove('active');
+    });
+
+    // Close on escape key
+    document.addEventListener('keydown', function closeOnEscape(e) {
+        if (e.key === 'Escape') {
+            overlay.classList.remove('active');
+            document.removeEventListener('keydown', closeOnEscape);
+        }
+    });
 }
 
 // Load project details when page loads
