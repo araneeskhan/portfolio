@@ -381,3 +381,81 @@
     transform: none;
     transition: none;
 }
+
+/* Project Content Dark Mode */
+[data-theme="dark"] .project-content {
+    background: var(--surface);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .project-title {
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] .project-description p {
+    color: var(--text-secondary);
+}
+
+[data-theme="dark"] .tech-badge {
+    background: rgba(76, 165, 255, 0.2);
+    color: var(--accent-primary);
+}
+
+[data-theme="dark"] .project-features li {
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] .project-features li::before {
+    color: var(--accent-primary);
+}
+
+/* Additional Dark Mode Styles */
+[data-theme="dark"] .project-info h2 {
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] .fullscreen-indicator {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+[data-theme="dark"] .slider-btn {
+    background: rgba(255, 255, 255, 0.2);
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] .slider-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+[data-theme="dark"] .dot {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+[data-theme="dark"] .dot.active {
+    background: var(--text-primary);
+}
+
+[data-theme="dark"] .fullscreen-overlay {
+    background-color: rgba(0, 0, 0, 0.95);
+}
+
+/* Navbar consistency */
+#desktop-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 1rem;
+    left: 2rem;
+    right: 2rem;
+    height: var(--nav-height);
+    background: var(--nav-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    z-index: 1000;
+    padding: 0 2rem;
+    border-radius: 50px;
+    box-shadow: 
+        0 4px 15px rgba(76, 165, 255, 0.3),
+        0 4px 15px rgba(182, 115, 248, 0.3);
+}

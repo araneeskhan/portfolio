@@ -1,3 +1,23 @@
+// Add this at the beginning of the file, before projectsData
+function initializeTheme() {
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+}
+
+function toggleTheme() {
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    
+    document.documentElement.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+}
+
+// Add theme initialization to the DOMContentLoaded event
+document.addEventListener('DOMContentLoaded', () => {
+    initializeTheme();
+    loadProjectDetails();
+});
+
 // Project data object
 const projectsData = {
     'campus-sports-sphere': {
@@ -243,6 +263,3 @@ function showFullscreen(imageSrc) {
         }
     });
 }
-
-// Load project details when page loads
-document.addEventListener('DOMContentLoaded', loadProjectDetails);

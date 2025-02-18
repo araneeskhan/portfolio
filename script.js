@@ -1,11 +1,18 @@
-function toggleMenu() {
-    const menu = document.querySelector(".menu-links");
-    const icon = document.querySelector(".hamburger-icon");
-    menu.classList.toggle("open");
-    icon.classList.toggle("open");
+document.addEventListener('DOMContentLoaded', () => {
+    // Get saved theme from localStorage
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    
+    // Initialize theme on page load
+    initializeTheme();
+});
+
+function initializeTheme() {
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    updateThemeIcon(savedTheme);
 }
 
-// Theme toggle functionality
 function toggleTheme() {
     const currentTheme = document.documentElement.getAttribute('data-theme');
     const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
@@ -13,6 +20,13 @@ function toggleTheme() {
     document.documentElement.setAttribute('data-theme', newTheme);
     localStorage.setItem('theme', newTheme);
     updateThemeIcon(newTheme);
+}
+
+function toggleMenu() {
+    const menu = document.querySelector(".menu-links");
+    const icon = document.querySelector(".hamburger-icon");
+    menu.classList.toggle("open");
+    icon.classList.toggle("open");
 }
 
 function updateThemeIcon(theme) {
@@ -27,16 +41,6 @@ function updateThemeIcon(theme) {
         moonIcon.style.display = 'block';
     }
 }
-
-// Set initial theme
-document.addEventListener('DOMContentLoaded', () => {
-    // Set light as default if no theme is stored
-    const savedTheme = localStorage.getItem('theme') || 'light';
-    document.documentElement.setAttribute('data-theme', savedTheme);
-    
-    // Update icon visibility based on current theme
-    updateThemeIcon(savedTheme);
-});
 
 // Smooth scroll for navigation links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {

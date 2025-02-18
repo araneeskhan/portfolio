@@ -6,17 +6,26 @@
     <title>Project Details</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="project-details.css">
+    <link rel="stylesheet" href="mediaqueries.css">
 </head>
 <body>
     <nav id="desktop-nav">
         <div class="logo">Anees Ur Rehman</div>
-        <div>
+        <div class="nav-right">
             <ul class="nav-links">
                 <li><a href="index.html#about">About</a></li>
                 <li><a href="index.html#experience">Skills</a></li>
                 <li><a href="index.html#projects">Projects</a></li>
                 <li><a href="index.html#achievements">Achievements</a></li>
                 <li><a href="index.html#contact">Contact</a></li>
+                <li>
+                    <img 
+                        src="./assets/light-dark.png" 
+                        alt="Theme Toggle" 
+                        class="theme-toggle" 
+                        onclick="toggleTheme()"
+                    />
+                </li>
             </ul>
         </div>
     </nav>
