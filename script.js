@@ -30,15 +30,15 @@ function toggleMenu() {
 }
 
 function updateThemeIcon(theme) {
-    const sunIcon = document.querySelector('.fa-sun');
-    const moonIcon = document.querySelector('.fa-moon');
+    const themeToggle = document.querySelector('.theme-toggle');
+    if (!themeToggle) return;
     
     if (theme === 'dark') {
-        sunIcon.style.display = 'block';
-        moonIcon.style.display = 'none';
+        themeToggle.classList.remove('fa-moon');
+        themeToggle.classList.add('fa-sun');
     } else {
-        sunIcon.style.display = 'none';
-        moonIcon.style.display = 'block';
+        themeToggle.classList.remove('fa-sun');
+        themeToggle.classList.add('fa-moon');
     }
 }
 
@@ -66,10 +66,7 @@ document.querySelectorAll('.btn').forEach(btn => {
         const xPercent = (x / rect.width - 0.5) * 40;
         const yPercent = (y / rect.height - 0.5) * 40;
         
-        btn.style.transform = `
-            translate(${xPercent}px, ${yPercent}px)
-            scale(1.1)
-        `;
+        btn.style.transform = `translate(${xPercent}px, ${yPercent}px) scale(1.1)`;
     });
     
     btn.addEventListener('mouseleave', () => {
@@ -88,4 +85,3 @@ document.addEventListener('DOMContentLoaded', () => {
         disable: 'mobile'
     });
 });
-  

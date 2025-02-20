@@ -90,6 +90,11 @@ a,
   align-items: center;
 }
 
+.nav-links li {
+  display: flex;
+  align-items: center;
+}
+
 .nav-links a {
   font-size: 1rem;
   font-weight: 500;
@@ -494,11 +499,36 @@ section {
   border-radius: 16px;
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
   width: 100%;
   max-width: 150px;
+}
+
+/* Dark mode styles for skill cards */
+[data-theme="dark"] #experience .skill-card {
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+[data-theme="dark"] #experience .skill-card h3 {
+  color: var(--text-primary);
+}
+
+/* Hover Effects */
+#experience .skill-card:hover {
+  transform: translateY(-5px);
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Dark mode hover effects */
+[data-theme="dark"] #experience .skill-card:hover {
+  background: rgba(76, 165, 255, 0.1);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
 #experience .skill-icon-wrapper {
@@ -510,8 +540,14 @@ section {
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
   transition: all 0.3s ease;
   padding: 12px;
+}
+
+#experience .skill-card:hover .skill-icon-wrapper {
+  transform: scale(1.1);
+  background: linear-gradient(135deg, #4ca5ff20, #b673f820);
 }
 
 #experience .skill-icon {
@@ -528,23 +564,6 @@ section {
   margin: 0;
   transition: all 0.3s ease;
 }
-
-/* Hover Effects */
-#experience .skill-card:hover {
-  transform: translateY(-5px);
-  background: rgba(255, 255, 255, 0.1);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-}
-
-#experience .skill-card:hover .skill-icon-wrapper {
-  transform: scale(1.1);
-  background: linear-gradient(135deg, #4ca5ff20, #b673f820);
-}
-
-#experience .skill-card:hover .skill-icon {
-  transform: scale(1.1);
-}
-
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
@@ -608,12 +627,31 @@ section {
   border-radius: 2rem;
   border: rgb(53, 53, 53) 0.1rem solid;
   border-color: rgb(163, 163, 163);
-  background: white;
+  background: var(--surface);
   margin: 2rem auto;
   padding: 0.5rem;
   flex-wrap: wrap;
   gap: 1rem;
   max-width: 95%;
+}
+
+/* Dark mode specific styles for contact section */
+[data-theme="dark"] .contact-info-upper-container {
+  background: var(--surface);
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow: var(--card-shadow);
+}
+
+[data-theme="dark"] .contact-info-container a {
+  color: var(--text-primary);
+}
+
+[data-theme="dark"] .contact-info-container a:hover {
+  color: var(--accent-primary);
+}
+
+[data-theme="dark"] .contact-icon {
+  filter: brightness(0.8) contrast(1.2);
 }
 
 .contact-info-container {
@@ -984,15 +1022,20 @@ footer p {
 }
 
 .theme-toggle {
-    width: 24px;
-    height: 24px;
+    font-size: 1.5rem;
     cursor: pointer;
     transition: transform 0.3s ease;
-    margin-left: 1rem;
+    color: var(--text-primary);
 }
 
 .theme-toggle:hover {
     transform: scale(1.1);
+    color: var(--accent-primary);
+}
+
+/* Dark mode specific styles */
+[data-theme="dark"] .theme-toggle {
+    color: var(--text-primary);
 }
 
 /* Projects Section Styling */
