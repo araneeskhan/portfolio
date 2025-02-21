@@ -5,6 +5,16 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Initialize theme on page load
     initializeTheme();
+
+    // Clone project cards for infinite scroll
+    const track = document.querySelector('.projects-track');
+    const cards = document.querySelectorAll('.project-card');
+    
+    // Clone all cards and append them to create the infinite effect
+    cards.forEach(card => {
+        const clone = card.cloneNode(true);
+        track.appendChild(clone);
+    });
 });
 
 function initializeTheme() {
