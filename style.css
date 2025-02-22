@@ -1291,13 +1291,13 @@ html {
   position: relative;
   padding: 1rem 0;
   margin: 0 auto;
-  border-radius: 70px;
+  border-radius: 40px;
 }
 
 .projects-track {
   display: flex;
   gap: 2rem;
-  animation: slideProjects 50s linear ;
+  animation: slideProjects 60s linear ;
   width: fit-content; /* Ensure track expands to fit all cards */
   padding: 0 2rem; /* Add padding to prevent cards from touching edges */
 }
@@ -1326,6 +1326,6 @@ html {
     max-width: 95%; /* Use percentage on smaller screens */
   }
   .project-card {
-    width: 400px; /* Adjust card size for smaller screens */
+    width: 300px; /* Adjust card size for smaller screens */
   }
 }
