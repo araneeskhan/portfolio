@@ -10,8 +10,10 @@
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/locomotive-scroll/4.1.4/locomotive-scroll.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/locomotive-scroll/4.1.4/locomotive-scroll.min.js"></script>
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
   </head>
   <body>
     <nav id="desktop-nav">
@@ -262,25 +264,23 @@
     </section>
     <section id="projects">
       <p class="section__text__p1" data-aos="fade-up">Browse My Recent</p>
-      <h1 class="title" data-aos="fade-up" data-aos-delay="100">Projects</h1>
-      <div class="projects-slider">
-        <div class="projects-track">
+      <h1 class="title" data-aos="fade-up" data-aos-delay="100" style="text-align: center;">Projects</h1>
+      <div class="projects-slider swiper">
+        <div class="swiper-wrapper">
           <!-- Project 1: Campus Sports Sphere -->
-          <div class="project-card" data-aos="fade-up" data-aos-delay="200">
+          <div class="project-card swiper-slide" data-aos="fade-up" data-aos-delay="200">
             <div class="project-image">
               <img src="./assets/css/landing-image.png" alt="Campus Sports Sphere" />
             </div>
             <div class="project-content">
-              <h3>Campus Sports Sphere</h3>
-              <p>A comprehensive Automated sports management system combining web and mobile technologies.</p>
+              <h3 style="text-align: center;">Campus Sports Sphere</h3>
+              <p>A comprehensive Automated sports management system with in University setting.</p>
               <div class="project-tech">
-                <span>React</span>
                 <span>React Native</span>
-                <span>Node.js</span>
                 <span>Firebase</span>
                 <span>FLask</span>
               </div>
-              <div class="project-links">
+              <div class="project-links" style="margin-top: auto;">
                 <button class="btn btn-color-2" onclick="location.href='https://github.com/araneeskhan/CampusSportsSphere'">
                   <i class="fab fa-github"></i>
                   Code
@@ -294,20 +294,19 @@
           </div>
 
           <!-- Project 2: QuickBite -->
-          <div class="project-card" data-aos="fade-up" data-aos-delay="300">
+          <div class="project-card swiper-slide" data-aos="fade-up" data-aos-delay="300">
             <div class="project-image">
               <img src="./assets/quickbite/cover.png" alt="QuickBite" />
             </div>
             <div class="project-content">
-              <h3>QuickBite</h3>
-              <p>A modern food delivery platform with real-time order tracking and seamless payment integration.</p>
+              <h3 style="text-align: center;">QuickBite</h3>
+              <p>A modern food delivery platform with real-time order tracking and seamless payment integration with Animations.</p>
               <div class="project-tech">
                 <span>React Native</span>
                 <span>Firebase</span>
                 <span>Zustand</span>
-                <span>AsyncStorage</span>
               </div>
-              <div class="project-links">
+              <div class="project-links" style="margin-top: auto;">
                 <button class="btn btn-color-2" onclick="location.href='https://github.com/araneeskhan/QuickBite'">
                   <i class="fab fa-github"></i>
                   Code
@@ -321,12 +320,12 @@
           </div>
 
           <!-- Project 3: AI Showcase -->
-          <div class="project-card" data-aos="fade-up" data-aos-delay="400">
+          <div class="project-card swiper-slide" data-aos="fade-up" data-aos-delay="400">
             <div class="project-image">
               <img src="./assets/ai-showcase/cover.png" alt="AI Showcase" />
             </div>
             <div class="project-content">
-              <h3>AI Showcase</h3>
+              <h3 style="text-align: center;">AI Showcase</h3>
               <p>A modern, feature-rich AI development platform that combines multiple AI-powered tools to enhance developer productivity.</p>
               <div class="project-tech">
                 <span>React.js</span>
@@ -334,7 +333,7 @@
                 <span>Framer Motion</span>
                 <span>Node.js</span>
               </div>
-              <div class="project-links">
+              <div class="project-links" style="margin-top: auto;">
                 <button class="btn btn-color-2" onclick="location.href='https://github.com/araneeskhan/AiShowCase'">
                   <i class="fab fa-github"></i>
                   Code
@@ -348,21 +347,20 @@
           </div>
 
           <!-- Project 4: AI-Based Store -->
-          <div class="project-card" data-aos="fade-up" data-aos-delay="500">
+          <div class="project-card swiper-slide" data-aos="fade-up" data-aos-delay="500">
             <div class="project-image">
               <img src="./assets/store/cover.png" alt="AI-Based Store" />
             </div>
             <div class="project-content">
-              <h3>AI-Based Store</h3>
+              <h3 style="text-align: center;">AI-Based Store</h3>
               <p>A modern e-commerce platform leveraging AI for personalized shopping experiences by browsing a wide range of products.</p>
               <div class="project-tech">
                 <span>Next.js</span>
-                <span>Chakra UI</span>
                 <span>Framer Motion</span>
                 <span>Node.js</span>
                 <span>Tailwind css</span>
               </div>
-              <div class="project-links">
+              <div class="project-links" style="margin-top: auto;">
                 <button class="btn btn-color-2" onclick="location.href='https://github.com/araneeskhan/AiStore'">
                   <i class="fab fa-github"></i>
                   Code
@@ -375,6 +373,10 @@
             </div>
           </div>
         </div>
+        <!-- Add Swiper navigation buttons -->
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-pagination"></div>
       </div>
       <img
         src="./assets/arrow.png"

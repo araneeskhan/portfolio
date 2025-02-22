@@ -774,6 +774,30 @@ footer p {
   overflow: hidden;
 }
 
+/* Dark mode styles for skill cards */
+[data-theme="dark"] .skill-card {
+  background: transparent;
+  backdrop-filter: none;
+  box-shadow: none;
+}
+
+[data-theme="dark"] .skill-card h3 {
+  color: var(--text-primary);
+}
+
+/* Hover Effects */
+.skill-card:hover {
+  transform: translateY(-5px);
+  background: rgba(76, 165, 255, 0.1);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Dark mode hover effects */
+[data-theme="dark"] .skill-card:hover {
+  background: rgba(76, 165, 255, 0.1);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
 .skill-icon-wrapper {
   width: 64px;
   height: 64px;
@@ -799,22 +823,6 @@ footer p {
   color: #2d2e32;
   margin: 0;
   transition: all 0.3s ease;
-}
-
-/* Hover Effects */
-.skill-card:hover {
-  transform: translateY(-5px);
-  background: rgba(255, 255, 255, 0.1);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-}
-
-.skill-card:hover .skill-icon-wrapper {
-  transform: scale(1.1);
-  background: linear-gradient(135deg, #4ca5ff20, #b673f820);
-}
-
-.skill-card:hover .skill-icon {
-  transform: scale(1.1);
 }
 
 /* Responsive adjustments */
@@ -1052,6 +1060,9 @@ footer p {
   overflow: hidden;
   transition: all 0.3s ease;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  height: 400px;
+  display: flex;
+  flex-direction: column;
 }
 
 .project-card:hover {
@@ -1060,7 +1071,6 @@ footer p {
 }
 
 .project-image {
-  width: 100%;
   height: 200px;
   overflow: hidden;
 }
@@ -1078,6 +1088,11 @@ footer p {
 
 .project-content {
   padding: 1.5rem;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
 }
 
 .project-content h3 {
@@ -1289,9 +1304,8 @@ html {
   max-width: 3000px; /* Increased max-width */
   overflow: hidden;
   position: relative;
-  padding: 1rem 0;
   margin: 0 auto;
-  border-radius: 40px;
+  border-radius: 30px;
 }
 
 .projects-track {
@@ -1299,7 +1313,7 @@ html {
   gap: 2rem;
   animation: slideProjects 60s linear ;
   width: fit-content; /* Ensure track expands to fit all cards */
-  padding: 0 2rem; /* Add padding to prevent cards from touching edges */
+  padding: 2rem; /* Add padding to prevent cards from touching edges */
 }
 
 .projects-track:hover {
@@ -1307,7 +1321,10 @@ html {
 }
 
 .project-card {
-  flex: 0 0 auto;
+  /* flex: 0 0 auto; */
+  margin-top: 20px;
+  margin-bottom: 20px;
+
   width: 400px; /* Increased card width to match larger container */
 }
 

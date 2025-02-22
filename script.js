@@ -6,14 +6,32 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize theme on page load
     initializeTheme();
 
-    // Clone project cards for infinite scroll
-    const track = document.querySelector('.projects-track');
-    const cards = document.querySelectorAll('.project-card');
-    
-    // Clone all cards and append them to create the infinite effect
-    cards.forEach(card => {
-        const clone = card.cloneNode(true);
-        track.appendChild(clone);
+    // Initialize Swiper
+    const swiper = new Swiper('.projects-slider', {
+        slidesPerView: 1,
+        spaceBetween: 10,
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+        },
+        breakpoints: {
+            640: {
+                slidesPerView: 2,
+                spaceBetween: 20,
+            },
+            768: {
+                slidesPerView: 3,
+                spaceBetween: 30,
+            },
+            1024: {
+                slidesPerView: 4,
+                spaceBetween: 40,
+            },
+        },
     });
 });
 
