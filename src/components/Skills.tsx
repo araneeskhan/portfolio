@@ -11,26 +11,26 @@ const Skills = () => {
 
   const skillCategories = {
     frontend: [
-      { name: 'HTML', icon: '/assets/skills/html.png' },
-      { name: 'CSS', icon: '/assets/skills/css.jpg' },
-      { name: 'Tailwind CSS', icon: '/assets/skills/tailwind.svg' },
-      { name: 'JavaScript', icon: '/assets/skills/javascript.svg' },
-      { name: 'React', icon: '/assets/skills/react.svg' },
-      { name: 'React Native', icon: '/assets/skills/reactnative.png' },
-      { name: 'Next Js', icon: '/assets/skills/nextjs.svg' },
+      { name: 'HTML', icon: '/portfolio/assets/skills/html.png' },
+      { name: 'CSS', icon: '/portfolio/assets/skills/css.jpg' },
+      { name: 'Tailwind CSS', icon: '/portfolio/assets/skills/tailwind.svg' },
+      { name: 'JavaScript', icon: '/portfolio/assets/skills/javascript.svg' },
+      { name: 'React', icon: '/portfolio/assets/skills/react.svg' },
+      { name: 'React Native', icon: '/portfolio/assets/skills/reactnative.png' },
+      { name: 'Next Js', icon: '/portfolio/assets/skills/nextjs.svg' },
     ],
     backend: [
-      { name: 'Node.js', icon: '/assets/skills/nodejs.png' },
-      { name: 'Express.js', icon: '/assets/skills/expressjs.png' },
-      { name: 'MongoDB', icon: '/assets/skills/mongodb.svg' },
-      { name: 'Firebase', icon: '/assets/skills/firebase.svg' },
-      { name: 'Python', icon: '/assets/skills/python.svg' },
-      { name: 'Java', icon: '/assets/skills/java.png' },
+      { name: 'Node.js', icon: '/portfolio/assets/skills/nodejs.png' },
+      { name: 'Express.js', icon: '/portfolio/assets/skills/expressjs.png' },
+      { name: 'MongoDB', icon: '/portfolio/assets/skills/mongodb.svg' },
+      { name: 'Firebase', icon: '/portfolio/assets/skills/firebase.svg' },
+      { name: 'Python', icon: '/portfolio/assets/skills/python.svg' },
+      { name: 'Java', icon: '/portfolio/assets/skills/java.png' },
     ],
     other: [
-      { name: 'Github', icon: '/assets/skills/github.png' },
-      { name: 'AWS', icon: '/assets/skills/aws.svg' },
-      { name: 'Docker', icon: '/assets/skills/docker.svg' },
+      { name: 'Github', icon: '/portfolio/assets/skills/github.png' },
+      { name: 'AWS', icon: '/portfolio/assets/skills/aws.svg' },
+      { name: 'Docker', icon: '/portfolio/assets/skills/docker.svg' },
     ]
   };
 
@@ -101,3 +101,35 @@ const Skills = () => {
 };
 
 export default Skills;
+
+// Update all skill image paths
+const skillsData = [
+  {
+    name: "HTML",
+    icon: "/assets/skills/html.png",
+  },
+  {
+    name: "CSS",
+    icon: "/portfolio/assets/skills/css.jpg",
+  },
+  {
+    name: "Tailwind",
+    icon: "/portfolio/assets/skills/tailwind.svg",
+  },
+  {
+    name: "Next.js",
+    icon: "/portfolio/assets/skills/nextjs.svg",
+  },
+  {
+    name: "JavaScript",
+    icon: "/portfolio/assets/skills/javascript.svg",
+  },
+  {
+    name: "React",
+    icon: "/portfolio/assets/skills/react.svg",
+  },
+  {
+    name: "React Native",
+    icon: "/portfolio/assets/skills/reactnative.png",
+  }
+]

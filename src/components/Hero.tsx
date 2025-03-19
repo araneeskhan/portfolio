@@ -47,8 +47,8 @@ const Hero = () => {
             </p>
             <div className="flex flex-wrap gap-4">
               <a 
-                href="/assets/Resume.pdf"  // Updated path to match the public directory structure
-                download="Anees_Ur_Rehman_Resume.pdf"  // Added download attribute
+                href="/portfolio/assets/Resume.pdf"  // Updated path to include /portfolio prefix
+                download="Anees_Ur_Rehman_Resume.pdf"
                 className="btn-secondary hover:scale-105 transition-transform animate-pulse"
               >
                 Download Resume
@@ -75,7 +75,7 @@ const Hero = () => {
               <div className="absolute inset-0 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full opacity-20 blur-xl animate-pulse-slow"></div>
               <div className="relative w-full h-full rounded-full overflow-hidden border-4 border-white dark:border-gray-800 shadow-xl hover:scale-105 transition-transform duration-300">
                 <Image 
-                  src="/assets/profile-pic.png"
+                  src="/portfolio/assets/profile-pic.png"
                   alt="Anees profile picture"
                   fill
                   className="object-cover"

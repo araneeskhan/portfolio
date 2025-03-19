@@ -2,7 +2,7 @@
 export const projectsData = {
   "campus-sports-sphere": {
     title: "Campus Sports Sphere",
-    coverImage: "/assets/css/cover.png",
+    coverImage: "/portfolio/assets/css/cover.png",
     description:
       "A comprehensive Automated sports management system combining web and mobile technologies to streamline University sports activities.",
     videoPath: "br6cqm",
@@ -26,7 +26,7 @@ export const projectsData = {
   },
   "quickbite": {
       title: "QuickBite",
-      coverImage: "/assets/quickbite/cover.png",
+      coverImage: "/portfolio/assets/quickbite/cover.png",
       description:
         "A modern food delivery platform that lets you Order FastFood, featuring real-time order History Tracking and seamless payment integration.",
       videoPath: "/assets/projects/quickbite/demo.mp4",
@@ -43,7 +43,7 @@ export const projectsData = {
   "ai-showcase": {
     title: "AI Showcase",
     coverImage: [
-      "/assets/ai-showcase/cover.png",
+      "/portfolio/assets/ai-showcase/cover.png",
       "/assets/ai-showcase/cover1.png",
     ],
     description:
@@ -69,7 +69,7 @@ export const projectsData = {
   },
   "store": {
     title: "E-Store",
-    coverImage: ["/assets/store/cover.png"],
+    coverImage: ["/portfolio/assets/store/cover.png"],
     description:
       "AI-Based Store is an innovative e-commerce platform that leverages to provide personalized shopping experiences. Users can browse a wide range of products, manage their shopping cart, and enjoy a seamless checkout process.",
     videoPath: "yyk79t",

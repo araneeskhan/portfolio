@@ -75,7 +75,7 @@ const Projects = () => {
                 </div>
                 <div className="flex justify-between mt-4">
                   <Link
-                    href={`/project/${project.id}`}
+                     href={`/projects/${project.id}`} // Remove the /portfolio prefix since it's handled by Next.js basePath
                     className="btn-primary text-sm px-4 py-2"
                   >
                     View Details

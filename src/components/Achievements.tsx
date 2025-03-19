@@ -23,8 +23,9 @@ const Achievements = () => {
             <div className="grid grid-cols-1 lg:grid-cols-5">
               {/* Achievement Image - Now takes 3/5 of the space on desktop */}
               <div className="relative h-80 sm:h-96 lg:h-[500px] lg:col-span-3">
+                // Update image paths
                 <Image 
-                  src="/assets/achievement-1.jpg"
+                  src="/portfolio/assets/achievement-1.jpg"
                   alt="Career Expo 2024 - 1st Position"
                   fill
                   className="object-cover"
