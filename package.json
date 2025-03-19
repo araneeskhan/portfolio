@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint --fix"
+    "lint": "next lint --fix",
+    "deploy": "next build && next export && touch out/.nojekyll"
   },
   "dependencies": {
     "aos": "^2.3.4",
@@ -16,6 +17,7 @@
     "swiper": "^11.2.5"
   },
   "devDependencies": {
+    "@types/aos": "^3.0.7",
     "@types/node": "^20.17.24",
     "@types/react": "^18.2.0",
     "@types/react-dom": "^18.2.0",

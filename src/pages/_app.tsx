@@ -4,25 +4,29 @@ import Head from 'next/head';
 import '../styles/globals.css';
 import dynamic from 'next/dynamic';
 
-const AOS = dynamic(() => import('aos').then(mod => mod.default), {
-  ssr: false
-});
+// Fix the dynamic import of AOS
+const AOS = dynamic(
+  () => import('aos').then((aos) => {
+    return function AOSComponent() {
+      return null;
+    };
+  }),
+  { ssr: false }
+);
 
 export default function App({ Component, pageProps }: AppProps) {
   useEffect(() => {
     if (typeof window !== 'undefined') {
       require('aos/dist/aos.css');
       
-      // Initialize AOS after load
-      const initializeAOS = async () => {
-        const AOS = await import('aos');
-        AOS.init({
+      // Initialize AOS
+      import('aos').then((aos) => {
+        aos.init({
           duration: 800,
           once: false,
           mirror: true,
         });
-      };
-      initializeAOS();
+      });
     }
   }, []);
 
