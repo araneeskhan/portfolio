@@ -97,7 +97,7 @@ const Contact = () => {
                   </div>
                   <div>
                     <p className="text-sm text-gray-600 dark:text-gray-400">Location</p>
-                    <p className="text-gray-900 dark:text-white">Lahore, Pakistan</p>
+                    <p className="text-gray-900 dark:text-white">Islamabad, Pakistan</p>
                   </div>
                 </div>
               </div>
@@ -112,7 +112,7 @@ const Contact = () => {
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                    Your Name
+                    Full Name
                   </label>
                   <input
                     type="text"
@@ -122,13 +122,13 @@ const Contact = () => {
                     onChange={handleChange}
                     required
                     className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400"
-                    placeholder="John Doe"
+                    placeholder="Enter your Full Name"
                   />
                 </div>
                 
                 <div>
                   <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                    Your Email
+                    Email
                   </label>
                   <input
                     type="email"
@@ -138,7 +138,7 @@ const Contact = () => {
                     onChange={handleChange}
                     required
                     className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400"
-                    placeholder="john@example.com"
+                    placeholder="email@example.com"
                   />
                 </div>
                 

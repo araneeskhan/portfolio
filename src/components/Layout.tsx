@@ -11,8 +11,8 @@ interface LayoutProps {
 
 const Layout = ({ 
   children, 
-  title = 'Anees Ur Rehman | Frontend Developer',
-  description = 'Portfolio of Anees Ur Rehman, Frontend Developer specializing in creating responsive and user-friendly web experiences.'
+  title = '',
+  description = ''
 }: LayoutProps) => {
   return (
     <>
