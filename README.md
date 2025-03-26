@@ -1,10 +1,4 @@
-# Portfolio README Enhancement
 
-Adding a beautiful README file to your GitHub repository is an excellent idea! It will serve as both documentation and a showcase of your portfolio when people visit your GitHub repository.
-
-Here's a suggestion for a beautiful README.md file that complements your portfolio website:
-
-```markdown:c:\Users\Sparkl3r\Desktop\portfolio\README.md
 # Anees Ur Rehman - Portfolio
 
 <div align="center">
@@ -118,4 +112,3 @@ You can customize it further by:
 - Adding more detailed descriptions of your skills or experience
 - Including testimonials if you have any
 
-Would you like me to make any adjustments to this README template?
