@@ -5,7 +5,17 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
-  transpilePackages: ['aos'],
-}
+  // Add this to redirect from root to /portfolio
+  async redirects() {
+    return [
+      {
+        source: '/',
+        destination: '/portfolio',
+        basePath: false,
+        permanent: true,
+      },
+    ];
+  },
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;

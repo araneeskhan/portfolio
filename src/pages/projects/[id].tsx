@@ -2,12 +2,22 @@ import { useRouter } from 'next/router';
 import Image from 'next/image';
 import Layout from '@/components/Layout';
 import { projectsData } from '@/data/projects';
+import { useState } from 'react'; // Add this import
 
 export default function ProjectDetails() {
   const router = useRouter();
   const { id } = router.query;
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
   
   const project = id ? projectsData[id as keyof typeof projectsData] : null;
+
+  const handleImageClick = (image: string) => {
+    setSelectedImage(image);
+  };
+
+  const closeModal = () => {
+    setSelectedImage(null);
+  };
 
   if (!project) {
     return (
@@ -32,7 +42,10 @@ export default function ProjectDetails() {
         <div className="max-w-4xl mx-auto">
           <h1 className="text-4xl font-bold mb-6 text-gray-900 dark:text-white">{project.title}</h1>
           
-          <div className="relative h-[400px] mb-8 rounded-xl overflow-hidden">
+          <div 
+            className="relative h-[400px] mb-8 rounded-xl overflow-hidden cursor-pointer"
+            onClick={() => handleImageClick(Array.isArray(project.coverImage) ? project.coverImage[0] : project.coverImage)}
+          >
             <Image
               src={Array.isArray(project.coverImage) ? project.coverImage[0] : project.coverImage}
               alt={project.title}
@@ -72,6 +85,37 @@ export default function ProjectDetails() {
             </div>
           </div>
         </div>
+
+        {/* Modal for full-screen image */}
+        {selectedImage && (
+          <div 
+            className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4 backdrop-blur-sm"
+            onClick={closeModal}
+          >
+            <div 
+              className="relative max-w-5xl max-h-[90vh] w-full h-full flex items-center justify-center"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button 
+                className="absolute top-2 right-2 text-white bg-black/50 hover:bg-black/70 rounded-full w-10 h-10 flex items-center justify-center transition-colors z-10"
+                onClick={closeModal}
+                aria-label="Close modal"
+              >
+                <i className="fas fa-times text-xl"></i>
+              </button>
+              <div className="relative w-full h-full flex items-center justify-center">
+                <Image
+                  src={selectedImage}
+                  alt="Project full view"
+                  width={1200}
+                  height={800}
+                  className="object-contain max-h-[90vh] rounded-lg shadow-2xl"
+                  onClick={(e) => e.stopPropagation()}
+                />
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </Layout>
   );

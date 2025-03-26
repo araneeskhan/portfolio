@@ -41,7 +41,7 @@ const Achievements = () => {
                 </div>
               </div>
               
-              {/* Achievement Content - Now takes 2/5 of the space on desktop */}
+              {/* Achievement Content */}
               <div className="p-8 lg:col-span-2 flex flex-col justify-center">
                 <div className="hidden lg:block mb-4">
                   <span className="inline-block px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 rounded-full text-sm font-medium">
@@ -65,7 +65,7 @@ const Achievements = () => {
             </div>
           </div>
           
-          {/* Add a decorative element */}
+          {/* Decorative element */}
           <div className="flex justify-center mt-12">
             <div className="w-16 h-16 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center transform rotate-45 hover:rotate-0 transition-transform duration-300">
               <i className="fas fa-award text-blue-600 dark:text-blue-400 text-2xl transform -rotate-45 hover:rotate-0 transition-transform duration-300"></i>

@@ -22,24 +22,24 @@ export const projectsData = {
       "Automated scheduling system",
       "Digital scoreboard and statistics",
     ],
-    githubUrl: "https://github.com/araneeskhan/CampusSportsSphere"
+    githubUrl: "https://github.com/araneeskhan/CampusSportsSphere",
   },
-  "quickbite": {
-      title: "QuickBite",
-      coverImage: "/portfolio/assets/quickbite/cover.png",
-      description:
-        "A modern food delivery platform that lets you Order FastFood, featuring real-time order History Tracking and seamless payment integration.",
-      videoPath: "/assets/projects/quickbite/demo.mp4",
-      technologies: ["ReactNative", "Firebase", "Zustand", "AsyncStorage"],
-      features: [
-        "Real-time order tracking system",
-        "Secure payment integration",
-        "Restaurant dashboard for ordering Food",
-        "Customer rating and review system",
-        "Dynamic menu management",
-      ],
-      githubUrl: "https://github.com/araneeskhan/QuickBite"
-    },
+  quickbite: {
+    title: "QuickBite",
+    coverImage: "/portfolio/assets/quickbite/cover.png",
+    description:
+      "A modern food delivery platform that lets you Order FastFood, featuring real-time order History Tracking and seamless payment integration.",
+    videoPath: "/assets/projects/quickbite/demo.mp4",
+    technologies: ["ReactNative", "Firebase", "Zustand", "AsyncStorage"],
+    features: [
+      "Real-time order tracking system",
+      "Secure payment integration",
+      "Restaurant dashboard for ordering Food",
+      "Customer rating and review system",
+      "Dynamic menu management",
+    ],
+    githubUrl: "https://github.com/araneeskhan/QuickBite",
+  },
   "ai-showcase": {
     title: "AI Showcase",
     coverImage: [
@@ -65,9 +65,9 @@ export const projectsData = {
       "☁️ Cloud Workspace - Secure, integrated development environment",
       "🔌 API Integration - Connect with your favorite dev tools",
     ],
-    githubUrl: "https://github.com/araneeskhan/AiShowCase"
+    githubUrl: "https://github.com/araneeskhan/AiShowCase",
   },
-  "store": {
+  store: {
     title: "E-Store",
     coverImage: ["/portfolio/assets/store/cover.png"],
     description:
@@ -89,7 +89,26 @@ export const projectsData = {
       "Products Filtration",
       "Responsive Design",
     ],
-    githubUrl: "https://github.com/araneeskhan/Store"
+    githubUrl: "https://github.com/araneeskhan/Store",
+  },
+
+  bankee: {
+    title: "Bankee - Mobile Banking App",
+    coverImage: ["/portfolio/assets/bankee/cover.png"],
+    description:
+      "Bankee is a modern, feature-rich mobile banking application built with React Native and Expo. It provides a seamless banking experience and comprehensive financial management features.",
+    videoPath: "yyk79t",
+    videoAspectRatio: "16-9",
+    technologies: ["React Native", "Firebase", "Expo"],
+    features: [
+      "🔐 Secure Authentication",
+      "💳 Wallet ",
+      "👥 Contacts (or Send & Receive Money)",
+      "💸 Easy Transfers",
+      "📊 Transaction History",
+      "🔔 Real-time Notifications",
+      "💰 Subscriptions",
+    ],
+    githubUrl: "https://github.com/araneeskhan/Bankee",
   },
 };
-  
