@@ -33,8 +33,8 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
-        <title>Anees Ur Rehman | Frontend Developer</title>
-        <meta name="description" content="Portfolio of Anees Ur Rehman, Frontend Developer" />
+        <title>Anees Ur Rehman | FullStack Developer</title>
+        <meta name="description" content="Portfolio of Anees Ur Rehman, FullStack Developer" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
         <meta name="theme-color" content="#111827" media="(prefers-color-scheme: dark)" />

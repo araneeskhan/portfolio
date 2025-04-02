@@ -5,7 +5,7 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
-  // Add this to redirect from root to /portfolio
+  
   async redirects() {
     return [
       {

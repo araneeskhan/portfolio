@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-PORTFOLIO - ANEES UR REHMAN
-=======
-
 # Anees Ur Rehman - Portfolio
 
 <div align="center">
