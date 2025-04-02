@@ -18,8 +18,8 @@ const Footer = () => {
               Anees Ur Rehman
             </h3>
             <p className="text-gray-600 dark:text-gray-400 mb-4">
-              Frontend Developer specializing in creating responsive and
-              user-friendly web experiences.
+              Full Stack Developer specializing in creating responsive and
+              user-friendly Experiences.
             </p>
             <div className="flex space-x-4">
               <a
