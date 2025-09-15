@@ -100,7 +100,7 @@ const Contact = () => {
                       Location
                     </p>
                     <p className="text-gray-900 dark:text-white">
-                      Islamabad, Pakistan
+                      Paris, France.
                     </p>
                   </div>
                 </div>

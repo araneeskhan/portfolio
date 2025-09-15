@@ -105,7 +105,7 @@ const Footer = () => {
               <li className="flex items-start">
                 <i className="fas fa-map-marker-alt text-blue-600 dark:text-blue-400 mt-1 mr-3"></i>
                 <span className="text-gray-600 dark:text-gray-400">
-                  Islamabad, Pakistan
+                  Paris, France
                 </span>
               </li>
             </ul>
