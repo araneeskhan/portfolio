@@ -48,13 +48,13 @@ const About = () => {
                 <div className="space-y-3">
                   <div>
                     <p className="font-medium text-gray-900 dark:text-white">
-                      6 Months Experience
+                      4 Months Experience
                     </p>
                     <p className="text-gray-700 dark:text-gray-300 text-sm">
                       Student Startup Business Center
                     </p>
                     <p className="text-gray-600 dark:text-gray-400 text-sm">
-                      Feb 2025 - Aug 2025
+                      June 2024 - September 2024
                     </p>
                     <p className="text-gray-600 dark:text-gray-400 text-sm mt-1">
                       Full-Stack Development with React frontend and Node.js
