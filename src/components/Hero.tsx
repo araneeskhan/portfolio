@@ -9,7 +9,7 @@ const Hero = () => {
   const [isDeleting, setIsDeleting] = useState(false);
 
   const fullText = "Anees Ur Rehman";
-  const roles = ["Full-Stack Developer", "Software Enginner"];
+  const roles = ["Full-Stack Developer", "Software Engineer"];
   const typingSpeed = 150;
   const typingRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -200,7 +200,6 @@ const Hero = () => {
                   ✨ Innovative
                 </span>
               </div>
-             
             </div>
           </div>
         </div>
