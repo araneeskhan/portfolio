@@ -1,14 +1,15 @@
-import { useRouter } from 'next/router';
-import Image from 'next/image';
-import Layout from '@/components/Layout';
-import { projectsData } from '@/data/projects';
-import { useState } from 'react'; // Add this import
+import { useRouter } from "next/router";
+import Image from "next/image";
+import Layout from "@/components/Layout";
+import { projectsData } from "@/data/projects";
+import { useState } from "react";
+import Link from "next/link";
 
 export default function ProjectDetails() {
   const router = useRouter();
   const { id } = router.query;
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
-  
+
   const project = id ? projectsData[id as keyof typeof projectsData] : null;
 
   const handleImageClick = (image: string) => {
@@ -22,15 +23,36 @@ export default function ProjectDetails() {
   if (!project) {
     return (
       <Layout title="Project Not Found">
-        <div className="min-h-screen flex flex-col items-center justify-center px-4">
-          <h1 className="text-6xl font-bold text-blue-600 dark:text-blue-400 mb-4">404</h1>
-          <h2 className="text-3xl font-semibold text-gray-900 dark:text-white mb-6">Project Not Found</h2>
-          <button 
-            onClick={() => router.push('/')} 
-            className="btn-primary"
-          >
-            Back to Home
-          </button>
+        <div className="min-h-screen flex flex-col items-center justify-center px-4 relative overflow-hidden">
+          {/* Background decoration */}
+          <div className="absolute inset-0 overflow-hidden z-0">
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-br from-blue-400 to-purple-600 dark:from-blue-600 dark:to-purple-900 rounded-full blur-3xl opacity-20"></div>
+          </div>
+
+          <div className="relative z-10 text-center">
+            <div className="mb-8">
+              <i className="fas fa-folder-open text-8xl text-blue-600 dark:text-blue-400 opacity-50"></i>
+            </div>
+            <h1 className="text-7xl md:text-8xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 bg-clip-text text-transparent mb-4">
+              404
+            </h1>
+            <h2 className="text-2xl md:text-3xl font-semibold text-gray-900 dark:text-white mb-4">
+              Project Not Found
+            </h2>
+            <p className="text-gray-600 dark:text-gray-400 mb-8 max-w-md mx-auto">
+              The project you're looking for doesn't exist or has been moved.
+            </p>
+            <button
+              onClick={() => router.push("/")}
+              className="group relative px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-medium rounded-xl overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-blue-500/50"
+            >
+              <span className="relative z-10 flex items-center">
+                <i className="fas fa-home mr-2"></i>
+                Back to Home
+              </span>
+              <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
+            </button>
+          </div>
         </div>
       </Layout>
     );
@@ -38,85 +60,267 @@ export default function ProjectDetails() {
 
   return (
     <Layout title={`${project.title} | Project Details`}>
-      <div className="container mx-auto px-4 py-20">
-        <div className="max-w-4xl mx-auto">
-          <h1 className="text-4xl font-bold mb-6 text-gray-900 dark:text-white">{project.title}</h1>
-          
-          <div 
-            className="relative h-[400px] mb-8 rounded-xl overflow-hidden cursor-pointer"
-            onClick={() => handleImageClick(Array.isArray(project.coverImage) ? project.coverImage[0] : project.coverImage)}
-          >
-            <Image
-              src={Array.isArray(project.coverImage) ? project.coverImage[0] : project.coverImage}
-              alt={project.title}
-              fill
-              className="object-cover"
-              priority
-            />
+      <div className="relative overflow-hidden bg-gradient-to-b from-white to-gray-50 dark:from-gray-900 dark:to-gray-800">
+        {/* Background decoration */}
+        <div className="absolute inset-0 overflow-hidden z-0">
+          <div className="absolute -top-24 -right-24 w-96 h-96 bg-gradient-to-br from-blue-400 to-blue-600 dark:from-blue-600 dark:to-blue-900 rounded-full blur-3xl opacity-20 animate-blob"></div>
+          <div className="absolute top-1/2 -left-24 w-80 h-80 bg-gradient-to-br from-purple-400 to-purple-600 dark:from-purple-600 dark:to-purple-900 rounded-full blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
+        </div>
+
+        <div className="container mx-auto px-4 py-20 relative z-10">
+          {/* Back Button */}
+          <div className="max-w-6xl mx-auto mb-8" data-aos="fade-right">
+            <Link
+              href="/#projects"
+              className="inline-flex items-center text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors group"
+            >
+              <i className="fas fa-arrow-left mr-2 group-hover:-translate-x-1 transition-transform"></i>
+              Back to Projects
+            </Link>
           </div>
 
-          <div className="prose dark:prose-invert max-w-none">
-            <p className="text-lg text-gray-700 dark:text-gray-300 mb-6">
-              {project.description}
-            </p>
-
-            <h2 className="text-2xl font-semibold mb-4">Technologies Used</h2>
-            <div className="flex flex-wrap gap-2 mb-8">
-              {project.technologies.map((tech, index) => (
-                <span
-                  key={index}
-                  className="px-3 py-1 bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 rounded-full"
-                >
-                  {tech}
-                </span>
-              ))}
+          <div className="max-w-6xl mx-auto">
+            {/* Project Header */}
+            <div className="mb-12" data-aos="fade-up">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="px-4 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white text-sm font-bold rounded-full">
+                  Featured Project
+                </div>
+              </div>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 bg-clip-text text-transparent">
+                {project.title}
+              </h1>
+              <p className="text-xl text-gray-600 dark:text-gray-400 leading-relaxed max-w-3xl">
+                {project.description}
+              </p>
             </div>
 
-            <div className="flex gap-4">
-              <a
-                href={project.githubUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-primary"
-              >
-                <i className="fab fa-github mr-2"></i> View Code
-              </a>
-              {/* Removed the Back to Projects button */}
+            {/* Main Image */}
+            <div
+              className="relative h-[400px] md:h-[500px] lg:h-[600px] mb-12 rounded-2xl overflow-hidden cursor-pointer shadow-2xl group"
+              onClick={() =>
+                handleImageClick(
+                  Array.isArray(project.coverImage)
+                    ? project.coverImage[0]
+                    : project.coverImage
+                )
+              }
+              data-aos="zoom-in"
+            >
+              <Image
+                src={
+                  Array.isArray(project.coverImage)
+                    ? project.coverImage[0]
+                    : project.coverImage
+                }
+                alt={project.title}
+                fill
+                className="object-cover group-hover:scale-105 transition-transform duration-700"
+                priority
+              />
+              {/* Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+
+              {/* Expand Icon */}
+              <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                <div className="w-16 h-16 bg-white dark:bg-gray-800 rounded-full flex items-center justify-center shadow-2xl transform scale-75 group-hover:scale-100 transition-transform duration-500">
+                  <i className="fas fa-expand text-blue-600 dark:text-blue-400 text-xl"></i>
+                </div>
+              </div>
+            </div>
+
+            <div className="grid lg:grid-cols-3 gap-12">
+              {/* Main Content */}
+              <div className="lg:col-span-2 space-y-8">
+                {/* Project Overview */}
+                <div
+                  className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg border border-gray-200 dark:border-gray-700"
+                  data-aos="fade-up"
+                >
+                  <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 flex items-center">
+                    <i className="fas fa-info-circle text-blue-600 dark:text-blue-400 mr-3"></i>
+                    Project Overview
+                  </h2>
+                  <p className="text-gray-700 dark:text-gray-300 leading-relaxed text-lg">
+                    {project.description}
+                  </p>
+                </div>
+
+                {/* Key Features - if you want to add later */}
+                <div
+                  className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg border border-gray-200 dark:border-gray-700"
+                  data-aos="fade-up"
+                  data-aos-delay="100"
+                >
+                  <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 flex items-center">
+                    <i className="fas fa-star text-blue-600 dark:text-blue-400 mr-3"></i>
+                    Key Features
+                  </h2>
+                  <ul className="space-y-4">
+                    {[
+                      "Responsive design for all devices",
+                      "Modern and intuitive user interface",
+                      "Optimized performance",
+                      "Clean and maintainable code",
+                    ].map((feature, index) => (
+                      <li
+                        key={index}
+                        className="flex items-start text-gray-700 dark:text-gray-300"
+                      >
+                        <div className="w-6 h-6 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full flex items-center justify-center flex-shrink-0 mr-3 mt-0.5">
+                          <i className="fas fa-check text-white text-xs"></i>
+                        </div>
+                        <span className="text-lg">{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+
+              {/* Sidebar */}
+              <div className="lg:col-span-1 space-y-6">
+                {/* Technologies */}
+                <div
+                  className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg border border-gray-200 dark:border-gray-700 sticky top-24"
+                  data-aos="fade-left"
+                >
+                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4 flex items-center">
+                    <i className="fas fa-code text-blue-600 dark:text-blue-400 mr-2"></i>
+                    Technologies
+                  </h3>
+                  <div className="flex flex-wrap gap-2">
+                    {project.technologies.map((tech, index) => (
+                      <span
+                        key={index}
+                        className="px-3 py-2 bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/30 dark:to-purple-900/30 text-blue-700 dark:text-blue-300 text-sm font-medium rounded-lg border border-blue-200 dark:border-blue-800 hover:scale-105 transition-transform duration-300"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Action Buttons */}
+                <div
+                  className="space-y-3"
+                  data-aos="fade-left"
+                  data-aos-delay="100"
+                >
+                  <a
+                    href={project.githubUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group relative w-full px-6 py-4 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-medium rounded-xl overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-blue-500/50 flex items-center justify-center"
+                  >
+                    <span className="relative z-10 flex items-center">
+                      <i className="fab fa-github mr-2 text-lg"></i>
+                      View Source Code
+                    </span>
+                    <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
+                  </a>
+
+                  {project.liveUrl && (
+                    <a
+                      href={project.liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group w-full px-6 py-4 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 text-gray-900 dark:text-white font-medium rounded-xl border-2 border-gray-300 dark:border-gray-600 transition-all duration-300 hover:scale-105 hover:shadow-lg flex items-center justify-center"
+                    >
+                      <i className="fas fa-external-link-alt mr-2"></i>
+                      View Live Demo
+                    </a>
+                  )}
+                </div>
+              </div>
             </div>
           </div>
         </div>
 
-        {/* Modal for full-screen image */}
+        {/* Enhanced Modal */}
         {selectedImage && (
-          <div 
-            className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4 backdrop-blur-sm"
+          <div
+            className="fixed inset-0 bg-black/90 backdrop-blur-md flex items-center justify-center z-50 p-4 animate-fade-in"
             onClick={closeModal}
           >
-            <div 
-              className="relative max-w-5xl max-h-[90vh] w-full h-full flex items-center justify-center"
+            <div
+              className="relative max-w-6xl max-h-[90vh] w-full animate-scale-in"
               onClick={(e) => e.stopPropagation()}
             >
-              <button 
-                className="absolute top-2 right-2 text-white bg-black/50 hover:bg-black/70 rounded-full w-10 h-10 flex items-center justify-center transition-colors z-10"
+              <button
+                className="absolute -top-12 right-0 text-white hover:text-blue-400 transition-colors z-10 flex items-center gap-2 text-sm font-medium"
                 onClick={closeModal}
                 aria-label="Close modal"
               >
-                <i className="fas fa-times text-xl"></i>
+                <span>Close</span>
+                <div className="w-10 h-10 bg-white/10 hover:bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center transition-all duration-300">
+                  <i className="fas fa-times text-xl"></i>
+                </div>
               </button>
-              <div className="relative w-full h-full flex items-center justify-center">
+
+              <div className="relative w-full h-full flex items-center justify-center bg-gray-900/50 backdrop-blur-sm rounded-2xl p-4">
                 <Image
                   src={selectedImage}
                   alt="Project full view"
                   width={1200}
                   height={800}
-                  className="object-contain max-h-[90vh] rounded-lg shadow-2xl"
-                  onClick={(e) => e.stopPropagation()}
+                  className="object-contain max-h-[85vh] rounded-lg shadow-2xl"
                 />
               </div>
             </div>
           </div>
         )}
       </div>
+
+      <style jsx>{`
+        @keyframes blob {
+          0%,
+          100% {
+            transform: translate(0, 0) scale(1);
+          }
+          33% {
+            transform: translate(30px, -50px) scale(1.1);
+          }
+          66% {
+            transform: translate(-20px, 20px) scale(0.9);
+          }
+        }
+
+        @keyframes fade-in {
+          from {
+            opacity: 0;
+          }
+          to {
+            opacity: 1;
+          }
+        }
+
+        @keyframes scale-in {
+          from {
+            transform: scale(0.9);
+            opacity: 0;
+          }
+          to {
+            transform: scale(1);
+            opacity: 1;
+          }
+        }
+
+        .animate-blob {
+          animation: blob 7s infinite;
+        }
+
+        .animation-delay-2000 {
+          animation-delay: 2s;
+        }
+
+        .animate-fade-in {
+          animation: fade-in 0.3s ease-out;
+        }
+
+        .animate-scale-in {
+          animation: scale-in 0.3s ease-out;
+        }
+      `}</style>
     </Layout>
   );
 }

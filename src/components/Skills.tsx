@@ -1,138 +1,314 @@
-import Image from 'next/image';
-import { useState } from 'react';
+import Image from "next/image";
+import { useState } from "react";
 
 interface SkillItem {
   name: string;
   icon: string;
+  level?: number; // Proficiency level out of 100
 }
 
 const Skills = () => {
-  const [activeCategory, setActiveCategory] = useState('frontend');
+  const [activeCategory, setActiveCategory] = useState("frontend");
+  const [hoveredSkill, setHoveredSkill] = useState<string | null>(null);
 
   const skillCategories = {
     frontend: [
-      { name: 'HTML', icon: '/portfolio/assets/skills/html.png' },
-      { name: 'CSS', icon: '/portfolio/assets/skills/css.jpg' },
-      { name: 'Tailwind CSS', icon: '/portfolio/assets/skills/tailwind.svg' },
-      { name: 'JavaScript', icon: '/portfolio/assets/skills/javascript.svg' },
-      { name: 'TypeScript', icon: '/portfolio/assets/skills/typescript.svg' },
-      { name: 'React', icon: '/portfolio/assets/skills/react.svg' },
-      { name: 'React Native', icon: '/portfolio/assets/skills/reactnative.png' },
-      { name: 'Next Js', icon: '/portfolio/assets/skills/nextjs.svg' },
+      { name: "HTML", icon: "/portfolio/assets/skills/html.png", level: 95 },
+      { name: "CSS", icon: "/portfolio/assets/skills/css.jpg", level: 90 },
+      {
+        name: "Tailwind CSS",
+        icon: "/portfolio/assets/skills/tailwind.svg",
+        level: 92,
+      },
+      {
+        name: "JavaScript",
+        icon: "/portfolio/assets/skills/javascript.svg",
+        level: 88,
+      },
+      {
+        name: "TypeScript",
+        icon: "/portfolio/assets/skills/typescript.svg",
+        level: 85,
+      },
+      { name: "React", icon: "/portfolio/assets/skills/react.svg", level: 90 },
+      {
+        name: "React Native",
+        icon: "/portfolio/assets/skills/reactnative.png",
+        level: 82,
+      },
+      {
+        name: "Next.js",
+        icon: "/portfolio/assets/skills/nextjs.svg",
+        level: 88,
+      },
     ],
     backend: [
-      { name: 'Node.js', icon: '/portfolio/assets/skills/nodejs.png' },
-      { name: 'Express.js', icon: '/portfolio/assets/skills/expressjs.png' },
-      { name: 'MongoDB', icon: '/portfolio/assets/skills/mongodb.svg' },
-      { name: 'MySQL', icon: '/portfolio/assets/skills/mysql.svg' },
-      { name: 'Firebase', icon: '/portfolio/assets/skills/firebase.svg' },
-      { name: 'Supabase', icon: '/portfolio/assets/skills/supabase.png' },
-      { name: 'Python', icon: '/portfolio/assets/skills/python.svg' },
-      { name: 'Java', icon: '/portfolio/assets/skills/java.png' },
+      {
+        name: "Node.js",
+        icon: "/portfolio/assets/skills/nodejs.png",
+        level: 87,
+      },
+      {
+        name: "Express.js",
+        icon: "/portfolio/assets/skills/expressjs.png",
+        level: 85,
+      },
+      {
+        name: "MongoDB",
+        icon: "/portfolio/assets/skills/mongodb.svg",
+        level: 83,
+      },
+      { name: "MySQL", icon: "/portfolio/assets/skills/mysql.svg", level: 80 },
+      {
+        name: "Firebase",
+        icon: "/portfolio/assets/skills/firebase.svg",
+        level: 88,
+      },
+      {
+        name: "Supabase",
+        icon: "/portfolio/assets/skills/supabase.png",
+        level: 82,
+      },
+      {
+        name: "Python",
+        icon: "/portfolio/assets/skills/python.svg",
+        level: 78,
+      },
+      { name: "Java", icon: "/portfolio/assets/skills/java.png", level: 75 },
     ],
     other: [
-      { name: 'Github', icon: '/portfolio/assets/skills/github.png' },
-      { name: 'AWS', icon: '/portfolio/assets/skills/aws.svg' },
-      { name: 'Docker', icon: '/portfolio/assets/skills/docker.svg' },
-    ]
+      {
+        name: "Github",
+        icon: "/portfolio/assets/skills/github.png",
+        level: 90,
+      },
+      { name: "AWS", icon: "/portfolio/assets/skills/aws.svg", level: 75 },
+      {
+        name: "Docker",
+        icon: "/portfolio/assets/skills/docker.svg",
+        level: 72,
+      },
+    ],
+  };
+
+  const categoryIcons = {
+    frontend: "fa-code",
+    backend: "fa-server",
+    other: "fa-tools",
+  };
+
+  const categoryDescriptions = {
+    frontend: "Building beautiful, responsive user interfaces",
+    backend: "Creating robust server-side applications",
+    other: "Tools and technologies for modern development",
   };
 
   return (
-    <section id="skills" className="py-20 relative overflow-hidden bg-white dark:bg-gray-900">
-      {/* Background decoration */}
-      <div className="absolute top-0 left-0 w-full h-full overflow-hidden z-0 opacity-30 dark:opacity-10">
-        <div className="absolute -top-24 -right-24 w-96 h-96 bg-blue-200 dark:bg-blue-900 rounded-full blur-3xl"></div>
-        <div className="absolute top-1/2 -left-24 w-80 h-80 bg-purple-200 dark:bg-purple-900 rounded-full blur-3xl"></div>
+    <section
+      id="skills"
+      className="py-20 relative overflow-hidden bg-gradient-to-b from-gray-50 to-white dark:from-gray-800 dark:to-gray-900"
+    >
+      {/* Animated background decoration */}
+      <div className="absolute inset-0 overflow-hidden z-0">
+        <div className="absolute -top-24 -right-24 w-96 h-96 bg-gradient-to-br from-blue-400 to-blue-600 dark:from-blue-600 dark:to-blue-900 rounded-full blur-3xl opacity-20 animate-blob"></div>
+        <div className="absolute top-1/2 -left-24 w-80 h-80 bg-gradient-to-br from-purple-400 to-purple-600 dark:from-purple-600 dark:to-purple-900 rounded-full blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
+        <div className="absolute bottom-0 right-1/4 w-72 h-72 bg-gradient-to-br from-pink-400 to-pink-600 dark:from-pink-600 dark:to-pink-900 rounded-full blur-3xl opacity-20 animate-blob animation-delay-4000"></div>
       </div>
-      
-      <div className="container mx-auto px-4 relative z-10">
-        <p className="section-subtitle text-center" data-aos="fade-up">
-          Explore My
-        </p>
-        <h1 className="section-title text-center mb-12" data-aos="fade-up" data-aos-delay="100">
-          Skills
-        </h1>
 
-        {/* Category Tabs */}
-        <div className="flex justify-center mb-12" data-aos="fade-up" data-aos-delay="200">
-          <div className="inline-flex bg-white dark:bg-gray-800 p-1.5 rounded-xl shadow-lg">
+      <div className="container mx-auto px-4 relative z-10">
+        {/* Header */}
+        <div className="text-center mb-16">
+          <p
+            className="inline-block px-4 py-2 mb-4 text-sm font-semibold text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/30 rounded-full"
+            data-aos="fade-up"
+          >
+            Explore My
+          </p>
+          <h1
+            className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
+            Technical Skills
+          </h1>
+          <div
+            className="w-24 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto rounded-full"
+            data-aos="fade-up"
+            data-aos-delay="200"
+          ></div>
+        </div>
+
+        {/* Category Tabs - Enhanced */}
+        <div
+          className="flex justify-center mb-12"
+          data-aos="fade-up"
+          data-aos-delay="300"
+        >
+          <div className="inline-flex bg-white dark:bg-gray-800 p-2 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700">
             {Object.keys(skillCategories).map((category) => (
               <button
                 key={category}
                 onClick={() => setActiveCategory(category)}
-                className={`px-6 py-2.5 rounded-lg transition-all duration-300 font-medium ${
-                  activeCategory === category 
-                    ? 'bg-blue-600 text-white shadow-md transform scale-105' 
-                    : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
+                className={`group relative px-8 py-4 rounded-xl transition-all duration-300 font-semibold ${
+                  activeCategory === category
+                    ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg transform scale-105"
+                    : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
                 }`}
               >
-                {category.charAt(0).toUpperCase() + category.slice(1)}
+                <div className="flex items-center space-x-2">
+                  <i
+                    className={`fas ${
+                      categoryIcons[category as keyof typeof categoryIcons]
+                    } text-lg`}
+                  ></i>
+                  <span>
+                    {category.charAt(0).toUpperCase() + category.slice(1)}
+                  </span>
+                </div>
+                {activeCategory !== category && (
+                  <div className="absolute inset-0 rounded-xl border-2 border-transparent group-hover:border-blue-400 dark:group-hover:border-blue-500 transition-colors duration-300"></div>
+                )}
               </button>
             ))}
           </div>
         </div>
 
-        {/* Skills Grid with Animation */}
-        <div 
-          className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 max-w-5xl mx-auto"
+        {/* Category Description */}
+        <p
+          className="text-center text-gray-600 dark:text-gray-400 text-lg mb-12 max-w-2xl mx-auto"
           data-aos="fade-up"
-          data-aos-delay="300"
+          data-aos-delay="400"
         >
-          {skillCategories[activeCategory as keyof typeof skillCategories].map((skill, index) => (
-            <div 
-              key={skill.name}
-              className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 flex flex-col items-center"
-              data-aos="zoom-in"
-              data-aos-delay={300 + index * 50}
-            >
-              <div className="relative w-16 h-16 mb-4 overflow-hidden">
-                <Image
-                  src={skill.icon}
-                  alt={skill.name}
-                  width={64}
-                  height={64}
-                  className="object-contain"
-                />
+          {
+            categoryDescriptions[
+              activeCategory as keyof typeof categoryDescriptions
+            ]
+          }
+        </p>
+
+        {/* Skills Grid with Enhanced Animation */}
+        <div
+          className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 max-w-6xl mx-auto"
+          data-aos="fade-up"
+          data-aos-delay="500"
+        >
+          {skillCategories[activeCategory as keyof typeof skillCategories].map(
+            (skill, index) => (
+              <div
+                key={skill.name}
+                className="group relative"
+                data-aos="zoom-in"
+                data-aos-delay={500 + index * 50}
+                onMouseEnter={() => setHoveredSkill(skill.name)}
+                onMouseLeave={() => setHoveredSkill(null)}
+              >
+                {/* Skill Card */}
+                <div className="relative bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-gray-200 dark:border-gray-700 overflow-hidden">
+                  {/* Gradient overlay on hover */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-blue-600/10 to-purple-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl"></div>
+
+                  {/* Content */}
+                  <div className="relative z-10 flex flex-col items-center">
+                    {/* Icon container with animated background */}
+                    <div className="relative w-20 h-20 mb-4">
+                      <div className="absolute inset-0 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl opacity-0 group-hover:opacity-20 blur-xl transition-opacity duration-500"></div>
+                      <div className="relative w-full h-full flex items-center justify-center bg-gray-50 dark:bg-gray-700 rounded-xl group-hover:scale-110 transition-transform duration-500">
+                        <Image
+                          src={skill.icon}
+                          alt={skill.name}
+                          width={48}
+                          height={48}
+                          className="object-contain"
+                        />
+                      </div>
+                    </div>
+                    {/* Skill name */}
+                    <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-3 text-center">
+                      {skill.name}
+                    </h3>
+
+                  </div>
+
+                  {/* Hover border effect */}
+                  <div className="absolute inset-0 border-2 border-transparent group-hover:border-blue-400 dark:group-hover:border-blue-500 rounded-2xl transition-colors duration-500"></div>
+                </div>
               </div>
-              <h3 className="text-lg font-bold text-gray-900 dark:text-white">{skill.name}</h3>
+            )
+          )}
+        </div>
+
+        {/* Stats Section */}
+        <div
+          className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto"
+          data-aos="fade-up"
+          data-aos-delay="700"
+        >
+          <div className="text-center p-6 bg-white dark:bg-gray-800 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700">
+            <div className="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-2">
+              {skillCategories.frontend.length +
+                skillCategories.backend.length +
+                skillCategories.other.length}
+              +
             </div>
-          ))}
+            <div className="text-gray-600 dark:text-gray-400 text-sm font-medium">
+              Technologies
+            </div>
+          </div>
+          <div className="text-center p-6 bg-white dark:bg-gray-800 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700">
+            <div className="text-3xl font-bold text-purple-600 dark:text-purple-400 mb-2">
+              5+
+            </div>
+            <div className="text-gray-600 dark:text-gray-400 text-sm font-medium">
+              Frameworks
+            </div>
+          </div>
+          <div className="text-center p-6 bg-white dark:bg-gray-800 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700">
+            <div className="text-3xl font-bold text-pink-600 dark:text-pink-400 mb-2">
+              5+
+            </div>
+            <div className="text-gray-600 dark:text-gray-400 text-sm font-medium">
+              Projects
+            </div>
+          </div>
+          <div className="text-center p-6 bg-white dark:bg-gray-800 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700">
+            <div className="text-3xl font-bold text-green-600 dark:text-green-400 mb-2">
+              12+
+            </div>
+            <div className="text-gray-600 dark:text-gray-400 text-sm font-medium">
+              Months Exp
+            </div>
+          </div>
         </div>
       </div>
+
+      <style jsx>{`
+        @keyframes blob {
+          0%,
+          100% {
+            transform: translate(0, 0) scale(1);
+          }
+          33% {
+            transform: translate(30px, -50px) scale(1.1);
+          }
+          66% {
+            transform: translate(-20px, 20px) scale(0.9);
+          }
+        }
+
+        .animate-blob {
+          animation: blob 7s infinite;
+        }
+
+        .animation-delay-2000 {
+          animation-delay: 2s;
+        }
+
+        .animation-delay-4000 {
+          animation-delay: 4s;
+        }
+      `}</style>
     </section>
   );
 };
 
 export default Skills;
-
-// Update all skill image paths
-const skillsData = [
-  {
-    name: "HTML",
-    icon: "/assets/skills/html.png",
-  },
-  {
-    name: "CSS",
-    icon: "/portfolio/assets/skills/css.jpg",
-  },
-  {
-    name: "Tailwind",
-    icon: "/portfolio/assets/skills/tailwind.svg",
-  },
-  {
-    name: "Next.js",
-    icon: "/portfolio/assets/skills/nextjs.svg",
-  },
-  {
-    name: "JavaScript",
-    icon: "/portfolio/assets/skills/javascript.svg",
-  },
-  {
-    name: "React",
-    icon: "/portfolio/assets/skills/react.svg",
-  },
-  {
-    name: "React Native",
-    icon: "/portfolio/assets/skills/reactnative.png",
-  }
-]
