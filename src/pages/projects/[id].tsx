@@ -218,18 +218,6 @@ export default function ProjectDetails() {
                     </span>
                     <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
                   </a>
-
-                  {project.liveUrl && (
-                    <a
-                      href={project.liveUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="group w-full px-6 py-4 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 text-gray-900 dark:text-white font-medium rounded-xl border-2 border-gray-300 dark:border-gray-600 transition-all duration-300 hover:scale-105 hover:shadow-lg flex items-center justify-center"
-                    >
-                      <i className="fas fa-external-link-alt mr-2"></i>
-                      View Live Demo
-                    </a>
-                  )}
                 </div>
               </div>
             </div>

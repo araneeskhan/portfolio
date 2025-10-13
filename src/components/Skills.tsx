@@ -226,7 +226,6 @@ const Skills = () => {
                     <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-3 text-center">
                       {skill.name}
                     </h3>
-
                   </div>
 
                   {/* Hover border effect */}
@@ -245,10 +244,7 @@ const Skills = () => {
         >
           <div className="text-center p-6 bg-white dark:bg-gray-800 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700">
             <div className="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-2">
-              {skillCategories.frontend.length +
-                skillCategories.backend.length +
-                skillCategories.other.length}
-              +
+              10+
             </div>
             <div className="text-gray-600 dark:text-gray-400 text-sm font-medium">
               Technologies
