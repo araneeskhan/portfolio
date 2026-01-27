@@ -173,7 +173,7 @@ const Hero = () => {
             data-aos="fade-left"
             data-aos-delay="200"
           >
-            <div className="relative w-72 h-72 md:w-96 md:h-96 lg:w-[450px] lg:h-[450px]">
+            <div className="relative w-56 h-56 md:w-72 md:h-72 lg:w-80 lg:h-80">
               {/* Animated background rings */}
               <div className="absolute inset-0 rounded-full">
                 <div className="absolute inset-0 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full opacity-20 blur-2xl animate-pulse-slow"></div>
@@ -182,12 +182,12 @@ const Hero = () => {
               </div>
 
               {/* Profile image container */}
-              <div className="relative w-full h-full rounded-full overflow-hidden border-4 border-white dark:border-gray-800 shadow-2xl hover:scale-105 transition-transform duration-500 group">
+              <div className="relative w-full h-full rounded-full overflow-hidden border-4 border-white dark:border-gray-800 shadow-2xl hover:scale-100 transition-transform duration-500 group">
                 <Image
-                  src="/portfolio/assets/profile-pic.png"
+                  src="/portfolio/assets/profile-pic.jpg"
                   alt="Anees profile picture"
                   fill
-                  className="object-cover group-hover:scale-110 transition-transform duration-500"
+                  className="object-contain group-hover:scale-110 transition-transform duration-500"
                   priority
                 />
                 {/* Overlay gradient on hover */}

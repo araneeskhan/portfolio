@@ -67,7 +67,7 @@ const Projects = () => {
               key={project.id}
               className="group relative"
               data-aos="fade-up"
-              data-aos-delay={100 + index * 100}
+              data-aos-delay={index * 50}
               onMouseEnter={() => setHoveredProject(project.id)}
               onMouseLeave={() => setHoveredProject(null)}
             >

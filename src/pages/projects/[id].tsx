@@ -9,15 +9,38 @@ export default function ProjectDetails() {
   const router = useRouter();
   const { id } = router.query;
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [currentImageIndex, setCurrentImageIndex] = useState<number>(0);
 
   const project = id ? projectsData[id as keyof typeof projectsData] : null;
 
   const handleImageClick = (image: string) => {
     setSelectedImage(image);
+    // Find the index of the clicked image in screenshots
+    if (project?.screenshots) {
+      const index = project.screenshots.findIndex(s => s.path === image);
+      setCurrentImageIndex(index >= 0 ? index : 0);
+    }
   };
 
   const closeModal = () => {
     setSelectedImage(null);
+    setCurrentImageIndex(0);
+  };
+
+  const nextImage = () => {
+    if (project?.screenshots && currentImageIndex < project.screenshots.length - 1) {
+      const nextIndex = currentImageIndex + 1;
+      setCurrentImageIndex(nextIndex);
+      setSelectedImage(project.screenshots[nextIndex].path);
+    }
+  };
+
+  const prevImage = () => {
+    if (project?.screenshots && currentImageIndex > 0) {
+      const prevIndex = currentImageIndex - 1;
+      setCurrentImageIndex(prevIndex);
+      setSelectedImage(project.screenshots[prevIndex].path);
+    }
   };
 
   if (!project) {
@@ -129,6 +152,28 @@ export default function ProjectDetails() {
               </div>
             </div>
 
+            {/* View More Photos Button */}
+            {project.screenshots && project.screenshots.length > 0 && (
+              <div className="mb-12" data-aos="fade-up">
+                <button
+                  onClick={() => {
+                    // Open first screenshot in modal as a preview
+                    if (project.screenshots && project.screenshots.length > 0) {
+                      handleImageClick(project.screenshots[0].path);
+                    }
+                  }}
+                  className="group relative w-full px-8 py-6 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold rounded-2xl overflow-hidden transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl hover:shadow-blue-500/50 flex items-center justify-center gap-3"
+                >
+                  <i className="fas fa-images text-2xl"></i>
+                  <span className="text-lg">
+                    View More Photos ({project.screenshots.length})
+                  </span>
+                  <i className="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                  <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
+                </button>
+              </div>
+            )}
+
             <div className="grid lg:grid-cols-3 gap-12">
               {/* Main Content */}
               <div className="lg:col-span-2 space-y-8">
@@ -157,12 +202,7 @@ export default function ProjectDetails() {
                     Key Features
                   </h2>
                   <ul className="space-y-4">
-                    {[
-                      "Responsive design for all devices",
-                      "Modern and intuitive user interface",
-                      "Optimized performance",
-                      "Clean and maintainable code",
-                    ].map((feature, index) => (
+                    {project.features.map((feature, index) => (
                       <li
                         key={index}
                         className="flex items-start text-gray-700 dark:text-gray-300"
@@ -224,35 +264,86 @@ export default function ProjectDetails() {
           </div>
         </div>
 
-        {/* Enhanced Modal */}
-        {selectedImage && (
+        {/* Enhanced Gallery Modal */}
+        {selectedImage && project?.screenshots && (
           <div
-            className="fixed inset-0 bg-black/90 backdrop-blur-md flex items-center justify-center z-50 p-4 animate-fade-in"
+            className="fixed inset-0 bg-black/95 backdrop-blur-md flex items-center justify-center z-50 p-4 animate-fade-in"
             onClick={closeModal}
           >
             <div
-              className="relative max-w-6xl max-h-[90vh] w-full animate-scale-in"
+              className="relative max-w-7xl max-h-[95vh] w-full animate-scale-in"
               onClick={(e) => e.stopPropagation()}
             >
+              {/* Close Button */}
               <button
-                className="absolute -top-12 right-0 text-white hover:text-blue-400 transition-colors z-10 flex items-center gap-2 text-sm font-medium"
+                className="absolute top-4 right-4 z-50 w-12 h-12 bg-black/50 hover:bg-black/70 backdrop-blur-sm rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 group border-2 border-white/20 hover:border-white/40"
                 onClick={closeModal}
                 aria-label="Close modal"
               >
-                <span>Close</span>
-                <div className="w-10 h-10 bg-white/10 hover:bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center transition-all duration-300">
-                  <i className="fas fa-times text-xl"></i>
-                </div>
+                <i className="fas fa-times text-white text-2xl group-hover:rotate-90 transition-transform duration-300"></i>
               </button>
 
+              {/* Image Counter */}
+              <div className="absolute top-4 left-4 z-50 text-white text-sm font-semibold bg-black/50 backdrop-blur-sm px-4 py-2 rounded-full border-2 border-white/20">
+                {currentImageIndex + 1} / {project.screenshots.length}
+              </div>
+
+              {/* Main Image Container */}
               <div className="relative w-full h-full flex items-center justify-center bg-gray-900/50 backdrop-blur-sm rounded-2xl p-4">
                 <Image
                   src={selectedImage}
-                  alt="Project full view"
+                  alt={`Screenshot ${currentImageIndex + 1}`}
                   width={1200}
                   height={800}
                   className="object-contain max-h-[85vh] rounded-lg shadow-2xl"
                 />
+
+                {/* Previous Button */}
+                {currentImageIndex > 0 && (
+                  <button
+                    onClick={prevImage}
+                    className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/10 hover:bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 group"
+                    aria-label="Previous image"
+                  >
+                    <i className="fas fa-chevron-left text-white text-xl group-hover:-translate-x-0.5 transition-transform"></i>
+                  </button>
+                )}
+
+                {/* Next Button */}
+                {currentImageIndex < project.screenshots.length - 1 && (
+                  <button
+                    onClick={nextImage}
+                    className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/10 hover:bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 group"
+                    aria-label="Next image"
+                  >
+                    <i className="fas fa-chevron-right text-white text-xl group-hover:translate-x-0.5 transition-transform"></i>
+                  </button>
+                )}
+              </div>
+
+              {/* Thumbnail Strip */}
+              <div className="mt-4 flex gap-2 overflow-x-auto pb-2 scrollbar-thin scrollbar-thumb-white/20 scrollbar-track-transparent">
+                {project.screenshots.map((screenshot, index) => (
+                  <button
+                    key={index}
+                    onClick={() => {
+                      setCurrentImageIndex(index);
+                      setSelectedImage(screenshot.path);
+                    }}
+                    className={`relative flex-shrink-0 w-20 h-20 rounded-lg overflow-hidden transition-all duration-300 ${
+                      index === currentImageIndex
+                        ? "ring-2 ring-blue-500 scale-105"
+                        : "opacity-60 hover:opacity-100"
+                    }`}
+                  >
+                    <Image
+                      src={screenshot.path}
+                      alt={`Thumbnail ${index + 1}`}
+                      fill
+                      className="object-cover"
+                    />
+                  </button>
+                ))}
               </div>
             </div>
           </div>

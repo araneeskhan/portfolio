@@ -22,9 +22,11 @@ export default function App({ Component, pageProps }: AppProps) {
       // Initialize AOS
       import('aos').then((aos) => {
         aos.init({
-          duration: 800,
-          once: false,
-          mirror: true,
+          duration: 600,
+          once: true,
+          mirror: false,
+          easing: 'ease-out-cubic',
+          offset: 100,
         });
       });
     }

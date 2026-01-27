@@ -1,5 +1,24 @@
+// TypeScript type definitions
+export interface Screenshot {
+  path: string;
+  type: "mobile" | "web";
+  alt?: string;
+}
+
+export interface Project {
+  title: string;
+  coverImage: string | string[];
+  description: string;
+  videoPath?: string;
+  videoAspectRatio?: string;
+  technologies: string[];
+  features: string[];
+  githubUrl: string;
+  screenshots?: Screenshot[];
+}
+
 // Project data object
-export const projectsData = {
+export const projectsData: Record<string, Project> = {
   "campus-sports-sphere": {
     title: "Campus Sports Sphere",
     coverImage: "/portfolio/assets/css/cover.png",
@@ -23,6 +42,20 @@ export const projectsData = {
       "Digital scoreboard and statistics",
     ],
     githubUrl: "https://github.com/araneeskhan/CampusSportsSphere",
+    screenshots: [
+      { path: "/portfolio/assets/css/screenshot1.png", type: "web" },
+      { path: "/portfolio/assets/css/screenshot.png", type: "mobile" },
+      { path: "/portfolio/assets/css/screenshot2.png", type: "mobile" },
+      { path: "/portfolio/assets/css/screenshot3.png", type: "mobile" },
+      { path: "/portfolio/assets/css/screenshot7.png", type: "mobile" },
+      { path: "/portfolio/assets/css/screenshot9.png", type: "mobile" },
+      { path: "/portfolio/assets/css/screenshot10.png", type: "mobile" },
+      { path: "/portfolio/assets/css/screenshot11.png", type: "mobile" },
+      { path: "/portfolio/assets/css/screenshot12.png", type: "mobile" },
+      { path: "/portfolio/assets/css/screenshot13.png", type: "mobile" },
+      { path: "/portfolio/assets/css/screenshot14.png", type: "mobile" },
+      { path: "/portfolio/assets/css/screenshot15.png", type: "mobile" },
+    ]
   },
   quickbite: {
     title: "QuickBite",
@@ -39,6 +72,7 @@ export const projectsData = {
       "Dynamic menu management",
     ],
     githubUrl: "https://github.com/araneeskhan/QuickBite",
+
   },
   "ai-showcase": {
     title: "AI Showcase",
@@ -110,5 +144,23 @@ export const projectsData = {
       "💰 Subscriptions",
     ],
     githubUrl: "https://github.com/araneeskhan/Bankee",
+  },
+  mafiaempire: {
+    title: "Mafia Empire",
+    coverImage: ["/portfolio/assets/mafiaempire/cover.png"],
+    description:
+      "Mafia Empire is a mobile game that puts you in control of your own criminal organization in a cyberpunk-themed world. Build your empire, recruit gang members, complete missions, and battle for control of territories.",
+    videoPath: "yyk79t",
+    videoAspectRatio: "16-9",
+    technologies: ["React Native", "Firebase", "Expo", "Zustand"],
+    features: [
+      "Criminal Career Progression: Start as a street thug and rise to become a powerful crime lord",
+      "Gang Management: Recruit and upgrade various types of gang members with unique abilities",
+      "Business Empire: Purchase and upgrade businesses to generate passive income",
+      "Mission System: Complete various missions to earn rewards and reputation",
+      "Territory Control: Battle other players for control of valuable territories",
+      "Achievement System: Complete achievements to earn special rewards",
+    ],
+    githubUrl: "https://github.com/araneeskhan/MafiaEmpire",
   },
 };

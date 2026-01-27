@@ -145,3 +145,26 @@ body {
     display: none;
   }
 }
+
+/* Performance optimizations for smooth scrolling */
+* {
+  scroll-behavior: smooth;
+}
+
+/* Hardware acceleration for animations */
+[data-aos] {
+  will-change: transform, opacity;
+}
+
+/* Optimize blur effects for better performance */
+.blur-3xl {
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* Font smoothing */
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
