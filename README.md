@@ -62,6 +62,8 @@ Here are some of the key projects I've worked on:
 
 ### 1. **Campus Sports Sphere** 🏆
 *A comprehensive automated sports management system for universities.*
+<img src="public/assets/css/cover.png" alt="Campus Sports Sphere Cover" width="100%" />
+
 - **Tech Stack:** JavaScript, Python, React, React Native, Node.js, Flask, Firebase
 - **Key Features:** Real-time event management, automated scheduling, digital scoreboard, cross-platform mobile app.
 - **Achievement:** 1st Position in Career Expo 2024 (Hybrid Category).
@@ -69,30 +71,40 @@ Here are some of the key projects I've worked on:
 
 ### 2. **QuickBite** 🍔
 *A modern food delivery platform with real-time tracking.*
+<img src="public/assets/quickbite/cover.png" alt="QuickBite Cover" width="100%" />
+
 - **Tech Stack:** React Native, Firebase, Zustand, AsyncStorage
 - **Key Features:** Real-time order tracking, secure payments, restaurant dashboard, dynamic menu management.
 - [View Code](https://github.com/araneeskhan/QuickBite)
 
 ### 3. **AI Showcase** 🤖
 *An integrated AI development platform for developer productivity.*
+<img src="public/assets/ai-showcase/cover.png" alt="AI Showcase Cover" width="100%" />
+
 - **Tech Stack:** React.js, Chakra UI, Framer Motion, Node.js, OpenAI API
 - **Key Features:** AI Code Assistant, Resume Analyzer, Dev Community, Smart Analytics.
 - [View Code](https://github.com/araneeskhan/AiShowCase)
 
 ### 4. **E-Store** 🛍️
 *An innovative e-commerce platform with AI-based personalization.*
+<img src="public/assets/store/cover.png" alt="E-Store Cover" width="100%" />
+
 - **Tech Stack:** Next.js, Chakra UI, Tailwind CSS, Node.js
 - **Key Features:** User/Admin dashboards, product recommendations, filtration, secure checkout.
 - [View Code](https://github.com/araneeskhan/Store)
 
 ### 5. **Bankee** 💳
 *A feature-rich mobile banking application.*
+<img src="public/assets/bankee/cover.png" alt="Bankee Cover" width="100%" />
+
 - **Tech Stack:** React Native, Expo, Firebase
 - **Key Features:** Secure auth, wallet management, easy transfers, transaction history, real-time notifications.
 - [View Code](https://github.com/araneeskhan/Bankee)
 
 ### 6. **Mafia Empire** 🎮
 *A cyberpunk-themed mobile strategy game.*
+<img src="public/assets/mafiaempire/cover.png" alt="Mafia Empire Cover" width="100%" />
+
 - **Tech Stack:** React Native, Expo, Firebase, Zustand
 - **Key Features:** Gang management, business empire building, territory battles, mission systems.
 - [View Code](https://github.com/araneeskhan/MafiaEmpire)
@@ -109,33 +121,6 @@ This portfolio website is itself a testament to my skills, built using:
 - **Animations:** AOS (Animate On Scroll) & Custom CSS
 - **Forms:** Formspree
 - **Deployment:** GitHub Pages
-
-## 🏁 Getting Started
-
-To run this portfolio locally on your machine:
-
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/araneeskhan/portfolio.git
-   ```
-
-2. **Navigate to the project directory**
-   ```bash
-   cd portfolio
-   ```
-
-3. **Install dependencies**
-   ```bash
-   npm install
-   ```
-
-4. **Run the development server**
-   ```bash
-   npm run dev
-   ```
-
-5. **Open your browser**
-   Visit [http://localhost:3000](http://localhost:3000) to view the site.
 
 ## 📬 Contact Me
 
