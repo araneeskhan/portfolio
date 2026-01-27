@@ -1,114 +1,153 @@
-# Anees Ur Rehman - Portfolio
+# 👨‍💻 Anees Ur Rehman - Portfolio
 
 <div align="center">
-  <img src="public/assets/profile.png" alt="Anees Ur Rehman" width="150" style="border-radius: 50%;" />
-  <h3>Full-Stack Developer</h3>
+  <img src="public/assets/profile-pic.jpg" alt="Anees Ur Rehman" width="160" height="160" style="border-radius: 50%; object-fit: cover; border: 4px solid #3b82f6;" />
   
-  [![Portfolio](https://img.shields.io/badge/Portfolio-Visit%20Website-blue?style=for-the-badge&logo=vercel)](https://araneeskhan.github.io/portfolio/)
-  [![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?style=for-the-badge&logo=linkedin)](https://linkedin.com/in/araneeskhan)
-  [![GitHub](https://img.shields.io/badge/GitHub-Follow-black?style=for-the-badge&logo=github)](https://github.com/araneeskhan)
+  <h2 style="margin-top: 20px;">Full-Stack Developer</h2>
+  <p><i>Building digital experiences that solve real-world problems.</i></p>
+
+  <div style="display: flex; justify-content: center; gap: 10px; margin-top: 10px;">
+    <a href="https://araneeskhan.github.io/portfolio/">
+      <img src="https://img.shields.io/badge/Portfolio-Visit%20Website-3b82f6?style=for-the-badge&logo=vercel&logoColor=white" alt="Portfolio" />
+    </a>
+    <a href="https://linkedin.com/in/araneeskhan">
+      <img src="https://img.shields.io/badge/LinkedIn-Connect-0077b5?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn" />
+    </a>
+    <a href="https://github.com/araneeskhan">
+      <img src="https://img.shields.io/badge/GitHub-Follow-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" />
+    </a>
+    <a href="mailto:aneesurrehman1358@gmail.com">
+      <img src="https://img.shields.io/badge/Email-Contact%20Me-EA4335?style=for-the-badge&logo=gmail&logoColor=white" alt="Email" />
+    </a>
+  </div>
 </div>
 
-## 👨‍💻 About Me
+<br />
 
-I'm a passionate Full-Stack Developer with expertise in building modern web and mobile applications. I focus on creating clean, efficient, and user-friendly solutions that solve real-world problems.
+## 📖 About Me
 
-## 🛠️ Skills
+I'm a passionate **Full-Stack Developer** with over a year of professional experience. I specialize in building modern, responsive, and efficient web and mobile applications. My journey involves mastering both frontend aesthetics and backend logic to deliver complete, user-friendly solutions.
 
-### Frontend
-- HTML, CSS, JavaScript, TypeScript
-- React, React Native
-- Next.js
-- Tailwind CSS
+## 🛠️ Tech Stack & Skills
 
-### Backend
-- Node.js, Express.js
-- MongoDB, MySQL
-- Firebase, Supabase
-- Python, Java
+### **Frontend Development**
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat&logo=css3&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=black)
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat&logo=typescript&logoColor=white)
+![React](https://img.shields.io/badge/React-20232A?style=flat&logo=react&logoColor=61DAFB)
+![React Native](https://img.shields.io/badge/React_Native-20232A?style=flat&logo=react&logoColor=61DAFB)
+![Next.js](https://img.shields.io/badge/Next.js-000000?style=flat&logo=next.js&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=flat&logo=tailwind-css&logoColor=white)
 
-### Other
-- Git/GitHub
-- AWS
-- Docker
+### **Backend Development**
+![Node.js](https://img.shields.io/badge/Node.js-339933?style=flat&logo=nodedotjs&logoColor=white)
+![Express.js](https://img.shields.io/badge/Express.js-000000?style=flat&logo=express&logoColor=white)
+![Python](https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white)
+![Java](https://img.shields.io/badge/Java-007396?style=flat&logo=openjdk&logoColor=white)
 
-## 🚀 Projects
+### **Databases & Cloud**
+![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=flat&logo=mongodb&logoColor=white)
+![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=flat&logo=mysql&logoColor=white)
+![Firebase](https://img.shields.io/badge/Firebase-FFCA28?style=flat&logo=firebase&logoColor=black)
+![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?style=flat&logo=supabase&logoColor=white)
+![AWS](https://img.shields.io/badge/AWS-232F3E?style=flat&logo=amazon-aws&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat&logo=docker&logoColor=white)
 
-### Campus Sports Sphere
-A comprehensive Automated sports management system combining web and mobile technologies to streamline University sports activities.
+---
 
-**Technologies:** JavaScript, Python, React, React Native, Node.js, Flask, Firebase
+## 🚀 Featured Projects
 
-[View Code](https://github.com/araneeskhan/CampusSportsSphere)
+Here are some of the key projects I've worked on:
 
-### QuickBite
-A modern food delivery platform that lets you Order FastFood, featuring real-time order History Tracking and seamless payment integration.
+### 1. **Campus Sports Sphere** 🏆
+*A comprehensive automated sports management system for universities.*
+- **Tech Stack:** JavaScript, Python, React, React Native, Node.js, Flask, Firebase
+- **Key Features:** Real-time event management, automated scheduling, digital scoreboard, cross-platform mobile app.
+- **Achievement:** 1st Position in Career Expo 2024 (Hybrid Category).
+- [View Code](https://github.com/araneeskhan/CampusSportsSphere)
 
-**Technologies:** React Native, Firebase, Zustand, AsyncStorage
+### 2. **QuickBite** 🍔
+*A modern food delivery platform with real-time tracking.*
+- **Tech Stack:** React Native, Firebase, Zustand, AsyncStorage
+- **Key Features:** Real-time order tracking, secure payments, restaurant dashboard, dynamic menu management.
+- [View Code](https://github.com/araneeskhan/QuickBite)
 
-[View Code](https://github.com/araneeskhan/QuickBite)
+### 3. **AI Showcase** 🤖
+*An integrated AI development platform for developer productivity.*
+- **Tech Stack:** React.js, Chakra UI, Framer Motion, Node.js, OpenAI API
+- **Key Features:** AI Code Assistant, Resume Analyzer, Dev Community, Smart Analytics.
+- [View Code](https://github.com/araneeskhan/AiShowCase)
 
-### AI Showcase
-A modern, feature-rich AI development platform that combines multiple AI-powered tools to enhance developer productivity.
+### 4. **E-Store** 🛍️
+*An innovative e-commerce platform with AI-based personalization.*
+- **Tech Stack:** Next.js, Chakra UI, Tailwind CSS, Node.js
+- **Key Features:** User/Admin dashboards, product recommendations, filtration, secure checkout.
+- [View Code](https://github.com/araneeskhan/Store)
 
-**Technologies:** React.js, Chakra UI, Framer Motion, Node.js, OpenAI API
+### 5. **Bankee** 💳
+*A feature-rich mobile banking application.*
+- **Tech Stack:** React Native, Expo, Firebase
+- **Key Features:** Secure auth, wallet management, easy transfers, transaction history, real-time notifications.
+- [View Code](https://github.com/araneeskhan/Bankee)
 
-[View Code](https://github.com/araneeskhan/ai-showcase)
+### 6. **Mafia Empire** 🎮
+*A cyberpunk-themed mobile strategy game.*
+- **Tech Stack:** React Native, Expo, Firebase, Zustand
+- **Key Features:** Gang management, business empire building, territory battles, mission systems.
+- [View Code](https://github.com/araneeskhan/MafiaEmpire)
 
-## 🏆 Achievements
+---
 
-- **Career Expo 2024:** 1st Position in the Hybrid category for the project "Campus Sports Sphere"
+## 💻 Portfolio Architecture
 
-## 📬 Contact
+This portfolio website is itself a testament to my skills, built using:
 
-Feel free to reach out to me through my [portfolio website](https://araneeskhan.github.io/portfolio/#contact) or connect with me on [LinkedIn](https://linkedin.com/in/araneeskhan).
+- **Framework:** Next.js 15 (React)
+- **Language:** TypeScript
+- **Styling:** Tailwind CSS
+- **Animations:** AOS (Animate On Scroll) & Custom CSS
+- **Forms:** Formspree
+- **Deployment:** GitHub Pages
 
-## 🛠️ Portfolio Tech Stack
+## 🏁 Getting Started
 
-This portfolio is built with:
+To run this portfolio locally on your machine:
 
-- **Next.js** - React framework
-- **TypeScript** - Type safety
-- **Tailwind CSS** - Styling
-- **AOS** - Scroll animations
-- **GitHub Pages** - Hosting
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/araneeskhan/portfolio.git
+   ```
 
-## 🚀 Getting Started
+2. **Navigate to the project directory**
+   ```bash
+   cd portfolio
+   ```
 
-```bash
-# Clone the repository
-git clone https://github.com/araneeskhan/portfolio.git
+3. **Install dependencies**
+   ```bash
+   npm install
+   ```
 
-# Navigate to the directory
-cd portfolio
+4. **Run the development server**
+   ```bash
+   npm run dev
+   ```
 
-# Install dependencies
-npm install
+5. **Open your browser**
+   Visit [http://localhost:3000](http://localhost:3000) to view the site.
 
-# Run the development server
-npm run dev
-```
+## 📬 Contact Me
 
-Open [http://localhost:3000/portfolio](http://localhost:3000/portfolio) to view the site.
+I'm always open to discussing new projects, creative ideas, or opportunities to be part of your visions.
 
-## 📄 License
+- **Website:** [araneeskhan.github.io/portfolio](https://araneeskhan.github.io/portfolio/)
+- **Email:** [aneesurrehman1358@gmail.com](mailto:aneesurrehman1358@gmail.com)
+- **LinkedIn:** [linkedin.com/in/araneeskhan](https://linkedin.com/in/araneeskhan)
 
-This project is open source and available under the [MIT License](LICENSE).
-```
+---
 
-This README:
-
-1. Starts with your name and a profile image
-2. Includes badges linking to your portfolio, LinkedIn, and GitHub
-3. Has sections for About Me, Skills, Projects, Achievements, and Contact
-4. Includes information about the tech stack used for the portfolio
-5. Provides instructions for running the project locally
-6. Mentions licensing information
-
-You can customize it further by:
-- Adding more projects or achievements
-- Including screenshots of your portfolio
-- Adding more detailed descriptions of your skills or experience
-- Including testimonials if you have any
-
->>>>>>> 6fb23db0187537d5a8959631b264bbc6d6f40ac1
+<div align="center">
+  <p>Made with ❤️ by <b>Anees Ur Rehman</b></p>
+  <p>© 2026 All Rights Reserved</p>
+</div>
