@@ -61,13 +61,13 @@ const Hero = () => {
       id="home"
       className="min-h-screen pt-28 pb-20 md:pt-36 md:pb-28 relative overflow-hidden flex items-center"
     >
-      {/* Animated background decoration */}
-      <div className="absolute inset-0 overflow-hidden z-0">
-        <div className="absolute -top-24 -right-24 w-96 h-96 bg-gradient-to-br from-blue-400 to-blue-600 dark:from-blue-600 dark:to-blue-900 rounded-full blur-3xl opacity-20 animate-blob"></div>
-        <div className="absolute top-1/2 -left-24 w-80 h-80 bg-gradient-to-br from-purple-400 to-purple-600 dark:from-purple-600 dark:to-purple-900 rounded-full blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
-        <div className="absolute -bottom-24 left-1/2 w-96 h-96 bg-gradient-to-br from-pink-400 to-pink-600 dark:from-pink-600 dark:to-pink-900 rounded-full blur-3xl opacity-20 animate-blob animation-delay-4000"></div>
+      {/* Animated background decoration - OPTIMIZED with will-change */}
+      <div className="absolute inset-0 overflow-hidden z-0 pointer-events-none">
+        <div className="absolute -top-24 -right-24 w-96 h-96 bg-gradient-to-br from-blue-400 to-blue-600 dark:from-blue-600 dark:to-blue-900 rounded-full blur-3xl opacity-20 animate-blob will-change-transform"></div>
+        <div className="absolute top-1/2 -left-24 w-80 h-80 bg-gradient-to-br from-purple-400 to-purple-600 dark:from-purple-600 dark:to-purple-900 rounded-full blur-3xl opacity-20 animate-blob animation-delay-2000 will-change-transform"></div>
+        <div className="absolute -bottom-24 left-1/2 w-96 h-96 bg-gradient-to-br from-pink-400 to-pink-600 dark:from-pink-600 dark:to-pink-900 rounded-full blur-3xl opacity-20 animate-blob animation-delay-4000 will-change-transform"></div>
 
-        {/* Grid pattern */}
+        {/* Grid pattern - SIMPLIFIED */}
         <div className="absolute inset-0 bg-grid-pattern opacity-5 dark:opacity-[0.02]"></div>
       </div>
 
@@ -81,7 +81,9 @@ const Hero = () => {
             {/* Greeting badge */}
             <div className="inline-flex items-center px-4 py-2 bg-blue-50 dark:bg-blue-900/30 rounded-full border border-blue-200 dark:border-blue-800">
               <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse mr-2"></span>
-              <p className="text-blue-600 dark:text-blue-400 font-medium text-sm"></p>
+              <p className="text-blue-600 dark:text-blue-400 font-medium text-sm">
+                Available for opportunities
+              </p>
             </div>
 
             {/* Main heading with typing effect */}
@@ -119,7 +121,7 @@ const Hero = () => {
             {/* CTA Buttons */}
             <div className="flex flex-wrap gap-4 pt-4">
               <a
-                href="/portfolio/assets/Resume.pdf"
+                href="/assets/Resume.pdf"
                 download="Anees_Ur_Rehman_Resume.pdf"
                 className="group relative px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-medium rounded-xl overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-blue-500/50"
               >
@@ -167,35 +169,37 @@ const Hero = () => {
             </div>
           </div>
 
-          {/* Profile Image with enhanced effects */}
+          {/* Profile Image with enhanced effects - OPTIMIZED */}
           <div
             className="md:w-1/2 flex justify-center order-1 md:order-2"
             data-aos="fade-left"
             data-aos-delay="200"
           >
             <div className="relative w-56 h-56 md:w-72 md:h-72 lg:w-80 lg:h-80">
-              {/* Animated background rings */}
-              <div className="absolute inset-0 rounded-full">
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full opacity-20 blur-2xl animate-pulse-slow"></div>
-                <div className="absolute inset-[-10px] border-2 border-blue-500/30 dark:border-blue-400/30 rounded-full animate-spin-slow"></div>
-                <div className="absolute inset-[-20px] border-2 border-purple-500/20 dark:border-purple-400/20 rounded-full animate-spin-reverse-slow"></div>
+              {/* Animated background rings - OPTIMIZED */}
+              <div className="absolute inset-0 rounded-full pointer-events-none">
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full opacity-20 blur-2xl animate-pulse-slow will-change-transform"></div>
+                <div className="absolute inset-[-10px] border-2 border-blue-500/30 dark:border-blue-400/30 rounded-full animate-spin-slow will-change-transform"></div>
+                <div className="absolute inset-[-20px] border-2 border-purple-500/20 dark:border-purple-400/20 rounded-full animate-spin-reverse-slow will-change-transform"></div>
               </div>
 
-              {/* Profile image container */}
-              <div className="relative w-full h-full rounded-full overflow-hidden border-4 border-white dark:border-gray-800 shadow-2xl hover:scale-100 transition-transform duration-500 group">
+              {/* Profile image container - OPTIMIZED with priority and quality settings */}
+              <div className="relative w-full h-full rounded-full overflow-hidden border-4 border-white dark:border-gray-800 shadow-2xl transition-transform duration-500 group">
                 <Image
                   src="/assets/profile-pic.jpg"
                   alt="Anees profile picture"
                   fill
-                  className="object-contain group-hover:scale-110 transition-transform duration-500"
+                  className="object-contain group-hover:scale-110 transition-transform duration-500 will-change-transform"
                   priority
+                  quality={85}
+                  sizes="(max-width: 768px) 224px, (max-width: 1024px) 288px, 320px"
                 />
                 {/* Overlay gradient on hover */}
                 <div className="absolute inset-0 bg-gradient-to-t from-blue-600/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               </div>
 
-              {/* Floating badges */}
-              <div className="absolute -top-4 -right-4 bg-white dark:bg-gray-800 px-4 py-2 rounded-full shadow-lg border border-gray-200 dark:border-gray-700 animate-float">
+              {/* Floating badges - OPTIMIZED */}
+              <div className="absolute -top-4 -right-4 bg-white dark:bg-gray-800 px-4 py-2 rounded-full shadow-lg border border-gray-200 dark:border-gray-700 animate-float will-change-transform">
                 <span className="text-sm font-bold text-gray-900 dark:text-white">
                   ✨ Innovative
                 </span>
