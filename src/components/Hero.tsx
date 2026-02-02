@@ -184,7 +184,7 @@ const Hero = () => {
               {/* Profile image container */}
               <div className="relative w-full h-full rounded-full overflow-hidden border-4 border-white dark:border-gray-800 shadow-2xl hover:scale-100 transition-transform duration-500 group">
                 <Image
-                  src="/portfolio/assets/profile-pic.jpg"
+                  src="/assets/profile-pic.jpg"
                   alt="Anees profile picture"
                   fill
                   className="object-contain group-hover:scale-110 transition-transform duration-500"

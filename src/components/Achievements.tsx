@@ -7,7 +7,7 @@ const Achievements = () => {
   const achievements = [
     {
       id: 1,
-      image: "/portfolio/assets/achievement-1.jpg",
+      image: "/assets/achievement-1.jpg",
       position: "1st Position",
       title: "Career Expo 2024",
       category: "Hybrid Category",

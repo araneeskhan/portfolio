@@ -21,7 +21,7 @@ export interface Project {
 export const projectsData: Record<string, Project> = {
   "campus-sports-sphere": {
     title: "Campus Sports Sphere",
-    coverImage: "/portfolio/assets/css/cover.png",
+    coverImage: "/assets/css/cover.png",  
     description:
       "A comprehensive Automated sports management system combining web and mobile technologies to streamline University sports activities.",
     videoPath: "br6cqm",
@@ -43,23 +43,23 @@ export const projectsData: Record<string, Project> = {
     ],
     githubUrl: "https://github.com/araneeskhan/CampusSportsSphere",
     screenshots: [
-      { path: "/portfolio/assets/css/screenshot1.png", type: "web" },
-      { path: "/portfolio/assets/css/screenshot.png", type: "mobile" },
-      { path: "/portfolio/assets/css/screenshot2.png", type: "mobile" },
-      { path: "/portfolio/assets/css/screenshot3.png", type: "mobile" },
-      { path: "/portfolio/assets/css/screenshot7.png", type: "mobile" },
-      { path: "/portfolio/assets/css/screenshot9.png", type: "mobile" },
-      { path: "/portfolio/assets/css/screenshot10.png", type: "mobile" },
-      { path: "/portfolio/assets/css/screenshot11.png", type: "mobile" },
-      { path: "/portfolio/assets/css/screenshot12.png", type: "mobile" },
-      { path: "/portfolio/assets/css/screenshot13.png", type: "mobile" },
-      { path: "/portfolio/assets/css/screenshot14.png", type: "mobile" },
-      { path: "/portfolio/assets/css/screenshot15.png", type: "mobile" },
+      { path: "/assets/css/screenshot1.png", type: "web" },  
+      { path: "/assets/css/screenshot.png", type: "mobile" },
+      { path: "/assets/css/screenshot2.png", type: "mobile" },
+      { path: "/assets/css/screenshot3.png", type: "mobile" },
+      { path: "/assets/css/screenshot7.png", type: "mobile" },
+      { path: "/assets/css/screenshot9.png", type: "mobile" },
+      { path: "/assets/css/screenshot10.png", type: "mobile" },
+      { path: "/assets/css/screenshot11.png", type: "mobile" },
+      { path: "/assets/css/screenshot12.png", type: "mobile" },
+      { path: "/assets/css/screenshot13.png", type: "mobile" },
+      { path: "/assets/css/screenshot14.png", type: "mobile" },
+      { path: "/assets/css/screenshot15.png", type: "mobile" },
     ]
   },
   quickbite: {
     title: "QuickBite",
-    coverImage: "/portfolio/assets/quickbite/cover.png",
+    coverImage: "/assets/quickbite/cover.png",  
     description:
       "A modern food delivery platform that lets you Order FastFood, featuring real-time order History Tracking and seamless payment integration.",
     videoPath: "/assets/projects/quickbite/demo.mp4",
@@ -72,12 +72,11 @@ export const projectsData: Record<string, Project> = {
       "Dynamic menu management",
     ],
     githubUrl: "https://github.com/araneeskhan/QuickBite",
-
   },
   "ai-showcase": {
     title: "AI Showcase",
     coverImage: [
-      "/portfolio/assets/ai-showcase/cover.png",
+      "/assets/ai-showcase/cover.png",  
       "/assets/ai-showcase/cover1.png",
     ],
     description:
@@ -103,7 +102,7 @@ export const projectsData: Record<string, Project> = {
   },
   store: {
     title: "E-Store",
-    coverImage: ["/portfolio/assets/store/cover.png"],
+    coverImage: ["/assets/store/cover.png"], 
     description:
       "AI-Based Store is an innovative e-commerce platform that leverages to provide personalized shopping experiences. Users can browse a wide range of products, manage their shopping cart, and enjoy a seamless checkout process.",
     videoPath: "yyk79t",
@@ -128,7 +127,7 @@ export const projectsData: Record<string, Project> = {
 
   bankee: {
     title: "Bankee - Mobile Banking App",
-    coverImage: ["/portfolio/assets/bankee/cover.png"],
+    coverImage: ["/assets/bankee/cover.png"],  
     description:
       "Bankee is a modern, feature-rich mobile banking application built with React Native and Expo. It provides a seamless banking experience and comprehensive financial management features.",
     videoPath: "yyk79t",
@@ -147,7 +146,7 @@ export const projectsData: Record<string, Project> = {
   },
   mafiaempire: {
     title: "Mafia Empire",
-    coverImage: ["/portfolio/assets/mafiaempire/cover.png"],
+    coverImage: ["/assets/mafiaempire/cover.png"],  
     description:
       "Mafia Empire is a mobile game that puts you in control of your own criminal organization in a cyberpunk-themed world. Build your empire, recruit gang members, complete missions, and battle for control of territories.",
     videoPath: "yyk79t",

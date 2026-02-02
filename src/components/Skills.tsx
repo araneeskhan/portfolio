@@ -13,65 +13,65 @@ const Skills = () => {
 
   const skillCategories = {
     frontend: [
-      { name: "HTML", icon: "/portfolio/assets/skills/html.png", level: 95 },
-      { name: "CSS", icon: "/portfolio/assets/skills/css.jpg", level: 90 },
+      { name: "HTML", icon: "/assets/skills/html.png", level: 95 },
+      { name: "CSS", icon: "/assets/skills/css.jpg", level: 90 },
       {
         name: "Tailwind CSS",
-        icon: "/portfolio/assets/skills/tailwind.svg",
+        icon: "/assets/skills/tailwind.svg",
         level: 92,
       },
       {
         name: "JavaScript",
-        icon: "/portfolio/assets/skills/javascript.svg",
+        icon: "/assets/skills/javascript.svg",
         level: 88,
       },
       {
         name: "TypeScript",
-        icon: "/portfolio/assets/skills/typescript.svg",
+        icon: "/assets/skills/typescript.svg",
         level: 85,
       },
-      { name: "React", icon: "/portfolio/assets/skills/react.svg", level: 90 },
+      { name: "React", icon: "/assets/skills/react.svg", level: 90 },
       {
         name: "React Native",
-        icon: "/portfolio/assets/skills/reactnative.png",
+        icon: "/assets/skills/reactnative.png",
         level: 82,
       },
       {
         name: "Next.js",
-        icon: "/portfolio/assets/skills/nextjs.svg",
+        icon: "/assets/skills/nextjs.svg",
         level: 88,
       },
     ],
     backend: [
       {
         name: "Node.js",
-        icon: "/portfolio/assets/skills/nodejs.png",
+        icon: "/assets/skills/nodejs.png",
         level: 87,
       },
       {
         name: "Express.js",
-        icon: "/portfolio/assets/skills/expressjs.png",
+        icon: "/assets/skills/expressjs.png",
         level: 85,
       },
       {
         name: "MongoDB",
-        icon: "/portfolio/assets/skills/mongodb.svg",
+        icon: "/assets/skills/mongodb.svg",
         level: 83,
       },
-      { name: "MySQL", icon: "/portfolio/assets/skills/mysql.svg", level: 80 },
+      { name: "MySQL", icon: "/assets/skills/mysql.svg", level: 80 },
       {
         name: "Firebase",
-        icon: "/portfolio/assets/skills/firebase.svg",
+        icon: "/assets/skills/firebase.svg",
         level: 88,
       },
       {
         name: "Supabase",
-        icon: "/portfolio/assets/skills/supabase.png",
+        icon: "/assets/skills/supabase.png",
         level: 82,
       },
       {
         name: "Python",
-        icon: "/portfolio/assets/skills/python.svg",
+        icon: "/assets/skills/python.svg",
         level: 78,
       },
       { name: "Java", icon: "/portfolio/assets/skills/java.png", level: 75 },
@@ -79,13 +79,13 @@ const Skills = () => {
     other: [
       {
         name: "Github",
-        icon: "/portfolio/assets/skills/github.png",
+        icon: "/assets/skills/github.png",
         level: 90,
       },
-      { name: "AWS", icon: "/portfolio/assets/skills/aws.svg", level: 75 },
+      { name: "AWS", icon: "/assets/skills/aws.svg", level: 75 },
       {
         name: "Docker",
-        icon: "/portfolio/assets/skills/docker.svg",
+        icon: "/assets/skills/docker.svg",
         level: 72,
       },
     ],

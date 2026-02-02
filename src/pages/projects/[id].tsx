@@ -17,7 +17,7 @@ export default function ProjectDetails() {
     setSelectedImage(image);
     // Find the index of the clicked image in screenshots
     if (project?.screenshots) {
-      const index = project.screenshots.findIndex(s => s.path === image);
+      const index = project.screenshots.findIndex((s) => s.path === image);
       setCurrentImageIndex(index >= 0 ? index : 0);
     }
   };
@@ -28,7 +28,10 @@ export default function ProjectDetails() {
   };
 
   const nextImage = () => {
-    if (project?.screenshots && currentImageIndex < project.screenshots.length - 1) {
+    if (
+      project?.screenshots &&
+      currentImageIndex < project.screenshots.length - 1
+    ) {
       const nextIndex = currentImageIndex + 1;
       setCurrentImageIndex(nextIndex);
       setSelectedImage(project.screenshots[nextIndex].path);
