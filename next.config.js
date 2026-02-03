@@ -5,6 +5,9 @@ const nextConfig = {
   output: "export",
   basePath: isProd ? "/portfolio" : "",
   assetPrefix: isProd ? "/portfolio" : "",
+  env: {
+    NEXT_PUBLIC_BASE_PATH: isProd ? "/portfolio" : "",
+  },
   images: {
     unoptimized: true,
   },

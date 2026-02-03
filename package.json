@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint --fix",
-    "deploy": "next build && next export && touch out/.nojekyll"
+    "deploy": "next build \u0026\u0026 New-Item -Path out/.nojekyll -ItemType File"
   },
   "dependencies": {
     "@formspree/react": "^3.0.0",

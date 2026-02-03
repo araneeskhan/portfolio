@@ -7,7 +7,7 @@ const Achievements = () => {
   const achievements = [
     {
       id: 1,
-      image: "/assets/achievement-1.jpg",
+      image: `${process.env.NEXT_PUBLIC_BASE_PATH}/assets/achievement-1.jpg`,
       position: "1st Position",
       title: "Career Expo 2024",
       category: "Hybrid Category",

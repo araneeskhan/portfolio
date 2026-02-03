@@ -74,7 +74,7 @@ const Skills = () => {
         icon: "/assets/skills/python.svg",
         level: 78,
       },
-      { name: "Java", icon: "/portfolio/assets/skills/java.png", level: 75 },
+      { name: "Java", icon: "/assets/skills/java.png", level: 75 },
     ],
     other: [
       {
