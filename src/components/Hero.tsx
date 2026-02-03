@@ -121,7 +121,7 @@ const Hero = () => {
             {/* CTA Buttons */}
             <div className="flex flex-wrap gap-4 pt-4">
               <a
-                href="/assets/Resume.pdf"
+                href={`${process.env.NEXT_PUBLIC_BASE_PATH}/assets/Resume.pdf`}
                 download="Anees_Ur_Rehman_Resume.pdf"
                 className="group relative px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-medium rounded-xl overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-blue-500/50"
               >

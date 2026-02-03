@@ -72,6 +72,9 @@ export const projectsData: Record<string, Project> = {
       "Dynamic menu management",
     ],
     githubUrl: "https://github.com/araneeskhan/QuickBite",
+    screenshots: [
+      { path: `${process.env.NEXT_PUBLIC_BASE_PATH}/assets/quickbite/cover.png`, type: "web" },
+    ]
   },
   "ai-showcase": {
     title: "AI Showcase",
@@ -99,6 +102,10 @@ export const projectsData: Record<string, Project> = {
       "🔌 API Integration - Connect with your favorite dev tools",
     ],
     githubUrl: "https://github.com/araneeskhan/AiShowCase",
+    screenshots: [
+      { path: `${process.env.NEXT_PUBLIC_BASE_PATH}/assets/ai-showcase/cover.png`, type: "web" },
+      { path: `${process.env.NEXT_PUBLIC_BASE_PATH}/assets/ai-showcase/cover1.png`, type: "web" },
+    ]
   },
   store: {
     title: "E-Store",
@@ -123,6 +130,14 @@ export const projectsData: Record<string, Project> = {
       "Responsive Design",
     ],
     githubUrl: "https://github.com/araneeskhan/Store",
+    screenshots: [
+      { path: `${process.env.NEXT_PUBLIC_BASE_PATH}/assets/store/cover.png`, type: "web" },
+      { path: `${process.env.NEXT_PUBLIC_BASE_PATH}/assets/store/01.png`, type: "web" },
+      { path: `${process.env.NEXT_PUBLIC_BASE_PATH}/assets/store/02.png`, type: "web" },
+      { path: `${process.env.NEXT_PUBLIC_BASE_PATH}/assets/store/03.png`, type: "web" },
+      { path: `${process.env.NEXT_PUBLIC_BASE_PATH}/assets/store/04.png`, type: "web" },
+      { path: `${process.env.NEXT_PUBLIC_BASE_PATH}/assets/store/05.png`, type: "web" },
+    ]
   },
 
   bankee: {
@@ -143,6 +158,9 @@ export const projectsData: Record<string, Project> = {
       "💰 Subscriptions",
     ],
     githubUrl: "https://github.com/araneeskhan/Bankee",
+    screenshots: [
+      { path: `${process.env.NEXT_PUBLIC_BASE_PATH}/assets/bankee/cover.png`, type: "mobile" },
+    ]
   },
   mafiaempire: {
     title: "Mafia Empire",
@@ -161,5 +179,8 @@ export const projectsData: Record<string, Project> = {
       "Achievement System: Complete achievements to earn special rewards",
     ],
     githubUrl: "https://github.com/araneeskhan/MafiaEmpire",
+    screenshots: [
+      { path: `${process.env.NEXT_PUBLIC_BASE_PATH}/assets/mafiaempire/cover.png`, type: "mobile" },
+    ]
   },
 };
