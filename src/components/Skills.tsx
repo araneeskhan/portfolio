@@ -13,79 +13,79 @@ const Skills = () => {
 
   const skillCategories = {
     frontend: [
-      { name: "HTML", icon: "/assets/skills/html.png", level: 95 },
-      { name: "CSS", icon: "/assets/skills/css.jpg", level: 90 },
+      { name: "HTML", icon: `${process.env.NEXT_PUBLIC_BASE_PATH}/assets/skills/html.png`, level: 95 },
+      { name: "CSS", icon: `${process.env.NEXT_PUBLIC_BASE_PATH}/assets/skills/css.jpg`, level: 90 },
       {
         name: "Tailwind CSS",
-        icon: "/assets/skills/tailwind.svg",
+        icon: `${process.env.NEXT_PUBLIC_BASE_PATH}/assets/skills/tailwind.svg`,
         level: 92,
       },
       {
         name: "JavaScript",
-        icon: "/assets/skills/javascript.svg",
+        icon: `${process.env.NEXT_PUBLIC_BASE_PATH}/assets/skills/javascript.svg`,
         level: 88,
       },
       {
         name: "TypeScript",
-        icon: "/assets/skills/typescript.svg",
+        icon: `${process.env.NEXT_PUBLIC_BASE_PATH}/assets/skills/typescript.svg`,
         level: 85,
       },
-      { name: "React", icon: "/assets/skills/react.svg", level: 90 },
+      { name: "React", icon: `${process.env.NEXT_PUBLIC_BASE_PATH}/assets/skills/react.svg`, level: 90 },
       {
         name: "React Native",
-        icon: "/assets/skills/reactnative.png",
+        icon: `${process.env.NEXT_PUBLIC_BASE_PATH}/assets/skills/reactnative.png`,
         level: 82,
       },
       {
         name: "Next.js",
-        icon: "/assets/skills/nextjs.svg",
+        icon: `${process.env.NEXT_PUBLIC_BASE_PATH}/assets/skills/nextjs.svg`,
         level: 88,
       },
     ],
     backend: [
       {
         name: "Node.js",
-        icon: "/assets/skills/nodejs.png",
+        icon: `${process.env.NEXT_PUBLIC_BASE_PATH}/assets/skills/nodejs.png`,
         level: 87,
       },
       {
         name: "Express.js",
-        icon: "/assets/skills/expressjs.png",
+        icon: `${process.env.NEXT_PUBLIC_BASE_PATH}/assets/skills/expressjs.png`,
         level: 85,
       },
       {
         name: "MongoDB",
-        icon: "/assets/skills/mongodb.svg",
+        icon: `${process.env.NEXT_PUBLIC_BASE_PATH}/assets/skills/mongodb.svg`,
         level: 83,
       },
-      { name: "MySQL", icon: "/assets/skills/mysql.svg", level: 80 },
+      { name: "MySQL", icon: `${process.env.NEXT_PUBLIC_BASE_PATH}/assets/skills/mysql.svg`, level: 80 },
       {
         name: "Firebase",
-        icon: "/assets/skills/firebase.svg",
+        icon: `${process.env.NEXT_PUBLIC_BASE_PATH}/assets/skills/firebase.svg`,
         level: 88,
       },
       {
         name: "Supabase",
-        icon: "/assets/skills/supabase.png",
+        icon: `${process.env.NEXT_PUBLIC_BASE_PATH}/assets/skills/supabase.png`,
         level: 82,
       },
       {
         name: "Python",
-        icon: "/assets/skills/python.svg",
+        icon: `${process.env.NEXT_PUBLIC_BASE_PATH}/assets/skills/python.svg`,
         level: 78,
       },
-      { name: "Java", icon: "/assets/skills/java.png", level: 75 },
+      { name: "Java", icon: `${process.env.NEXT_PUBLIC_BASE_PATH}/assets/skills/java.png`, level: 75 },
     ],
     other: [
       {
         name: "Github",
-        icon: "/assets/skills/github.png",
+        icon: `${process.env.NEXT_PUBLIC_BASE_PATH}/assets/skills/github.png`,
         level: 90,
       },
-      { name: "AWS", icon: "/assets/skills/aws.svg", level: 75 },
+      { name: "AWS", icon: `${process.env.NEXT_PUBLIC_BASE_PATH}/assets/skills/aws.svg`, level: 75 },
       {
         name: "Docker",
-        icon: "/assets/skills/docker.svg",
+        icon: `${process.env.NEXT_PUBLIC_BASE_PATH}/assets/skills/docker.svg`,
         level: 72,
       },
     ],
