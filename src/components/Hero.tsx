@@ -198,12 +198,7 @@ const Hero = () => {
                 <div className="absolute inset-0 bg-gradient-to-t from-blue-600/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               </div>
 
-              {/* Floating badges - OPTIMIZED */}
-              <div className="absolute -top-4 -right-4 bg-white dark:bg-gray-800 px-4 py-2 rounded-full shadow-lg border border-gray-200 dark:border-gray-700 animate-float will-change-transform">
-                <span className="text-sm font-bold text-gray-900 dark:text-white">
-                  ✨ Innovative
-                </span>
-              </div>
+    
             </div>
           </div>
         </div>
