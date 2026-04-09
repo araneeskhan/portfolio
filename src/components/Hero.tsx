@@ -243,16 +243,6 @@ const Hero = () => {
           }
         }
 
-        @keyframes float {
-          0%,
-          100% {
-            transform: translateY(0);
-          }
-          50% {
-            transform: translateY(-20px);
-          }
-        }
-
         @keyframes spin-slow {
           from {
             transform: rotate(0deg);
@@ -291,10 +281,6 @@ const Hero = () => {
 
         .animate-blink {
           animation: blink 1s infinite;
-        }
-
-        .animate-float {
-          animation: float 3s ease-in-out infinite;
         }
 
         .animate-spin-slow {

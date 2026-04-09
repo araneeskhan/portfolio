@@ -1,16 +1,12 @@
-import { useEffect } from 'react';
-import dynamic from 'next/dynamic';
 import Hero from '@/components/Hero';
 import About from '@/components/About';
 import Skills from '@/components/Skills';
 import Projects from '@/components/Projects';
 import Achievements from '@/components/Achievements';
+import Certifications from '@/components/Certifications';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
-
-const Navbar = dynamic(() => import('@/components/Navbar'), { 
-  ssr: true
-});
+import Navbar from '@/components/Navbar';
 
 export default function Home() {
   return (
@@ -21,6 +17,7 @@ export default function Home() {
       <Skills />
       <Projects />
       <Achievements />
+      <Certifications />
       <Contact />
       <Footer />
     </main>

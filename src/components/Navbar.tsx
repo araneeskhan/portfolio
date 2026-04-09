@@ -174,6 +174,7 @@ const NavLinks = ({
     { name: "Skills", href: "/#skills", icon: "fa-code" },
     { name: "Projects", href: "/#projects", icon: "fa-folder-open" },
     { name: "Achievements", href: "/#achievements", icon: "fa-trophy" },
+    { name: "Certifications", href: "/#certifications", icon: "fa-certificate" },
     { name: "Contact", href: "/#contact", icon: "fa-envelope" },
   ];
 

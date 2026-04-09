@@ -1,5 +1,3 @@
-import Image from "next/image";
-
 const About = () => {
   return (
     <section
@@ -91,7 +89,7 @@ const About = () => {
                   </div>
                   <div className="space-y-2">
                     <p className="text-3xl font-bold text-blue-600 dark:text-blue-400">
-                      12 Months
+                      24 Months
                     </p>
                     <p className="text-gray-600 dark:text-gray-400">
                       Professional Development
@@ -113,13 +111,23 @@ const About = () => {
                       Education
                     </h3>
                   </div>
-                  <div className="space-y-2">
-                    <p className="text-xl font-bold text-purple-600 dark:text-purple-400">
-                      Bachelor's Degree
-                    </p>
-                    <p className="text-gray-600 dark:text-gray-400">
-                      Computer Science
-                    </p>
+                  <div className="space-y-3">
+                    <div>
+                      <p className="text-xl font-bold text-purple-600 dark:text-purple-400">
+                        Master's Degree
+                      </p>
+                      <p className="text-gray-600 dark:text-gray-400">
+                        Artificial Intelligence
+                      </p>
+                    </div>
+                    <div className="border-t border-purple-200 dark:border-purple-700/50 pt-3">
+                      <p className="text-xl font-bold text-purple-600 dark:text-purple-400">
+                        Bachelor's Degree
+                      </p>
+                      <p className="text-gray-600 dark:text-gray-400">
+                        Computer Science
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>

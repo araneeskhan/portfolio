@@ -4,89 +4,92 @@ import { useState } from "react";
 interface SkillItem {
   name: string;
   icon: string;
-  level?: number; // Proficiency level out of 100
 }
 
 const Skills = () => {
   const [activeCategory, setActiveCategory] = useState("frontend");
-  const [hoveredSkill, setHoveredSkill] = useState<string | null>(null);
 
   const skillCategories = {
     frontend: [
-      { name: "HTML", icon: `${process.env.NEXT_PUBLIC_BASE_PATH}/assets/skills/html.png`, level: 95 },
-      { name: "CSS", icon: `${process.env.NEXT_PUBLIC_BASE_PATH}/assets/skills/css.jpg`, level: 90 },
+      { name: "HTML", icon: `${process.env.NEXT_PUBLIC_BASE_PATH}/assets/skills/html.png` },
+      { name: "CSS", icon: `${process.env.NEXT_PUBLIC_BASE_PATH}/assets/skills/css.jpg` },
       {
         name: "Tailwind CSS",
         icon: `${process.env.NEXT_PUBLIC_BASE_PATH}/assets/skills/tailwind.svg`,
-        level: 92,
       },
       {
         name: "JavaScript",
         icon: `${process.env.NEXT_PUBLIC_BASE_PATH}/assets/skills/javascript.svg`,
-        level: 88,
       },
       {
         name: "TypeScript",
         icon: `${process.env.NEXT_PUBLIC_BASE_PATH}/assets/skills/typescript.svg`,
-        level: 85,
       },
-      { name: "React", icon: `${process.env.NEXT_PUBLIC_BASE_PATH}/assets/skills/react.svg`, level: 90 },
+      { name: "React", icon: `${process.env.NEXT_PUBLIC_BASE_PATH}/assets/skills/react.svg` },
       {
         name: "React Native",
         icon: `${process.env.NEXT_PUBLIC_BASE_PATH}/assets/skills/reactnative.png`,
-        level: 82,
       },
       {
         name: "Next.js",
         icon: `${process.env.NEXT_PUBLIC_BASE_PATH}/assets/skills/nextjs.svg`,
-        level: 88,
       },
     ],
     backend: [
       {
         name: "Node.js",
         icon: `${process.env.NEXT_PUBLIC_BASE_PATH}/assets/skills/nodejs.png`,
-        level: 87,
       },
       {
         name: "Express.js",
         icon: `${process.env.NEXT_PUBLIC_BASE_PATH}/assets/skills/expressjs.png`,
-        level: 85,
       },
       {
         name: "MongoDB",
         icon: `${process.env.NEXT_PUBLIC_BASE_PATH}/assets/skills/mongodb.svg`,
-        level: 83,
       },
-      { name: "MySQL", icon: `${process.env.NEXT_PUBLIC_BASE_PATH}/assets/skills/mysql.svg`, level: 80 },
+      { name: "MySQL", icon: `${process.env.NEXT_PUBLIC_BASE_PATH}/assets/skills/mysql.svg` },
       {
         name: "Firebase",
         icon: `${process.env.NEXT_PUBLIC_BASE_PATH}/assets/skills/firebase.svg`,
-        level: 88,
       },
       {
         name: "Supabase",
         icon: `${process.env.NEXT_PUBLIC_BASE_PATH}/assets/skills/supabase.png`,
-        level: 82,
       },
       {
         name: "Python",
         icon: `${process.env.NEXT_PUBLIC_BASE_PATH}/assets/skills/python.svg`,
-        level: 78,
       },
-      { name: "Java", icon: `${process.env.NEXT_PUBLIC_BASE_PATH}/assets/skills/java.png`, level: 75 },
+      { name: "Java", icon: `${process.env.NEXT_PUBLIC_BASE_PATH}/assets/skills/java.png` },
+    ],
+    "ai-ml": [
+      {
+        name: "TensorFlow",
+        icon: `${process.env.NEXT_PUBLIC_BASE_PATH}/assets/skills/tensorflow.png`,
+      },
+      {
+        name: "Flower",
+        icon: `${process.env.NEXT_PUBLIC_BASE_PATH}/assets/skills/flower.png`,
+      },
+      {
+        name: "NLP",
+        icon: `${process.env.NEXT_PUBLIC_BASE_PATH}/assets/skills/nlp.svg`,
+      },
+      {
+        name: "Neural Networks",
+        icon: `${process.env.NEXT_PUBLIC_BASE_PATH}/assets/skills/neuralnetwork.svg`,
+      },
     ],
     other: [
       {
         name: "Github",
         icon: `${process.env.NEXT_PUBLIC_BASE_PATH}/assets/skills/github.png`,
-        level: 90,
       },
-      { name: "AWS", icon: `${process.env.NEXT_PUBLIC_BASE_PATH}/assets/skills/aws.svg`, level: 75 },
+      { name: "AWS", icon: `${process.env.NEXT_PUBLIC_BASE_PATH}/assets/skills/aws.svg` },
       {
         name: "Docker",
         icon: `${process.env.NEXT_PUBLIC_BASE_PATH}/assets/skills/docker.svg`,
-        level: 72,
       },
     ],
   };
@@ -94,12 +97,22 @@ const Skills = () => {
   const categoryIcons = {
     frontend: "fa-code",
     backend: "fa-server",
+    "ai-ml": "fa-brain",
     other: "fa-tools",
+  };
+
+  const categoryLabels = {
+    frontend: "Frontend",
+    backend: "Backend",
+    "ai-ml": "AI / ML",
+    other: "Other",
   };
 
   const categoryDescriptions = {
     frontend: "Building beautiful, responsive user interfaces",
     backend: "Creating robust server-side applications",
+    "ai-ml":
+      "Machine learning, deep learning, and intelligent systems",
     other: "Tools and technologies for modern development",
   };
 
@@ -138,7 +151,7 @@ const Skills = () => {
           ></div>
         </div>
 
-        {/* Category Tabs - Enhanced with better mobile responsiveness */}
+        {/* Category Tabs */}
         <div
           className="flex justify-center mb-12 px-2"
           data-aos="fade-up"
@@ -162,7 +175,7 @@ const Skills = () => {
                     } text-base md:text-lg`}
                   ></i>
                   <span className="whitespace-nowrap">
-                    {category.charAt(0).toUpperCase() + category.slice(1)}
+                    {categoryLabels[category as keyof typeof categoryLabels]}
                   </span>
                 </div>
                 {activeCategory !== category && (
@@ -186,7 +199,7 @@ const Skills = () => {
           }
         </p>
 
-        {/* Skills Grid with Enhanced Animation and Centering Fix */}
+        {/* Skills Grid */}
         <div
           className={`grid grid-cols-2 sm:grid-cols-3 gap-4 sm:gap-6 mx-auto justify-items-center ${
             activeCategory === "other"
@@ -203,8 +216,6 @@ const Skills = () => {
                 className="group relative w-full"
                 data-aos="zoom-in"
                 data-aos-delay={500 + index * 50}
-                onMouseEnter={() => setHoveredSkill(skill.name)}
-                onMouseLeave={() => setHoveredSkill(null)}
               >
                 {/* Skill Card */}
                 <div className="relative bg-white dark:bg-gray-800 rounded-2xl p-4 sm:p-6 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-gray-200 dark:border-gray-700 overflow-hidden">
@@ -248,7 +259,7 @@ const Skills = () => {
         >
           <div className="text-center p-4 md:p-6 bg-white dark:bg-gray-800 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700">
             <div className="text-2xl md:text-3xl font-bold text-blue-600 dark:text-blue-400 mb-2">
-              10+
+              15+
             </div>
             <div className="text-gray-600 dark:text-gray-400 text-xs md:text-sm font-medium">
               Technologies
@@ -272,7 +283,7 @@ const Skills = () => {
           </div>
           <div className="text-center p-4 md:p-6 bg-white dark:bg-gray-800 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700">
             <div className="text-2xl md:text-3xl font-bold text-green-600 dark:text-green-400 mb-2">
-              12+
+              24+
             </div>
             <div className="text-gray-600 dark:text-gray-400 text-xs md:text-sm font-medium">
               Months Exp

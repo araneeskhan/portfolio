@@ -68,6 +68,11 @@ const Footer = () => {
                   href: "/#achievements",
                   icon: "fa-trophy",
                 },
+                {
+                  name: "Certifications",
+                  href: "/#certifications",
+                  icon: "fa-certificate",
+                },
                 { name: "Contact", href: "/#contact", icon: "fa-envelope" },
               ].map((link) => (
                 <li key={link.name}>
