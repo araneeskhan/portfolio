@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+  <rect fill="#1565C0" x="4" y="4" width="40" height="40" rx="8"/>
+  <text x="24" y="20" text-anchor="middle" font-family="Arial,sans-serif" font-weight="bold" font-size="10" fill="#fff">NLP</text>
+  <path fill="none" stroke="#64B5F6" stroke-width="1.5" d="M12 28h24M14 32h20M16 36h16"/>
+  <circle fill="#42A5F5" cx="12" cy="28" r="2"/>
+  <circle fill="#42A5F5" cx="36" cy="28" r="2"/>
+</svg>
