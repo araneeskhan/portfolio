@@ -9,7 +9,7 @@ FROM node:18-alpine AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
-ENV BUILD_STANDALONE="true"
+
 RUN npm run build
 
 # 3. Run the production server
