@@ -2,14 +2,15 @@
 const isProd = process.env.NODE_ENV === "production";
 
 const nextConfig = {
-  output: "export", // Back to static export for GitHub Pages
-  basePath: isProd ? "/portfolio" : "",
-  assetPrefix: isProd ? "/portfolio" : "",
+  output: "export", // REQUIRED for GitHub Pages
+  basePath: "/portfolio",
+  assetPrefix: "/portfolio",
   images: {
     unoptimized: true,
   },
   env: {
-    NEXT_PUBLIC_BASE_PATH: isProd ? "/portfolio" : "",
+    // Hardcoding this for now to ensure it NEVER returns undefined
+    NEXT_PUBLIC_BASE_PATH: "/portfolio",
   },
 };
 
