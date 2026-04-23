@@ -11,85 +11,85 @@ const Skills = () => {
 
   const skillCategories = {
     frontend: [
-      { name: "HTML", icon: `${process.env.NEXT_PUBLIC_BASE_PATH}/assets/skills/html.png` },
-      { name: "CSS", icon: `${process.env.NEXT_PUBLIC_BASE_PATH}/assets/skills/css.jpg` },
+      { name: "HTML", icon: `/assets/skills/html.png` },
+      { name: "CSS", icon: `/assets/skills/css.jpg` },
       {
         name: "Tailwind CSS",
-        icon: `${process.env.NEXT_PUBLIC_BASE_PATH}/assets/skills/tailwind.svg`,
+        icon: `/assets/skills/tailwind.svg`,
       },
       {
         name: "JavaScript",
-        icon: `${process.env.NEXT_PUBLIC_BASE_PATH}/assets/skills/javascript.svg`,
+        icon: `/assets/skills/javascript.svg`,
       },
       {
         name: "TypeScript",
-        icon: `${process.env.NEXT_PUBLIC_BASE_PATH}/assets/skills/typescript.svg`,
+        icon: `/assets/skills/typescript.svg`,
       },
-      { name: "React", icon: `${process.env.NEXT_PUBLIC_BASE_PATH}/assets/skills/react.svg` },
+      { name: "React", icon: `/assets/skills/react.svg` },
       {
         name: "React Native",
-        icon: `${process.env.NEXT_PUBLIC_BASE_PATH}/assets/skills/reactnative.png`,
+        icon: `/assets/skills/reactnative.png`,
       },
       {
         name: "Next.js",
-        icon: `${process.env.NEXT_PUBLIC_BASE_PATH}/assets/skills/nextjs.svg`,
+        icon: `/assets/skills/nextjs.svg`,
       },
     ],
     backend: [
       {
         name: "Node.js",
-        icon: `${process.env.NEXT_PUBLIC_BASE_PATH}/assets/skills/nodejs.png`,
+        icon: `/assets/skills/nodejs.png`,
       },
       {
         name: "Express.js",
-        icon: `${process.env.NEXT_PUBLIC_BASE_PATH}/assets/skills/expressjs.png`,
+        icon: `/assets/skills/expressjs.png`,
       },
       {
         name: "MongoDB",
-        icon: `${process.env.NEXT_PUBLIC_BASE_PATH}/assets/skills/mongodb.svg`,
+        icon: `/assets/skills/mongodb.svg`,
       },
-      { name: "MySQL", icon: `${process.env.NEXT_PUBLIC_BASE_PATH}/assets/skills/mysql.svg` },
+      { name: "MySQL", icon: `/assets/skills/mysql.svg` },
       {
         name: "Firebase",
-        icon: `${process.env.NEXT_PUBLIC_BASE_PATH}/assets/skills/firebase.svg`,
+        icon: `/assets/skills/firebase.svg`,
       },
       {
         name: "Supabase",
-        icon: `${process.env.NEXT_PUBLIC_BASE_PATH}/assets/skills/supabase.png`,
+        icon: `/assets/skills/supabase.png`,
       },
       {
         name: "Python",
-        icon: `${process.env.NEXT_PUBLIC_BASE_PATH}/assets/skills/python.svg`,
+        icon: `/assets/skills/python.svg`,
       },
-      { name: "Java", icon: `${process.env.NEXT_PUBLIC_BASE_PATH}/assets/skills/java.png` },
+      { name: "Java", icon: `/assets/skills/java.png` },
     ],
     "ai-ml": [
       {
         name: "TensorFlow",
-        icon: `${process.env.NEXT_PUBLIC_BASE_PATH}/assets/skills/tensorflow.png`,
+        icon: `/assets/skills/tensorflow.png`,
       },
       {
         name: "Flower",
-        icon: `${process.env.NEXT_PUBLIC_BASE_PATH}/assets/skills/flower.png`,
+        icon: `/assets/skills/flower.png`,
       },
       {
         name: "NLP",
-        icon: `${process.env.NEXT_PUBLIC_BASE_PATH}/assets/skills/nlp.svg`,
+        icon: `/assets/skills/nlp.svg`,
       },
       {
         name: "Neural Networks",
-        icon: `${process.env.NEXT_PUBLIC_BASE_PATH}/assets/skills/neuralnetwork.svg`,
+        icon: `/assets/skills/neuralnetwork.svg`,
       },
     ],
     other: [
       {
         name: "Github",
-        icon: `${process.env.NEXT_PUBLIC_BASE_PATH}/assets/skills/github.png`,
+        icon: `/assets/skills/github.png`,
       },
-      { name: "AWS", icon: `${process.env.NEXT_PUBLIC_BASE_PATH}/assets/skills/aws.svg` },
+      { name: "AWS", icon: `/assets/skills/aws.svg` },
       {
         name: "Docker",
-        icon: `${process.env.NEXT_PUBLIC_BASE_PATH}/assets/skills/docker.svg`,
+        icon: `/assets/skills/docker.svg`,
       },
     ],
   };

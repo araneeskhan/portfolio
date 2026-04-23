@@ -21,7 +21,7 @@ export interface Project {
 export const projectsData: Record<string, Project> = {
   "campus-sports-sphere": {
     title: "Campus Sports Sphere",
-    coverImage: `${process.env.NEXT_PUBLIC_BASE_PATH}/assets/css/cover.png`,  
+    coverImage: `/assets/css/cover.png`,
     description:
       "A comprehensive Automated sports management system combining web and mobile technologies to streamline University sports activities.",
     videoPath: "br6cqm",
@@ -43,23 +43,23 @@ export const projectsData: Record<string, Project> = {
     ],
     githubUrl: "https://github.com/araneeskhan/CampusSportsSphere",
     screenshots: [
-      { path: `${process.env.NEXT_PUBLIC_BASE_PATH}/assets/css/screenshot1.png`, type: "web" },  
-      { path: `${process.env.NEXT_PUBLIC_BASE_PATH}/assets/css/screenshot.png`, type: "mobile" },
-      { path: `${process.env.NEXT_PUBLIC_BASE_PATH}/assets/css/screenshot2.png`, type: "mobile" },
-      { path: `${process.env.NEXT_PUBLIC_BASE_PATH}/assets/css/screenshot3.png`, type: "mobile" },
-      { path: `${process.env.NEXT_PUBLIC_BASE_PATH}/assets/css/screenshot7.png`, type: "mobile" },
-      { path: `${process.env.NEXT_PUBLIC_BASE_PATH}/assets/css/screenshot9.png`, type: "mobile" },
-      { path: `${process.env.NEXT_PUBLIC_BASE_PATH}/assets/css/screenshot10.png`, type: "mobile" },
-      { path: `${process.env.NEXT_PUBLIC_BASE_PATH}/assets/css/screenshot11.png`, type: "mobile" },
-      { path: `${process.env.NEXT_PUBLIC_BASE_PATH}/assets/css/screenshot12.png`, type: "mobile" },
-      { path: `${process.env.NEXT_PUBLIC_BASE_PATH}/assets/css/screenshot13.png`, type: "mobile" },
-      { path: `${process.env.NEXT_PUBLIC_BASE_PATH}/assets/css/screenshot14.png`, type: "mobile" },
-      { path: `${process.env.NEXT_PUBLIC_BASE_PATH}/assets/css/screenshot15.png`, type: "mobile" },
+      { path: `/assets/css/screenshot1.png`, type: "web" },
+      { path: `/assets/css/screenshot.png`, type: "mobile" },
+      { path: `/assets/css/screenshot2.png`, type: "mobile" },
+      { path: `/assets/css/screenshot3.png`, type: "mobile" },
+      { path: `/assets/css/screenshot7.png`, type: "mobile" },
+      { path: `/assets/css/screenshot9.png`, type: "mobile" },
+      { path: `/assets/css/screenshot10.png`, type: "mobile" },
+      { path: `/assets/css/screenshot11.png`, type: "mobile" },
+      { path: `/assets/css/screenshot12.png`, type: "mobile" },
+      { path: `/assets/css/screenshot13.png`, type: "mobile" },
+      { path: `/assets/css/screenshot14.png`, type: "mobile" },
+      { path: `/assets/css/screenshot15.png`, type: "mobile" },
     ]
   },
   quickbite: {
     title: "QuickBite",
-    coverImage: `${process.env.NEXT_PUBLIC_BASE_PATH}/assets/quickbite/cover.png`,  
+    coverImage: `/assets/quickbite/cover.png`,
     description:
       "A modern food delivery platform that lets you Order FastFood, featuring real-time order History Tracking and seamless payment integration.",
     videoPath: "/assets/projects/quickbite/demo.mp4",
@@ -73,14 +73,14 @@ export const projectsData: Record<string, Project> = {
     ],
     githubUrl: "https://github.com/araneeskhan/QuickBite",
     screenshots: [
-      { path: `${process.env.NEXT_PUBLIC_BASE_PATH}/assets/quickbite/cover.png`, type: "web" },
+      { path: `/assets/quickbite/cover.png`, type: "web" },
     ]
   },
   "ai-showcase": {
     title: "AI Showcase",
     coverImage: [
-      `${process.env.NEXT_PUBLIC_BASE_PATH}/assets/ai-showcase/cover.png`,  
-      `${process.env.NEXT_PUBLIC_BASE_PATH}/assets/ai-showcase/cover1.png`,
+      `/assets/ai-showcase/cover.png`,
+      `/assets/ai-showcase/cover1.png`,
     ],
     description:
       "A modern, feature-rich AI development platform that combines multiple AI-powered tools to enhance developer productivity.",
@@ -103,13 +103,13 @@ export const projectsData: Record<string, Project> = {
     ],
     githubUrl: "https://github.com/araneeskhan/AiShowCase",
     screenshots: [
-      { path: `${process.env.NEXT_PUBLIC_BASE_PATH}/assets/ai-showcase/cover.png`, type: "web" },
-      { path: `${process.env.NEXT_PUBLIC_BASE_PATH}/assets/ai-showcase/cover1.png`, type: "web" },
+      { path: `/assets/ai-showcase/cover.png`, type: "web" },
+      { path: `/assets/ai-showcase/cover1.png`, type: "web" },
     ]
   },
   store: {
     title: "E-Store",
-    coverImage: [`${process.env.NEXT_PUBLIC_BASE_PATH}/assets/store/cover.png`], 
+    coverImage: [`/assets/store/cover.png`],
     description:
       "AI-Based Store is an innovative e-commerce platform that leverages to provide personalized shopping experiences. Users can browse a wide range of products, manage their shopping cart, and enjoy a seamless checkout process.",
     videoPath: "yyk79t",
@@ -131,18 +131,18 @@ export const projectsData: Record<string, Project> = {
     ],
     githubUrl: "https://github.com/araneeskhan/Store",
     screenshots: [
-      { path: `${process.env.NEXT_PUBLIC_BASE_PATH}/assets/store/cover.png`, type: "web" },
-      { path: `${process.env.NEXT_PUBLIC_BASE_PATH}/assets/store/01.png`, type: "web" },
-      { path: `${process.env.NEXT_PUBLIC_BASE_PATH}/assets/store/02.png`, type: "web" },
-      { path: `${process.env.NEXT_PUBLIC_BASE_PATH}/assets/store/03.png`, type: "web" },
-      { path: `${process.env.NEXT_PUBLIC_BASE_PATH}/assets/store/04.png`, type: "web" },
-      { path: `${process.env.NEXT_PUBLIC_BASE_PATH}/assets/store/05.png`, type: "web" },
+      { path: `/assets/store/cover.png`, type: "web" },
+      { path: `/assets/store/01.png`, type: "web" },
+      { path: `/assets/store/02.png`, type: "web" },
+      { path: `/assets/store/03.png`, type: "web" },
+      { path: `/assets/store/04.png`, type: "web" },
+      { path: `/assets/store/05.png`, type: "web" },
     ]
   },
 
   bankee: {
     title: "Bankee - Mobile Banking App",
-    coverImage: [`${process.env.NEXT_PUBLIC_BASE_PATH}/assets/bankee/cover.png`],  
+    coverImage: [`/assets/bankee/cover.png`],
     description:
       "Bankee is a modern, feature-rich mobile banking application built with React Native and Expo. It provides a seamless banking experience and comprehensive financial management features.",
     videoPath: "yyk79t",
@@ -159,12 +159,12 @@ export const projectsData: Record<string, Project> = {
     ],
     githubUrl: "https://github.com/araneeskhan/Bankee",
     screenshots: [
-      { path: `${process.env.NEXT_PUBLIC_BASE_PATH}/assets/bankee/cover.png`, type: "mobile" },
+      { path: `/assets/bankee/cover.png`, type: "mobile" },
     ]
   },
   mafiaempire: {
     title: "Mafia Empire",
-    coverImage: [`${process.env.NEXT_PUBLIC_BASE_PATH}/assets/mafiaempire/cover.png`],  
+    coverImage: [`/assets/mafiaempire/cover.png`],
     description:
       "Mafia Empire is a mobile game that puts you in control of your own criminal organization in a cyberpunk-themed world. Build your empire, recruit gang members, complete missions, and battle for control of territories.",
     videoPath: "yyk79t",
@@ -180,7 +180,7 @@ export const projectsData: Record<string, Project> = {
     ],
     githubUrl: "https://github.com/araneeskhan/MafiaEmpire",
     screenshots: [
-      { path: `${process.env.NEXT_PUBLIC_BASE_PATH}/assets/mafiaempire/cover.png`, type: "mobile" },
+      { path: `/assets/mafiaempire/cover.png`, type: "mobile" },
     ]
   },
 };

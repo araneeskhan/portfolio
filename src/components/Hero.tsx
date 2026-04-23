@@ -121,7 +121,7 @@ const Hero = () => {
             {/* CTA Buttons */}
             <div className="flex flex-wrap gap-4 pt-4">
               <a
-                href={`${process.env.NEXT_PUBLIC_BASE_PATH}/assets/Resume.pdf`}
+                href="/assets/Resume.pdf"
                 download="AneesUrRehman_Resume.pdf"
                 className="group relative px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-medium rounded-xl overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-blue-500/50"
               >
@@ -186,7 +186,7 @@ const Hero = () => {
               {/* Profile image container - OPTIMIZED with priority and quality settings */}
               <div className="relative w-full h-full rounded-full overflow-hidden border-4 border-white dark:border-gray-800 shadow-2xl transition-transform duration-500 group">
                 <Image
-                  src={`${process.env.NEXT_PUBLIC_BASE_PATH}/assets/profile-pic.jpeg`}
+                  src="/assets/profile-pic.jpeg"
                   alt="Anees profile picture"
                   fill
                   className="object-contain group-hover:scale-110 transition-transform duration-500 will-change-transform"
