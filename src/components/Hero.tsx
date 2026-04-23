@@ -122,7 +122,7 @@ const Hero = () => {
             <div className="flex flex-wrap gap-4 pt-4">
               <a
                 href={`${process.env.NEXT_PUBLIC_BASE_PATH}/assets/Resume.pdf`}
-                download="Anees_Ur_Rehman_Resume.pdf"
+                download="AneesUrRehman_Resume.pdf"
                 className="group relative px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-medium rounded-xl overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-blue-500/50"
               >
                 <span className="relative z-10 flex items-center">
@@ -197,8 +197,6 @@ const Hero = () => {
                 {/* Overlay gradient on hover */}
                 <div className="absolute inset-0 bg-gradient-to-t from-blue-600/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               </div>
-
-    
             </div>
           </div>
         </div>
