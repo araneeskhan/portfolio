@@ -1,24 +1,20 @@
 import { useEffect } from 'react';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
+import 'aos/dist/aos.css';
 import '../styles/globals.css';
 
 export default function App({ Component, pageProps }: AppProps) {
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      require('aos/dist/aos.css');
-      
-      // Initialize AOS
-      import('aos').then((aos) => {
-        aos.init({
-          duration: 600,
-          once: true,
-          mirror: false,
-          easing: 'ease-out-cubic',
-          offset: 100,
-        });
+    import('aos').then((aos) => {
+      aos.init({
+        duration: 600,
+        once: true,
+        mirror: false,
+        easing: 'ease-out-cubic',
+        offset: 100,
       });
-    }
+    });
   }, []);
 
   return (

@@ -4,7 +4,18 @@ import Layout from "@/components/Layout";
 import { projectsData } from "@/data/projects";
 import { useState } from "react";
 import Link from "next/link";
+import type { GetStaticPaths, GetStaticProps } from "next";
 
+export const getStaticPaths: GetStaticPaths = async () => {
+  const paths = Object.keys(projectsData).map((id) => ({
+    params: { id },
+  }));
+  return { paths, fallback: false };
+};
+
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+  return { props: { id: params?.id || null } };
+};
 export default function ProjectDetails() {
   const router = useRouter();
   const { id } = router.query;
