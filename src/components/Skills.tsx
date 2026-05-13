@@ -1,11 +1,6 @@
 import Image from "next/image";
 import { useState } from "react";
 
-interface SkillItem {
-  name: string;
-  icon: string;
-}
-
 const Skills = () => {
   const [activeCategory, setActiveCategory] = useState("frontend");
 
@@ -137,13 +132,13 @@ const Skills = () => {
           >
             Explore My
           </p>
-          <h1
+          <h2
             className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4"
             data-aos="fade-up"
             data-aos-delay="100"
           >
             Technical Skills
-          </h1>
+          </h2>
           <div
             className="w-24 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto rounded-full"
             data-aos="fade-up"
@@ -275,7 +270,7 @@ const Skills = () => {
           </div>
           <div className="text-center p-4 md:p-6 bg-white dark:bg-gray-800 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700">
             <div className="text-2xl md:text-3xl font-bold text-pink-600 dark:text-pink-400 mb-2">
-              5+
+              6+
             </div>
             <div className="text-gray-600 dark:text-gray-400 text-xs md:text-sm font-medium">
               Projects
@@ -292,32 +287,6 @@ const Skills = () => {
         </div>
       </div>
 
-      <style jsx>{`
-        @keyframes blob {
-          0%,
-          100% {
-            transform: translate(0, 0) scale(1);
-          }
-          33% {
-            transform: translate(30px, -50px) scale(1.1);
-          }
-          66% {
-            transform: translate(-20px, 20px) scale(0.9);
-          }
-        }
-
-        .animate-blob {
-          animation: blob 7s infinite;
-        }
-
-        .animation-delay-2000 {
-          animation-delay: 2s;
-        }
-
-        .animation-delay-4000 {
-          animation-delay: 4s;
-        }
-      `}</style>
     </section>
   );
 };

@@ -14,6 +14,7 @@ export interface Project {
   technologies: string[];
   features: string[];
   githubUrl: string;
+  caseStudyUrl?: string;
   screenshots?: Screenshot[];
 }
 
@@ -42,6 +43,7 @@ export const projectsData: Record<string, Project> = {
       "Digital scoreboard and statistics",
     ],
     githubUrl: "https://github.com/araneeskhan/CampusSportsSphere",
+    caseStudyUrl: "/case-studies/campus-sports-sphere",
     screenshots: [
       { path: `/assets/css/screenshot1.png`, type: "web" },
       { path: `/assets/css/screenshot.png`, type: "mobile" },
@@ -62,7 +64,6 @@ export const projectsData: Record<string, Project> = {
     coverImage: `/assets/quickbite/cover.png`,
     description:
       "A modern food delivery platform that lets you Order FastFood, featuring real-time order History Tracking and seamless payment integration.",
-    videoPath: "/assets/projects/quickbite/demo.mp4",
     technologies: ["ReactNative", "Firebase", "Zustand", "AsyncStorage"],
     features: [
       "Real-time order tracking system",
@@ -112,8 +113,6 @@ export const projectsData: Record<string, Project> = {
     coverImage: [`/assets/store/cover.png`],
     description:
       "AI-Based Store is an innovative e-commerce platform that leverages to provide personalized shopping experiences. Users can browse a wide range of products, manage their shopping cart, and enjoy a seamless checkout process.",
-    videoPath: "yyk79t",
-    videoAspectRatio: "16-9",
     technologies: [
       "Next.js",
       "Chakra UI",
@@ -145,8 +144,6 @@ export const projectsData: Record<string, Project> = {
     coverImage: [`/assets/bankee/cover.png`],
     description:
       "Bankee is a modern, feature-rich mobile banking application built with React Native and Expo. It provides a seamless banking experience and comprehensive financial management features.",
-    videoPath: "yyk79t",
-    videoAspectRatio: "16-9",
     technologies: ["React Native", "Firebase", "Expo"],
     features: [
       "🔐 Secure Authentication",
@@ -167,8 +164,6 @@ export const projectsData: Record<string, Project> = {
     coverImage: [`/assets/mafiaempire/cover.png`],
     description:
       "Mafia Empire is a mobile game that puts you in control of your own criminal organization in a cyberpunk-themed world. Build your empire, recruit gang members, complete missions, and battle for control of territories.",
-    videoPath: "yyk79t",
-    videoAspectRatio: "16-9",
     technologies: ["React Native", "Firebase", "Expo", "Zustand"],
     features: [
       "Criminal Career Progression: Start as a street thug and rise to become a powerful crime lord",

@@ -57,22 +57,11 @@ const Footer = () => {
             <ul className="space-y-3">
               {[
                 { name: "About", href: "/#about", icon: "fa-user" },
-                { name: "Skills", href: "/#skills", icon: "fa-code" },
-                {
-                  name: "Projects",
-                  href: "/#projects",
-                  icon: "fa-folder-open",
-                },
-                {
-                  name: "Achievements",
-                  href: "/#achievements",
-                  icon: "fa-trophy",
-                },
-                {
-                  name: "Certifications",
-                  href: "/#certifications",
-                  icon: "fa-certificate",
-                },
+                { name: "Services", href: "/#services", icon: "fa-briefcase" },
+                { name: "Projects", href: "/#projects", icon: "fa-folder-open" },
+                { name: "Achievements", href: "/#achievements", icon: "fa-trophy" },
+                { name: "Certifications", href: "/#certifications", icon: "fa-certificate" },
+                { name: "Resume", href: "/resume", icon: "fa-file-alt" },
                 { name: "Contact", href: "/#contact", icon: "fa-envelope" },
               ].map((link) => (
                 <li key={link.name}>
@@ -172,6 +161,7 @@ const Footer = () => {
         {/* Back to Top Button */}
         <div className="mt-8 flex justify-center">
           <button
+            type="button"
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
             className="group w-12 h-12 flex items-center justify-center bg-gradient-to-br from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110"
             aria-label="Back to top"
@@ -181,28 +171,6 @@ const Footer = () => {
         </div>
       </div>
 
-      <style jsx>{`
-        @keyframes blob {
-          0%,
-          100% {
-            transform: translate(0, 0) scale(1);
-          }
-          33% {
-            transform: translate(30px, -50px) scale(1.1);
-          }
-          66% {
-            transform: translate(-20px, 20px) scale(0.9);
-          }
-        }
-
-        .animate-blob {
-          animation: blob 7s infinite;
-        }
-
-        .animation-delay-2000 {
-          animation-delay: 2s;
-        }
-      `}</style>
     </footer>
   );
 };

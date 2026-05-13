@@ -133,12 +133,12 @@ const Hero = () => {
               </a>
 
               <Link
-                href="#contact"
+                href="/resume"
                 className="group px-8 py-4 bg-white dark:bg-gray-800 text-gray-900 dark:text-white font-medium rounded-xl border-2 border-gray-300 dark:border-gray-700 hover:border-blue-600 dark:hover:border-blue-400 transition-all duration-300 hover:scale-105 hover:shadow-lg"
               >
                 <span className="flex items-center">
-                  <i className="fas fa-paper-plane mr-2 text-blue-600 dark:text-blue-400"></i>
-                  Contact Me
+                  <i className="fas fa-eye mr-2 text-blue-600 dark:text-blue-400"></i>
+                  View Resume
                 </span>
               </Link>
             </div>
@@ -218,19 +218,6 @@ const Hero = () => {
       </div>
 
       <style jsx>{`
-        @keyframes blob {
-          0%,
-          100% {
-            transform: translate(0, 0) scale(1);
-          }
-          33% {
-            transform: translate(30px, -50px) scale(1.1);
-          }
-          66% {
-            transform: translate(-20px, 20px) scale(0.9);
-          }
-        }
-
         @keyframes blink {
           0%,
           100% {
@@ -273,10 +260,6 @@ const Hero = () => {
           }
         }
 
-        .animate-blob {
-          animation: blob 7s infinite;
-        }
-
         .animate-blink {
           animation: blink 1s infinite;
         }
@@ -291,14 +274,6 @@ const Hero = () => {
 
         .animate-scroll-indicator {
           animation: scroll-indicator 2s ease-in-out infinite;
-        }
-
-        .animation-delay-2000 {
-          animation-delay: 2s;
-        }
-
-        .animation-delay-4000 {
-          animation-delay: 4s;
         }
 
         .animate-pulse-slow {

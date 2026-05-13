@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useForm, ValidationError } from "@formspree/react";
 
 const Contact = () => {
-  const [state, handleSubmit] = useForm("mjgpoeyy");
+  const [state, handleSubmit, reset] = useForm("mjgpoeyy");
   const [focusedField, setFocusedField] = useState<string | null>(null);
 
   return (
@@ -78,7 +78,7 @@ const Contact = () => {
                       Email
                     </p>
                     <p className="text-sm font-medium text-gray-900 dark:text-white truncate">
-                      aneesurrehman1358
+                      aneesurrehman1358@gmail.com
                     </p>
                   </div>
                 </a>
@@ -168,7 +168,8 @@ const Contact = () => {
                     hours.
                   </p>
                   <button
-                    onClick={() => window.location.reload()}
+                    type="button"
+                    onClick={reset}
                     className="group relative px-10 py-4 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold rounded-2xl overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-blue-500/40"
                   >
                     <span className="relative z-10 flex items-center">
@@ -393,19 +394,6 @@ const Contact = () => {
       </div>
 
       <style jsx>{`
-        @keyframes blob {
-          0%,
-          100% {
-            transform: translate(0, 0) scale(1);
-          }
-          33% {
-            transform: translate(30px, -50px) scale(1.1);
-          }
-          66% {
-            transform: translate(-20px, 20px) scale(0.9);
-          }
-        }
-
         @keyframes bounce-once {
           0%,
           100% {
@@ -416,21 +404,10 @@ const Contact = () => {
           }
         }
 
-        .animate-blob {
-          animation: blob 7s infinite;
-        }
-
         .animate-bounce-once {
           animation: bounce-once 0.6s ease-out;
         }
 
-        .animation-delay-2000 {
-          animation-delay: 2s;
-        }
-
-        .animation-delay-4000 {
-          animation-delay: 4s;
-        }
       `}</style>
     </section>
   );

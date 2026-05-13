@@ -166,12 +166,11 @@ const NavLinks = ({
   mobile?: boolean;
   setIsMenuOpen?: (isOpen: boolean) => void;
 }) => {
-  const pathname = usePathname();
   const [activeSection, setActiveSection] = useState("");
 
   const links = [
     { name: "About", href: "/#about", icon: "fa-user" },
-    { name: "Skills", href: "/#skills", icon: "fa-code" },
+    { name: "Services", href: "/#services", icon: "fa-briefcase" },
     { name: "Projects", href: "/#projects", icon: "fa-folder-open" },
     { name: "Achievements", href: "/#achievements", icon: "fa-trophy" },
     { name: "Certifications", href: "/#certifications", icon: "fa-certificate" },

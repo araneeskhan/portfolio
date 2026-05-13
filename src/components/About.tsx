@@ -21,13 +21,13 @@ const About = () => {
           >
             Get To Know More
           </p>
-          <h1
+          <h2
             className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4"
             data-aos="fade-up"
             data-aos-delay="100"
           >
             About Me
-          </h1>
+          </h2>
           <div
             className="w-24 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto rounded-full"
             data-aos="fade-up"
@@ -143,29 +143,36 @@ const About = () => {
                       icon: "fa-code",
                       title: "Web Development",
                       description: "Building responsive, accessible websites",
-                      color: "blue",
+                      iconBg: "from-blue-100 to-blue-200 dark:from-blue-900/40 dark:to-blue-800/40",
+                      iconColor: "text-blue-600 dark:text-blue-400",
+                      border: "border-blue-400 dark:border-blue-500",
                       delay: "500",
                     },
                     {
                       icon: "fa-mobile-alt",
                       title: "Mobile Development",
-                      description:
-                        "Creating cross-platform mobile applications",
-                      color: "green",
+                      description: "Creating cross-platform mobile applications",
+                      iconBg: "from-green-100 to-green-200 dark:from-green-900/40 dark:to-green-800/40",
+                      iconColor: "text-green-600 dark:text-green-400",
+                      border: "border-green-400 dark:border-green-500",
                       delay: "600",
                     },
                     {
                       icon: "fa-server",
                       title: "Backend Development",
                       description: "Building APIs and server-side applications",
-                      color: "orange",
+                      iconBg: "from-orange-100 to-orange-200 dark:from-orange-900/40 dark:to-orange-800/40",
+                      iconColor: "text-orange-600 dark:text-orange-400",
+                      border: "border-orange-400 dark:border-orange-500",
                       delay: "700",
                     },
                     {
                       icon: "fa-database",
                       title: "Database Design",
                       description: "Creating efficient database structures",
-                      color: "purple",
+                      iconBg: "from-purple-100 to-purple-200 dark:from-purple-900/40 dark:to-purple-800/40",
+                      iconColor: "text-purple-600 dark:text-purple-400",
+                      border: "border-purple-400 dark:border-purple-500",
                       delay: "800",
                     },
                   ].map((item, index) => (
@@ -175,12 +182,8 @@ const About = () => {
                       data-aos="fade-up"
                       data-aos-delay={item.delay}
                     >
-                      <div
-                        className={`w-12 h-12 flex items-center justify-center bg-gradient-to-br from-${item.color}-100 to-${item.color}-200 dark:from-${item.color}-900/40 dark:to-${item.color}-800/40 rounded-lg mb-4 group-hover:scale-110 transition-transform duration-300`}
-                      >
-                        <i
-                          className={`fas ${item.icon} text-${item.color}-600 dark:text-${item.color}-400 text-xl`}
-                        ></i>
+                      <div className={`w-12 h-12 flex items-center justify-center bg-gradient-to-br ${item.iconBg} rounded-lg mb-4 group-hover:scale-110 transition-transform duration-300`}>
+                        <i className={`fas ${item.icon} ${item.iconColor} text-xl`}></i>
                       </div>
                       <h4 className="font-bold text-gray-900 dark:text-white mb-2 text-lg">
                         {item.title}
@@ -188,10 +191,7 @@ const About = () => {
                       <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
                         {item.description}
                       </p>
-                      {/* Hover effect border */}
-                      <div
-                        className={`absolute inset-0 border-2 border-${item.color}-400 dark:border-${item.color}-500 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300`}
-                      ></div>
+                      <div className={`absolute inset-0 border-2 ${item.border} rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300`}></div>
                     </div>
                   ))}
                 </div>

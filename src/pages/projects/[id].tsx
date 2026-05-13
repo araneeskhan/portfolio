@@ -14,15 +14,19 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  return { props: { id: params?.id || null } };
+  const id = params?.id as string;
+  const project = projectsData[id as keyof typeof projectsData] ?? null;
+  return { props: { project } };
 };
-export default function ProjectDetails() {
+
+interface Props {
+  project: (typeof projectsData)[keyof typeof projectsData];
+}
+
+export default function ProjectDetails({ project }: Props) {
   const router = useRouter();
-  const { id } = router.query;
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState<number>(0);
-
-  const project = id ? projectsData[id as keyof typeof projectsData] : null;
 
   const handleImageClick = (image: string) => {
     setSelectedImage(image);
@@ -80,6 +84,7 @@ export default function ProjectDetails() {
               The project you're looking for doesn't exist or has been moved.
             </p>
             <button
+              type="button"
               onClick={() => router.push("/")}
               className="group relative px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-medium rounded-xl overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-blue-500/50"
             >
@@ -119,17 +124,9 @@ export default function ProjectDetails() {
           <div className="max-w-6xl mx-auto">
             {/* Project Header */}
             <div className="mb-12" data-aos="fade-up">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="px-4 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white text-sm font-bold rounded-full">
-                  Featured Project
-                </div>
-              </div>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 bg-clip-text text-transparent">
                 {project.title}
               </h1>
-              <p className="text-xl text-gray-600 dark:text-gray-400 leading-relaxed max-w-3xl">
-                {project.description}
-              </p>
             </div>
 
             {/* Main Image */}
@@ -170,8 +167,8 @@ export default function ProjectDetails() {
             {project.screenshots && project.screenshots.length > 0 && (
               <div className="mb-12" data-aos="fade-up">
                 <button
+                  type="button"
                   onClick={() => {
-                    // Open first screenshot in modal as a preview
                     if (project.screenshots && project.screenshots.length > 0) {
                       handleImageClick(project.screenshots[0].path);
                     }
@@ -272,6 +269,16 @@ export default function ProjectDetails() {
                     </span>
                     <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
                   </a>
+
+                  {project.caseStudyUrl && (
+                    <Link
+                      href={project.caseStudyUrl}
+                      className="group relative w-full px-6 py-4 bg-white dark:bg-gray-700 border-2 border-gray-300 dark:border-gray-600 hover:border-blue-500 dark:hover:border-blue-400 text-gray-900 dark:text-white font-medium rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-lg flex items-center justify-center"
+                    >
+                      <i className="fas fa-microscope mr-2 text-blue-600 dark:text-blue-400 text-lg"></i>
+                      View Case Study
+                    </Link>
+                  )}
                 </div>
               </div>
             </div>
@@ -290,6 +297,7 @@ export default function ProjectDetails() {
             >
               {/* Close Button */}
               <button
+                type="button"
                 className="absolute top-4 right-4 z-50 w-12 h-12 bg-black/50 hover:bg-black/70 backdrop-blur-sm rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 group border-2 border-white/20 hover:border-white/40"
                 onClick={closeModal}
                 aria-label="Close modal"
@@ -315,6 +323,7 @@ export default function ProjectDetails() {
                 {/* Previous Button */}
                 {currentImageIndex > 0 && (
                   <button
+                    type="button"
                     onClick={prevImage}
                     className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/10 hover:bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 group"
                     aria-label="Previous image"
@@ -326,6 +335,7 @@ export default function ProjectDetails() {
                 {/* Next Button */}
                 {currentImageIndex < project.screenshots.length - 1 && (
                   <button
+                    type="button"
                     onClick={nextImage}
                     className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/10 hover:bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 group"
                     aria-label="Next image"
@@ -340,6 +350,8 @@ export default function ProjectDetails() {
                 {project.screenshots.map((screenshot, index) => (
                   <button
                     key={index}
+                    type="button"
+                    aria-label={`View screenshot ${index + 1}`}
                     onClick={() => {
                       setCurrentImageIndex(index);
                       setSelectedImage(screenshot.path);
@@ -365,19 +377,6 @@ export default function ProjectDetails() {
       </div>
 
       <style jsx>{`
-        @keyframes blob {
-          0%,
-          100% {
-            transform: translate(0, 0) scale(1);
-          }
-          33% {
-            transform: translate(30px, -50px) scale(1.1);
-          }
-          66% {
-            transform: translate(-20px, 20px) scale(0.9);
-          }
-        }
-
         @keyframes fade-in {
           from {
             opacity: 0;
@@ -396,14 +395,6 @@ export default function ProjectDetails() {
             transform: scale(1);
             opacity: 1;
           }
-        }
-
-        .animate-blob {
-          animation: blob 7s infinite;
-        }
-
-        .animation-delay-2000 {
-          animation-delay: 2s;
         }
 
         .animate-fade-in {

@@ -5,7 +5,6 @@ import { projectsData } from "@/data/projects";
 
 const Projects = () => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
-  const [hoveredProject, setHoveredProject] = useState<string | null>(null);
 
   const projects = Object.entries(projectsData).map(([id, project]) => ({
     id,
@@ -68,8 +67,6 @@ const Projects = () => {
               className="group relative"
               data-aos="fade-up"
               data-aos-delay={index * 50}
-              onMouseEnter={() => setHoveredProject(project.id)}
-              onMouseLeave={() => setHoveredProject(null)}
             >
               {/* Project Card */}
               <div className="relative bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-gray-200 dark:border-gray-700">
@@ -187,6 +184,7 @@ const Projects = () => {
           >
             {/* Close Button */}
             <button
+              type="button"
               className="absolute -top-12 right-0 text-white hover:text-blue-400 transition-colors z-10 flex items-center gap-2 text-sm font-medium"
               onClick={closeModal}
               aria-label="Close modal"
@@ -212,19 +210,6 @@ const Projects = () => {
       )}
 
       <style jsx>{`
-        @keyframes blob {
-          0%,
-          100% {
-            transform: translate(0, 0) scale(1);
-          }
-          33% {
-            transform: translate(30px, -50px) scale(1.1);
-          }
-          66% {
-            transform: translate(-20px, 20px) scale(0.9);
-          }
-        }
-
         @keyframes fade-in {
           from {
             opacity: 0;
@@ -243,14 +228,6 @@ const Projects = () => {
             transform: scale(1);
             opacity: 1;
           }
-        }
-
-        .animate-blob {
-          animation: blob 7s infinite;
-        }
-
-        .animation-delay-2000 {
-          animation-delay: 2s;
         }
 
         .animate-fade-in {
