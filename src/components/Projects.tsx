@@ -2,6 +2,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { projectsData } from "@/data/projects";
+import SectionHeader from "@/components/SectionHeader";
 
 const Projects = () => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
@@ -32,33 +33,11 @@ const Projects = () => {
 
       <div className="container mx-auto px-4 relative z-10">
         {/* Header */}
-        <div className="text-center mb-16">
-          <p
-            className="inline-block px-4 py-2 mb-4 text-sm font-semibold text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/30 rounded-full"
-            data-aos="fade-up"
-          >
-            Browse My Recent
-          </p>
-          <h2
-            className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4"
-            data-aos="fade-up"
-            data-aos-delay="100"
-          >
-            Projects
-          </h2>
-          <div
-            className="w-24 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto rounded-full"
-            data-aos="fade-up"
-            data-aos-delay="200"
-          ></div>
-          <p
-            className="mt-6 text-gray-600 dark:text-gray-400 text-lg max-w-2xl mx-auto"
-            data-aos="fade-up"
-            data-aos-delay="300"
-          >
-            Showcasing my latest work and creative solutions
-          </p>
-        </div>
+        <SectionHeader
+          label="Browse My Recent"
+          title="Projects"
+          description="Showcasing my latest work and creative solutions"
+        />
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map((project, index) => (

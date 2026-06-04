@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { useState } from "react";
+import SectionHeader from "@/components/SectionHeader";
 
 const Achievements = () => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
@@ -41,34 +42,11 @@ const Achievements = () => {
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
-        {/* Header */}
-        <div className="text-center mb-16">
-          <p
-            className="inline-block px-4 py-2 mb-4 text-sm font-semibold text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/30 rounded-full"
-            data-aos="fade-up"
-          >
-            Check Out My
-          </p>
-          <h1
-            className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4"
-            data-aos="fade-up"
-            data-aos-delay="100"
-          >
-            Achievements
-          </h1>
-          <div
-            className="w-24 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto rounded-full"
-            data-aos="fade-up"
-            data-aos-delay="200"
-          ></div>
-          <p
-            className="mt-6 text-gray-600 dark:text-gray-400 text-lg max-w-2xl mx-auto"
-            data-aos="fade-up"
-            data-aos-delay="300"
-          >
-            Celebrating milestones and recognitions
-          </p>
-        </div>
+        <SectionHeader
+          label="Check Out My"
+          title="Achievements"
+          description="Celebrating milestones and recognitions"
+        />
 
         <div className="max-w-6xl mx-auto space-y-8">
           {achievements.map((achievement, index) => (
@@ -216,6 +194,7 @@ const Achievements = () => {
             onClick={(e) => e.stopPropagation()}
           >
             <button
+              type="button"
               className="absolute -top-12 right-0 text-white hover:text-yellow-400 transition-colors z-10 flex items-center gap-2 text-sm font-medium"
               onClick={closeModal}
               aria-label="Close modal"
@@ -239,60 +218,6 @@ const Achievements = () => {
         </div>
       )}
 
-      <style jsx>{`
-        @keyframes blob {
-          0%,
-          100% {
-            transform: translate(0, 0) scale(1);
-          }
-          33% {
-            transform: translate(30px, -50px) scale(1.1);
-          }
-          66% {
-            transform: translate(-20px, 20px) scale(0.9);
-          }
-        }
-
-        @keyframes fade-in {
-          from {
-            opacity: 0;
-          }
-          to {
-            opacity: 1;
-          }
-        }
-
-        @keyframes scale-in {
-          from {
-            transform: scale(0.9);
-            opacity: 0;
-          }
-          to {
-            transform: scale(1);
-            opacity: 1;
-          }
-        }
-
-        .animate-blob {
-          animation: blob 7s infinite;
-        }
-
-        .animation-delay-2000 {
-          animation-delay: 2s;
-        }
-
-        .animation-delay-4000 {
-          animation-delay: 4s;
-        }
-
-        .animate-fade-in {
-          animation: fade-in 0.3s ease-out;
-        }
-
-        .animate-scale-in {
-          animation: scale-in 0.3s ease-out;
-        }
-      `}</style>
     </section>
   );
 };

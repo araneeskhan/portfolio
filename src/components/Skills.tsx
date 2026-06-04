@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { useState } from "react";
+import SectionHeader from "@/components/SectionHeader";
 
 const Skills = () => {
   const [activeCategory, setActiveCategory] = useState("frontend");
@@ -125,26 +126,7 @@ const Skills = () => {
 
       <div className="container mx-auto px-4 relative z-10">
         {/* Header */}
-        <div className="text-center mb-16">
-          <p
-            className="inline-block px-4 py-2 mb-4 text-sm font-semibold text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/30 rounded-full"
-            data-aos="fade-up"
-          >
-            Explore My
-          </p>
-          <h2
-            className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4"
-            data-aos="fade-up"
-            data-aos-delay="100"
-          >
-            Technical Skills
-          </h2>
-          <div
-            className="w-24 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto rounded-full"
-            data-aos="fade-up"
-            data-aos-delay="200"
-          ></div>
-        </div>
+        <SectionHeader label="Explore My" title="Technical Skills" />
 
         {/* Category Tabs */}
         <div
@@ -156,6 +138,7 @@ const Skills = () => {
             {Object.keys(skillCategories).map((category) => (
               <button
                 key={category}
+                type="button"
                 onClick={() => setActiveCategory(category)}
                 className={`group relative px-4 sm:px-6 md:px-8 py-3 md:py-4 rounded-xl transition-all duration-300 font-semibold text-sm md:text-base ${
                   activeCategory === category

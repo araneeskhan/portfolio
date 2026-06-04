@@ -1,4 +1,5 @@
 import Link from "next/link";
+import SectionHeader from "@/components/SectionHeader";
 
 const services = [
   {
@@ -74,35 +75,11 @@ const Services = () => {
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
-        {/* Header */}
-        <div className="text-center mb-16">
-          <p
-            className="inline-block px-4 py-2 mb-4 text-sm font-semibold text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/30 rounded-full"
-            data-aos="fade-up"
-          >
-            What I Offer
-          </p>
-          <h2
-            className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4"
-            data-aos="fade-up"
-            data-aos-delay="100"
-          >
-            Services
-          </h2>
-          <div
-            className="w-24 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto rounded-full"
-            data-aos="fade-up"
-            data-aos-delay="200"
-          ></div>
-          <p
-            className="mt-6 text-gray-600 dark:text-gray-400 text-lg max-w-2xl mx-auto"
-            data-aos="fade-up"
-            data-aos-delay="300"
-          >
-            From idea to production — I cover the full stack so you don&apos;t
-            have to manage multiple specialists.
-          </p>
-        </div>
+        <SectionHeader
+          label="What I Offer"
+          title="Services"
+          description="From idea to production — I cover the full stack so you don't have to manage multiple specialists."
+        />
 
         {/* Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">

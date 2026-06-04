@@ -1,4 +1,5 @@
 import { useState } from "react";
+import SectionHeader from "@/components/SectionHeader";
 
 interface Certification {
   name: string;
@@ -82,35 +83,11 @@ const Certifications = () => {
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
-        {/* Header */}
-        <div className="text-center mb-16">
-          <p
-            className="inline-block px-4 py-2 mb-4 text-sm font-semibold text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/30 rounded-full"
-            data-aos="fade-up"
-          >
-            My Credentials
-          </p>
-          <h1
-            className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4"
-            data-aos="fade-up"
-            data-aos-delay="100"
-          >
-            Certifications
-          </h1>
-          <div
-            className="w-24 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto rounded-full"
-            data-aos="fade-up"
-            data-aos-delay="200"
-          ></div>
-          <p
-            className="mt-6 text-gray-600 dark:text-gray-400 text-lg max-w-2xl mx-auto"
-            data-aos="fade-up"
-            data-aos-delay="300"
-          >
-            Professional certifications that validate my expertise across
-            various technologies
-          </p>
-        </div>
+        <SectionHeader
+          label="My Credentials"
+          title="Certifications"
+          description="Professional certifications that validate my expertise across various technologies"
+        />
 
         {/* Certifications Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
@@ -330,32 +307,6 @@ const Certifications = () => {
         </div>
       </div>
 
-      <style jsx>{`
-        @keyframes blob {
-          0%,
-          100% {
-            transform: translate(0, 0) scale(1);
-          }
-          33% {
-            transform: translate(30px, -50px) scale(1.1);
-          }
-          66% {
-            transform: translate(-20px, 20px) scale(0.9);
-          }
-        }
-
-        .animate-blob {
-          animation: blob 7s infinite;
-        }
-
-        .animation-delay-2000 {
-          animation-delay: 2s;
-        }
-
-        .animation-delay-4000 {
-          animation-delay: 4s;
-        }
-      `}</style>
     </section>
   );
 };

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState, useRef } from "react";
+import personal from "@/config/personal";
 
 const Hero = () => {
   const [displayText, setDisplayText] = useState("");
@@ -8,7 +9,7 @@ const Hero = () => {
   const [currentRole, setCurrentRole] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
 
-  const fullText = "Anees Ur Rehman";
+  const fullText = personal.name;
   const roles = ["Full-Stack Developer", "Software Engineer"];
   const typingSpeed = 150;
   const typingRef = useRef<NodeJS.Timeout | null>(null);
@@ -125,8 +126,8 @@ const Hero = () => {
             {/* CTA Buttons */}
             <div className="flex flex-wrap gap-4 pt-4">
               <a
-                href="/assets/Resume.pdf"
-                download="AneesUrRehman_Resume.pdf"
+                href={personal.resumePath}
+                download={personal.resumeFileName}
                 className="group relative px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-medium rounded-xl overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-blue-500/50"
               >
                 <span className="relative z-10 flex items-center">
@@ -154,7 +155,7 @@ const Hero = () => {
               </span>
               <div className="flex gap-3">
                 <a
-                  href="https://linkedin.com/in/araneeskhan"
+                  href={personal.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="LinkedIn profile"
@@ -163,7 +164,7 @@ const Hero = () => {
                   <i className="fab fa-linkedin text-xl text-gray-700 dark:text-gray-300 group-hover:text-white transition-colors"></i>
                 </a>
                 <a
-                  href="https://github.com/araneeskhan"
+                  href={personal.github}
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="GitHub profile"

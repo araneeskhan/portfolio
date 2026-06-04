@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://araneeskhan.vercel.app/sitemap.xml

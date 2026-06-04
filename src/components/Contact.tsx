@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { useForm, ValidationError } from "@formspree/react";
+import personal from "@/config/personal";
+import SectionHeader from "@/components/SectionHeader";
 
 const Contact = () => {
-  const [state, handleSubmit, reset] = useForm("mjgpoeyy");
+  const [state, handleSubmit, reset] = useForm(process.env.NEXT_PUBLIC_FORMSPREE_ID ?? '');
   const [focusedField, setFocusedField] = useState<string | null>(null);
 
   return (
@@ -18,35 +20,11 @@ const Contact = () => {
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
-        {/* Header */}
-        <div className="text-center mb-16">
-          <p
-            className="inline-block px-4 py-2 mb-4 text-sm font-semibold text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/30 rounded-full"
-            data-aos="fade-up"
-          >
-            Get In Touch
-          </p>
-          <h2
-            className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4"
-            data-aos="fade-up"
-            data-aos-delay="100"
-          >
-            Let's Work Together
-          </h2>
-          <div
-            className="w-24 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto rounded-full"
-            data-aos="fade-up"
-            data-aos-delay="200"
-          ></div>
-          <p
-            className="mt-6 text-gray-600 dark:text-gray-400 text-lg max-w-2xl mx-auto"
-            data-aos="fade-up"
-            data-aos-delay="300"
-          >
-            Have a project in mind? Let's discuss how we can work together to
-            bring your ideas to life.
-          </p>
-        </div>
+        <SectionHeader
+          label="Get In Touch"
+          title="Let's Work Together"
+          description="Have a project in mind? Let's discuss how we can work together to bring your ideas to life."
+        />
 
         <div className="max-w-6xl mx-auto">
           {/* Glassmorphism wrapper card */}
@@ -67,7 +45,7 @@ const Contact = () => {
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
                 {/* Email */}
                 <a
-                  href="mailto:aneesurrehman1358@gmail.com"
+                  href={`mailto:${personal.email}`}
                   className="group flex items-center gap-4 p-4 rounded-2xl bg-gradient-to-br from-blue-50 to-blue-100/50 dark:from-blue-900/20 dark:to-blue-800/20 border border-blue-200/50 dark:border-blue-700/40 hover:border-blue-400 dark:hover:border-blue-500 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
                 >
                   <div className="w-12 h-12 flex-shrink-0 flex items-center justify-center bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl shadow-lg group-hover:scale-110 transition-transform duration-300">
@@ -78,14 +56,14 @@ const Contact = () => {
                       Email
                     </p>
                     <p className="text-sm font-medium text-gray-900 dark:text-white truncate">
-                      aneesurrehman1358@gmail.com
+                      {personal.email}
                     </p>
                   </div>
                 </a>
 
                 {/* LinkedIn */}
                 <a
-                  href="https://linkedin.com/in/araneeskhan"
+                  href={personal.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group flex items-center gap-4 p-4 rounded-2xl bg-gradient-to-br from-sky-50 to-sky-100/50 dark:from-sky-900/20 dark:to-sky-800/20 border border-sky-200/50 dark:border-sky-700/40 hover:border-sky-400 dark:hover:border-sky-500 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
@@ -98,14 +76,14 @@ const Contact = () => {
                       LinkedIn
                     </p>
                     <p className="text-sm font-medium text-gray-900 dark:text-white">
-                      /in/araneeskhan
+                      {personal.linkedinHandle}
                     </p>
                   </div>
                 </a>
 
                 {/* GitHub */}
                 <a
-                  href="https://github.com/araneeskhan"
+                  href={personal.github}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group flex items-center gap-4 p-4 rounded-2xl bg-gradient-to-br from-gray-50 to-gray-100/50 dark:from-gray-700/30 dark:to-gray-600/20 border border-gray-200/50 dark:border-gray-600/40 hover:border-gray-400 dark:hover:border-gray-500 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
@@ -118,7 +96,7 @@ const Contact = () => {
                       GitHub
                     </p>
                     <p className="text-sm font-medium text-gray-900 dark:text-white">
-                      /araneeskhan
+                      /{personal.githubUsername}
                     </p>
                   </div>
                 </a>
@@ -133,7 +111,7 @@ const Contact = () => {
                       Location
                     </p>
                     <p className="text-sm font-bold text-white">
-                      Paris, France
+                      {personal.location}
                     </p>
                   </div>
                 </div>

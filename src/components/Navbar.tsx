@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import ThemeToggle from "./ThemeToggle";
 import { usePathname } from "next/navigation";
+import personal from "@/config/personal";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -52,7 +53,7 @@ const Navbar = () => {
               className="group relative text-2xl font-bold transition-all duration-300"
             >
               <span className="bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 bg-clip-text text-transparent group-hover:from-purple-600 group-hover:to-blue-600 dark:group-hover:from-purple-400 dark:group-hover:to-blue-400 transition-all duration-300">
-                Anees Ur Rehman
+                {personal.name}
               </span>
               <div className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 group-hover:w-full transition-all duration-300"></div>
             </Link>
@@ -69,6 +70,7 @@ const Navbar = () => {
             <div className="flex items-center space-x-4 md:hidden">
               <ThemeToggle />
               <button
+                type="button"
                 className="relative w-10 h-10 flex items-center justify-center text-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-all duration-300"
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
                 aria-label="Toggle menu"
@@ -117,6 +119,7 @@ const Navbar = () => {
               Menu
             </span>
             <button
+              type="button"
               onClick={() => setIsMenuOpen(false)}
               className="w-10 h-10 flex items-center justify-center hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors"
               aria-label="Close menu"
@@ -134,7 +137,7 @@ const Navbar = () => {
           <div className="p-6 border-t border-gray-200 dark:border-gray-800">
             <div className="flex space-x-4 justify-center">
               <a
-                href="https://linkedin.com/in/araneeskhan"
+                href={personal.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-12 h-12 flex items-center justify-center bg-gray-100 dark:bg-gray-800 hover:bg-blue-600 dark:hover:bg-blue-600 text-gray-700 dark:text-gray-300 hover:text-white rounded-full transition-all duration-300 hover:scale-110"
@@ -143,7 +146,7 @@ const Navbar = () => {
                 <i className="fab fa-linkedin text-xl"></i>
               </a>
               <a
-                href="https://github.com/araneeskhan"
+                href={personal.github}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-12 h-12 flex items-center justify-center bg-gray-100 dark:bg-gray-800 hover:bg-gray-900 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 hover:text-white rounded-full transition-all duration-300 hover:scale-110"

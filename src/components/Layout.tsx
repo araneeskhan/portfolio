@@ -2,6 +2,7 @@ import { ReactNode } from 'react';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import Head from 'next/head';
+import ErrorBoundary from './ErrorBoundary';
 
 interface LayoutProps {
   children: ReactNode;
@@ -22,7 +23,9 @@ const Layout = ({
       </Head>
       <div className="flex flex-col min-h-screen">
         <Navbar />
-        <main className="flex-grow">{children}</main>
+        <main className="flex-grow">
+          <ErrorBoundary>{children}</ErrorBoundary>
+        </main>
         <Footer />
       </div>
     </>

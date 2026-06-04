@@ -1,4 +1,5 @@
 import Link from "next/link";
+import personal from "@/config/personal";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -17,18 +18,18 @@ const Footer = () => {
           <div className="lg:col-span-1">
             <Link href="/" className="group inline-block mb-4">
               <h3 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 bg-clip-text text-transparent group-hover:from-purple-600 group-hover:to-blue-600 dark:group-hover:from-purple-400 dark:group-hover:to-blue-400 transition-all duration-300">
-                Anees Ur Rehman
+                {personal.name}
               </h3>
             </Link>
             <p className="text-gray-600 dark:text-gray-400 mb-6 leading-relaxed">
-              Full Stack Developer specializing in creating responsive and
+              {personal.title} specializing in creating responsive and
               user-friendly experiences.
             </p>
 
             {/* Social Links */}
             <div className="flex space-x-3">
               <a
-                href="https://linkedin.com/in/araneeskhan"
+                href={personal.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group w-11 h-11 flex items-center justify-center bg-gray-100 dark:bg-gray-800 hover:bg-blue-600 dark:hover:bg-blue-600 text-gray-700 dark:text-gray-300 rounded-xl transition-all duration-300 hover:scale-110 hover:shadow-lg"
@@ -37,7 +38,7 @@ const Footer = () => {
                 <i className="fab fa-linkedin text-lg group-hover:text-white transition-colors"></i>
               </a>
               <a
-                href="https://github.com/araneeskhan"
+                href={personal.github}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group w-11 h-11 flex items-center justify-center bg-gray-100 dark:bg-gray-800 hover:bg-gray-900 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-xl transition-all duration-300 hover:scale-110 hover:shadow-lg"
@@ -98,10 +99,10 @@ const Footer = () => {
                       Email
                     </p>
                     <a
-                      href="mailto:aneesurrehman1358@gmail.com"
+                      href={`mailto:${personal.email}`}
                       className="text-sm text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors break-all"
                     >
-                      aneesurrehman1358@gmail.com
+                      {personal.email}
                     </a>
                   </div>
                 </div>
@@ -116,7 +117,7 @@ const Footer = () => {
                       Location
                     </p>
                     <p className="text-sm text-gray-700 dark:text-gray-300">
-                      Paris, France
+                      {personal.location}
                     </p>
                   </div>
                 </div>
@@ -152,7 +153,7 @@ const Footer = () => {
             <p className="text-gray-600 dark:text-gray-400 text-sm text-center md:text-left">
               &copy; {currentYear}{" "}
               <span className="font-semibold text-gray-900 dark:text-white">
-                Anees Ur Rehman
+                {personal.name}
               </span>
             </p>
           </div>
