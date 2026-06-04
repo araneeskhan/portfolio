@@ -199,56 +199,6 @@ const About = () => {
             </div>
           </div>
 
-          {/* GitHub Stats */}
-          <div className="mt-12" data-aos="fade-up" data-aos-delay="900">
-            <h3 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-2 text-center">
-              GitHub Activity
-            </h3>
-            <p className="text-gray-500 dark:text-gray-400 text-sm text-center mb-8">
-              Live stats pulled directly from GitHub
-            </p>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {/* Stats card — light */}
-              <img
-                src="https://github-readme-stats.vercel.app/api?username=araneeskhan&show_icons=true&count_private=true&hide_border=true&bg_color=ffffff&title_color=1d4ed8&text_color=374151&icon_color=7c3aed&ring_color=7c3aed"
-                alt="GitHub stats"
-                className="w-full rounded-2xl dark:hidden"
-              />
-              {/* Stats card — dark */}
-              <img
-                src="https://github-readme-stats.vercel.app/api?username=araneeskhan&show_icons=true&count_private=true&hide_border=true&bg_color=1f2937&title_color=60a5fa&text_color=d1d5db&icon_color=a78bfa&ring_color=a78bfa"
-                alt="GitHub stats"
-                className="w-full rounded-2xl hidden dark:block"
-              />
-
-              {/* Top languages — light */}
-              <img
-                src="https://github-readme-stats.vercel.app/api/top-langs/?username=araneeskhan&layout=compact&hide_border=true&bg_color=ffffff&title_color=1d4ed8&text_color=374151&langs_count=8"
-                alt="Top languages"
-                className="w-full rounded-2xl dark:hidden"
-              />
-              {/* Top languages — dark */}
-              <img
-                src="https://github-readme-stats.vercel.app/api/top-langs/?username=araneeskhan&layout=compact&hide_border=true&bg_color=1f2937&title_color=60a5fa&text_color=d1d5db&langs_count=8"
-                alt="Top languages"
-                className="w-full rounded-2xl hidden dark:block"
-              />
-            </div>
-
-            <div className="flex justify-center mt-6">
-              <a
-                href="https://github.com/araneeskhan"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
-              >
-                <i className="fab fa-github"></i>
-                View full GitHub profile
-                <i className="fas fa-arrow-right text-xs"></i>
-              </a>
-            </div>
-          </div>
         </div>
       </div>
     </section>
