@@ -253,36 +253,20 @@ const Skills = () => {
           data-aos-delay="700"
         >
           <div className="text-center p-4 md:p-6 bg-white dark:bg-gray-800 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700">
-            <div className="text-2xl md:text-3xl font-bold text-blue-600 dark:text-blue-400 mb-2">
-              15+
-            </div>
-            <div className="text-gray-600 dark:text-gray-400 text-xs md:text-sm font-medium">
-              Technologies
-            </div>
+            <div className="text-2xl md:text-3xl font-bold text-blue-600 dark:text-blue-400 mb-2">15+</div>
+            <div className="text-gray-600 dark:text-gray-400 text-xs md:text-sm font-medium">Technologies</div>
           </div>
           <div className="text-center p-4 md:p-6 bg-white dark:bg-gray-800 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700">
-            <div className="text-2xl md:text-3xl font-bold text-purple-600 dark:text-purple-400 mb-2">
-              5+
-            </div>
-            <div className="text-gray-600 dark:text-gray-400 text-xs md:text-sm font-medium">
-              Frameworks
-            </div>
+            <div className="text-2xl md:text-3xl font-bold text-purple-600 dark:text-purple-400 mb-2">5+</div>
+            <div className="text-gray-600 dark:text-gray-400 text-xs md:text-sm font-medium">Frameworks</div>
           </div>
           <div className="text-center p-4 md:p-6 bg-white dark:bg-gray-800 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700">
-            <div className="text-2xl md:text-3xl font-bold text-pink-600 dark:text-pink-400 mb-2">
-              6+
-            </div>
-            <div className="text-gray-600 dark:text-gray-400 text-xs md:text-sm font-medium">
-              Projects
-            </div>
+            <div className="text-2xl md:text-3xl font-bold text-pink-600 dark:text-pink-400 mb-2">6+</div>
+            <div className="text-gray-600 dark:text-gray-400 text-xs md:text-sm font-medium">Projects</div>
           </div>
           <div className="text-center p-4 md:p-6 bg-white dark:bg-gray-800 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700">
-            <div className="text-2xl md:text-3xl font-bold text-green-600 dark:text-green-400 mb-2">
-              24+
-            </div>
-            <div className="text-gray-600 dark:text-gray-400 text-xs md:text-sm font-medium">
-              Months Exp
-            </div>
+            <div className="text-2xl md:text-3xl font-bold text-green-600 dark:text-green-400 mb-2">24+</div>
+            <div className="text-gray-600 dark:text-gray-400 text-xs md:text-sm font-medium">Months Exp</div>
           </div>
         </div>
       </div>

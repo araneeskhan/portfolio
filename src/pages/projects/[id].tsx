@@ -185,6 +185,35 @@ export default function ProjectDetails({ project }: Props) {
               </div>
             )}
 
+            {/* Case Study banner — full width, impossible to miss */}
+            {project.caseStudyUrl && (
+              <Link
+                href={project.caseStudyUrl}
+                className="group flex items-center justify-between gap-4 w-full mb-12 p-6 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 rounded-2xl shadow-xl shadow-amber-500/20 transition-all duration-300 hover:shadow-amber-500/40 hover:-translate-y-1"
+                data-aos="fade-up"
+              >
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 flex-shrink-0 flex items-center justify-center bg-white/20 rounded-xl">
+                    <i className="fas fa-microscope text-white text-xl"></i>
+                  </div>
+                  <div>
+                    <p className="text-amber-100 text-xs font-semibold uppercase tracking-widest mb-0.5">
+                      Deep Dive
+                    </p>
+                    <p className="text-white text-lg font-bold">
+                      Read the Full Case Study
+                    </p>
+                    <p className="text-amber-100 text-sm">
+                      Architecture · SRS · SRD · Testing · Challenges
+                    </p>
+                  </div>
+                </div>
+                <div className="flex-shrink-0 w-10 h-10 flex items-center justify-center bg-white/20 rounded-xl group-hover:translate-x-1 transition-transform duration-300">
+                  <i className="fas fa-arrow-right text-white"></i>
+                </div>
+              </Link>
+            )}
+
             <div className="grid lg:grid-cols-3 gap-12">
               {/* Main Content */}
               <div className="lg:col-span-2 space-y-8">
@@ -270,15 +299,6 @@ export default function ProjectDetails({ project }: Props) {
                     <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
                   </a>
 
-                  {project.caseStudyUrl && (
-                    <Link
-                      href={project.caseStudyUrl}
-                      className="group relative w-full px-6 py-4 bg-white dark:bg-gray-700 border-2 border-gray-300 dark:border-gray-600 hover:border-blue-500 dark:hover:border-blue-400 text-gray-900 dark:text-white font-medium rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-lg flex items-center justify-center"
-                    >
-                      <i className="fas fa-microscope mr-2 text-blue-600 dark:text-blue-400 text-lg"></i>
-                      View Case Study
-                    </Link>
-                  )}
                 </div>
               </div>
             </div>

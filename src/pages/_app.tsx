@@ -3,6 +3,7 @@ import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { Analytics } from '@vercel/analytics/react';
+import FloatingBackToTop from '@/components/FloatingBackToTop';
 import 'aos/dist/aos.css';
 import '../styles/globals.css';
 
@@ -23,22 +24,27 @@ export default function App({ Component, pageProps }: AppProps) {
 
   useEffect(() => {
     const onStart = () => {
-      // Disable smooth-scroll before navigation so the jump to top is instant
+      // Disable smooth scroll so Next.js's built-in scroll reset will be instant —
+      // but do NOT call scrollTo here, that causes the current page to visually
+      // scroll up before the new page has even loaded (the "rescroll" effect).
       document.documentElement.style.scrollBehavior = 'auto';
-      window.scrollTo(0, 0);
     };
     const onComplete = () => {
-      // Re-enable smooth-scroll for anchor links on the new page
+      // New page is now rendered. Jump to top instantly then restore smooth scroll.
+      window.scrollTo(0, 0);
+      document.documentElement.style.scrollBehavior = '';
+    };
+    const onError = () => {
       document.documentElement.style.scrollBehavior = '';
     };
 
     router.events.on('routeChangeStart', onStart);
     router.events.on('routeChangeComplete', onComplete);
-    router.events.on('routeChangeError', onComplete);
+    router.events.on('routeChangeError', onError);
     return () => {
       router.events.off('routeChangeStart', onStart);
       router.events.off('routeChangeComplete', onComplete);
-      router.events.off('routeChangeError', onComplete);
+      router.events.off('routeChangeError', onError);
     };
   }, [router.events]);
 
@@ -106,7 +112,8 @@ export default function App({ Component, pageProps }: AppProps) {
         />
       </Head>
       <Component {...pageProps} />
-      <Analytics /> {/* place outside Component so it persists across pages */}
+      <FloatingBackToTop />
+      <Analytics />
     </>
   );
 }

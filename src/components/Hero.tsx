@@ -79,12 +79,16 @@ const Hero = () => {
             data-aos="fade-right"
           >
             {/* Greeting badge */}
-            <div className="inline-flex items-center px-4 py-2 bg-blue-50 dark:bg-blue-900/30 rounded-full border border-blue-200 dark:border-blue-800">
+            <Link
+              href="#contact"
+              className="inline-flex items-center px-4 py-2 bg-blue-50 dark:bg-blue-900/30 rounded-full border border-blue-200 dark:border-blue-800 hover:border-blue-400 dark:hover:border-blue-500 hover:bg-blue-100 dark:hover:bg-blue-900/50 transition-all duration-300 group"
+            >
               <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse mr-2"></span>
               <p className="text-blue-600 dark:text-blue-400 font-medium text-sm">
                 Available for opportunities
               </p>
-            </div>
+              <i className="fas fa-arrow-right text-xs text-blue-500 dark:text-blue-400 ml-2 group-hover:translate-x-1 transition-transform duration-300"></i>
+            </Link>
 
             {/* Main heading with typing effect */}
             <div>
@@ -153,6 +157,7 @@ const Hero = () => {
                   href="https://linkedin.com/in/araneeskhan"
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label="LinkedIn profile"
                   className="group w-12 h-12 flex items-center justify-center bg-gray-100 dark:bg-gray-800 hover:bg-blue-600 dark:hover:bg-blue-600 rounded-xl transition-all duration-300 hover:scale-110 hover:shadow-lg"
                 >
                   <i className="fab fa-linkedin text-xl text-gray-700 dark:text-gray-300 group-hover:text-white transition-colors"></i>
@@ -161,6 +166,7 @@ const Hero = () => {
                   href="https://github.com/araneeskhan"
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label="GitHub profile"
                   className="group w-12 h-12 flex items-center justify-center bg-gray-100 dark:bg-gray-800 hover:bg-gray-900 dark:hover:bg-gray-700 rounded-xl transition-all duration-300 hover:scale-110 hover:shadow-lg"
                 >
                   <i className="fab fa-github text-xl text-gray-700 dark:text-gray-300 group-hover:text-white transition-colors"></i>

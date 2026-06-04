@@ -102,11 +102,16 @@ const Projects = () => {
                     </div>
                   </div>
 
-                  {/* Featured Badge */}
-                  {index < 3 && (
-                    <div className="absolute top-4 left-4 px-3 py-1 bg-gradient-to-r from-blue-600 to-purple-600 text-white text-xs font-bold rounded-full shadow-lg">
-                      <i className="fas fa-star mr-1"></i> Featured
-                    </div>
+                  {/* Case Study badge — visible on the image so it's impossible to miss */}
+                  {project.caseStudyUrl && (
+                    <Link
+                      href={project.caseStudyUrl}
+                      onClick={(e) => e.stopPropagation()}
+                      className="absolute top-4 left-4 flex items-center gap-1.5 px-3 py-1.5 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white text-xs font-bold rounded-full shadow-lg transition-all duration-300 hover:scale-105 z-10"
+                    >
+                      <i className="fas fa-microscope text-xs"></i>
+                      Case Study
+                    </Link>
                   )}
                 </div>
 
@@ -162,6 +167,18 @@ const Projects = () => {
                       <i className="fab fa-github text-lg"></i>
                     </a>
                   </div>
+
+                  {/* Case Study link — full width, below main buttons */}
+                  {project.caseStudyUrl && (
+                    <Link
+                      href={project.caseStudyUrl}
+                      className="group/cs mt-3 flex items-center justify-center gap-2 w-full px-4 py-2.5 bg-gradient-to-r from-amber-50 to-orange-50 dark:from-amber-900/20 dark:to-orange-900/20 border border-amber-300 dark:border-amber-700 hover:border-amber-500 dark:hover:border-amber-500 text-amber-700 dark:text-amber-400 text-sm font-semibold rounded-xl transition-all duration-300 hover:shadow-md"
+                    >
+                      <i className="fas fa-microscope text-sm"></i>
+                      Read Case Study
+                      <i className="fas fa-arrow-right text-xs group-hover/cs:translate-x-1 transition-transform duration-300"></i>
+                    </Link>
+                  )}
                 </div>
 
                 {/* Hover border effect */}
