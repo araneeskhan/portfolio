@@ -59,6 +59,10 @@ export default function App({ Component, pageProps }: AppProps) {
         <meta name="theme-color" content="#111827" media="(prefers-color-scheme: dark)" />
         <link rel="icon" href="/favicon.ico" />
 
+        {/* Early connection to Font Awesome CDN — reduces blocking time */}
+        <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
+        <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com" />
+
         {/* Open Graph */}
         <meta property="og:type" content="website" />
         <meta property="og:url" content={personal.siteUrl} />

@@ -3,13 +3,14 @@ import { projectsData } from '@/data/projects';
 import personal from '@/config/personal';
 
 export const getServerSideProps: GetServerSideProps = async ({ res }) => {
-  const base = personal.siteUrl;
+  try {
+    const base = personal.siteUrl;
 
-  const staticPaths = ['', '/resume', '/case-studies/campus-sports-sphere'];
-  const projectPaths = Object.keys(projectsData).map((id) => `/projects/${id}`);
-  const all = [...staticPaths, ...projectPaths];
+    const staticPaths = ['', '/resume', '/case-studies/campus-sports-sphere'];
+    const projectPaths = Object.keys(projectsData).map((id) => `/projects/${id}`);
+    const all = [...staticPaths, ...projectPaths];
 
-  const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
+    const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${all
   .map(
@@ -22,9 +23,14 @@ ${all
   .join('\n')}
 </urlset>`;
 
-  res.setHeader('Content-Type', 'text/xml; charset=utf-8');
-  res.write(sitemap);
-  res.end();
+    res.setHeader('Content-Type', 'text/xml; charset=utf-8');
+    res.setHeader('Cache-Control', 'public, s-maxage=86400, stale-while-revalidate');
+    res.write(sitemap);
+    res.end();
+  } catch {
+    res.statusCode = 500;
+    res.end();
+  }
 
   return { props: {} };
 };

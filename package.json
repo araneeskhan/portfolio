@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint --fix",
-    "deploy": "next build && New-Item -Path out/.nojekyll -ItemType File"
+    "deploy": "next build"
   },
   "dependencies": {
     "@formspree/react": "^3.0.0",
@@ -26,7 +26,6 @@
     "eslint": "^9.0.0",
     "eslint-config-next": "16.2.4",
     "eslint-config-prettier": "^10.1.8",
-    "mini-css-extract-plugin": "^2.9.2",
     "postcss": "^8.5.3",
     "prettier": "^3.8.3",
     "tailwindcss": "^3.4.17",
