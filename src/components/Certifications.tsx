@@ -105,7 +105,7 @@ const CertCard = ({
               {cert.issuer}
             </p>
           </div>
-          <div className={`relative z-10 mt-6 flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br ${cert.gradient} text-white shadow-[0_10px_25px_-5px_currentColor] md:mt-0`}>
+          <div className={`relative z-10 mt-6 flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br ${cert.gradient} text-white shadow-lg md:mt-0`}>
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
               <polyline points="20 6 9 17 4 12" />
             </svg>

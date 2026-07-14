@@ -160,7 +160,7 @@ export const projectsData: Record<string, Project> = {
   },
   docuforge: {
     title: "DocuForge",
-    coverImage: "/assets/ai-showcase/cover.png",
+    coverImage: "/assets/docuforge/cover.png",
     shortDescription:
       "An offline document formatting engine that converts messy text and Word files into polished DOCX/PDF outputs.",
     category: "Document Automation",
@@ -200,7 +200,7 @@ export const projectsData: Record<string, Project> = {
       { label: "Mode", value: "Offline" },
     ],
     githubUrl: "https://github.com/araneeskhan/docuforge",
-    screenshots: [{ path: "/assets/ai-showcase/cover.png", type: "web" }],
+    screenshots: [{ path: "/assets/docuforge/cover.png", type: "web" }],
   },
   quickbite: {
     title: "QuickBite",
