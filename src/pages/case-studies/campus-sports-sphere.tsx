@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Layout from "@/components/Layout";
 import { useState } from "react";
+import { motion, AnimatePresence } from "motion/react";
 
 const screenshots = [
   { path: "/assets/css/screenshot1.png", type: "web", label: "Web Dashboard" },
@@ -33,611 +34,498 @@ const phases = [
     number: "01",
     title: "Requirements Engineering",
     subtitle: "SRS Documentation",
-    description:
-      "Gathered and documented all functional and non-functional requirements through stakeholder interviews with university sports coordinators, student athletes, and IT staff. Produced a formal Software Requirements Specification (SRS) covering use cases, user stories, and system constraints.",
+    description: "Gathered and documented all functional and non-functional requirements through stakeholder interviews with university sports coordinators, student athletes, and IT staff. Produced a formal Software Requirements Specification (SRS) covering use cases, user stories, and system constraints.",
     icon: "fa-file-alt",
-    color: "blue",
   },
   {
     number: "02",
     title: "System Design",
     subtitle: "SRD & Architecture",
-    description:
-      "Designed the full system architecture including microservice separation (Node.js API + Python ML service), Firebase real-time data model, and mobile/web client communication flows. Documented in a Software Requirements Document (SRD) with ER diagrams, sequence diagrams, and API contracts.",
+    description: "Designed the full system architecture including microservice separation (Node.js API + Python ML service), Firebase real-time data model, and mobile/web client communication flows. Documented in a Software Requirements Document (SRD) with ER diagrams, sequence diagrams, and API contracts.",
     icon: "fa-drafting-compass",
-    color: "purple",
   },
   {
     number: "03",
     title: "Development",
     subtitle: "Iterative Sprints",
-    description:
-      "Built the system in iterative sprints — starting with the core Firebase data layer and Node.js API, then the React web dashboard, then the React Native mobile app, and finally integrating the Flask-based automated scheduling service.",
+    description: "Built the system in iterative sprints — starting with the core Firebase data layer and Node.js API, then the React web dashboard, then the React Native mobile app, and finally integrating the Flask-based automated scheduling service.",
     icon: "fa-code",
-    color: "green",
   },
   {
     number: "04",
     title: "Testing & QA",
     subtitle: "Formal Test Plans",
-    description:
-      "Executed structured testing across unit tests (individual modules), integration tests (API + database layer), and User Acceptance Testing (UAT) with real students and coordinators. Documented all test cases, results, and defect resolutions in formal test reports.",
+    description: "Executed structured testing across unit tests (individual modules), integration tests (API + database layer), and User Acceptance Testing (UAT) with real students and coordinators. Documented all test cases, results, and defect resolutions in formal test reports.",
     icon: "fa-vial",
-    color: "orange",
   },
   {
     number: "05",
     title: "Deployment",
     subtitle: "Production Release",
-    description:
-      "Deployed the Node.js API and Flask service independently, enabling each to scale and update without downtime. The React Native app was packaged for both iOS and Android. Firebase handled production-grade real-time sync and authentication.",
+    description: "Deployed the Node.js API and Flask service independently, enabling each to scale and update without downtime. The React Native app was packaged for both iOS and Android. Firebase handled production-grade real-time sync and authentication.",
     icon: "fa-rocket",
-    color: "pink",
   },
 ];
 
 const challenges = [
   {
     challenge: "Real-time sync across web and mobile simultaneously",
-    solution:
-      "Leveraged Firebase's onSnapshot listeners on both React and React Native clients — any score or event update propagates to all connected clients within milliseconds without polling.",
+    solution: "Leveraged Firebase's onSnapshot listeners on both React and React Native clients — any score or event update propagates to all connected clients within milliseconds without polling.",
     icon: "fa-bolt",
   },
   {
     challenge: "Automated scheduling with complex university constraints",
-    solution:
-      "Built a dedicated Python/Flask microservice that takes venue availability, team rosters, and event priorities as inputs and returns conflict-free schedules using constraint satisfaction. Kept this separate from the Node.js API so the ML logic can be iterated independently.",
+    solution: "Built a dedicated Python/Flask microservice that takes venue availability, team rosters, and event priorities as inputs and returns conflict-free schedules using constraint satisfaction. Kept this separate from the Node.js API so the ML logic can be iterated independently.",
     icon: "fa-calendar-check",
   },
   {
     challenge: "Consistent UX between the web admin dashboard and mobile app",
-    solution:
-      "Defined a shared design language — same color tokens, spacing scale, and component patterns — applied to both React (web) and React Native (mobile). This reduced design drift and made the two platforms feel like one product.",
+    solution: "Defined a shared design language — same color tokens, spacing scale, and component patterns — applied to both React (web) and React Native (mobile). This reduced design drift and made the two platforms feel like one product.",
     icon: "fa-layer-group",
   },
   {
     challenge: "Handling multi-role access (student vs admin vs coordinator)",
-    solution:
-      "Implemented Firebase custom claims for role assignment with Node.js middleware that validates the token's role on every protected endpoint, keeping authorization logic server-side rather than client-enforced.",
+    solution: "Implemented Firebase custom claims for role assignment with Node.js middleware that validates the token's role on every protected endpoint, keeping authorization logic server-side rather than client-enforced.",
     icon: "fa-shield-alt",
   },
 ];
 
-export default function CampusSportsSphereCaseStudy() {
-  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+// Animation Variants
+const staggerContainer = {
+  hidden: { opacity: 0 },
+  show: { opacity: 1, transition: { staggerChildren: 0.1 } }
+};
 
-  const openLightbox = (index: number) => setLightboxIndex(index);
-  const closeLightbox = () => setLightboxIndex(null);
-  const prev = () =>
-    setLightboxIndex((i) =>
-      i !== null ? (i - 1 + screenshots.length) % screenshots.length : null
-    );
-  const next = () =>
-    setLightboxIndex((i) =>
-      i !== null ? (i + 1) % screenshots.length : null
-    );
+const fadeUp = {
+  hidden: { opacity: 0, y: 30 },
+  show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 300, damping: 24 } }
+};
+
+export default function CampusSportsSphereCaseStudy() {
+  const [selectedScreenshot, setSelectedScreenshot] = useState<typeof screenshots[0] | null>(null);
+
+  const prev = () => {
+    if (!selectedScreenshot) return;
+    const currentIndex = screenshots.indexOf(selectedScreenshot);
+    const prevIndex = (currentIndex - 1 + screenshots.length) % screenshots.length;
+    setSelectedScreenshot(screenshots[prevIndex]);
+  };
+
+  const next = () => {
+    if (!selectedScreenshot) return;
+    const currentIndex = screenshots.indexOf(selectedScreenshot);
+    const nextIndex = (currentIndex + 1) % screenshots.length;
+    setSelectedScreenshot(screenshots[nextIndex]);
+  };
 
   return (
     <Layout
       title="Campus Sports Sphere — Case Study | Anees Ur Rehman"
-      description="A deep-dive into the design, architecture, and development of Campus Sports Sphere — an automated university sports management platform built with React, React Native, Node.js, Python, and Firebase."
+      description="A deep-dive into the design, architecture, and development of Campus Sports Sphere."
     >
-      <div className="relative overflow-hidden bg-gradient-to-b from-white to-gray-50 dark:from-gray-900 dark:to-gray-800">
+      <div className="relative min-h-screen overflow-hidden bg-canvas-50 dark:bg-canvas-950">
+        
         {/* ── HERO ─────────────────────────────────────────── */}
-        <div className="relative pt-28 pb-20 bg-gradient-to-br from-gray-900 via-blue-950 to-purple-950 overflow-hidden">
-          <div className="absolute inset-0 pointer-events-none">
-            <div className="absolute -top-24 -right-24 w-96 h-96 bg-blue-600/20 rounded-full blur-3xl animate-blob"></div>
-            <div className="absolute bottom-0 -left-24 w-80 h-80 bg-purple-600/20 rounded-full blur-3xl animate-blob animation-delay-2000"></div>
+        <section className="relative pt-32 pb-24 overflow-hidden border-b border-canvas-200/20 dark:border-white/5">
+          {/* Futuristic Glowing Orbs */}
+          <div className="absolute inset-0 pointer-events-none overflow-hidden">
+            <motion.div 
+              animate={{ scale: [1, 1.1, 1], opacity: [0.3, 0.5, 0.3] }}
+              transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute -top-40 -right-40 h-[600px] w-[600px] rounded-full bg-accent-500/20 blur-[120px]" 
+            />
+            <motion.div 
+              animate={{ scale: [1, 1.2, 1], opacity: [0.2, 0.4, 0.2] }}
+              transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+              className="absolute top-40 -left-20 h-[500px] w-[500px] rounded-full bg-blue-500/10 blur-[120px]" 
+            />
           </div>
 
-          <div className="container mx-auto px-4 relative z-10">
-            <div className="max-w-5xl mx-auto">
-              {/* Back */}
+          <div className="section-container relative z-10">
+            <div className="max-w-4xl mx-auto text-center md:text-left">
               <Link
-                href="/projects/campus-sports-sphere"
-                className="inline-flex items-center text-blue-400 hover:text-blue-300 transition-colors group mb-10 font-medium"
+                href="/#projects"
+                className="font-display inline-flex items-center text-sm font-medium text-canvas-500 hover:text-accent-500 dark:text-canvas-400 dark:hover:text-accent-400 transition-colors mb-12 group"
               >
-                <i className="fas fa-arrow-left mr-2 group-hover:-translate-x-1 transition-transform"></i>
-                Back to Project
+                <i className="fas fa-arrow-left mr-3 group-hover:-translate-x-1 transition-transform"></i>
+                Back to Projects
               </Link>
 
-              {/* Badge */}
-              <div className="inline-flex items-center px-4 py-1.5 bg-blue-500/20 border border-blue-500/30 rounded-full text-blue-300 text-sm font-medium mb-6">
-                <i className="fas fa-microscope mr-2"></i>
-                Case Study
-              </div>
+              <motion.div initial="hidden" animate="show" variants={staggerContainer} className="flex flex-col md:items-start items-center">
+                <motion.div variants={fadeUp} className="font-display inline-flex items-center px-5 py-2 bg-accent-500/10 border border-accent-500/20 rounded-full text-accent-500 text-xs font-bold tracking-widest uppercase mb-8 shadow-[0_0_20px_rgba(var(--color-accent-500),0.2)]">
+                  <i className="fas fa-microscope mr-3"></i>
+                  Deep Dive Case Study
+                </motion.div>
 
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
-                Campus Sports Sphere
-              </h1>
-              <p className="text-xl text-blue-200 max-w-3xl mb-10 leading-relaxed">
-                An automated university sports management system — combining a
-                React web dashboard, a React Native mobile app, a Node.js API,
-                and a Python/ML scheduling service into one unified platform.
-              </p>
+                <motion.h1 variants={fadeUp} className="font-display text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-canvas-950 dark:text-white mb-6">
+                  Campus Sports Sphere
+                </motion.h1>
+                
+                <motion.p variants={fadeUp} className="font-display text-lg md:text-xl text-canvas-500 dark:text-canvas-300 max-w-3xl mb-12 leading-relaxed">
+                  An automated university sports management system — combining a React web dashboard, a React Native mobile app, a Node.js API, and a Python/ML scheduling service into one unified platform.
+                </motion.p>
 
-              {/* Meta chips */}
-              <div className="flex flex-wrap gap-4">
-                {[
-                  { icon: "fa-user", label: "Role", value: "Full-Stack Developer" },
-                  { icon: "fa-layer-group", label: "Type", value: "Web + Mobile" },
-                  { icon: "fa-code-branch", label: "Stack", value: "React · RN · Node · Python" },
-                  { icon: "fa-database", label: "Data", value: "Firebase Real-time" },
-                ].map((item) => (
-                  <div
-                    key={item.label}
-                    className="flex items-center gap-3 px-4 py-3 bg-white/10 backdrop-blur-sm rounded-xl border border-white/20"
-                  >
-                    <i className={`fas ${item.icon} text-blue-400 text-sm`}></i>
-                    <div>
-                      <p className="text-blue-300 text-xs font-medium uppercase tracking-wider">
-                        {item.label}
-                      </p>
-                      <p className="text-white text-sm font-semibold">
-                        {item.value}
-                      </p>
+                {/* Meta chips */}
+                <motion.div variants={fadeUp} className="flex flex-wrap justify-center md:justify-start gap-4">
+                  {[
+                    { icon: "fa-user", label: "Role", value: "Full-Stack Dev" },
+                    { icon: "fa-layer-group", label: "Type", value: "Web + Mobile" },
+                    { icon: "fa-code-branch", label: "Stack", value: "React · RN · Node" },
+                    { icon: "fa-database", label: "Data", value: "Firebase Real-time" },
+                  ].map((item) => (
+                    <div key={item.label} className="flex items-center gap-4 px-5 py-3.5 bg-white/50 dark:bg-canvas-900/50 backdrop-blur-md rounded-2xl border border-canvas-200/50 dark:border-white/10 shadow-lg hover:border-accent-500/30 transition-colors">
+                      <div className="w-10 h-10 flex items-center justify-center rounded-xl bg-accent-500/10 text-accent-500">
+                        <i className={`fas ${item.icon}`}></i>
+                      </div>
+                      <div className="text-left">
+                        <p className="font-display text-[10px] font-bold uppercase tracking-widest text-canvas-400">
+                          {item.label}
+                        </p>
+                        <p className="font-display text-sm font-bold text-canvas-950 dark:text-white">
+                          {item.value}
+                        </p>
+                      </div>
                     </div>
+                  ))}
+                </motion.div>
+              </motion.div>
+            </div>
+          </div>
+        </section>
+
+        <div className="section-container py-24 max-w-5xl">
+          
+          {/* ── OVERVIEW ─────────────────────────────────────── */}
+          <motion.section 
+            className="mb-32"
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={staggerContainer}
+          >
+            <div className="grid md:grid-cols-2 gap-8">
+              <motion.div variants={fadeUp} className="surface-card p-10 group hover:border-red-500/30 dark:hover:border-red-500/30">
+                <div className="flex items-center mb-6">
+                  <div className="w-14 h-14 flex items-center justify-center bg-red-500/10 text-red-500 rounded-2xl mr-5 group-hover:scale-110 transition-transform duration-500">
+                    <i className="fas fa-exclamation-triangle text-xl"></i>
                   </div>
+                  <h2 className="font-display text-2xl font-bold text-canvas-950 dark:text-white">The Problem</h2>
+                </div>
+                <p className="font-display text-canvas-600 dark:text-canvas-300 leading-relaxed text-lg">
+                  University sports departments relied on manual, paper-based systems to manage events, schedules, and scores. This led to scheduling conflicts, delayed score updates, poor communication, and heavy administrative overhead.
+                </p>
+              </motion.div>
+
+              <motion.div variants={fadeUp} className="surface-card p-10 group hover:border-emerald-500/30 dark:hover:border-emerald-500/30">
+                <div className="flex items-center mb-6">
+                  <div className="w-14 h-14 flex items-center justify-center bg-emerald-500/10 text-emerald-500 rounded-2xl mr-5 group-hover:scale-110 transition-transform duration-500">
+                    <i className="fas fa-lightbulb text-xl"></i>
+                  </div>
+                  <h2 className="font-display text-2xl font-bold text-canvas-950 dark:text-white">The Solution</h2>
+                </div>
+                <p className="font-display text-canvas-600 dark:text-canvas-300 leading-relaxed text-lg">
+                  A full-stack platform with a React dashboard for admins, a React Native app for students, and a Python/ML microservice that automates conflict-free scheduling — backed by Firebase for instantaneous sync.
+                </p>
+              </motion.div>
+            </div>
+          </motion.section>
+
+          {/* ── TECH STACK ───────────────────────────────────── */}
+          <motion.section 
+            className="mb-32"
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={staggerContainer}
+          >
+            <motion.div variants={fadeUp} className="mb-10 text-center md:text-left">
+              <h2 className="font-display text-3xl md:text-4xl font-bold text-canvas-950 dark:text-white mb-4">Architecture Stack</h2>
+              <p className="font-display text-canvas-500 dark:text-canvas-400 max-w-2xl text-lg">
+                Each technology was chosen as the precise best fit for its specific layer of the system.
+              </p>
+            </motion.div>
+            
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+              {techStack.map((tech, i) => (
+                <motion.div
+                  key={tech.name}
+                  variants={fadeUp}
+                  className="surface-card p-6 flex flex-col items-center text-center group hover:bg-canvas-100/50 dark:hover:bg-white/[0.03]"
+                >
+                  <div className="relative w-14 h-14 mb-4 transition-transform duration-500 group-hover:scale-110">
+                    <Image src={tech.icon} alt={tech.name} fill className="object-contain" />
+                  </div>
+                  <p className="font-display font-bold text-canvas-950 dark:text-white">{tech.name}</p>
+                  <p className="font-display text-[10px] uppercase tracking-widest font-bold text-canvas-400 mt-2">{tech.role}</p>
+                </motion.div>
+              ))}
+            </div>
+          </motion.section>
+
+          {/* ── KEY FEATURES ─────────────────────────────────── */}
+          <motion.section 
+            className="mb-32"
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={staggerContainer}
+          >
+            <motion.div variants={fadeUp} className="mb-12">
+              <h2 className="font-display text-3xl md:text-4xl font-bold text-canvas-950 dark:text-white mb-4">Core Capabilities</h2>
+              <p className="font-display text-canvas-500 dark:text-canvas-400 max-w-2xl text-lg">
+                Four defining features that solved distinct organizational pain points.
+              </p>
+            </motion.div>
+
+            <div className="grid md:grid-cols-2 gap-6">
+              {[
+                { icon: "fa-calendar-alt", title: "Real-time Event Mgmt", desc: "Admins create events on the web dashboard. Changes propagate to all mobile clients in milliseconds via Firebase onSnapshot listeners." },
+                { icon: "fa-robot", title: "Automated Scheduling", desc: "A Python/Flask microservice computes conflict-free schedules using constraint satisfaction algorithms, replacing hours of manual planning." },
+                { icon: "fa-mobile-alt", title: "Dual-Platform App", desc: "A single React Native codebase targets iOS and Android. Role-based access controls reveal management features to admins automatically." },
+                { icon: "fa-chart-bar", title: "Digital Scoreboard", desc: "Live score updates and historical statistics are aggregated and visualised per sport, team, and player for deep performance analytics." },
+              ].map((feature, i) => (
+                <motion.div key={i} variants={fadeUp} className="surface-card p-8 group">
+                  <div className="w-16 h-16 flex items-center justify-center bg-accent-500/10 text-accent-500 rounded-2xl mb-6 group-hover:scale-110 transition-transform duration-500 shadow-[0_0_30px_rgba(var(--color-accent-500),0.15)]">
+                    <i className={`fas ${feature.icon} text-2xl`}></i>
+                  </div>
+                  <h3 className="font-display text-xl font-bold text-canvas-950 dark:text-white mb-3">{feature.title}</h3>
+                  <p className="font-display text-canvas-600 dark:text-canvas-300 leading-relaxed text-sm">{feature.desc}</p>
+                </motion.div>
+              ))}
+            </div>
+          </motion.section>
+
+          {/* ── DEVELOPMENT PROCESS ──────────────────────────── */}
+          <motion.section 
+            className="mb-32 relative"
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={staggerContainer}
+          >
+            <motion.div variants={fadeUp} className="mb-16">
+              <h2 className="font-display text-3xl md:text-4xl font-bold text-canvas-950 dark:text-white mb-4">Development Lifecycle</h2>
+              <p className="font-display text-canvas-500 dark:text-canvas-400 max-w-2xl text-lg">
+                Structured software engineering from formal requirements to deployment.
+              </p>
+            </motion.div>
+
+            <div className="relative">
+              {/* Glowing Timeline Line */}
+              <div className="absolute left-[39px] top-4 bottom-4 w-[2px] bg-gradient-to-b from-accent-500/50 via-blue-500/50 to-purple-500/50 hidden md:block rounded-full"></div>
+
+              <div className="space-y-12">
+                {phases.map((phase, i) => (
+                  <motion.div key={i} variants={fadeUp} className="md:pl-28 relative group">
+                    {/* HUD Node */}
+                    <div className="hidden md:flex absolute left-6 top-6 w-5 h-5 bg-canvas-950 dark:bg-canvas-50 border-4 border-accent-500 rounded-full z-10 shadow-[0_0_15px_rgba(var(--color-accent-500),0.8)] group-hover:scale-150 transition-transform duration-500"></div>
+
+                    <div className="surface-card p-8 group-hover:border-accent-500/30 transition-colors">
+                      <div className="flex items-center gap-4 mb-4">
+                        <span className="font-display text-[10px] font-black tracking-widest px-3 py-1.5 bg-accent-500/10 text-accent-500 uppercase rounded-md border border-accent-500/20">
+                          Phase {phase.number}
+                        </span>
+                        <span className="font-display text-sm font-semibold text-canvas-400 uppercase tracking-widest">
+                          {phase.subtitle}
+                        </span>
+                      </div>
+                      <h3 className="font-display text-2xl font-bold text-canvas-950 dark:text-white mb-3">{phase.title}</h3>
+                      <p className="font-display text-canvas-600 dark:text-canvas-300 leading-relaxed text-sm md:text-base">{phase.description}</p>
+                    </div>
+                  </motion.div>
                 ))}
               </div>
             </div>
-          </div>
-        </div>
-
-        <div className="container mx-auto px-4 py-20 max-w-5xl">
-          {/* ── OVERVIEW ─────────────────────────────────────── */}
-          <section className="mb-20" data-aos="fade-up">
-            <div className="grid md:grid-cols-2 gap-8">
-              <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg border border-gray-200 dark:border-gray-700">
-                <div className="flex items-center mb-5">
-                  <div className="w-12 h-12 flex items-center justify-center bg-gradient-to-br from-red-500 to-orange-500 rounded-xl mr-4 shadow-lg">
-                    <i className="fas fa-exclamation-triangle text-white"></i>
-                  </div>
-                  <h2 className="text-xl font-bold text-gray-900 dark:text-white">
-                    The Problem
-                  </h2>
-                </div>
-                <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
-                  University sports departments relied on manual, paper-based
-                  systems to manage events, schedules, and scores. This led to
-                  scheduling conflicts, delayed score updates, poor communication
-                  with students, and significant administrative overhead for
-                  coordinators.
-                </p>
-              </div>
-
-              <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg border border-gray-200 dark:border-gray-700">
-                <div className="flex items-center mb-5">
-                  <div className="w-12 h-12 flex items-center justify-center bg-gradient-to-br from-green-500 to-emerald-500 rounded-xl mr-4 shadow-lg">
-                    <i className="fas fa-lightbulb text-white"></i>
-                  </div>
-                  <h2 className="text-xl font-bold text-gray-900 dark:text-white">
-                    The Solution
-                  </h2>
-                </div>
-                <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
-                  A full-stack platform with a React web dashboard for
-                  administrators and coordinators, a React Native mobile app for
-                  students and athletes, and a Python/ML microservice that
-                  automates conflict-free scheduling — all backed by Firebase
-                  for real-time data sync.
-                </p>
-              </div>
-            </div>
-          </section>
-
-          {/* ── TECH STACK ───────────────────────────────────── */}
-          <section className="mb-20" data-aos="fade-up">
-            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-3">
-              Tech Stack
-            </h2>
-            <p className="text-gray-600 dark:text-gray-400 mb-8 max-w-2xl">
-              Each technology was chosen for a specific reason — not as
-              defaults, but as the best fit for that layer of the system.
-            </p>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-              {techStack.map((tech) => (
-                <div
-                  key={tech.name}
-                  className="group bg-white dark:bg-gray-800 rounded-2xl p-5 border border-gray-200 dark:border-gray-700 hover:border-blue-400 dark:hover:border-blue-500 hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex flex-col items-center text-center"
-                >
-                  <div className="relative w-12 h-12 mb-3">
-                    <Image
-                      src={tech.icon}
-                      alt={tech.name}
-                      fill
-                      className="object-contain"
-                    />
-                  </div>
-                  <p className="font-bold text-gray-900 dark:text-white text-sm">
-                    {tech.name}
-                  </p>
-                  <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-                    {tech.role}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </section>
-
-          {/* ── KEY FEATURES ─────────────────────────────────── */}
-          <section className="mb-20" data-aos="fade-up">
-            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-3">
-              Key Features
-            </h2>
-            <p className="text-gray-600 dark:text-gray-400 mb-8 max-w-2xl">
-              Four core capabilities that define the system — each solving a
-              distinct pain point identified during requirements gathering.
-            </p>
-
-            <div className="space-y-5">
-              {[
-                {
-                  icon: "fa-calendar-alt",
-                  title: "Real-time Sports Event Management",
-                  gradient: "from-blue-500 to-cyan-500",
-                  description:
-                    "Administrators can create, update, and cancel sports events from the web dashboard. Changes propagate to all connected mobile clients in real time via Firebase onSnapshot listeners — no refresh needed, no polling.",
-                },
-                {
-                  icon: "fa-robot",
-                  title: "Automated Scheduling System",
-                  gradient: "from-purple-500 to-violet-500",
-                  description:
-                    "A Python/Flask microservice takes venue availability, team rosters, and event priorities as inputs and returns a conflict-free schedule using constraint satisfaction algorithms. Coordinators go from hours of manual planning to seconds.",
-                },
-                {
-                  icon: "fa-mobile-alt",
-                  title: "Dual-Platform Mobile App",
-                  gradient: "from-green-500 to-emerald-500",
-                  description:
-                    "A single React Native codebase targets both iOS and Android. Students can browse upcoming events, view live scores, and receive push notifications. Admins have an elevated view with management controls — role determined by Firebase custom claims.",
-                },
-                {
-                  icon: "fa-chart-bar",
-                  title: "Digital Scoreboard & Statistics",
-                  gradient: "from-orange-500 to-amber-500",
-                  description:
-                    "Live score updates display in both the web dashboard and mobile app simultaneously. Historical statistics are aggregated and visualised per sport, per team, and per player — giving coordinators data to report to university management.",
-                },
-              ].map((feature, i) => (
-                <div
-                  key={i}
-                  className="flex gap-6 bg-white dark:bg-gray-800 rounded-2xl p-6 border border-gray-200 dark:border-gray-700 hover:shadow-lg transition-all duration-300 group"
-                  data-aos="fade-up"
-                  data-aos-delay={i * 80}
-                >
-                  <div
-                    className={`w-14 h-14 flex-shrink-0 flex items-center justify-center bg-gradient-to-br ${feature.gradient} rounded-xl shadow-lg group-hover:scale-110 transition-transform duration-300`}
-                  >
-                    <i className={`fas ${feature.icon} text-white text-xl`}></i>
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">
-                      {feature.title}
-                    </h3>
-                    <p className="text-gray-600 dark:text-gray-400 leading-relaxed text-sm">
-                      {feature.description}
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </section>
-
-          {/* ── DEVELOPMENT PROCESS ──────────────────────────── */}
-          <section className="mb-20" data-aos="fade-up">
-            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-3">
-              Development Process
-            </h2>
-            <p className="text-gray-600 dark:text-gray-400 mb-10 max-w-2xl">
-              The project followed a structured software engineering lifecycle —
-              from formal requirements documentation through deployment.
-            </p>
-
-            <div className="relative">
-              {/* Vertical line */}
-              <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-blue-500 via-purple-500 to-pink-500 hidden md:block"></div>
-
-              <div className="space-y-8">
-                {phases.map((phase, i) => {
-                  const colorMap: Record<string, string> = {
-                    blue: "from-blue-500 to-cyan-500",
-                    purple: "from-purple-500 to-violet-500",
-                    green: "from-green-500 to-emerald-500",
-                    orange: "from-orange-500 to-amber-500",
-                    pink: "from-pink-500 to-rose-500",
-                  };
-                  return (
-                    <div
-                      key={i}
-                      className="md:pl-20 relative"
-                      data-aos="fade-up"
-                      data-aos-delay={i * 80}
-                    >
-                      {/* Circle on timeline */}
-                      <div
-                        className={`hidden md:flex absolute left-0 top-4 w-16 h-16 items-center justify-center bg-gradient-to-br ${colorMap[phase.color]} rounded-2xl shadow-lg`}
-                      >
-                        <i
-                          className={`fas ${phase.icon} text-white text-lg`}
-                        ></i>
-                      </div>
-
-                      <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 border border-gray-200 dark:border-gray-700 hover:shadow-lg transition-all duration-300">
-                        <div className="flex items-center gap-3 mb-3">
-                          <span
-                            className={`text-xs font-bold px-3 py-1 bg-gradient-to-r ${colorMap[phase.color]} text-white rounded-full`}
-                          >
-                            Phase {phase.number}
-                          </span>
-                          <span className="text-xs text-gray-500 dark:text-gray-400 font-medium">
-                            {phase.subtitle}
-                          </span>
-                        </div>
-                        <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">
-                          {phase.title}
-                        </h3>
-                        <p className="text-gray-600 dark:text-gray-400 leading-relaxed text-sm">
-                          {phase.description}
-                        </p>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          </section>
+          </motion.section>
 
           {/* ── DOCUMENTATION ────────────────────────────────── */}
-          <section className="mb-20" data-aos="fade-up">
-            <div className="bg-gradient-to-br from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 rounded-2xl p-8 border border-blue-200 dark:border-blue-800">
+          <motion.section 
+            className="mb-32"
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={staggerContainer}
+          >
+            <motion.div variants={fadeUp} className="surface-card p-10 border border-blue-500/20 bg-gradient-to-br from-blue-500/5 to-purple-500/5">
               <div className="flex items-center mb-6">
-                <div className="w-12 h-12 flex items-center justify-center bg-gradient-to-br from-blue-600 to-purple-600 rounded-xl mr-4 shadow-lg">
-                  <i className="fas fa-books text-white text-lg"></i>
+                <div className="w-14 h-14 flex items-center justify-center bg-blue-500/20 text-blue-500 rounded-2xl mr-5 shadow-[0_0_30px_rgba(59,130,246,0.3)]">
+                  <i className="fas fa-books text-xl"></i>
                 </div>
                 <div>
-                  <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
-                    Formal Documentation
-                  </h2>
-                  <p className="text-gray-500 dark:text-gray-400 text-sm">
-                    Engineering-first approach
-                  </p>
+                  <h2 className="font-display text-3xl font-bold text-canvas-950 dark:text-white">Formal Documentation</h2>
+                  <p className="font-display text-sm font-bold uppercase tracking-widest text-canvas-400 mt-1">Engineering-first approach</p>
                 </div>
               </div>
-              <p className="text-gray-700 dark:text-gray-300 mb-6 leading-relaxed">
-                This project was developed with formal documentation at every
-                stage — not as an afterthought, but as the foundation for
-                implementation decisions. Each document served a concrete
-                purpose in the engineering process.
+              <p className="font-display text-canvas-600 dark:text-canvas-300 leading-relaxed text-lg mb-10">
+                This project was developed with formal documentation at every stage — not as an afterthought, but as the foundation for implementation decisions. Each document served a concrete purpose in the engineering process.
               </p>
-              <div className="grid sm:grid-cols-3 gap-4">
+              
+              <div className="grid md:grid-cols-3 gap-6">
                 {[
-                  {
-                    icon: "fa-file-alt",
-                    title: "SRS",
-                    full: "Software Requirements Specification",
-                    desc: "Functional & non-functional requirements, use cases, user stories, system constraints.",
-                    color: "blue",
-                  },
-                  {
-                    icon: "fa-drafting-compass",
-                    title: "SRD",
-                    full: "Software Requirements Document",
-                    desc: "System architecture, ER diagrams, sequence diagrams, API contracts, data flow.",
-                    color: "purple",
-                  },
-                  {
-                    icon: "fa-vial",
-                    title: "Test Plan",
-                    full: "Testing Documentation",
-                    desc: "Unit test cases, integration test results, UAT sessions, defect logs, and resolutions.",
-                    color: "green",
-                  },
-                ].map((doc) => {
-                  const colorMap: Record<string, string> = {
-                    blue: "from-blue-500 to-cyan-500",
-                    purple: "from-purple-500 to-violet-500",
-                    green: "from-green-500 to-emerald-500",
-                  };
-                  const bgMap: Record<string, string> = {
-                    blue: "bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300",
-                    purple: "bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300",
-                    green: "bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300",
-                  };
-                  return (
-                    <div
-                      key={doc.title}
-                      className="bg-white dark:bg-gray-800 rounded-xl p-5 border border-gray-200 dark:border-gray-700"
-                    >
-                      <div
-                        className={`w-10 h-10 flex items-center justify-center bg-gradient-to-br ${colorMap[doc.color]} rounded-lg mb-3 shadow`}
-                      >
-                        <i
-                          className={`fas ${doc.icon} text-white text-sm`}
-                        ></i>
-                      </div>
-                      <div className="flex items-center gap-2 mb-2">
-                        <span
-                          className={`text-xs font-bold px-2 py-0.5 rounded ${bgMap[doc.color]}`}
-                        >
-                          {doc.title}
-                        </span>
-                        <span className="text-xs text-gray-500 dark:text-gray-400 truncate">
-                          {doc.full}
-                        </span>
-                      </div>
-                      <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed">
-                        {doc.desc}
-                      </p>
+                  { icon: "fa-file-alt", title: "SRS", full: "Software Requirements Specification", desc: "Functional & non-functional requirements, use cases, user stories, system constraints.", color: "blue" },
+                  { icon: "fa-drafting-compass", title: "SRD", full: "Software Requirements Document", desc: "System architecture, ER diagrams, sequence diagrams, API contracts, data flow.", color: "purple" },
+                  { icon: "fa-vial", title: "Test Plan", full: "Testing Documentation", desc: "Unit test cases, integration test results, UAT sessions, defect logs, and resolutions.", color: "emerald" },
+                ].map((doc, i) => (
+                  <div key={i} className="bg-white/50 dark:bg-canvas-900/50 backdrop-blur-md rounded-2xl p-6 border border-canvas-200/50 dark:border-white/10 hover:-translate-y-1 transition-transform">
+                    <div className={`w-10 h-10 flex items-center justify-center bg-${doc.color}-500/20 text-${doc.color}-500 rounded-xl mb-4`}>
+                      <i className={`fas ${doc.icon}`}></i>
                     </div>
-                  );
-                })}
+                    <div className="mb-3">
+                      <span className={`font-display text-[10px] font-black uppercase tracking-widest px-2 py-1 bg-${doc.color}-500/10 text-${doc.color}-500 rounded border border-${doc.color}-500/20 mr-2`}>{doc.title}</span>
+                      <span className="font-display text-xs font-semibold text-canvas-500">{doc.full}</span>
+                    </div>
+                    <p className="font-display text-sm text-canvas-600 dark:text-canvas-400 leading-relaxed">{doc.desc}</p>
+                  </div>
+                ))}
               </div>
-            </div>
-          </section>
+            </motion.div>
+          </motion.section>
 
           {/* ── CHALLENGES & SOLUTIONS ───────────────────────── */}
-          <section className="mb-20" data-aos="fade-up">
-            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-3">
-              Challenges & Solutions
-            </h2>
-            <p className="text-gray-600 dark:text-gray-400 mb-8 max-w-2xl">
-              The hard problems — and the specific decisions made to solve them.
-            </p>
+          <motion.section 
+            className="mb-32"
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={staggerContainer}
+          >
+            <motion.div variants={fadeUp} className="mb-12 text-center md:text-left">
+              <h2 className="font-display text-3xl md:text-4xl font-bold text-canvas-950 dark:text-white mb-4">Challenges & Solutions</h2>
+              <p className="font-display text-canvas-500 dark:text-canvas-400 max-w-2xl text-lg">
+                The hard problems — and the specific engineering decisions made to solve them.
+              </p>
+            </motion.div>
 
-            <div className="grid md:grid-cols-2 gap-5">
+            <div className="grid md:grid-cols-2 gap-6">
               {challenges.map((item, i) => (
-                <div
-                  key={i}
-                  className="bg-white dark:bg-gray-800 rounded-2xl p-6 border border-gray-200 dark:border-gray-700 hover:shadow-lg transition-all duration-300"
-                  data-aos="fade-up"
-                  data-aos-delay={i * 80}
-                >
-                  <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 flex-shrink-0 flex items-center justify-center bg-gradient-to-br from-red-500 to-orange-500 rounded-xl shadow">
-                      <i className={`fas ${item.icon} text-white text-sm`}></i>
+                <motion.div key={i} variants={fadeUp} className="surface-card p-8 group hover:border-accent-500/30">
+                  <div className="flex items-start gap-5">
+                    <div className="w-14 h-14 flex-shrink-0 flex items-center justify-center bg-red-500/10 text-red-500 rounded-2xl group-hover:scale-110 transition-transform duration-500">
+                      <i className={`fas ${item.icon} text-xl`}></i>
                     </div>
                     <div>
-                      <p className="text-xs font-semibold text-red-500 dark:text-red-400 uppercase tracking-wider mb-1">
-                        Challenge
-                      </p>
-                      <p className="font-semibold text-gray-900 dark:text-white text-sm mb-4">
-                        {item.challenge}
-                      </p>
-                      <div className="flex items-start gap-2">
-                        <i className="fas fa-check-circle text-green-500 text-sm mt-0.5 flex-shrink-0"></i>
-                        <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
-                          {item.solution}
-                        </p>
+                      <p className="font-display text-[10px] font-black uppercase tracking-widest text-red-500 mb-2">Challenge</p>
+                      <h3 className="font-display text-lg font-bold text-canvas-950 dark:text-white mb-4 leading-tight">{item.challenge}</h3>
+                      <div className="flex items-start gap-3 bg-emerald-500/5 border border-emerald-500/10 rounded-xl p-4">
+                        <i className="fas fa-check-circle text-emerald-500 mt-1"></i>
+                        <p className="font-display text-sm text-canvas-600 dark:text-canvas-300 leading-relaxed">{item.solution}</p>
                       </div>
                     </div>
                   </div>
-                </div>
+                </motion.div>
               ))}
             </div>
-          </section>
+          </motion.section>
 
           {/* ── GALLERY ──────────────────────────────────────── */}
-          <section className="mb-20" data-aos="fade-up">
-            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-3">
-              Screenshots
-            </h2>
-            <p className="text-gray-600 dark:text-gray-400 mb-8">
-              Click any image to open the full-screen gallery.
-            </p>
+          <motion.section 
+            className="mb-24"
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={staggerContainer}
+          >
+            <motion.div variants={fadeUp} className="mb-10 text-center md:text-left">
+              <h2 className="font-display text-3xl md:text-4xl font-bold text-canvas-950 dark:text-white mb-4">System Gallery</h2>
+              <p className="font-display text-canvas-500 dark:text-canvas-400 text-lg">
+                Click any interface to expand the high-resolution view.
+              </p>
+            </motion.div>
 
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
               {screenshots.map((s, i) => (
-                <button
-                  key={i}
+                <motion.button
+                  key={s.path}
+                  variants={fadeUp}
                   type="button"
-                  onClick={() => openLightbox(i)}
-                  className="group relative rounded-xl overflow-hidden bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 hover:border-blue-400 dark:hover:border-blue-500 transition-all duration-300 hover:shadow-lg hover:-translate-y-1"
+                  onClick={() => setSelectedScreenshot(s)}
+                  className="group relative rounded-2xl overflow-hidden surface-card border border-canvas-200/20 dark:border-white/5 hover:border-accent-500/40 dark:hover:border-accent-500/40 cursor-zoom-in"
                   style={{ aspectRatio: s.type === "mobile" ? "9/16" : "16/9" }}
                 >
-                  <Image
-                    src={s.path}
-                    alt={s.label}
-                    fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                  <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                    <i className="fas fa-expand text-white text-xl"></i>
+                  <motion.div layoutId={`screenshot-${s.path}`} className="absolute inset-0 h-full w-full">
+                    <Image src={s.path} alt={s.label} fill className="object-cover transition-transform duration-700 ease-in-out group-hover:scale-105" />
+                  </motion.div>
+                  <div className="absolute inset-0 bg-canvas-950/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-[2px]">
+                    <div className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center shadow-2xl">
+                      <i className="fas fa-expand text-white text-lg"></i>
+                    </div>
                   </div>
-                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-2 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                    <p className="text-white text-xs font-medium text-center">
-                      {s.label}
-                    </p>
+                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-canvas-950/90 to-transparent p-4 translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
+                    <p className="font-display text-white text-xs font-bold tracking-widest uppercase text-center">{s.label}</p>
                   </div>
-                </button>
+                </motion.button>
               ))}
             </div>
-          </section>
+          </motion.section>
+
+          {/* ── LIGHTBOX ─────────────────────────────────────── */}
+          <AnimatePresence>
+            {selectedScreenshot && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.3 }}
+                className="fixed inset-0 z-[100] flex items-center justify-center bg-canvas-950/95 backdrop-blur-2xl p-4 sm:p-8"
+                onClick={() => setSelectedScreenshot(null)}
+              >
+                <motion.div className="relative w-full max-w-5xl flex flex-col items-center justify-center" onClick={(e) => e.stopPropagation()}>
+                  
+                  {/* Controls */}
+                  <div className="absolute -top-16 left-0 right-0 flex justify-between items-center text-white/50 w-full">
+                    <span className="font-display text-xs font-bold tracking-widest uppercase bg-white/10 px-4 py-2 rounded-full border border-white/10">
+                      {screenshots.indexOf(selectedScreenshot) + 1} / {screenshots.length}
+                    </span>
+                    <button onClick={() => setSelectedScreenshot(null)} className="font-display flex items-center gap-2 text-xs font-bold uppercase tracking-widest hover:text-white transition-colors">
+                      Close <i className="fas fa-times text-lg"></i>
+                    </button>
+                  </div>
+
+                  {/* Shared Element Image */}
+                  <motion.div 
+                    layoutId={`screenshot-${selectedScreenshot.path}`}
+                    className="relative flex items-center justify-center w-full max-h-[80vh] rounded-2xl overflow-hidden shadow-2xl ring-1 ring-white/10"
+                    transition={{ type: "spring", stiffness: 250, damping: 25 }}
+                  >
+                    <Image
+                      src={selectedScreenshot.path}
+                      alt={selectedScreenshot.label}
+                      width={1200}
+                      height={900}
+                      className="max-h-[80vh] w-auto object-contain rounded-xl"
+                      priority
+                    />
+                  </motion.div>
+
+                  <motion.p 
+                    initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
+                    className="font-display text-white text-sm font-bold tracking-widest uppercase mt-6 bg-white/5 px-6 py-3 rounded-full border border-white/10"
+                  >
+                    {selectedScreenshot.label}
+                  </motion.p>
+
+                  {/* Navigation Arrows */}
+                  <button onClick={prev} className="absolute left-0 md:-left-20 top-1/2 -translate-y-1/2 w-14 h-14 bg-white/5 hover:bg-white/10 border border-white/10 rounded-full flex items-center justify-center text-white transition-all hover:scale-110 backdrop-blur-md">
+                    <i className="fas fa-chevron-left"></i>
+                  </button>
+                  <button onClick={next} className="absolute right-0 md:-right-20 top-1/2 -translate-y-1/2 w-14 h-14 bg-white/5 hover:bg-white/10 border border-white/10 rounded-full flex items-center justify-center text-white transition-all hover:scale-110 backdrop-blur-md">
+                    <i className="fas fa-chevron-right"></i>
+                  </button>
+
+                </motion.div>
+              </motion.div>
+            )}
+          </AnimatePresence>
 
           {/* ── LINKS ────────────────────────────────────────── */}
-          <section data-aos="fade-up">
-            <div className="flex flex-wrap gap-4 justify-center">
-              <a
-                href="https://github.com/araneeskhan/CampusSportsSphere"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group inline-flex items-center px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold rounded-2xl transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-blue-500/40"
-              >
-                <i className="fab fa-github mr-3 text-lg"></i>
-                View Source Code
-              </a>
-              <Link
-                href="/#projects"
-                className="inline-flex items-center px-8 py-4 bg-white dark:bg-gray-800 border-2 border-gray-300 dark:border-gray-700 hover:border-blue-500 dark:hover:border-blue-400 text-gray-900 dark:text-white font-semibold rounded-2xl transition-all duration-300 hover:scale-105 hover:shadow-lg"
-              >
-                <i className="fas fa-th-large mr-3"></i>
-                All Projects
-              </Link>
-            </div>
+          <section className="text-center mt-20">
+            <Link href="/#projects" className="btn-primary font-display px-8 py-4 text-sm inline-flex items-center gap-3">
+              <i className="fas fa-th-large"></i>
+              Back to All Projects
+            </Link>
           </section>
+
         </div>
-
-        {/* ── LIGHTBOX ─────────────────────────────────────── */}
-        {lightboxIndex !== null && (
-          <div
-            className="fixed inset-0 bg-black/95 backdrop-blur-md flex items-center justify-center z-50 p-4"
-            onClick={closeLightbox}
-          >
-            <div
-              className="relative max-w-4xl w-full"
-              onClick={(e) => e.stopPropagation()}
-            >
-              {/* Counter */}
-              <div className="absolute top-4 left-4 z-10 text-white text-sm font-semibold bg-black/50 px-4 py-2 rounded-full border border-white/20">
-                {lightboxIndex + 1} / {screenshots.length}
-              </div>
-
-              {/* Close */}
-              <button
-                type="button"
-                onClick={closeLightbox}
-                className="absolute top-4 right-4 z-10 w-10 h-10 bg-black/50 hover:bg-black/70 rounded-full flex items-center justify-center border border-white/20 transition-colors"
-                aria-label="Close"
-              >
-                <i className="fas fa-times text-white"></i>
-              </button>
-
-              {/* Image */}
-              <div className="flex items-center justify-center bg-gray-900/50 rounded-2xl p-4">
-                <Image
-                  src={screenshots[lightboxIndex].path}
-                  alt={screenshots[lightboxIndex].label}
-                  width={900}
-                  height={700}
-                  className="object-contain max-h-[80vh] rounded-lg shadow-2xl"
-                />
-              </div>
-
-              <p className="text-center text-gray-300 text-sm mt-3 font-medium">
-                {screenshots[lightboxIndex].label}
-              </p>
-
-              {/* Prev / Next */}
-              <button
-                type="button"
-                onClick={prev}
-                className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-14 w-10 h-10 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center transition-colors"
-                aria-label="Previous"
-              >
-                <i className="fas fa-chevron-left text-white"></i>
-              </button>
-              <button
-                type="button"
-                onClick={next}
-                className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-14 w-10 h-10 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center transition-colors"
-                aria-label="Next"
-              >
-                <i className="fas fa-chevron-right text-white"></i>
-              </button>
-            </div>
-          </div>
-        )}
       </div>
     </Layout>
   );

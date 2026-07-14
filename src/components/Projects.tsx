@@ -204,47 +204,71 @@ const FeaturedProjectCard = ({
     offset: ['start end', 'end start'],
   });
 
-  const imgY = useTransform(scrollYProgress, [0, 1], [-40, 40]);
-  const imgScale = useTransform(scrollYProgress, [0, 0.5, 1], [1.15, 1.05, 1.15]);
+  const smoothProgress = useSpring(scrollYProgress, { stiffness: 70, damping: 20, restDelta: 0.001 });
+  const imgY = useTransform(smoothProgress, [0, 1], ["-10%", "10%"]);
+  const imgScale = useTransform(smoothProgress, [0, 0.5, 1], [1.1, 1, 1.1]);
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: { staggerChildren: 0.1, delayChildren: index * 0.1 + 0.3 }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 300, damping: 24 } }
+  };
 
   return (
     <motion.article
       ref={cardRef}
-      className="group overflow-hidden rounded-2xl border border-canvas-200/15 bg-white/30 backdrop-blur-sm dark:border-white/5 dark:bg-white/[0.015]"
-      initial={{ opacity: 0, y: 60 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      className="group overflow-hidden rounded-[2.5rem] border border-canvas-200/20 bg-white/40 shadow-2xl backdrop-blur-md transition-colors hover:border-accent-500/30 dark:border-white/10 dark:bg-canvas-950/40 dark:shadow-[0_0_50px_rgba(0,0,0,0.5)]"
+      initial="hidden"
+      whileInView="show"
       viewport={{ once: true, margin: '-100px' }}
-      transition={{ duration: 0.8, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
+      variants={containerVariants}
     >
       <div className={`grid lg:grid-cols-2 ${index % 2 === 1 ? 'lg:grid-flow-dense' : ''}`}>
-        {/* Image with parallax */}
+        {/* Image with smooth parallax */}
         <button
           type="button"
           onClick={() => onPreview(cover)}
-          className={`relative block h-[300px] w-full overflow-hidden text-left md:h-[400px] lg:h-auto ${index % 2 === 1 ? 'lg:col-start-2' : ''}`}
+          className={`relative block h-[350px] w-full overflow-hidden text-left md:h-[450px] lg:h-full cursor-zoom-in ${index % 2 === 1 ? 'lg:col-start-2' : ''}`}
           aria-label={`Preview ${project.title}`}
         >
-          <motion.div className="absolute inset-0" style={{ y: imgY, scale: imgScale }}>
+          <motion.div className="absolute inset-[-10%] h-[120%] w-[120%]" style={{ y: imgY, scale: imgScale }}>
             <Image
               src={cover}
               alt={`${project.title} cover`}
               fill
-              className="object-cover transition-transform duration-700"
+              className="object-cover transition-transform duration-1000 ease-in-out group-hover:scale-105"
               sizes="(max-width: 1024px) 100vw, 50vw"
               priority={index === 0}
             />
           </motion.div>
-          <div className="absolute inset-0 bg-gradient-to-t from-canvas-950/50 via-transparent to-transparent lg:bg-gradient-to-r lg:from-transparent lg:via-transparent lg:to-canvas-950/10" />
+          <div className="absolute inset-0 bg-gradient-to-t from-canvas-950/80 via-transparent to-transparent opacity-80 transition-opacity duration-700 group-hover:opacity-40 lg:bg-gradient-to-r lg:from-transparent lg:via-canvas-950/10 lg:to-canvas-950/80" />
+
+          {/* Animated Preview Badge */}
+          <motion.span 
+            className="absolute bottom-6 left-6 flex items-center gap-2 rounded-full bg-white/90 px-5 py-2.5 text-sm font-semibold text-canvas-950 shadow-xl backdrop-blur-md transition-all duration-500 group-hover:-translate-y-1 group-hover:shadow-2xl opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0"
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="transition-transform duration-500 group-hover:scale-110">
+              <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+            Gallery
+          </motion.span>
 
           {/* Badges */}
-          <div className="absolute left-5 top-5 flex flex-wrap gap-2">
+          <div className="absolute left-8 top-8 flex flex-wrap gap-3">
             {project.category && (
-              <span className="rounded-full bg-white/90 px-3 py-1.5 text-xs font-semibold text-canvas-950 backdrop-blur-sm">
+              <span className="font-display rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-xs font-semibold tracking-wide text-white backdrop-blur-md">
                 {project.category}
               </span>
             )}
             {project.status && (
-              <span className="rounded-full bg-emerald-400/90 px-3 py-1.5 text-xs font-semibold text-emerald-950 backdrop-blur-sm">
+              <span className="font-display rounded-full border border-emerald-400/30 bg-emerald-400/10 px-4 py-1.5 text-xs font-semibold tracking-wide text-emerald-400 backdrop-blur-md shadow-[0_0_15px_rgba(52,211,153,0.3)]">
                 {project.status}
               </span>
             )}
@@ -252,49 +276,55 @@ const FeaturedProjectCard = ({
         </button>
 
         {/* Content */}
-        <div className={`flex flex-col justify-center p-6 md:p-10 ${index % 2 === 1 ? 'lg:col-start-1 lg:row-start-1' : ''}`}>
-          <p className="text-sm font-medium text-canvas-400 dark:text-canvas-500">
-            {project.role} {project.year ? `/ ${project.year}` : ''}
-          </p>
-          <h3 className="mt-3 font-display text-2xl font-bold tracking-tight text-canvas-950 dark:text-white md:text-3xl">
+        <div className={`relative flex flex-col justify-center p-8 md:p-12 lg:p-16 ${index % 2 === 1 ? 'lg:col-start-1 lg:row-start-1' : ''}`}>
+          
+          {/* Subtle Glow Behind Content */}
+          <div className="absolute top-0 right-0 -mr-20 -mt-20 h-64 w-64 rounded-full bg-accent-500/10 blur-[100px] pointer-events-none" />
+
+          <motion.p variants={itemVariants} className="font-display text-sm font-bold tracking-widest uppercase text-accent-500 dark:text-accent-400">
+            {project.role} {project.year ? `• ${project.year}` : ''}
+          </motion.p>
+          
+          <motion.h3 variants={itemVariants} className="mt-4 font-display text-4xl font-bold tracking-tight text-canvas-950 dark:text-white lg:text-5xl">
             {project.title}
-          </h3>
-          <p className="mt-4 font-display leading-relaxed text-canvas-500 dark:text-canvas-300">
+          </motion.h3>
+          
+          <motion.p variants={itemVariants} className="mt-6 font-display text-lg leading-relaxed text-canvas-500 dark:text-canvas-300">
             {project.shortDescription ?? project.description}
-          </p>
+          </motion.p>
 
           {/* Metrics */}
           {project.metrics && project.metrics.length > 0 && (
-            <div className="mt-6 flex flex-wrap gap-6">
+            <motion.div variants={itemVariants} className="mt-10 flex flex-wrap gap-10">
               {project.metrics.slice(0, 3).map((m) => (
-                <div key={m.label}>
-                  <p className="font-display text-xl font-bold text-canvas-950 dark:text-white">{m.value}</p>
-                  <p className="font-display text-[10px] font-semibold uppercase tracking-wider text-canvas-400">{m.label}</p>
+                <div key={m.label} className="flex flex-col">
+                  <span className="font-display text-4xl font-bold text-canvas-950 dark:text-white">{m.value}</span>
+                  <span className="font-display mt-2 text-[10px] font-semibold uppercase tracking-widest text-canvas-400">{m.label}</span>
                 </div>
               ))}
-            </div>
+            </motion.div>
           )}
 
           {/* Tags */}
-          <div className="mt-5 flex flex-wrap gap-2">
+          <motion.div variants={itemVariants} className="mt-10 flex flex-wrap gap-3">
             {project.technologies.slice(0, 5).map((tech) => (
-              <span key={tech} className="rounded-full border border-canvas-200/20 bg-canvas-50/40 px-2.5 py-1 font-display text-xs font-medium text-canvas-500 dark:border-white/5 dark:bg-white/[0.02] dark:text-canvas-400">
+              <span key={tech} className="font-display rounded-full border border-canvas-200/40 bg-canvas-100/50 px-4 py-2 text-xs font-semibold text-canvas-600 transition-colors hover:border-accent-500/30 hover:bg-accent-500/10 hover:text-accent-500 dark:border-white/10 dark:bg-white/[0.03] dark:text-canvas-300 dark:hover:border-accent-400/30 dark:hover:bg-accent-400/10 dark:hover:text-accent-400">
                 {tech}
               </span>
             ))}
-          </div>
+          </motion.div>
 
           {/* Actions */}
-          <div className="mt-6 flex flex-wrap gap-3">
-            <Link href={`/projects/${project.id}`} className="btn-primary font-display px-5 py-2.5 text-xs">
-              <span>View Details</span>
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M7 17L17 7M17 7H7M17 7V17" /></svg>
+          <motion.div variants={itemVariants} className="mt-12 flex flex-wrap items-center gap-4">
+            <Link href={`/projects/${project.id}`} className="btn-primary font-display px-7 py-3.5 text-sm shadow-[0_0_20px_rgba(var(--color-accent-500),0.3)] transition-all hover:shadow-[0_0_30px_rgba(var(--color-accent-500),0.6)]">
+              <span>Explore Case Study</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M7 17L17 7M17 7H7M17 7V17" /></svg>
             </Link>
-            <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="btn-secondary font-display px-5 py-2.5 text-xs">
-              <span>Source</span>
+            <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="btn-secondary font-display px-7 py-3.5 text-sm">
+              <span>View Source</span>
               <i className="fab fa-github" />
             </a>
-          </div>
+          </motion.div>
         </div>
       </div>
     </motion.article>
