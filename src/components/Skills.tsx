@@ -1,259 +1,145 @@
-import Image from "next/image";
-import { useState } from "react";
-import SectionHeader from "@/components/SectionHeader";
+import Image from 'next/image';
+import { useRef } from 'react';
+import { motion, useScroll, useTransform } from 'motion/react';
+import SectionHeader from '@/components/SectionHeader';
 
-const Skills = () => {
-  const [activeCategory, setActiveCategory] = useState("frontend");
+const allSkills = [
+  { name: 'HTML', icon: '/assets/skills/html.png' },
+  { name: 'CSS', icon: '/assets/skills/css.jpg' },
+  { name: 'Tailwind CSS', icon: '/assets/skills/tailwind.svg' },
+  { name: 'JavaScript', icon: '/assets/skills/javascript.svg' },
+  { name: 'TypeScript', icon: '/assets/skills/typescript.svg' },
+  { name: 'React', icon: '/assets/skills/react.svg' },
+  { name: 'React Native', icon: '/assets/skills/reactnative.png' },
+  { name: 'Next.js', icon: '/assets/skills/nextjs.svg' },
+  { name: 'Node.js', icon: '/assets/skills/nodejs.png' },
+  { name: 'Express.js', icon: '/assets/skills/expressjs.png' },
+  { name: 'MongoDB', icon: '/assets/skills/mongodb.svg' },
+  { name: 'MySQL', icon: '/assets/skills/mysql.svg' },
+  { name: 'Firebase', icon: '/assets/skills/firebase.svg' },
+  { name: 'Supabase', icon: '/assets/skills/supabase.png' },
+  { name: 'Python', icon: '/assets/skills/python.svg' },
+  { name: 'Java', icon: '/assets/skills/java.png' },
+  { name: 'TensorFlow', icon: '/assets/skills/tensorflow.png' },
+  { name: 'Flower', icon: '/assets/skills/flower.png' },
+  { name: 'NLP', icon: '/assets/skills/nlp.svg' },
+  { name: 'Neural Networks', icon: '/assets/skills/neuralnetwork.svg' },
+  { name: 'GitHub', icon: '/assets/skills/github.png' },
+  { name: 'AWS', icon: '/assets/skills/aws.svg' },
+  { name: 'Docker', icon: '/assets/skills/docker.svg' },
+];
 
-  const skillCategories = {
-    frontend: [
-      { name: "HTML", icon: `/assets/skills/html.png` },
-      { name: "CSS", icon: `/assets/skills/css.jpg` },
-      {
-        name: "Tailwind CSS",
-        icon: `/assets/skills/tailwind.svg`,
-      },
-      {
-        name: "JavaScript",
-        icon: `/assets/skills/javascript.svg`,
-      },
-      {
-        name: "TypeScript",
-        icon: `/assets/skills/typescript.svg`,
-      },
-      { name: "React", icon: `/assets/skills/react.svg` },
-      {
-        name: "React Native",
-        icon: `/assets/skills/reactnative.png`,
-      },
-      {
-        name: "Next.js",
-        icon: `/assets/skills/nextjs.svg`,
-      },
-    ],
-    backend: [
-      {
-        name: "Node.js",
-        icon: `/assets/skills/nodejs.png`,
-      },
-      {
-        name: "Express.js",
-        icon: `/assets/skills/expressjs.png`,
-      },
-      {
-        name: "MongoDB",
-        icon: `/assets/skills/mongodb.svg`,
-      },
-      { name: "MySQL", icon: `/assets/skills/mysql.svg` },
-      {
-        name: "Firebase",
-        icon: `/assets/skills/firebase.svg`,
-      },
-      {
-        name: "Supabase",
-        icon: `/assets/skills/supabase.png`,
-      },
-      {
-        name: "Python",
-        icon: `/assets/skills/python.svg`,
-      },
-      { name: "Java", icon: `/assets/skills/java.png` },
-    ],
-    "ai-ml": [
-      {
-        name: "TensorFlow",
-        icon: `/assets/skills/tensorflow.png`,
-      },
-      {
-        name: "Flower",
-        icon: `/assets/skills/flower.png`,
-      },
-      {
-        name: "NLP",
-        icon: `/assets/skills/nlp.svg`,
-      },
-      {
-        name: "Neural Networks",
-        icon: `/assets/skills/neuralnetwork.svg`,
-      },
-    ],
-    other: [
-      {
-        name: "Github",
-        icon: `/assets/skills/github.png`,
-      },
-      { name: "AWS", icon: `/assets/skills/aws.svg` },
-      {
-        name: "Docker",
-        icon: `/assets/skills/docker.svg`,
-      },
-    ],
+/* Split into 3 rows for different scroll speeds */
+const row1 = allSkills.slice(0, 8);
+const row2 = allSkills.slice(8, 16);
+const row3 = allSkills.slice(16);
+
+const ScrollRow = ({
+  skills,
+  xRange,
+  size = 'lg',
+  opacity = 1,
+}: {
+  skills: typeof allSkills;
+  xRange: [number, number];
+  size?: 'lg' | 'md' | 'sm';
+  opacity?: number;
+}) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ['start end', 'end start'],
+  });
+  const x = useTransform(scrollYProgress, [0, 1], xRange);
+
+  const sizeClasses = {
+    lg: 'h-20 w-20 rounded-2xl',
+    md: 'h-16 w-16 rounded-xl',
+    sm: 'h-14 w-14 rounded-xl',
   };
 
-  const categoryIcons = {
-    frontend: "fa-code",
-    backend: "fa-server",
-    "ai-ml": "fa-brain",
-    other: "fa-tools",
-  };
-
-  const categoryLabels = {
-    frontend: "Frontend",
-    backend: "Backend",
-    "ai-ml": "AI / ML",
-    other: "Other",
-  };
-
-  const categoryDescriptions = {
-    frontend: "Building beautiful, responsive user interfaces",
-    backend: "Creating robust server-side applications",
-    "ai-ml":
-      "Machine learning, deep learning, and intelligent systems",
-    other: "Tools and technologies for modern development",
-  };
+  const imgSizes = { lg: 40, md: 32, sm: 28 };
+  const duplicated = [...skills, ...skills, ...skills];
 
   return (
-    <section
-      id="skills"
-      className="py-20 relative overflow-hidden bg-gradient-to-b from-gray-50 to-white dark:from-gray-800 dark:to-gray-900"
-    >
-      {/* Animated background decoration */}
-      <div className="absolute inset-0 overflow-hidden z-0">
-        <div className="absolute -top-24 -right-24 w-96 h-96 bg-gradient-to-br from-blue-400 to-blue-600 dark:from-blue-600 dark:to-blue-900 rounded-full blur-3xl opacity-20 animate-blob"></div>
-        <div className="absolute top-1/2 -left-24 w-80 h-80 bg-gradient-to-br from-purple-400 to-purple-600 dark:from-purple-600 dark:to-purple-900 rounded-full blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
-        <div className="absolute bottom-0 right-1/4 w-72 h-72 bg-gradient-to-br from-pink-400 to-pink-600 dark:from-pink-600 dark:to-pink-900 rounded-full blur-3xl opacity-20 animate-blob animation-delay-4000"></div>
+    <div ref={ref} className="overflow-hidden py-2">
+      <motion.div className="flex gap-5" style={{ x }}>
+        {duplicated.map((skill, i) => (
+          <motion.div
+            key={`${skill.name}-${i}`}
+            className={`group relative flex shrink-0 ${sizeClasses[size]} items-center justify-center border border-canvas-200/20 bg-white/50 backdrop-blur-sm transition-all duration-500 hover:border-accent-500/30 hover:shadow-glow dark:border-white/5 dark:bg-white/[0.03] dark:hover:border-accent-400/20`}
+            style={{ opacity }}
+            whileHover={{ scale: 1.2, rotate: 5, y: -4 }}
+            transition={{ type: 'spring', stiffness: 400, damping: 15 }}
+          >
+            <Image
+              src={skill.icon}
+              alt={skill.name}
+              width={imgSizes[size]}
+              height={imgSizes[size]}
+              className={`h-${imgSizes[size] / 4} w-${imgSizes[size] / 4} object-contain`}
+              style={{ width: imgSizes[size], height: imgSizes[size] }}
+            />
+
+            {/* Tooltip */}
+            <div className="pointer-events-none absolute -top-10 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-lg bg-canvas-950 px-3 py-1.5 text-[11px] font-semibold text-white opacity-0 shadow-lg transition-opacity duration-300 group-hover:opacity-100 dark:bg-white dark:text-canvas-950">
+              {skill.name}
+              <div className="absolute left-1/2 top-full -translate-x-1/2 border-4 border-transparent border-t-canvas-950 dark:border-t-white" />
+            </div>
+          </motion.div>
+        ))}
+      </motion.div>
+    </div>
+  );
+};
+
+const Skills = () => {
+  const sectionRef = useRef<HTMLElement>(null);
+
+  return (
+    <section ref={sectionRef} id="skills" className="section-shell section-border-top overflow-hidden">
+      <div className="pointer-events-none absolute inset-0">
+        <div className="glow-orb left-1/4 top-0 h-[400px] w-[400px] bg-accent2-500/[0.04]" />
+        <div className="glow-orb right-1/4 bottom-0 h-[300px] w-[300px] bg-accent-500/[0.03]" style={{ animationDelay: '5s' }} />
       </div>
 
-      <div className="container mx-auto px-4 relative z-10">
-        {/* Header */}
-        <SectionHeader label="Explore My" title="Technical Skills" />
-
-        {/* Category Tabs */}
-        <div
-          className="flex justify-center mb-12 px-2"
-          data-aos="fade-up"
-          data-aos-delay="300"
-        >
-          <div className="inline-flex flex-wrap justify-center bg-white dark:bg-gray-800 p-2 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 gap-2">
-            {Object.keys(skillCategories).map((category) => (
-              <button
-                key={category}
-                type="button"
-                onClick={() => setActiveCategory(category)}
-                className={`group relative px-4 sm:px-6 md:px-8 py-3 md:py-4 rounded-xl transition-all duration-300 font-semibold text-sm md:text-base ${
-                  activeCategory === category
-                    ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg transform scale-105"
-                    : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
-                }`}
-              >
-                <div className="flex items-center space-x-2">
-                  <i
-                    className={`fas ${
-                      categoryIcons[category as keyof typeof categoryIcons]
-                    } text-base md:text-lg`}
-                  ></i>
-                  <span className="whitespace-nowrap">
-                    {categoryLabels[category as keyof typeof categoryLabels]}
-                  </span>
-                </div>
-                {activeCategory !== category && (
-                  <div className="absolute inset-0 rounded-xl border-2 border-transparent group-hover:border-blue-400 dark:group-hover:border-blue-500 transition-colors duration-300"></div>
-                )}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {/* Category Description */}
-        <p
-          className="text-center text-gray-600 dark:text-gray-400 text-base md:text-lg mb-12 max-w-2xl mx-auto px-4"
-          data-aos="fade-up"
-          data-aos-delay="400"
-        >
-          {
-            categoryDescriptions[
-              activeCategory as keyof typeof categoryDescriptions
-            ]
-          }
-        </p>
-
-        {/* Skills Grid */}
-        <div
-          className={`grid grid-cols-2 sm:grid-cols-3 gap-4 sm:gap-6 mx-auto justify-items-center ${
-            activeCategory === "other"
-              ? "lg:grid-cols-3 max-w-4xl"
-              : "lg:grid-cols-4 max-w-6xl"
-          }`}
-          data-aos="fade-up"
-          data-aos-delay="500"
-        >
-          {skillCategories[activeCategory as keyof typeof skillCategories].map(
-            (skill, index) => (
-              <div
-                key={skill.name}
-                className="group relative w-full"
-                data-aos="zoom-in"
-                data-aos-delay={500 + index * 50}
-              >
-                {/* Skill Card */}
-                <div className="relative bg-white dark:bg-gray-800 rounded-2xl p-4 sm:p-6 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-gray-200 dark:border-gray-700 overflow-hidden">
-                  {/* Gradient overlay on hover */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-blue-600/10 to-purple-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl"></div>
-
-                  {/* Content */}
-                  <div className="relative z-10 flex flex-col items-center">
-                    {/* Icon container with animated background */}
-                    <div className="relative w-16 h-16 sm:w-20 sm:h-20 mb-3 sm:mb-4">
-                      <div className="absolute inset-0 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl opacity-0 group-hover:opacity-20 blur-xl transition-opacity duration-500"></div>
-                      <div className="relative w-full h-full flex items-center justify-center bg-gray-50 dark:bg-gray-700 rounded-xl group-hover:scale-110 transition-transform duration-500">
-                        <Image
-                          src={skill.icon}
-                          alt={skill.name}
-                          width={48}
-                          height={48}
-                          className="object-contain w-10 h-10 sm:w-12 sm:h-12"
-                        />
-                      </div>
-                    </div>
-                    {/* Skill name */}
-                    <h3 className="text-sm sm:text-base md:text-lg font-bold text-gray-900 dark:text-white mb-3 text-center">
-                      {skill.name}
-                    </h3>
-                  </div>
-
-                  {/* Hover border effect */}
-                  <div className="absolute inset-0 border-2 border-transparent group-hover:border-blue-400 dark:group-hover:border-blue-500 rounded-2xl transition-colors duration-500"></div>
-                </div>
-              </div>
-            )
-          )}
-        </div>
-
-        {/* Stats Section */}
-        <div
-          className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 max-w-4xl mx-auto px-4"
-          data-aos="fade-up"
-          data-aos-delay="700"
-        >
-          <div className="text-center p-4 md:p-6 bg-white dark:bg-gray-800 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700">
-            <div className="text-2xl md:text-3xl font-bold text-blue-600 dark:text-blue-400 mb-2">15+</div>
-            <div className="text-gray-600 dark:text-gray-400 text-xs md:text-sm font-medium">Technologies</div>
-          </div>
-          <div className="text-center p-4 md:p-6 bg-white dark:bg-gray-800 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700">
-            <div className="text-2xl md:text-3xl font-bold text-purple-600 dark:text-purple-400 mb-2">5+</div>
-            <div className="text-gray-600 dark:text-gray-400 text-xs md:text-sm font-medium">Frameworks</div>
-          </div>
-          <div className="text-center p-4 md:p-6 bg-white dark:bg-gray-800 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700">
-            <div className="text-2xl md:text-3xl font-bold text-pink-600 dark:text-pink-400 mb-2">6+</div>
-            <div className="text-gray-600 dark:text-gray-400 text-xs md:text-sm font-medium">Projects</div>
-          </div>
-          <div className="text-center p-4 md:p-6 bg-white dark:bg-gray-800 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700">
-            <div className="text-2xl md:text-3xl font-bold text-green-600 dark:text-green-400 mb-2">24+</div>
-            <div className="text-gray-600 dark:text-gray-400 text-xs md:text-sm font-medium">Months Exp</div>
-          </div>
-        </div>
+      <div className="section-container mb-12">
+        <SectionHeader
+          label="Skills"
+          title="A practical stack for modern product engineering."
+          description="The tools I use daily across frontend, backend, mobile, AI, and platform work — moving with you as you scroll."
+        />
       </div>
 
+      {/* Three rows of scroll-driven floating icons */}
+      <div className="space-y-4">
+        <ScrollRow skills={row1} xRange={[100, -400]} size="lg" />
+        <ScrollRow skills={row2} xRange={[-300, 200]} size="md" opacity={0.8} />
+        <ScrollRow skills={row3} xRange={[50, -250]} size="sm" opacity={0.6} />
+      </div>
+
+      {/* Stats at the bottom */}
+      <div className="section-container mt-16">
+        <motion.div
+          className="mx-auto grid max-w-3xl grid-cols-2 gap-4 md:grid-cols-4"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+        >
+          {[
+            { value: '23+', label: 'Technologies' },
+            { value: '6+', label: 'Frameworks' },
+            { value: '8', label: 'Projects' },
+            { value: '24+', label: 'Months' },
+          ].map((stat) => (
+            <div key={stat.label} className="surface-card p-5 text-center">
+              <p className="font-display text-2xl font-bold text-canvas-950 dark:text-white">{stat.value}</p>
+              <p className="mt-1 text-xs font-medium uppercase tracking-wider text-canvas-400 dark:text-canvas-500">{stat.label}</p>
+            </div>
+          ))}
+        </motion.div>
+      </div>
     </section>
   );
 };

@@ -1,240 +1,353 @@
-import { useState } from "react";
-import Image from "next/image";
-import Link from "next/link";
-import { projectsData } from "@/data/projects";
-import SectionHeader from "@/components/SectionHeader";
+import { useState, useRef } from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { motion, AnimatePresence, useScroll, useTransform, useSpring } from 'motion/react';
+import { projectsData, type Project } from '@/data/projects';
+import SectionHeader from '@/components/SectionHeader';
+
+type ProjectWithId = Project & { id: string };
+
+const getCoverImage = (project: Project) =>
+  Array.isArray(project.coverImage) ? project.coverImage[0] : project.coverImage;
 
 const Projects = () => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
-
-  const projects = Object.entries(projectsData).map(([id, project]) => ({
-    id,
-    ...project,
-  }));
-
-  const handleImageClick = (image: string) => {
-    setSelectedImage(image);
-  };
-
-  const closeModal = () => {
-    setSelectedImage(null);
-  };
+  const projects = Object.entries(projectsData).map(([id, project]) => ({ id, ...project }));
+  const featuredProjects = projects.filter((p) => p.featured);
+  const archiveProjects = projects.filter((p) => !p.featured);
 
   return (
-    <section
-      id="projects"
-      className="py-20 relative overflow-hidden bg-gradient-to-b from-white to-gray-50 dark:from-gray-900 dark:to-gray-800"
-    >
-      {/* Animated background decoration */}
-      <div className="absolute inset-0 overflow-hidden z-0">
-        <div className="absolute top-20 -right-32 w-96 h-96 bg-gradient-to-br from-blue-400 to-blue-600 dark:from-blue-600 dark:to-blue-900 rounded-full blur-3xl opacity-20 animate-blob"></div>
-        <div className="absolute bottom-20 -left-32 w-80 h-80 bg-gradient-to-br from-purple-400 to-purple-600 dark:from-purple-600 dark:to-purple-900 rounded-full blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
+    <section id="projects" className="section-border-top relative pb-24 pt-24 md:pt-32">
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        <div className="glow-orb right-0 bottom-0 h-[500px] w-[500px] bg-accent-500/[0.04]" />
       </div>
 
-      <div className="container mx-auto px-4 relative z-10">
-        {/* Header */}
-        <SectionHeader
-          label="Browse My Recent"
-          title="Projects"
-          description="Showcasing my latest work and creative solutions"
-        />
+      <div className="section-container">
+        <div className="grid gap-10 lg:grid-cols-[0.72fr_1.28fr] lg:items-end">
+          <SectionHeader
+            align="left"
+            label="Selected Work"
+            title="Projects with product shape, architecture, and visual polish."
+            description="A curated set of builds across healthcare, university operations, document automation, commerce, fintech, and AI tooling."
+          />
+          <motion.div
+            className="surface-card mb-14 grid grid-cols-3 gap-0 overflow-hidden"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <Signal value={featuredProjects.length.toString()} label="Featured" />
+            <Signal value={projects.length.toString()} label="Total Builds" />
+            <Signal value="Web + Mobile" label="Surface Area" />
+          </motion.div>
+        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.map((project, index) => (
-            <div
+        {/* Featured: alternating full-width cards with parallax */}
+        <div className="space-y-8">
+          {featuredProjects.map((project, index) => (
+            <FeaturedProjectCard
               key={project.id}
-              className="group relative"
-              data-aos="fade-up"
-              data-aos-delay={index * 50}
-            >
-              {/* Project Card */}
-              <div className="relative bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-gray-200 dark:border-gray-700">
-                {/* Image Container with Overlay */}
-                <div
-                  className="relative h-56 overflow-hidden cursor-pointer"
-                  onClick={() =>
-                    handleImageClick(
-                      Array.isArray(project.coverImage)
-                        ? project.coverImage[0]
-                        : project.coverImage
-                    )
-                  }
-                >
-                  <Image
-                    src={
-                      Array.isArray(project.coverImage)
-                        ? project.coverImage[0]
-                        : project.coverImage
-                    }
-                    alt={project.title}
-                    width={500}
-                    height={300}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                  />
-                  {/* Gradient Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-
-                  {/* View Image Icon */}
-                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                    <div className="w-12 h-12 bg-white dark:bg-gray-800 rounded-full flex items-center justify-center shadow-lg transform scale-75 group-hover:scale-100 transition-transform duration-500">
-                      <i className="fas fa-expand text-blue-600 dark:text-blue-400"></i>
-                    </div>
-                  </div>
-
-                  {/* Case Study badge — visible on the image so it's impossible to miss */}
-                  {project.caseStudyUrl && (
-                    <Link
-                      href={project.caseStudyUrl}
-                      onClick={(e) => e.stopPropagation()}
-                      className="absolute top-4 left-4 flex items-center gap-1.5 px-3 py-1.5 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white text-xs font-bold rounded-full shadow-lg transition-all duration-300 hover:scale-105 z-10"
-                    >
-                      <i className="fas fa-microscope text-xs"></i>
-                      Case Study
-                    </Link>
-                  )}
-                </div>
-
-                {/* Content */}
-                <div className="p-6">
-                  {/* Title with gradient on hover */}
-                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3 group-hover:bg-gradient-to-r group-hover:from-blue-600 group-hover:to-purple-600 group-hover:bg-clip-text group-hover:text-transparent transition-all duration-300">
-                    {project.title}
-                  </h3>
-
-                  {/* Description */}
-                  <p className="text-gray-600 dark:text-gray-400 mb-4 line-clamp-3 leading-relaxed">
-                    {project.description}
-                  </p>
-
-                  {/* Technologies */}
-                  <div className="flex flex-wrap gap-2 mb-6">
-                    {project.technologies.slice(0, 3).map((tech, i) => (
-                      <span
-                        key={i}
-                        className="px-3 py-1 bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/30 dark:to-purple-900/30 text-blue-700 dark:text-blue-300 text-xs font-medium rounded-full border border-blue-200 dark:border-blue-800"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                    {project.technologies.length > 3 && (
-                      <span className="px-3 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 text-xs font-medium rounded-full">
-                        +{project.technologies.length - 3}
-                      </span>
-                    )}
-                  </div>
-
-                  {/* Action Buttons */}
-                  <div className="flex gap-3">
-                    <Link
-                      href={`/projects/${project.id}`}
-                      className="flex-1 group/btn relative px-4 py-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white text-sm font-medium rounded-xl overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/50 text-center"
-                    >
-                      <span className="relative z-10 flex items-center justify-center">
-                        <i className="fas fa-eye mr-2"></i>
-                        View Details
-                      </span>
-                      <div className="absolute inset-0 bg-white opacity-0 group-hover/btn:opacity-20 transition-opacity duration-300"></div>
-                    </Link>
-
-                    <a
-                      href={project.githubUrl}
-                      className="group/btn px-4 py-3 bg-gray-100 dark:bg-gray-700 hover:bg-gray-900 dark:hover:bg-gray-600 text-gray-900 dark:text-white text-sm font-medium rounded-xl transition-all duration-300 hover:shadow-lg flex items-center justify-center"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      title="View Code"
-                    >
-                      <i className="fab fa-github text-lg"></i>
-                    </a>
-                  </div>
-
-                  {/* Case Study link — full width, below main buttons */}
-                  {project.caseStudyUrl && (
-                    <Link
-                      href={project.caseStudyUrl}
-                      className="group/cs mt-3 flex items-center justify-center gap-2 w-full px-4 py-2.5 bg-gradient-to-r from-amber-50 to-orange-50 dark:from-amber-900/20 dark:to-orange-900/20 border border-amber-300 dark:border-amber-700 hover:border-amber-500 dark:hover:border-amber-500 text-amber-700 dark:text-amber-400 text-sm font-semibold rounded-xl transition-all duration-300 hover:shadow-md"
-                    >
-                      <i className="fas fa-microscope text-sm"></i>
-                      Read Case Study
-                      <i className="fas fa-arrow-right text-xs group-hover/cs:translate-x-1 transition-transform duration-300"></i>
-                    </Link>
-                  )}
-                </div>
-
-                {/* Hover border effect */}
-                <div className="absolute inset-0 border-2 border-transparent group-hover:border-blue-400 dark:group-hover:border-blue-500 rounded-2xl transition-colors duration-500 pointer-events-none"></div>
-              </div>
-            </div>
+              project={project}
+              index={index}
+              onPreview={setSelectedImage}
+            />
           ))}
         </div>
+
+        {/* Archive - Now handled by HorizontalArchive below */}
       </div>
 
-      {/* Enhanced Modal for full-screen image */}
-      {selectedImage && (
-        <div
-          className="fixed inset-0 bg-black/90 backdrop-blur-md flex items-center justify-center z-50 p-4 animate-fade-in"
-          onClick={closeModal}
-        >
-          <div
-            className="relative max-w-6xl max-h-[90vh] w-full animate-scale-in"
-            onClick={(e) => e.stopPropagation()}
-          >
-            {/* Close Button */}
-            <button
-              type="button"
-              className="absolute -top-12 right-0 text-white hover:text-blue-400 transition-colors z-10 flex items-center gap-2 text-sm font-medium"
-              onClick={closeModal}
-              aria-label="Close modal"
-            >
-              <span>Close</span>
-              <div className="w-10 h-10 bg-white/10 hover:bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center transition-all duration-300">
-                <i className="fas fa-times text-xl"></i>
-              </div>
-            </button>
+      <HorizontalArchive projects={archiveProjects} onPreview={setSelectedImage} />
 
-            {/* Image Container */}
-            <div className="relative w-full h-full flex items-center justify-center bg-gray-900/50 backdrop-blur-sm rounded-2xl p-4">
-              <Image
-                src={selectedImage}
-                alt="Project full view"
-                width={1200}
-                height={800}
-                className="object-contain max-h-[85vh] rounded-lg shadow-2xl"
-              />
+      {/* Lightbox */}
+      <AnimatePresence>
+        {selectedImage && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4 backdrop-blur-xl"
+            onClick={() => setSelectedImage(null)}
+          >
+            <motion.div
+              className="relative w-full max-w-6xl"
+              onClick={(e) => e.stopPropagation()}
+              initial={{ scale: 0.92, opacity: 0, y: 30 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.92, opacity: 0, y: 30 }}
+              transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <button
+                type="button"
+                className="absolute right-0 top-[-3rem] flex items-center gap-2 text-sm font-medium text-white/70 transition-colors hover:text-white"
+                onClick={() => setSelectedImage(null)}
+                aria-label="Close"
+              >
+                Close
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" /></svg>
+              </button>
+              <div className="relative flex max-h-[86vh] items-center justify-center rounded-2xl border border-white/5 bg-canvas-950 p-2">
+                <Image src={selectedImage} alt="Project preview" width={1400} height={900} className="max-h-[82vh] rounded-xl object-contain" />
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </section>
+  );
+};
+
+const HorizontalArchive = ({ projects, onPreview }: { projects: ProjectWithId[], onPreview: (img: string) => void }) => {
+  const containerRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end end"]
+  });
+
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 70,
+    damping: 20,
+    restDelta: 0.001
+  });
+
+  return (
+    <section ref={containerRef} className="relative mt-16 h-[300vh]">
+      <div className="sticky top-0 flex h-screen flex-col items-center justify-center overflow-hidden py-20">
+        
+        <div className="absolute top-12 w-full px-5 text-center sm:px-8 z-50 pointer-events-none">
+          <p className="eyebrow mb-4 inline-flex bg-canvas-50/80 backdrop-blur-md dark:bg-canvas-950/80">
+            <span className="h-1.5 w-1.5 rounded-full bg-accent-500" />
+            Archive
+          </p>
+          <h3 className="font-display text-4xl font-bold tracking-tight text-canvas-950 dark:text-white md:text-5xl lg:text-6xl">
+            More shipped builds
+          </h3>
+          <p className="mt-3 font-display text-sm font-medium text-canvas-500 dark:text-canvas-400">
+            Keep scrolling to spread the deck
+          </p>
+        </div>
+
+        <div className="relative mt-24 flex w-full max-w-sm items-center justify-center">
+          {projects.map((project, index) => {
+            const center = (projects.length - 1) / 2;
+            const offset = index - center;
+            
+            // Fix Framer Motion string interpolation by matching initial and target string structures perfectly
+            const initialX = `calc(0vw + 0px)`;
+            const targetX = `calc(${offset * 14}vw + ${offset * 35}px)`;
+            
+            const initialY = `0rem`;
+            const targetY = `${Math.abs(offset) * 2.5}rem`;
+            
+            const x = useTransform(smoothProgress, [0, 1], [initialX, targetX]);
+            const y = useTransform(smoothProgress, [0, 1], [initialY, targetY]);
+            const rotate = useTransform(smoothProgress, [0, 1], [0, offset * 7]);
+
+            return (
+              <motion.div
+                key={project.id}
+                style={{
+                  x,
+                  y,
+                  rotate,
+                  zIndex: Math.round(20 - Math.abs(offset)),
+                }}
+                whileHover={{
+                  scale: 1.08,
+                  rotate: 0,
+                  y: -20,
+                  zIndex: 50,
+                }}
+                transition={{
+                  type: "spring",
+                  stiffness: 300,
+                  damping: 20,
+                  mass: 0.8
+                }}
+                className="absolute w-[85vw] sm:w-[380px] rounded-2xl shadow-[0_20px_60px_-15px_rgba(0,0,0,0.2)] will-change-transform dark:shadow-[0_20px_60px_-15px_rgba(0,0,0,0.7)] cursor-pointer"
+              >
+                {/* Wrap in a div to prevent the inner card from breaking the layout */}
+                <div className="h-full w-full rounded-2xl bg-canvas-50 dark:bg-canvas-950">
+                  <ArchiveProjectCard project={project} index={index} onPreview={onPreview} />
+                </div>
+              </motion.div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+const Signal = ({ value, label }: { value: string; label: string }) => (
+  <div className="border-r border-canvas-200/20 p-5 last:border-r-0 dark:border-white/5">
+    <p className="font-display text-xl font-bold text-canvas-950 dark:text-white">{value}</p>
+    <p className="mt-1 text-xs font-medium uppercase tracking-wider text-canvas-400 dark:text-canvas-500">{label}</p>
+  </div>
+);
+
+/* Featured project — full-width with scroll-linked parallax image */
+const FeaturedProjectCard = ({
+  project,
+  index,
+  onPreview,
+}: {
+  project: ProjectWithId;
+  index: number;
+  onPreview: (img: string) => void;
+}) => {
+  const cover = getCoverImage(project);
+  const cardRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: cardRef,
+    offset: ['start end', 'end start'],
+  });
+
+  const imgY = useTransform(scrollYProgress, [0, 1], [-40, 40]);
+  const imgScale = useTransform(scrollYProgress, [0, 0.5, 1], [1.15, 1.05, 1.15]);
+
+  return (
+    <motion.article
+      ref={cardRef}
+      className="group overflow-hidden rounded-2xl border border-canvas-200/15 bg-white/30 backdrop-blur-sm dark:border-white/5 dark:bg-white/[0.015]"
+      initial={{ opacity: 0, y: 60 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-100px' }}
+      transition={{ duration: 0.8, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
+    >
+      <div className={`grid lg:grid-cols-2 ${index % 2 === 1 ? 'lg:grid-flow-dense' : ''}`}>
+        {/* Image with parallax */}
+        <button
+          type="button"
+          onClick={() => onPreview(cover)}
+          className={`relative block h-[300px] w-full overflow-hidden text-left md:h-[400px] lg:h-auto ${index % 2 === 1 ? 'lg:col-start-2' : ''}`}
+          aria-label={`Preview ${project.title}`}
+        >
+          <motion.div className="absolute inset-0" style={{ y: imgY, scale: imgScale }}>
+            <Image
+              src={cover}
+              alt={`${project.title} cover`}
+              fill
+              className="object-cover transition-transform duration-700"
+              sizes="(max-width: 1024px) 100vw, 50vw"
+              priority={index === 0}
+            />
+          </motion.div>
+          <div className="absolute inset-0 bg-gradient-to-t from-canvas-950/50 via-transparent to-transparent lg:bg-gradient-to-r lg:from-transparent lg:via-transparent lg:to-canvas-950/10" />
+
+          {/* Badges */}
+          <div className="absolute left-5 top-5 flex flex-wrap gap-2">
+            {project.category && (
+              <span className="rounded-full bg-white/90 px-3 py-1.5 text-xs font-semibold text-canvas-950 backdrop-blur-sm">
+                {project.category}
+              </span>
+            )}
+            {project.status && (
+              <span className="rounded-full bg-emerald-400/90 px-3 py-1.5 text-xs font-semibold text-emerald-950 backdrop-blur-sm">
+                {project.status}
+              </span>
+            )}
+          </div>
+        </button>
+
+        {/* Content */}
+        <div className={`flex flex-col justify-center p-6 md:p-10 ${index % 2 === 1 ? 'lg:col-start-1 lg:row-start-1' : ''}`}>
+          <p className="text-sm font-medium text-canvas-400 dark:text-canvas-500">
+            {project.role} {project.year ? `/ ${project.year}` : ''}
+          </p>
+          <h3 className="mt-3 font-display text-2xl font-bold tracking-tight text-canvas-950 dark:text-white md:text-3xl">
+            {project.title}
+          </h3>
+          <p className="mt-4 font-display leading-relaxed text-canvas-500 dark:text-canvas-300">
+            {project.shortDescription ?? project.description}
+          </p>
+
+          {/* Metrics */}
+          {project.metrics && project.metrics.length > 0 && (
+            <div className="mt-6 flex flex-wrap gap-6">
+              {project.metrics.slice(0, 3).map((m) => (
+                <div key={m.label}>
+                  <p className="font-display text-xl font-bold text-canvas-950 dark:text-white">{m.value}</p>
+                  <p className="font-display text-[10px] font-semibold uppercase tracking-wider text-canvas-400">{m.label}</p>
+                </div>
+              ))}
             </div>
+          )}
+
+          {/* Tags */}
+          <div className="mt-5 flex flex-wrap gap-2">
+            {project.technologies.slice(0, 5).map((tech) => (
+              <span key={tech} className="rounded-full border border-canvas-200/20 bg-canvas-50/40 px-2.5 py-1 font-display text-xs font-medium text-canvas-500 dark:border-white/5 dark:bg-white/[0.02] dark:text-canvas-400">
+                {tech}
+              </span>
+            ))}
+          </div>
+
+          {/* Actions */}
+          <div className="mt-6 flex flex-wrap gap-3">
+            <Link href={`/projects/${project.id}`} className="btn-primary font-display px-5 py-2.5 text-xs">
+              <span>View Details</span>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M7 17L17 7M17 7H7M17 7V17" /></svg>
+            </Link>
+            <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="btn-secondary font-display px-5 py-2.5 text-xs">
+              <span>Source</span>
+              <i className="fab fa-github" />
+            </a>
           </div>
         </div>
-      )}
+      </div>
+    </motion.article>
+  );
+};
 
-      <style jsx>{`
-        @keyframes fade-in {
-          from {
-            opacity: 0;
-          }
-          to {
-            opacity: 1;
-          }
-        }
+/* Archive card with hover lift */
+const ArchiveProjectCard = ({
+  project,
+  index,
+  onPreview,
+}: {
+  project: ProjectWithId;
+  index: number;
+  onPreview: (img: string) => void;
+}) => {
+  const cover = getCoverImage(project);
 
-        @keyframes scale-in {
-          from {
-            transform: scale(0.9);
-            opacity: 0;
-          }
-          to {
-            transform: scale(1);
-            opacity: 1;
-          }
-        }
+  return (
+    <motion.article
+      className="group overflow-hidden rounded-2xl border border-canvas-200/15 bg-white/30 backdrop-blur-sm transition-all duration-500 hover:border-accent-500/20 hover:shadow-glow dark:border-white/5 dark:bg-white/[0.015]"
+    >
+      <button
+        type="button"
+        onClick={() => onPreview(cover)}
+        className="relative block h-44 w-full overflow-hidden text-left"
+        aria-label={`Preview ${project.title}`}
+      >
+        <Image src={cover} alt={`${project.title} cover`} fill className="object-cover transition-transform duration-700 ease-out group-hover:scale-105" sizes="(max-width: 768px) 100vw, 25vw" />
+      </button>
 
-        .animate-fade-in {
-          animation: fade-in 0.3s ease-out;
-        }
+      <div className="p-5">
+        <div className="mb-3 flex items-center justify-between gap-3">
+          <span className="text-xs font-semibold uppercase tracking-wider text-accent-500 dark:text-accent-400">{project.category}</span>
+          {project.year && <span className="text-xs font-medium text-canvas-400 dark:text-canvas-500">{project.year}</span>}
+        </div>
+        <h3 className="font-display text-base font-bold text-canvas-950 dark:text-white">{project.title}</h3>
+        <p className="mt-2 min-h-[4.5rem] font-display text-sm leading-relaxed text-canvas-500 dark:text-canvas-400">{project.shortDescription ?? project.description}</p>
 
-        .animate-scale-in {
-          animation: scale-in 0.3s ease-out;
-        }
-      `}</style>
-    </section>
+        <div className="mt-4 flex flex-wrap gap-2">
+          {project.technologies.slice(0, 3).map((tech) => (
+            <span key={tech} className="rounded-full bg-canvas-100/60 px-2.5 py-1 font-display text-xs font-medium text-canvas-500 dark:bg-white/[0.04] dark:text-canvas-400">{tech}</span>
+          ))}
+        </div>
+
+        <div className="mt-5 flex gap-2">
+          <Link href={`/projects/${project.id}`} className="btn-primary font-display flex-1 px-4 py-2.5 text-xs"><span>Details</span></Link>
+          <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="flex h-10 w-10 items-center justify-center rounded-full border border-canvas-200/30 text-canvas-500 transition-all duration-300 hover:border-accent-500/30 hover:text-accent-500 dark:border-white/5 dark:text-canvas-400" aria-label={`View ${project.title} source`}>
+            <i className="fab fa-github" />
+          </a>
+        </div>
+      </div>
+    </motion.article>
   );
 };
 

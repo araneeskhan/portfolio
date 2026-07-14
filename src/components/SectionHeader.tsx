@@ -1,38 +1,65 @@
+import { motion } from 'motion/react';
+
 interface SectionHeaderProps {
   label: string;
   title: string;
   description?: string;
+  align?: 'center' | 'left';
 }
 
-export default function SectionHeader({ label, title, description }: SectionHeaderProps) {
+export default function SectionHeader({
+  label,
+  title,
+  description,
+  align = 'center',
+}: SectionHeaderProps) {
+  const isCentered = align === 'center';
+
   return (
-    <div className="text-center mb-16">
-      <p
-        className="inline-block px-4 py-2 mb-4 text-sm font-semibold text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/30 rounded-full"
-        data-aos="fade-up"
+    <div className={`${isCentered ? 'mx-auto text-center' : ''} mb-16 max-w-3xl`}>
+      <motion.p
+        className="eyebrow"
+        initial={{ opacity: 0, y: 16, filter: 'blur(6px)' }}
+        whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+        viewport={{ once: true, margin: '-60px' }}
+        transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
       >
+        <span className="h-1.5 w-1.5 rounded-full bg-accent-500" />
         {label}
-      </p>
-      <h2
-        className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4"
-        data-aos="fade-up"
-        data-aos-delay="100"
+      </motion.p>
+
+      <motion.h2
+        className="mt-5 font-display text-3xl font-bold tracking-tight text-canvas-950 dark:text-white sm:text-4xl md:text-[2.8rem] md:leading-tight"
+        initial={{ opacity: 0, y: 24, filter: 'blur(8px)' }}
+        whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+        viewport={{ once: true, margin: '-60px' }}
+        transition={{ duration: 0.8, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
       >
         {title}
-      </h2>
-      <div
-        className="w-24 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto rounded-full"
-        data-aos="fade-up"
-        data-aos-delay="200"
-      />
+      </motion.h2>
+
+      {isCentered && (
+        <motion.div
+          className="mx-auto mt-6 h-px w-20 bg-gradient-to-r from-transparent via-accent-500/50 to-transparent"
+          initial={{ opacity: 0, scaleX: 0.3 }}
+          whileInView={{ opacity: 1, scaleX: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.16 }}
+        />
+      )}
+
       {description && (
-        <p
-          className="mt-6 text-gray-600 dark:text-gray-400 text-lg max-w-2xl mx-auto"
-          data-aos="fade-up"
-          data-aos-delay="300"
+        <motion.p
+          className={`mt-5 font-display text-base leading-relaxed text-canvas-500 dark:text-canvas-300 md:text-lg ${
+            isCentered ? 'mx-auto max-w-2xl' : ''
+          }`}
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-60px' }}
+          transition={{ duration: 0.7, delay: 0.14, ease: [0.22, 1, 0.36, 1] }}
         >
           {description}
-        </p>
+        </motion.p>
       )}
     </div>
   );

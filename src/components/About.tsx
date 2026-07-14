@@ -1,188 +1,185 @@
-import SectionHeader from "@/components/SectionHeader";
+import { motion, useScroll, useTransform } from 'motion/react';
+import { useRef } from 'react';
+import SectionHeader from '@/components/SectionHeader';
+
+const focusAreas = [
+  {
+    title: 'Frontend Systems',
+    description: 'Responsive interfaces, typed components, polished states, and accessible interaction patterns.',
+    gradient: 'from-blue-500 to-cyan-500',
+  },
+  {
+    title: 'Backend & APIs',
+    description: 'REST services, auth flows, relational and document databases, and deployable server architecture.',
+    gradient: 'from-violet-500 to-purple-500',
+  },
+  {
+    title: 'Mobile Products',
+    description: 'React Native apps with clear navigation, persistent state, and production-minded user journeys.',
+    gradient: 'from-emerald-500 to-teal-500',
+  },
+  {
+    title: 'AI Integration',
+    description: 'ML workflows, NLP features, deterministic automation, and intelligent product experiences.',
+    gradient: 'from-orange-500 to-amber-500',
+  },
+];
+
+/* Word-by-word scroll reveal paragraph */
+const ScrollRevealText = ({ text, className }: { text: string; className?: string }) => {
+  const containerRef = useRef<HTMLParagraphElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ['start 0.9', 'start 0.3'],
+  });
+
+  const words = text.split(' ');
+
+  return (
+    <p ref={containerRef} className={className}>
+      {words.map((word, i) => {
+        const start = i / words.length;
+        const end = start + 1 / words.length;
+        return <ScrollWord key={i} word={word} range={[start, end]} progress={scrollYProgress} />;
+      })}
+    </p>
+  );
+};
+
+const ScrollWord = ({
+  word,
+  range,
+  progress,
+}: {
+  word: string;
+  range: [number, number];
+  progress: ReturnType<typeof useScroll>['scrollYProgress'];
+}) => {
+  const opacity = useTransform(progress, range, [0.15, 1]);
+  const y = useTransform(progress, range, [4, 0]);
+
+  return (
+    <motion.span
+      style={{ opacity, y }}
+      className="mr-[0.3em] inline-block transition-colors duration-200"
+    >
+      {word}
+    </motion.span>
+  );
+};
 
 const About = () => {
+  const sectionRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ['start end', 'end start'],
+  });
+
+  const lineScale = useTransform(scrollYProgress, [0, 0.3], [0, 1]);
+
   return (
-    <section
-      id="about"
-      className="relative py-20 px-4 bg-gradient-to-b from-white to-gray-50 dark:from-gray-900 dark:to-gray-800 overflow-hidden"
-    >
-      {/* Animated background elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-20 -right-32 w-96 h-96 bg-blue-200/30 dark:bg-blue-500/10 rounded-full blur-3xl animate-pulse"></div>
-        <div
-          className="absolute -bottom-32 -left-32 w-96 h-96 bg-purple-200/30 dark:bg-purple-500/10 rounded-full blur-3xl animate-pulse"
-          style={{ animationDelay: "1s" }}
-        ></div>
-      </div>
+    <section ref={sectionRef} id="about" className="section-shell section-border-top">
+      <div className="section-container">
+        <SectionHeader
+          label="About"
+          title="Engineering clean, useful digital products."
+        />
 
-      <div className="max-w-7xl mx-auto relative z-10">
-        <SectionHeader label="Get To Know More" title="About Me" />
+        {/* Main text - scroll reveals */}
+        <div className="mx-auto max-w-4xl">
+          <ScrollRevealText
+            text="I am a full-stack developer focused on building responsive, user-friendly web and mobile applications. My work is shaped by a practical curiosity: understanding the problem deeply, designing a maintainable system around it, and shipping an experience people can use without friction."
+            className="font-display text-2xl font-medium leading-relaxed text-canvas-950 dark:text-white sm:text-3xl md:text-4xl md:leading-snug"
+          />
 
-        <div className="mt-12 max-w-6xl mx-auto">
-          {/* Main content card with glassmorphism effect */}
-          <div
-            className="relative bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl p-8 md:p-12 rounded-3xl shadow-2xl border border-gray-200/50 dark:border-gray-700/50"
-            data-aos="fade-up"
-            data-aos-delay="200"
-          >
-            {/* Gradient overlay */}
-            <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 to-purple-50/50 dark:from-blue-900/10 dark:to-purple-900/10 rounded-3xl pointer-events-none"></div>
-
-            <div className="relative z-10">
-              {/* Introduction text with better typography */}
-              <div className="mb-12 space-y-6">
-                <p className="text-gray-700 dark:text-gray-300 text-lg md:text-xl leading-relaxed">
-                  👋 I'm a passionate{" "}
-                  <span className="font-semibold text-blue-600 dark:text-blue-400">
-                    Full-Stack Developer
-                  </span>{" "}
-                  with a focus on creating responsive and user-friendly web
-                  applications. My journey in software development began with a
-                  curiosity about how websites work, which evolved into a deep
-                  passion for building digital experiences that solve real-world
-                  problems.
-                </p>
-                <p className="text-gray-700 dark:text-gray-300 text-lg md:text-xl leading-relaxed">
-                  I specialize in both frontend and backend technologies, with
-                  expertise in{" "}
-                  <span className="font-semibold text-purple-600 dark:text-purple-400">
-                    React, Next.js, Node.js
-                  </span>
-                  , and various database systems. I'm constantly learning and
-                  adapting to new technologies to stay at the forefront of
-                  development.
-                </p>
-              </div>
-
-              {/* Stats cards with improved design */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-                <div
-                  className="group relative bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/30 dark:to-blue-800/30 p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 border border-blue-200/50 dark:border-blue-700/50"
-                  data-aos="zoom-in"
-                  data-aos-delay="300"
-                >
-                  <div className="absolute top-4 right-4 w-16 h-16 bg-blue-600/10 dark:bg-blue-400/10 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-500"></div>
-                  <div className="flex items-center mb-6">
-                    <div className="w-14 h-14 flex items-center justify-center bg-gradient-to-br from-blue-500 to-blue-600 dark:from-blue-400 dark:to-blue-500 rounded-xl mr-4 shadow-lg group-hover:scale-110 transition-transform duration-300">
-                      <i className="fas fa-laptop-code text-white text-2xl"></i>
-                    </div>
-                    <h3 className="text-2xl font-bold text-gray-900 dark:text-white">
-                      Experience
-                    </h3>
-                  </div>
-                  <div className="space-y-2">
-                    <p className="text-3xl font-bold text-blue-600 dark:text-blue-400">
-                      24 Months
-                    </p>
-                    <p className="text-gray-600 dark:text-gray-400">
-                      Professional Development
-                    </p>
-                  </div>
-                </div>
-
-                <div
-                  className="group relative bg-gradient-to-br from-purple-50 to-purple-100 dark:from-purple-900/30 dark:to-purple-800/30 p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 border border-purple-200/50 dark:border-purple-700/50"
-                  data-aos="zoom-in"
-                  data-aos-delay="400"
-                >
-                  <div className="absolute top-4 right-4 w-16 h-16 bg-purple-600/10 dark:bg-purple-400/10 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-500"></div>
-                  <div className="flex items-center mb-6">
-                    <div className="w-14 h-14 flex items-center justify-center bg-gradient-to-br from-purple-500 to-purple-600 dark:from-purple-400 dark:to-purple-500 rounded-xl mr-4 shadow-lg group-hover:scale-110 transition-transform duration-300">
-                      <i className="fas fa-graduation-cap text-white text-2xl"></i>
-                    </div>
-                    <h3 className="text-2xl font-bold text-gray-900 dark:text-white">
-                      Education
-                    </h3>
-                  </div>
-                  <div className="space-y-3">
-                    <div>
-                      <p className="text-xl font-bold text-purple-600 dark:text-purple-400">
-                        Master's Degree
-                      </p>
-                      <p className="text-gray-600 dark:text-gray-400">
-                        Artificial Intelligence
-                      </p>
-                    </div>
-                    <div className="border-t border-purple-200 dark:border-purple-700/50 pt-3">
-                      <p className="text-xl font-bold text-purple-600 dark:text-purple-400">
-                        Bachelor's Degree
-                      </p>
-                      <p className="text-gray-600 dark:text-gray-400">
-                        Computer Science
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* What I Do section with enhanced cards */}
-              <div className="mt-12">
-                <h3 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">
-                  What I Do
-                </h3>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                  {[
-                    {
-                      icon: "fa-code",
-                      title: "Web Development",
-                      description: "Building responsive, accessible websites",
-                      iconBg: "from-blue-100 to-blue-200 dark:from-blue-900/40 dark:to-blue-800/40",
-                      iconColor: "text-blue-600 dark:text-blue-400",
-                      border: "border-blue-400 dark:border-blue-500",
-                      delay: "500",
-                    },
-                    {
-                      icon: "fa-mobile-alt",
-                      title: "Mobile Development",
-                      description: "Creating cross-platform mobile applications",
-                      iconBg: "from-green-100 to-green-200 dark:from-green-900/40 dark:to-green-800/40",
-                      iconColor: "text-green-600 dark:text-green-400",
-                      border: "border-green-400 dark:border-green-500",
-                      delay: "600",
-                    },
-                    {
-                      icon: "fa-server",
-                      title: "Backend Development",
-                      description: "Building APIs and server-side applications",
-                      iconBg: "from-orange-100 to-orange-200 dark:from-orange-900/40 dark:to-orange-800/40",
-                      iconColor: "text-orange-600 dark:text-orange-400",
-                      border: "border-orange-400 dark:border-orange-500",
-                      delay: "700",
-                    },
-                    {
-                      icon: "fa-database",
-                      title: "Database Design",
-                      description: "Creating efficient database structures",
-                      iconBg: "from-purple-100 to-purple-200 dark:from-purple-900/40 dark:to-purple-800/40",
-                      iconColor: "text-purple-600 dark:text-purple-400",
-                      border: "border-purple-400 dark:border-purple-500",
-                      delay: "800",
-                    },
-                  ].map((item, index) => (
-                    <div
-                      key={index}
-                      className="group relative bg-white dark:bg-gray-700/50 p-6 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-200 dark:border-gray-600"
-                      data-aos="fade-up"
-                      data-aos-delay={item.delay}
-                    >
-                      <div className={`w-12 h-12 flex items-center justify-center bg-gradient-to-br ${item.iconBg} rounded-lg mb-4 group-hover:scale-110 transition-transform duration-300`}>
-                        <i className={`fas ${item.icon} ${item.iconColor} text-xl`}></i>
-                      </div>
-                      <h4 className="font-bold text-gray-900 dark:text-white mb-2 text-lg">
-                        {item.title}
-                      </h4>
-                      <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
-                        {item.description}
-                      </p>
-                      <div className={`absolute inset-0 border-2 ${item.border} rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300`}></div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
+          <div className="my-12 flex items-center gap-6">
+            <motion.div
+              className="h-px flex-1 bg-gradient-to-r from-accent-500/40 to-transparent"
+              style={{ scaleX: lineScale, transformOrigin: 'left' }}
+            />
+            <motion.span
+              className="text-xs font-semibold uppercase tracking-widest text-canvas-400 dark:text-canvas-500"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3 }}
+            >
+              My Stack
+            </motion.span>
+            <motion.div
+              className="h-px flex-1 bg-gradient-to-l from-accent2-500/40 to-transparent"
+              style={{ scaleX: lineScale, transformOrigin: 'right' }}
+            />
           </div>
 
+          <ScrollRevealText
+            text="My core stack includes React, Next.js, React Native, Node.js, Python, and modern database systems. I am especially interested in products where strong engineering and intelligent automation meet to create experiences that feel effortless."
+            className="font-display text-xl font-medium leading-relaxed text-canvas-700 dark:text-canvas-200 sm:text-2xl md:text-3xl md:leading-snug"
+          />
         </div>
+
+        {/* Focus areas — appearing on scroll with gradient underlines */}
+        <div className="mx-auto mt-20 grid max-w-5xl grid-cols-1 gap-0 md:grid-cols-2">
+          {focusAreas.map((area, i) => (
+            <motion.div
+              key={area.title}
+              className="group relative border-b border-canvas-200/20 py-8 dark:border-white/5 md:px-8"
+              initial={{ opacity: 0, x: i % 2 === 0 ? -30 : 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: '-60px' }}
+              transition={{ duration: 0.7, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] }}
+            >
+              {/* Number */}
+              <span className="font-mono text-xs font-medium text-canvas-300 dark:text-canvas-600">
+                0{i + 1}
+              </span>
+
+              <h3 className="mt-3 font-display text-xl font-bold text-canvas-950 dark:text-white">
+                {area.title}
+              </h3>
+              <p className="mt-2 font-display text-sm leading-relaxed text-canvas-500 dark:text-canvas-400">
+                {area.description}
+              </p>
+
+              {/* Animated gradient underline on hover */}
+              <div className={`absolute bottom-0 left-0 h-[2px] w-0 bg-gradient-to-r ${area.gradient} transition-all duration-700 group-hover:w-full`} />
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Credentials line */}
+        <motion.div
+          className="mx-auto mt-16 flex max-w-4xl flex-wrap items-center justify-center gap-8 text-center"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
+          {[
+            { val: '2+', label: 'Years Experience' },
+            { val: 'AI', label: "Master's Degree" },
+            { val: 'CS', label: "Bachelor's Degree" },
+          ].map((cred, i) => (
+            <motion.div
+              key={cred.label}
+              className="flex items-center gap-3"
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 + i * 0.1, duration: 0.5 }}
+            >
+              <span className="font-display text-3xl font-bold text-canvas-950 dark:text-white sm:text-4xl">
+                {cred.val}
+              </span>
+              <span className="text-left text-xs font-medium uppercase tracking-wider text-canvas-400 dark:text-canvas-500">
+                {cred.label}
+              </span>
+              {i < 2 && (
+                <span className="ml-5 hidden h-8 w-px bg-canvas-200/40 dark:bg-white/10 sm:block" />
+              )}
+            </motion.div>
+          ))}
+        </motion.div>
       </div>
     </section>
   );

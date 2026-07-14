@@ -2,9 +2,12 @@ import { useEffect } from 'react';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
+import { MotionConfig } from 'motion/react';
 import { Analytics } from '@vercel/analytics/react';
 import FloatingBackToTop from '@/components/FloatingBackToTop';
+import ScrollProgress from '@/components/motion/ScrollProgress';
 import personal from '@/config/personal';
+import { fontClass } from '@/styles/fonts';
 import 'aos/dist/aos.css';
 import '../styles/globals.css';
 
@@ -25,13 +28,9 @@ export default function App({ Component, pageProps }: AppProps) {
 
   useEffect(() => {
     const onStart = () => {
-      // Disable smooth scroll so Next.js's built-in scroll reset will be instant —
-      // but do NOT call scrollTo here, that causes the current page to visually
-      // scroll up before the new page has even loaded (the "rescroll" effect).
       document.documentElement.style.scrollBehavior = 'auto';
     };
     const onComplete = () => {
-      // New page is now rendered. Jump to top instantly then restore smooth scroll.
       window.scrollTo(0, 0);
       document.documentElement.style.scrollBehavior = '';
     };
@@ -42,6 +41,7 @@ export default function App({ Component, pageProps }: AppProps) {
     router.events.on('routeChangeStart', onStart);
     router.events.on('routeChangeComplete', onComplete);
     router.events.on('routeChangeError', onError);
+
     return () => {
       router.events.off('routeChangeStart', onStart);
       router.events.off('routeChangeComplete', onComplete);
@@ -55,15 +55,10 @@ export default function App({ Component, pageProps }: AppProps) {
         <title>{`${personal.name} | ${personal.title}`}</title>
         <meta name="description" content={personal.description} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
-        <meta name="theme-color" content="#111827" media="(prefers-color-scheme: dark)" />
+        <meta name="theme-color" content="#f6f5f2" media="(prefers-color-scheme: light)" />
+        <meta name="theme-color" content="#08090b" media="(prefers-color-scheme: dark)" />
         <link rel="icon" href="/favicon.ico" />
 
-        {/* Early connection to Font Awesome CDN — reduces blocking time */}
-        <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
-        <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com" />
-
-        {/* Open Graph */}
         <meta property="og:type" content="website" />
         <meta property="og:url" content={personal.siteUrl} />
         <meta property="og:title" content={`${personal.name} | ${personal.title}`} />
@@ -73,13 +68,11 @@ export default function App({ Component, pageProps }: AppProps) {
         <meta property="og:image:height" content="800" />
         <meta property="og:locale" content="en_US" />
 
-        {/* Twitter Card */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={`${personal.name} | ${personal.title}`} />
         <meta name="twitter:description" content={personal.description} />
         <meta name="twitter:image" content={`${personal.siteUrl}/assets/profile-pic.jpeg`} />
 
-        {/* JSON-LD structured data */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -98,24 +91,29 @@ export default function App({ Component, pageProps }: AppProps) {
                 addressCountry: 'FR',
               },
               knowsAbout: [
-                'React', 'Next.js', 'Node.js', 'TypeScript',
-                'React Native', 'Python', 'TensorFlow', 'Firebase',
-                'MongoDB', 'Express.js',
+                'React',
+                'Next.js',
+                'Node.js',
+                'TypeScript',
+                'React Native',
+                'Python',
+                'TensorFlow',
+                'Firebase',
+                'MongoDB',
+                'Express.js',
               ],
             }),
           }}
         />
-        <link
-          rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-          integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
-          crossOrigin="anonymous"
-          referrerPolicy="no-referrer"
-        />
       </Head>
-      <Component {...pageProps} />
-      <FloatingBackToTop />
-      <Analytics />
+      <div className={fontClass}>
+        <MotionConfig reducedMotion="user">
+          <ScrollProgress />
+          <Component {...pageProps} />
+          <FloatingBackToTop />
+        </MotionConfig>
+        <Analytics />
+      </div>
     </>
   );
 }

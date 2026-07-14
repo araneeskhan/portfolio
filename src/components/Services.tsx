@@ -1,148 +1,170 @@
-import Link from "next/link";
-import SectionHeader from "@/components/SectionHeader";
+import Link from 'next/link';
+import { useRef } from 'react';
+import { motion, useScroll, useTransform } from 'motion/react';
+import SectionHeader from '@/components/SectionHeader';
 
 const services = [
   {
-    icon: "fa-globe",
-    title: "Full-Stack Web Development",
-    description:
-      "End-to-end web applications — interactive React/Next.js frontends wired to robust Node.js backends and REST APIs, deployed to production.",
-    tags: ["React", "Next.js", "Node.js", "TypeScript"],
-    gradient: "from-blue-500 to-cyan-500",
-    bg: "from-blue-50 to-cyan-50 dark:from-blue-900/20 dark:to-cyan-900/20",
-    border: "border-blue-200 dark:border-blue-800",
-    hoverBorder: "group-hover:border-blue-400 dark:group-hover:border-blue-500",
+    title: 'Full-Stack Web Development',
+    description: 'End-to-end React and Next.js applications connected to robust Node.js APIs and production-ready data layers.',
+    tags: ['React', 'Next.js', 'Node.js', 'TypeScript'],
+    gradient: 'from-blue-500 to-cyan-500',
+    bgTint: 'bg-blue-500/[0.03] dark:bg-blue-500/[0.03]',
   },
   {
-    icon: "fa-mobile-alt",
-    title: "Mobile App Development",
-    description:
-      "Cross-platform iOS & Android apps with React Native — native performance, smooth UX, offline support, and real-time backend integration.",
-    tags: ["React Native", "Expo", "Firebase", "Zustand"],
-    gradient: "from-purple-500 to-violet-500",
-    bg: "from-purple-50 to-violet-50 dark:from-purple-900/20 dark:to-violet-900/20",
-    border: "border-purple-200 dark:border-purple-800",
-    hoverBorder:
-      "group-hover:border-purple-400 dark:group-hover:border-purple-500",
+    title: 'Mobile App Development',
+    description: 'Cross-platform React Native apps with smooth navigation, persistent state, backend integration, and clean mobile UX.',
+    tags: ['React Native', 'Expo', 'Firebase', 'Zustand'],
+    gradient: 'from-emerald-500 to-teal-500',
+    bgTint: 'bg-emerald-500/[0.03] dark:bg-emerald-500/[0.03]',
   },
   {
-    icon: "fa-brain",
-    title: "AI & ML Integration",
-    description:
-      "Add intelligence to your product — recommendation engines, NLP pipelines, or computer vision models served via Python/Flask microservices.",
-    tags: ["Python", "TensorFlow", "Flask", "NLP"],
-    gradient: "from-pink-500 to-rose-500",
-    bg: "from-pink-50 to-rose-50 dark:from-pink-900/20 dark:to-rose-900/20",
-    border: "border-pink-200 dark:border-pink-800",
-    hoverBorder: "group-hover:border-pink-400 dark:group-hover:border-pink-500",
+    title: 'AI & ML Integration',
+    description: 'Intelligent product features powered by Python services, NLP pipelines, recommendation logic, and practical ML workflows.',
+    tags: ['Python', 'TensorFlow', 'Flask', 'NLP'],
+    gradient: 'from-violet-500 to-purple-500',
+    bgTint: 'bg-violet-500/[0.03] dark:bg-violet-500/[0.03]',
   },
   {
-    icon: "fa-server",
-    title: "Backend & API Development",
-    description:
-      "Scalable REST APIs, database architecture, and server-side services built for production — with auth, validation, and cloud deployment.",
-    tags: ["Express.js", "MongoDB", "MySQL", "Supabase"],
-    gradient: "from-green-500 to-emerald-500",
-    bg: "from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20",
-    border: "border-green-200 dark:border-green-800",
-    hoverBorder:
-      "group-hover:border-green-400 dark:group-hover:border-green-500",
+    title: 'Backend & API Development',
+    description: 'Scalable REST APIs, auth, validation, database architecture, and deployable server-side services.',
+    tags: ['Express.js', 'MongoDB', 'MySQL', 'Supabase'],
+    gradient: 'from-orange-500 to-amber-500',
+    bgTint: 'bg-orange-500/[0.03] dark:bg-orange-500/[0.03]',
   },
   {
-    icon: "fa-layer-group",
-    title: "UI/UX to Code",
-    description:
-      "Pixel-perfect implementation of Figma or XD designs into responsive, accessible, animated interfaces — fast and cross-browser.",
-    tags: ["Tailwind CSS", "Framer Motion", "AOS", "Responsive"],
-    gradient: "from-orange-500 to-amber-500",
-    bg: "from-orange-50 to-amber-50 dark:from-orange-900/20 dark:to-amber-900/20",
-    border: "border-orange-200 dark:border-orange-800",
-    hoverBorder:
-      "group-hover:border-orange-400 dark:group-hover:border-orange-500",
+    title: 'UI/UX to Code',
+    description: 'Precise implementation of responsive, accessible interfaces with strong visual hierarchy and reliable states.',
+    tags: ['Tailwind CSS', 'Motion', 'Responsive', 'A11y'],
+    gradient: 'from-pink-500 to-rose-500',
+    bgTint: 'bg-pink-500/[0.03] dark:bg-pink-500/[0.03]',
   },
 ];
 
+/* Each card in the sticky stack */
+const ServiceCard = ({
+  service,
+  index,
+  total,
+}: {
+  service: (typeof services)[0];
+  index: number;
+  total: number;
+}) => {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: cardRef,
+    offset: ['start end', 'start start'],
+  });
+
+  const scale = useTransform(scrollYProgress, [0, 1], [0.9, 1]);
+  const opacity = useTransform(scrollYProgress, [0, 0.5], [0.4, 1]);
+
+  return (
+    <div
+      ref={cardRef}
+      className="sticky"
+      style={{ top: `${120 + index * 30}px` }}
+    >
+      <motion.div
+        style={{ scale, opacity }}
+        className={`relative overflow-hidden rounded-2xl border border-canvas-200/40 bg-white/90 p-8 shadow-elevated backdrop-blur-3xl transition-shadow duration-500 hover:shadow-glow dark:border-white/10 dark:bg-canvas-950/90 md:p-10`}
+      >
+        {/* Subtle color tint overlay */}
+        <div className={`pointer-events-none absolute inset-0 ${service.bgTint}`} />
+
+        <div className="relative z-10">
+          {/* Number */}
+          <div className="flex items-start justify-between">
+            <span className="font-mono text-sm font-bold text-canvas-400 dark:text-canvas-500">
+              0{index + 1}
+            </span>
+            <span className="text-xs font-bold uppercase tracking-wider text-canvas-400 dark:text-canvas-500">
+              Service
+            </span>
+          </div>
+
+          <h3 className="mt-6 font-display text-2xl font-bold text-canvas-950 dark:text-white md:text-3xl">
+            {service.title}
+          </h3>
+          <p className="mt-4 max-w-2xl font-display text-base font-medium leading-relaxed text-canvas-600 dark:text-canvas-300 md:text-lg">
+            {service.description}
+          </p>
+
+          {/* Tags */}
+          <div className="mt-6 flex flex-wrap gap-2">
+            {service.tags.map((tag) => (
+              <span
+                key={tag}
+                className="rounded-full border border-canvas-200/40 bg-white/80 px-3.5 py-1.5 font-display text-[13px] font-bold text-canvas-700 shadow-sm dark:border-white/10 dark:bg-white/[0.06] dark:text-canvas-200"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        {/* Bottom gradient line */}
+        <div className={`absolute bottom-0 left-0 h-[4px] w-full bg-gradient-to-r ${service.gradient}`} />
+      </motion.div>
+    </div>
+  );
+};
+
 const Services = () => {
   return (
-    <section
-      id="services"
-      className="py-20 relative overflow-hidden bg-gradient-to-b from-white to-gray-50 dark:from-gray-900 dark:to-gray-800"
-    >
-      {/* Background blobs */}
-      <div className="absolute inset-0 overflow-hidden z-0 pointer-events-none">
-        <div className="absolute top-20 -right-32 w-96 h-96 bg-gradient-to-br from-blue-400 to-blue-600 dark:from-blue-600 dark:to-blue-900 rounded-full blur-3xl opacity-10 animate-blob"></div>
-        <div className="absolute bottom-20 -left-32 w-80 h-80 bg-gradient-to-br from-purple-400 to-purple-600 dark:from-purple-600 dark:to-purple-900 rounded-full blur-3xl opacity-10 animate-blob animation-delay-2000"></div>
+    <section id="services" className="section-border-top relative pb-32 pt-24 md:pt-32">
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        <div className="glow-orb right-0 top-1/4 h-[400px] w-[400px] bg-accent-500/[0.04]" />
       </div>
 
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="section-container">
         <SectionHeader
-          label="What I Offer"
-          title="Services"
-          description="From idea to production — I cover the full stack so you don't have to manage multiple specialists."
+          label="Services"
+          title="Focused execution from product idea to shipped interface."
+          description="I cover the important product layers: experience, frontend, backend, mobile, and intelligent automation."
         />
 
-        {/* Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+        {/* Sticky card stack */}
+        <div className="relative mx-auto max-w-4xl space-y-6">
           {services.map((service, index) => (
-            <div
+            <ServiceCard
               key={service.title}
-              className={`group relative bg-gradient-to-br ${service.bg} p-8 rounded-2xl border ${service.border} ${service.hoverBorder} hover:shadow-2xl transition-all duration-500 hover:-translate-y-2`}
-              data-aos="fade-up"
-              data-aos-delay={index * 80}
-            >
-              {/* Icon */}
-              <div
-                className={`w-14 h-14 flex items-center justify-center bg-gradient-to-br ${service.gradient} rounded-2xl mb-5 shadow-lg group-hover:scale-110 transition-transform duration-300`}
-              >
-                <i className={`fas ${service.icon} text-white text-xl`}></i>
-              </div>
-
-              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">
-                {service.title}
-              </h3>
-              <p className="text-gray-600 dark:text-gray-400 leading-relaxed mb-5 text-sm">
-                {service.description}
-              </p>
-
-              {/* Tech tags */}
-              <div className="flex flex-wrap gap-2">
-                {service.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="px-2.5 py-1 bg-white/70 dark:bg-gray-800/70 text-gray-700 dark:text-gray-300 text-xs font-medium rounded-lg border border-gray-200 dark:border-gray-700"
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            </div>
+              service={service}
+              index={index}
+              total={services.length}
+            />
           ))}
+        </div>
 
-          {/* CTA card */}
-          <div
-            className="group relative bg-gradient-to-br from-blue-600 to-purple-600 p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 flex flex-col items-center justify-center text-center"
-            data-aos="fade-up"
-            data-aos-delay={services.length * 80}
-          >
-            <div className="w-14 h-14 flex items-center justify-center bg-white/20 rounded-2xl mb-5 group-hover:scale-110 transition-transform duration-300">
-              <i className="fas fa-handshake text-white text-xl"></i>
-            </div>
-            <h3 className="text-xl font-bold text-white mb-3">
-              Have a project in mind?
-            </h3>
-            <p className="text-blue-100 text-sm mb-6 leading-relaxed">
-              Let&apos;s talk about your idea and build something great
-              together.
+        {/* CTA */}
+        <motion.div
+          className="relative z-10 mx-auto mt-16 max-w-4xl overflow-hidden rounded-2xl bg-canvas-950 p-8 text-white dark:bg-white dark:text-canvas-950 md:p-10"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
+        >
+          <div className="absolute -right-12 -top-12 h-48 w-48 rounded-full bg-accent-500/20 blur-3xl" />
+          <div className="absolute -left-8 -bottom-8 h-32 w-32 rounded-full bg-accent2-500/15 blur-3xl" />
+
+          <div className="relative">
+            <h3 className="font-display text-2xl font-bold md:text-3xl">Have a project in mind?</h3>
+            <p className="mt-4 max-w-xl font-display font-medium leading-relaxed text-canvas-300 dark:text-canvas-600">
+              Share the goals, constraints, and timeline. I&apos;ll help shape the technical direction
+              and build a product that feels complete.
             </p>
             <Link
               href="/#contact"
-              className="inline-flex items-center px-6 py-3 bg-white text-blue-600 font-semibold rounded-xl hover:bg-blue-50 transition-colors duration-300 hover:scale-105"
+              className="mt-6 inline-flex items-center gap-2.5 rounded-full bg-white px-7 py-3.5 text-sm font-bold text-canvas-950 shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl dark:bg-canvas-950 dark:text-white"
             >
-              <i className="fas fa-paper-plane mr-2"></i>
-              Get a Quote
+              Start a Conversation
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M7 17L17 7M17 7H7M17 7V17" />
+              </svg>
             </Link>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

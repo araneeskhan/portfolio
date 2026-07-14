@@ -1,312 +1,208 @@
-import { useState } from "react";
-import SectionHeader from "@/components/SectionHeader";
+import { useRef } from 'react';
+import { motion, useScroll, useTransform } from 'motion/react';
+import SectionHeader from '@/components/SectionHeader';
 
 interface Certification {
   name: string;
   issuer: string;
-  icon: string;
-  color: string;
-  gradient: string;
   description: string;
+  gradient: string;
+  bgTint: string;
 }
 
-const Certifications = () => {
-  const [hoveredCert, setHoveredCert] = useState<number | null>(null);
+const certifications: Certification[] = [
+  {
+    name: 'AWS Cloud Practitioner',
+    issuer: 'Amazon Web Services / Coursera',
+    gradient: 'from-orange-500 to-amber-500',
+    bgTint: 'bg-orange-500/[0.03] dark:bg-orange-500/[0.03]',
+    description: 'Cloud fundamentals, core AWS services, security, architecture, pricing, and support models.',
+  },
+  {
+    name: 'TensorFlow Developer',
+    issuer: 'Google / Coursera',
+    gradient: 'from-red-500 to-rose-500',
+    bgTint: 'bg-red-500/[0.03] dark:bg-red-500/[0.03]',
+    description: 'Neural networks, image classification, NLP, model training, and time-series forecasting.',
+  },
+  {
+    name: 'Flower Framework',
+    issuer: 'Flower Labs',
+    gradient: 'from-pink-500 to-fuchsia-500',
+    bgTint: 'bg-pink-500/[0.03] dark:bg-pink-500/[0.03]',
+    description: 'Federated learning for privacy-aware and decentralized machine learning systems.',
+  },
+  {
+    name: 'React.js',
+    issuer: 'Meta / Coursera',
+    gradient: 'from-cyan-500 to-blue-500',
+    bgTint: 'bg-cyan-500/[0.03] dark:bg-cyan-500/[0.03]',
+    description: 'Component architecture, hooks, dynamic interfaces, state patterns, and performance thinking.',
+  },
+  {
+    name: 'React Native',
+    issuer: 'Meta / Coursera',
+    gradient: 'from-blue-500 to-indigo-500',
+    bgTint: 'bg-blue-500/[0.03] dark:bg-blue-500/[0.03]',
+    description: 'Cross-platform mobile UI, navigation, native-feeling flows, and mobile application structure.',
+  },
+  {
+    name: 'Python',
+    issuer: 'Python Institute / Coursera',
+    gradient: 'from-emerald-500 to-teal-500',
+    bgTint: 'bg-emerald-500/[0.03] dark:bg-emerald-500/[0.03]',
+    description: 'Core programming, data structures, object-oriented design, scripting, and automation.',
+  },
+];
 
-  const certifications: Certification[] = [
-    {
-      name: "AWS Cloud Practitioner",
-      issuer: "Amazon Web Services - coursera",
-      icon: "fab fa-aws",
-      color: "orange",
-      gradient: "from-orange-500 to-yellow-500",
-      description:
-        "Cloud computing fundamentals, AWS services, security, architecture, and pricing.",
-    },
-    {
-      name: "TensorFlow Developer",
-      issuer: "Google - coursera",
-      icon: "fas fa-brain",
-      color: "red",
-      gradient: "from-red-500 to-orange-500",
-      description:
-        "Building and training neural networks, image classification, NLP, and time series forecasting.",
-    },
-    {
-      name: "Flower Framework",
-      issuer: "Flower Labs",
-      icon: "fas fa-network-wired",
-      color: "pink",
-      gradient: "from-pink-500 to-purple-500",
-      description:
-        "Federated Learning framework for building privacy-preserving and decentralized AI systems.",
-    },
-    {
-      name: "React.js",
-      issuer: "Meta - coursera",
-      icon: "fab fa-react",
-      color: "cyan",
-      gradient: "from-cyan-500 to-blue-500",
-      description:
-        "Building dynamic user interfaces, component architecture, hooks, state management, and performance optimization.",
-    },
-    {
-      name: "React Native",
-      issuer: "Meta - coursera",
-      icon: "fas fa-mobile-alt",
-      color: "blue",
-      gradient: "from-blue-500 to-indigo-500",
-      description:
-        "Cross-platform mobile app development, native modules, navigation, and mobile UI patterns.",
-    },
-    {
-      name: "Python",
-      issuer: "Python Institute - coursera",
-      icon: "fab fa-python",
-      color: "yellow",
-      gradient: "from-yellow-500 to-green-500",
-      description:
-        "Core Python programming, data structures, OOP, scripting, and automation.",
-    },
-  ];
+const workshopTopics = [
+  'Cloud Architecture',
+  'Huawei Cloud Services',
+  'Cloud Deployment',
+  'Infrastructure Design',
+  'Resource Management',
+];
+
+/* Sticky stacking certification card */
+const CertCard = ({
+  cert,
+  index,
+}: {
+  cert: Certification;
+  index: number;
+}) => {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: cardRef,
+    offset: ['start end', 'start start'],
+  });
+
+  const scale = useTransform(scrollYProgress, [0, 1], [0.88, 1]);
+  const opacity = useTransform(scrollYProgress, [0, 0.5], [0.3, 1]);
+  const rotateX = useTransform(scrollYProgress, [0, 1], [8, 0]);
 
   return (
-    <section
-      id="certifications"
-      className="py-20 relative overflow-hidden bg-gradient-to-b from-white to-gray-50 dark:from-gray-900 dark:to-gray-800"
+    <div
+      ref={cardRef}
+      className="sticky"
+      style={{ top: `${110 + index * 28}px` }}
     >
-      {/* Animated background decoration */}
-      <div className="absolute inset-0 overflow-hidden z-0 pointer-events-none">
-        <div className="absolute -top-24 -left-24 w-96 h-96 bg-gradient-to-br from-green-400 to-emerald-600 dark:from-green-600 dark:to-emerald-900 rounded-full blur-3xl opacity-20 animate-blob"></div>
-        <div className="absolute bottom-0 right-0 w-80 h-80 bg-gradient-to-br from-orange-400 to-red-600 dark:from-orange-600 dark:to-red-900 rounded-full blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 bg-gradient-to-br from-blue-400 to-purple-600 dark:from-blue-600 dark:to-purple-900 rounded-full blur-3xl opacity-15 animate-blob animation-delay-4000"></div>
+      <motion.div
+        style={{ scale, opacity, rotateX }}
+        className={`relative overflow-hidden rounded-2xl border border-canvas-200/40 bg-white/90 p-6 shadow-elevated backdrop-blur-3xl transition-shadow duration-500 hover:shadow-glow dark:border-white/10 dark:bg-canvas-950/90 md:p-8`}
+      >
+        <div className={`pointer-events-none absolute inset-0 ${cert.bgTint}`} />
+
+        <div className="relative z-10">
+          <div className="flex items-start justify-between gap-4">
+            <div>
+              <span className="text-[10px] font-bold uppercase tracking-widest text-canvas-400 dark:text-canvas-500">
+                Certificate — 0{index + 1}
+              </span>
+              <h3 className="mt-3 font-display text-xl font-bold text-canvas-950 dark:text-white md:text-2xl">
+                {cert.name}
+              </h3>
+              <p className="mt-2 font-display text-sm font-bold text-accent-500 dark:text-accent-400">
+                {cert.issuer}
+              </p>
+            </div>
+            <div className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br ${cert.gradient} text-white shadow-lg`}>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+            </div>
+          </div>
+
+          <p className="mt-4 max-w-2xl font-display font-medium leading-relaxed text-canvas-600 dark:text-canvas-300">
+            {cert.description}
+          </p>
+        </div>
+
+        {/* Bottom gradient line */}
+        <div className={`absolute bottom-0 left-0 h-[4px] w-full bg-gradient-to-r ${cert.gradient}`} />
+      </motion.div>
+    </div>
+  );
+};
+
+const Certifications = () => {
+  return (
+    <section id="certifications" className="section-border-top relative pb-32 pt-24 md:pt-32">
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        <div className="glow-orb left-0 top-1/3 h-[400px] w-[400px] bg-accent2-500/[0.04]" />
       </div>
 
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="section-container">
         <SectionHeader
-          label="My Credentials"
-          title="Certifications"
-          description="Professional certifications that validate my expertise across various technologies"
+          label="Credentials"
+          title="Validated learning across cloud, AI, and product engineering."
+          description="Certifications and hands-on workshops that support the product work shown throughout the portfolio."
         />
 
-        {/* Certifications Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+        {/* Sticky stacking cards */}
+        <div className="relative mx-auto max-w-3xl space-y-6">
           {certifications.map((cert, index) => (
-            <div
-              key={index}
-              className="group relative"
-              data-aos="fade-up"
-              data-aos-delay={200 + index * 100}
-              onMouseEnter={() => setHoveredCert(index)}
-              onMouseLeave={() => setHoveredCert(null)}
-            >
-              <div className="relative bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-gray-200 dark:border-gray-700 overflow-hidden h-full">
-                {/* Gradient overlay on hover */}
-                <div
-                  className={`absolute inset-0 bg-gradient-to-br ${cert.gradient} opacity-0 group-hover:opacity-[0.06] transition-opacity duration-500 rounded-2xl`}
-                ></div>
-
-                {/* Top accent bar */}
-                <div
-                  className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${cert.gradient} transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500`}
-                ></div>
-
-                <div className="relative z-10">
-                  {/* Icon */}
-                  <div className="mb-5">
-                    <div
-                      className={`w-14 h-14 flex items-center justify-center bg-gradient-to-br ${cert.gradient} rounded-xl shadow-lg group-hover:scale-110 group-hover:rotate-3 transition-all duration-300`}
-                    >
-                      <i className={`${cert.icon} text-white text-2xl`}></i>
-                    </div>
-                  </div>
-
-                  {/* Cert name */}
-                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-1.5">
-                    {cert.name}
-                  </h3>
-
-                  {/* Issuer */}
-                  <p className="text-sm font-medium text-blue-600 dark:text-blue-400 mb-3 flex items-center gap-1.5">
-                    <i className="fas fa-building text-xs"></i>
-                    {cert.issuer}
-                  </p>
-
-                  {/* Description */}
-                  <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
-                    {cert.description}
-                  </p>
-
-                  {/* Bottom divider and credential icon */}
-                  <div className="mt-5 pt-4 border-t border-gray-100 dark:border-gray-700/50 flex items-center justify-between">
-                    <div className="flex items-center gap-2 text-gray-500 dark:text-gray-500">
-                      <i className="fas fa-certificate text-sm"></i>
-                      <span className="text-xs font-medium">
-                        Professional Certificate
-                      </span>
-                    </div>
-                    <div
-                      className={`w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 dark:bg-gray-700 group-hover:bg-gradient-to-br group-hover:${cert.gradient} transition-all duration-300`}
-                    >
-                      <i className="fas fa-arrow-right text-xs text-gray-400 group-hover:text-white transition-colors duration-300"></i>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Hover border effect */}
-                <div
-                  className={`absolute inset-0 border-2 border-transparent group-hover:border-opacity-50 rounded-2xl transition-all duration-500`}
-                  style={{
-                    borderColor:
-                      hoveredCert === index ? "currentColor" : "transparent",
-                  }}
-                ></div>
-              </div>
-            </div>
+            <CertCard key={cert.name} cert={cert} index={index} />
           ))}
         </div>
 
-        {/* Workshops Section */}
-        <div className="mt-20 max-w-6xl mx-auto">
-          <div className="text-center mb-10">
-            <p
-              className="inline-block px-4 py-2 mb-4 text-sm font-semibold text-purple-600 dark:text-purple-400 bg-purple-50 dark:bg-purple-900/30 rounded-full"
-              data-aos="fade-up"
+        {/* Workshop section */}
+        <div className="relative z-10 mx-auto mt-16 max-w-4xl">
+          <div className="grid gap-6 lg:grid-cols-[0.75fr_1.25fr]">
+            <motion.div
+              className="rounded-2xl bg-canvas-950 p-6 text-white shadow-xl dark:bg-white dark:text-canvas-950"
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7 }}
             >
-              Hands-On Learning
-            </p>
-            <h2
-              className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4"
-              data-aos="fade-up"
-              data-aos-delay="100"
+              <p className="text-xs font-bold uppercase tracking-widest text-accent-400 dark:text-accent-600">
+                Hands-On Learning
+              </p>
+              <h3 className="mt-4 font-display text-xl font-bold tracking-tight md:text-2xl">
+                Huawei Cloud Services Workshop
+              </h3>
+              <p className="mt-4 font-display font-medium leading-relaxed text-canvas-300 dark:text-canvas-600">
+                Practical workshop at COMSATS University covering cloud platforms, scalable
+                infrastructure, resource management, and deployment workflows.
+              </p>
+            </motion.div>
+
+            <motion.div
+              className="surface-card border-canvas-200/40 p-6 shadow-md dark:border-white/10"
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7, delay: 0.1 }}
             >
-              Workshops Attended
-            </h2>
-            <div
-              className="w-20 h-1 bg-gradient-to-r from-purple-600 to-pink-600 mx-auto rounded-full"
-              data-aos="fade-up"
-              data-aos-delay="200"
-            ></div>
-          </div>
-
-          <div
-            className="group relative bg-white dark:bg-gray-800 rounded-3xl shadow-xl overflow-hidden border border-gray-200 dark:border-gray-700 hover:shadow-2xl transition-all duration-500"
-            data-aos="fade-up"
-            data-aos-delay="300"
-          >
-            {/* Top accent gradient */}
-            <div className="h-1.5 bg-gradient-to-r from-red-600 via-red-500 to-rose-500"></div>
-
-            <div className="p-8 md:p-10">
-              <div className="flex flex-col md:flex-row md:items-start gap-6">
-                {/* Icon */}
-                <div className="flex-shrink-0">
-                  <div className="w-16 h-16 flex items-center justify-center bg-gradient-to-br from-red-600 to-rose-500 rounded-2xl shadow-lg group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
-                    <i className="fas fa-cloud text-white text-2xl"></i>
-                  </div>
+              <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+                <div>
+                  <p className="text-sm font-bold text-canvas-500 dark:text-canvas-400">Workshop Topics</p>
+                  <h4 className="mt-1 font-display text-lg font-bold text-canvas-950 dark:text-white">
+                    Practical cloud execution
+                  </h4>
                 </div>
-
-                {/* Content */}
-                <div className="flex-1">
-                  <div className="flex flex-wrap items-center gap-3 mb-3">
-                    <h3 className="text-2xl font-bold text-gray-900 dark:text-white">
-                      Huawei Cloud Services Workshop
-                    </h3>
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-purple-50 dark:bg-purple-900/20 text-purple-700 dark:text-purple-400 text-xs font-semibold rounded-full border border-purple-200 dark:border-purple-800">
-                      <i className="fas fa-chalkboard-teacher text-[10px]"></i>
-                      Workshop
-                    </span>
-                  </div>
-
-                  <div className="flex flex-wrap items-center gap-4 mb-4 text-sm">
-                    <span className="flex items-center gap-1.5 text-blue-600 dark:text-blue-400 font-medium">
-                      <i className="fas fa-building text-xs"></i>
-                      Huawei
-                    </span>
-                    <span className="flex items-center gap-1.5 text-gray-500 dark:text-gray-400">
-                      <i className="fas fa-map-marker-alt text-xs"></i>
-                      COMSATS University Islamabad
-                    </span>
-                  </div>
-
-                  <p className="text-gray-600 dark:text-gray-400 leading-relaxed mb-6">
-                    Hands-on workshop covering Huawei Cloud platforms, cloud
-                    architecture, cloud-native services, and enterprise cloud
-                    solutions. Gained practical experience with cloud deployment,
-                    resource management, and scalable infrastructure design.
-                  </p>
-
-                  {/* Topics covered */}
-                  <div className="flex flex-wrap gap-2">
-                    {[
-                      "Cloud Architecture",
-                      "Huawei Cloud Services",
-                      "Cloud Deployment",
-                      "Infrastructure Design",
-                      "Resource Management",
-                    ].map((topic) => (
-                      <span
-                        key={topic}
-                        className="px-3 py-1.5 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 text-xs font-medium rounded-lg border border-gray-200 dark:border-gray-600"
-                      >
-                        {topic}
-                      </span>
-                    ))}
-                  </div>
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-accent-500 to-accent2-500 text-white shadow-lg">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M18 10h-1.26A8 8 0 109 20h9a5 5 0 000-10z" />
+                  </svg>
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
 
-        {/* Bottom stats */}
-        <div
-          className="mt-16 flex flex-wrap justify-center gap-8"
-          data-aos="fade-up"
-          data-aos-delay="800"
-        >
-          <div className="flex items-center gap-3 px-6 py-3 bg-white dark:bg-gray-800 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700">
-            <div className="w-10 h-10 flex items-center justify-center bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl">
-              <i className="fas fa-certificate text-white"></i>
-            </div>
-            <div>
-              <p className="text-2xl font-bold text-gray-900 dark:text-white">
-                {certifications.length}
-              </p>
-              <p className="text-xs text-gray-500 dark:text-gray-400 font-medium">
-                Certifications
-              </p>
-            </div>
-          </div>
-          <div className="flex items-center gap-3 px-6 py-3 bg-white dark:bg-gray-800 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700">
-            <div className="w-10 h-10 flex items-center justify-center bg-gradient-to-br from-green-500 to-emerald-600 rounded-xl">
-              <i className="fas fa-chalkboard-teacher text-white"></i>
-            </div>
-            <div>
-              <p className="text-2xl font-bold text-gray-900 dark:text-white">
-                1
-              </p>
-              <p className="text-xs text-gray-500 dark:text-gray-400 font-medium">
-                Workshop
-              </p>
-            </div>
-          </div>
-          <div className="flex items-center gap-3 px-6 py-3 bg-white dark:bg-gray-800 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700">
-            <div className="w-10 h-10 flex items-center justify-center bg-gradient-to-br from-orange-500 to-red-600 rounded-xl">
-              <i className="fas fa-layer-group text-white"></i>
-            </div>
-            <div>
-              <p className="text-2xl font-bold text-gray-900 dark:text-white">
-                5+
-              </p>
-              <p className="text-xs text-gray-500 dark:text-gray-400 font-medium">
-                Platforms
-              </p>
-            </div>
+              <div className="mt-5 flex flex-wrap gap-2">
+                {workshopTopics.map((topic) => (
+                  <span
+                    key={topic}
+                    className="rounded-full border border-canvas-200/40 bg-canvas-100/60 px-3.5 py-1.5 font-display text-sm font-bold text-canvas-700 shadow-sm dark:border-white/10 dark:bg-white/[0.06] dark:text-canvas-300"
+                  >
+                    {topic}
+                  </span>
+                ))}
+              </div>
+            </motion.div>
           </div>
         </div>
       </div>
-
     </section>
   );
 };

@@ -1,179 +1,151 @@
-import Link from "next/link";
-import personal from "@/config/personal";
+import Link from 'next/link';
+import { motion } from 'motion/react';
+import personal from '@/config/personal';
+
+const quickLinks = [
+  { name: 'About', href: '/#about' },
+  { name: 'Services', href: '/#services' },
+  { name: 'Projects', href: '/#projects' },
+  { name: 'Skills', href: '/#skills' },
+  { name: 'Certifications', href: '/#certifications' },
+  { name: 'Contact', href: '/#contact' },
+];
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="relative overflow-hidden bg-gradient-to-b from-white to-gray-50 dark:from-gray-900 dark:to-gray-950 border-t border-gray-200 dark:border-gray-800">
-      {/* Animated background decoration */}
-      <div className="absolute inset-0 overflow-hidden z-0">
-        <div className="absolute -top-24 -right-24 w-96 h-96 bg-gradient-to-br from-blue-400 to-blue-600 dark:from-blue-600 dark:to-blue-900 rounded-full blur-3xl opacity-10 animate-blob"></div>
-        <div className="absolute top-1/2 -left-24 w-80 h-80 bg-gradient-to-br from-purple-400 to-purple-600 dark:from-purple-600 dark:to-purple-900 rounded-full blur-3xl opacity-10 animate-blob animation-delay-2000"></div>
+    <footer className="section-border-top relative overflow-hidden">
+      {/* Background gradient */}
+      <div className="pointer-events-none absolute inset-0">
+        <div className="glow-orb left-1/2 bottom-0 h-[300px] w-[300px] -translate-x-1/2 bg-accent-500/[0.03]" />
       </div>
 
-      <div className="container mx-auto px-4 py-16 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12">
-          {/* Brand Section */}
-          <div className="lg:col-span-1">
-            <Link href="/" className="group inline-block mb-4">
-              <h3 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 bg-clip-text text-transparent group-hover:from-purple-600 group-hover:to-blue-600 dark:group-hover:from-purple-400 dark:group-hover:to-blue-400 transition-all duration-300">
-                {personal.name}
-              </h3>
+      <div className="section-container py-16">
+        {/* Large CTA section */}
+        <motion.div
+          className="mb-16 text-center"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
+        >
+          <h2 className="font-display text-3xl font-bold text-canvas-950 dark:text-white sm:text-4xl md:text-5xl">
+            Let&apos;s create something
+            <br />
+            <span className="text-gradient">remarkable together.</span>
+          </h2>
+          <div className="mt-8 flex justify-center gap-3">
+            <Link href="/#contact" className="btn-primary">
+              <span>Start a Project</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M7 17L17 7M17 7H7M17 7V17"/>
+              </svg>
             </Link>
-            <p className="text-gray-600 dark:text-gray-400 mb-6 leading-relaxed">
-              {personal.title} specializing in creating responsive and
-              user-friendly experiences.
-            </p>
+            <a
+              href={`mailto:${personal.email}`}
+              className="btn-secondary"
+            >
+              <span>Email Me</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
+              </svg>
+            </a>
+          </div>
+        </motion.div>
 
-            {/* Social Links */}
-            <div className="flex space-x-3">
-              <a
-                href={personal.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group w-11 h-11 flex items-center justify-center bg-gray-100 dark:bg-gray-800 hover:bg-blue-600 dark:hover:bg-blue-600 text-gray-700 dark:text-gray-300 rounded-xl transition-all duration-300 hover:scale-110 hover:shadow-lg"
-                aria-label="LinkedIn"
-              >
-                <i className="fab fa-linkedin text-lg group-hover:text-white transition-colors"></i>
-              </a>
-              <a
-                href={personal.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group w-11 h-11 flex items-center justify-center bg-gray-100 dark:bg-gray-800 hover:bg-gray-900 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-xl transition-all duration-300 hover:scale-110 hover:shadow-lg"
-                aria-label="GitHub"
-              >
-                <i className="fab fa-github text-lg group-hover:text-white transition-colors"></i>
-              </a>
+        {/* Divider */}
+        <div className="divider" />
+
+        {/* Footer grid */}
+        <div className="mt-12 grid gap-10 lg:grid-cols-[1.25fr_0.75fr_0.9fr]">
+          {/* Brand */}
+          <div>
+            <Link href="/" className="group inline-flex items-center gap-3">
+              <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-canvas-950 text-sm font-bold text-white dark:bg-white dark:text-canvas-950">
+                AR
+              </span>
+              <span className="font-display text-lg font-bold text-canvas-950 dark:text-white">
+                {personal.name}
+              </span>
+            </Link>
+            <p className="font-display mt-5 max-w-md leading-relaxed text-canvas-500 dark:text-canvas-400">
+              {personal.title} building polished web, mobile, and AI-powered product experiences.
+            </p>
+            <div className="mt-6 flex gap-3">
+              <SocialLink href={personal.linkedin} icon="fa-linkedin" label="LinkedIn" />
+              <SocialLink href={personal.github} icon="fa-github" label="GitHub" />
             </div>
           </div>
 
-          {/* Quick Links */}
-          <div>
-            <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-6 flex items-center">
-              <i className="fas fa-link text-blue-600 dark:text-blue-400 mr-2 text-sm"></i>
-              Quick Links
+          {/* Navigation */}
+          <nav>
+            <h3 className="text-xs font-semibold uppercase tracking-widest text-canvas-400 dark:text-canvas-500">
+              Navigation
             </h3>
-            <ul className="space-y-3">
-              {[
-                { name: "About", href: "/#about", icon: "fa-user" },
-                { name: "Services", href: "/#services", icon: "fa-briefcase" },
-                { name: "Projects", href: "/#projects", icon: "fa-folder-open" },
-                { name: "Achievements", href: "/#achievements", icon: "fa-trophy" },
-                { name: "Certifications", href: "/#certifications", icon: "fa-certificate" },
-                { name: "Resume", href: "/resume", icon: "fa-file-alt" },
-                { name: "Contact", href: "/#contact", icon: "fa-envelope" },
-              ].map((link) => (
-                <li key={link.name}>
-                  <Link
-                    href={link.href}
-                    className="group flex items-center text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-300"
-                  >
-                    <i
-                      className={`fas ${link.icon} w-5 text-sm mr-2 group-hover:translate-x-1 transition-transform`}
-                    ></i>
-                    <span className="group-hover:translate-x-1 transition-transform">
-                      {link.name}
-                    </span>
-                  </Link>
-                </li>
+            <div className="mt-5 grid grid-cols-2 gap-3">
+              {quickLinks.map((link) => (
+                <Link
+                  key={link.name}
+                  href={link.href}
+                  className="font-display text-sm font-medium text-canvas-600 transition-colors duration-300 hover:text-accent-500 dark:text-canvas-400 dark:hover:text-accent-400"
+                >
+                  {link.name}
+                </Link>
               ))}
-            </ul>
-          </div>
+            </div>
+          </nav>
 
-          {/* Contact Info */}
+          {/* Contact info */}
           <div>
-            <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-6 flex items-center">
-              <i className="fas fa-address-book text-blue-600 dark:text-blue-400 mr-2 text-sm"></i>
-              Contact Info
+            <h3 className="text-xs font-semibold uppercase tracking-widest text-canvas-400 dark:text-canvas-500">
+              Contact
             </h3>
-            <ul className="space-y-4">
-              <li className="group">
-                <div className="flex items-start">
-                  <div className="w-9 h-9 flex items-center justify-center bg-blue-100 dark:bg-blue-900/30 rounded-lg mr-3 flex-shrink-0 group-hover:scale-110 transition-transform">
-                    <i className="fas fa-envelope text-blue-600 dark:text-blue-400 text-sm"></i>
-                  </div>
-                  <div>
-                    <p className="text-xs font-medium text-gray-500 dark:text-gray-500 mb-1">
-                      Email
-                    </p>
-                    <a
-                      href={`mailto:${personal.email}`}
-                      className="text-sm text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors break-all"
-                    >
-                      {personal.email}
-                    </a>
-                  </div>
-                </div>
-              </li>
-              <li className="group">
-                <div className="flex items-start">
-                  <div className="w-9 h-9 flex items-center justify-center bg-purple-100 dark:bg-purple-900/30 rounded-lg mr-3 flex-shrink-0 group-hover:scale-110 transition-transform">
-                    <i className="fas fa-map-marker-alt text-purple-600 dark:text-purple-400 text-sm"></i>
-                  </div>
-                  <div>
-                    <p className="text-xs font-medium text-gray-500 dark:text-gray-500 mb-1">
-                      Location
-                    </p>
-                    <p className="text-sm text-gray-700 dark:text-gray-300">
-                      {personal.location}
-                    </p>
-                  </div>
-                </div>
-              </li>
-            </ul>
-          </div>
-
-          {/* Newsletter/CTA Section */}
-          <div>
-            <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-6 flex items-center">
-              <i className="fas fa-rocket text-blue-600 dark:text-blue-400 mr-2 text-sm"></i>
-              Let's Work Together
-            </h3>
-            <p className="text-sm text-gray-600 dark:text-gray-400 mb-4 leading-relaxed">
-              Have a project in mind? Let's create something amazing together!
-            </p>
-            <Link
-              href="/#contact"
-              className="group relative inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white text-sm font-medium rounded-xl overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-blue-500/50"
+            <a
+              href={`mailto:${personal.email}`}
+              className="mt-5 block break-all font-display font-semibold text-canvas-950 transition-colors duration-300 hover:text-accent-500 dark:text-white dark:hover:text-accent-400"
             >
-              <span className="relative z-10 flex items-center">
-                <i className="fas fa-paper-plane mr-2"></i>
-                Get In Touch
-              </span>
-              <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
-            </Link>
+              {personal.email}
+            </a>
+            <p className="mt-3 text-sm text-canvas-500 dark:text-canvas-400">{personal.location}</p>
           </div>
         </div>
 
-        {/* Bottom Bar */}
-        <div className="mt-12 pt-8 border-t border-gray-200 dark:border-gray-800">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-gray-600 dark:text-gray-400 text-sm text-center md:text-left">
-              &copy; {currentYear}{" "}
-              <span className="font-semibold text-gray-900 dark:text-white">
-                {personal.name}
-              </span>
-            </p>
-          </div>
-        </div>
-
-        {/* Back to Top Button */}
-        <div className="mt-8 flex justify-center">
-          <button
+        {/* Bottom bar */}
+        <div className="mt-12 flex flex-col gap-4 border-t border-canvas-200/10 pt-6 dark:border-white/5 sm:flex-row sm:items-center sm:justify-between">
+          <p className="font-display text-sm text-canvas-400 dark:text-canvas-500">
+            &copy; {currentYear} {personal.name}. All rights reserved.
+          </p>
+          <motion.button
             type="button"
-            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            className="group w-12 h-12 flex items-center justify-center bg-gradient-to-br from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110"
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            whileHover={{ y: -2 }}
+            whileTap={{ scale: 0.95 }}
+            className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-canvas-200/20 text-canvas-500 transition-colors duration-300 hover:border-accent-500/30 hover:text-accent-500 dark:border-white/5 dark:text-canvas-400 dark:hover:border-accent-400/30 dark:hover:text-accent-400"
             aria-label="Back to top"
           >
-            <i className="fas fa-arrow-up group-hover:-translate-y-1 transition-transform"></i>
-          </button>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/>
+            </svg>
+          </motion.button>
         </div>
       </div>
-
     </footer>
   );
 };
+
+const SocialLink = ({ href, icon, label }: { href: string; icon: string; label: string }) => (
+  <motion.a
+    href={href}
+    target="_blank"
+    rel="noopener noreferrer"
+    whileHover={{ y: -2 }}
+    whileTap={{ scale: 0.95 }}
+    className="flex h-10 w-10 items-center justify-center rounded-full border border-canvas-200/20 text-canvas-500 transition-colors duration-300 hover:border-accent-500/30 hover:text-accent-500 dark:border-white/5 dark:text-canvas-400 dark:hover:border-accent-400/30 dark:hover:text-accent-400"
+    aria-label={label}
+  >
+    <i className={`fab ${icon}`} />
+  </motion.a>
+);
 
 export default Footer;
