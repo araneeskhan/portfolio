@@ -185,7 +185,7 @@ const Contact = () => {
                         onFocus={() => setFocusedField('name')}
                         onBlur={() => setFocusedField(null)}
                         className={fieldClass('name')}
-                        placeholder="e.g. John Doe"
+                        placeholder="e.g. Add your name"
                       />
                       <ValidationError prefix="Name" field="name" errors={state.errors} className="mt-2 text-sm font-semibold text-red-500" />
                     </FieldLabel>
