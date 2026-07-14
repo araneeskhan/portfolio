@@ -111,47 +111,75 @@ const HorizontalArchive = ({ projects, onPreview }: { projects: ProjectWithId[],
     restDelta: 0.001
   });
 
+  const [activeCard, setActiveCard] = useState<number | null>(null);
+
   return (
     <section ref={containerRef} className="relative mt-16 h-[300vh]">
-      <div className="sticky top-0 flex h-screen flex-col items-center justify-center overflow-hidden py-20">
+      <style>{`
+        .archive-stack {
+          --spread-x: 12vw;
+          --spread-px: 0px;
+          --spread-y: 0rem;
+          --spread-y-dir: 8rem;
+          --rot: 4deg;
+          --scale: 0.8;
+        }
+        @media (min-width: 768px) {
+          .archive-stack {
+            --spread-x: 14vw;
+            --spread-px: 35px;
+            --spread-y: 2.5rem;
+            --spread-y-dir: 0rem;
+            --rot: 7deg;
+            --scale: 1;
+          }
+        }
+      `}</style>
+      <div className="archive-stack sticky top-0 flex h-[100dvh] flex-col items-center justify-center py-20">
         
-        <div className="absolute top-12 w-full px-5 text-center sm:px-8 z-50 pointer-events-none">
-          <p className="eyebrow mb-4 inline-flex bg-canvas-50/80 backdrop-blur-md dark:bg-canvas-950/80">
-            <span className="h-1.5 w-1.5 rounded-full bg-accent-500" />
-            Archive
-          </p>
-          <h3 className="font-display text-4xl font-bold tracking-tight text-canvas-950 dark:text-white md:text-5xl lg:text-6xl">
-            More shipped builds
-          </h3>
-          <p className="mt-3 font-display text-sm font-medium text-canvas-500 dark:text-canvas-400">
-            Keep scrolling to spread the deck
-          </p>
+        <div className="absolute top-4 md:top-12 w-full px-5 text-center sm:px-8 z-0 md:z-50 pointer-events-none">
+          <div className="inline-block rounded-3xl bg-canvas-50/70 px-6 py-4 backdrop-blur-xl dark:bg-canvas-950/70 shadow-[0_8px_30px_rgb(0,0,0,0.12)] border border-white/10">
+            <p className="eyebrow mb-4 inline-flex bg-canvas-50/80 backdrop-blur-md dark:bg-canvas-950/80">
+              <span className="h-1.5 w-1.5 rounded-full bg-accent-500" />
+              Archive
+            </p>
+            <h3 className="font-display text-4xl font-bold tracking-tight text-canvas-950 dark:text-white md:text-5xl lg:text-6xl">
+              More shipped builds
+            </h3>
+            <p className="mt-3 font-display text-sm font-medium text-canvas-500 dark:text-canvas-400">
+              Keep scrolling to spread the deck
+            </p>
+          </div>
         </div>
 
-        <div className="relative mt-24 flex w-full max-w-sm items-center justify-center">
+        <div className="relative z-10 mt-40 md:mt-24 flex w-full max-w-sm items-center justify-center transition-transform duration-500" style={{ transform: 'scale(var(--scale))' }}>
           {projects.map((project, index) => {
             const center = (projects.length - 1) / 2;
             const offset = index - center;
             
             // Fix Framer Motion string interpolation by matching initial and target string structures perfectly
-            const initialX = `calc(0vw + 0px)`;
-            const targetX = `calc(${offset * 14}vw + ${offset * 35}px)`;
+            const initialX = `calc(var(--spread-x) * 0 + var(--spread-px) * 0)`;
+            const targetX = `calc(var(--spread-x) * ${offset} + var(--spread-px) * ${offset})`;
             
-            const initialY = `0rem`;
-            const targetY = `${Math.abs(offset) * 2.5}rem`;
+            const initialY = `calc(var(--spread-y) * 0 + var(--spread-y-dir) * 0)`;
+            const targetY = `calc(var(--spread-y) * ${Math.abs(offset)} + var(--spread-y-dir) * ${offset})`;
             
+            const initialRotate = `calc(var(--rot) * 0)`;
+            const targetRotate = `calc(var(--rot) * ${offset})`;
+
             const x = useTransform(smoothProgress, [0, 1], [initialX, targetX]);
             const y = useTransform(smoothProgress, [0, 1], [initialY, targetY]);
-            const rotate = useTransform(smoothProgress, [0, 1], [0, offset * 7]);
+            const rotate = useTransform(smoothProgress, [0, 1], [initialRotate, targetRotate]);
 
             return (
               <motion.div
                 key={project.id}
+                onClick={() => setActiveCard(activeCard === index ? null : index)}
                 style={{
                   x,
                   y,
                   rotate,
-                  zIndex: Math.round(20 - Math.abs(offset)),
+                  zIndex: activeCard === index ? 100 : Math.round(20 - Math.abs(offset)),
                 }}
                 whileHover={{
                   scale: 1.08,
@@ -341,8 +369,11 @@ const ArchiveProjectCard = ({
     >
       <button
         type="button"
-        onClick={() => onPreview(cover)}
-        className="relative block h-56 w-full overflow-hidden rounded-2xl cursor-zoom-in bg-canvas-50 dark:bg-canvas-950"
+        onClick={() => {
+          if (typeof window !== 'undefined' && window.innerWidth < 768) return;
+          onPreview(cover);
+        }}
+        className="relative block h-56 w-full overflow-hidden rounded-2xl md:cursor-zoom-in bg-canvas-50 dark:bg-canvas-950"
         aria-label={`Preview ${project.title}`}
       >
         <Image 
