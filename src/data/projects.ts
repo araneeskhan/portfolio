@@ -34,8 +34,7 @@ export interface Project {
 export const projectsData: Record<string, Project> = {
   "recover-care": {
     title: "RecoverCare",
-    coverImage:
-      "https://raw.githubusercontent.com/araneeskhan/recover-care/main/docs/screenshots/home.png",
+    coverImage: "/assets/recovercare/cover-recover_care.png",
     shortDescription:
       "A hospital post-surgery recovery app with check-ins, care-team messaging, medication tracking, and intelligent alerting.",
     category: "HealthTech",
