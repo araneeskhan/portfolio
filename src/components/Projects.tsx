@@ -224,18 +224,18 @@ const FeaturedProjectCard = ({
   return (
     <motion.article
       ref={cardRef}
-      className="group overflow-hidden rounded-3xl border border-canvas-200/40 bg-white/50 shadow-xl backdrop-blur-xl transition-colors hover:border-accent-500/40 dark:border-white/10 dark:bg-canvas-950/50 dark:shadow-[0_0_30px_rgba(0,0,0,0.4)]"
+      className="group overflow-hidden rounded-[2rem] bg-white shadow-[0_20px_60px_-15px_rgba(0,0,0,0.1)] transition-all duration-500 hover:shadow-[0_30px_70px_-15px_rgba(0,0,0,0.15)] dark:bg-canvas-900 dark:shadow-[0_20px_60px_-15px_rgba(0,0,0,0.5)]"
       initial="hidden"
       whileInView="show"
       viewport={{ once: true, margin: '-100px' }}
       variants={containerVariants}
     >
-      <div className={`grid lg:grid-cols-2 ${index % 2 === 1 ? 'lg:grid-flow-dense' : ''}`}>
-        {/* Image with smooth parallax */}
+      <div className={`grid lg:grid-cols-2`}>
+        {/* Image Half */}
         <button
           type="button"
           onClick={() => onPreview(cover)}
-          className={`relative block h-[350px] w-full overflow-hidden text-left md:h-[450px] lg:h-full cursor-zoom-in ${index % 2 === 1 ? 'lg:col-start-2' : ''}`}
+          className={`relative block h-[300px] w-full overflow-hidden text-left md:h-[400px] lg:h-full cursor-zoom-in bg-canvas-100 dark:bg-canvas-950 ${index % 2 === 1 ? 'lg:col-start-2 lg:row-start-1' : ''}`}
           aria-label={`Preview ${project.title}`}
         >
           <motion.div className="absolute inset-[-10%] h-[120%] w-[120%]" style={{ y: imgY, scale: imgScale }}>
@@ -248,93 +248,75 @@ const FeaturedProjectCard = ({
               priority={index === 0}
             />
           </motion.div>
-          <div className="absolute inset-0 bg-gradient-to-t from-canvas-950/80 via-transparent to-transparent opacity-80 transition-opacity duration-700 group-hover:opacity-40 lg:bg-gradient-to-r lg:from-transparent lg:via-canvas-950/10 lg:to-canvas-950/80" />
+          
+          <div className="absolute inset-0 bg-canvas-950/0 transition-colors duration-500 group-hover:bg-canvas-950/10" />
 
-          {/* Animated Preview Badge */}
-          <motion.span 
-            className="absolute bottom-6 left-6 flex items-center gap-2 rounded-full bg-white/90 px-5 py-2.5 text-sm font-semibold text-canvas-950 shadow-xl backdrop-blur-md transition-all duration-500 group-hover:-translate-y-1 group-hover:shadow-2xl opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0"
-          >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="transition-transform duration-500 group-hover:scale-110">
-              <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
-            </svg>
-            Gallery
-          </motion.span>
-
-          {/* Badges */}
+          {/* Badges on Image */}
           <div className="absolute left-6 top-6 flex flex-wrap gap-2">
             {project.category && (
-              <span className="font-display rounded-full border border-white/20 bg-white/20 px-4 py-1.5 text-xs font-semibold tracking-wide text-white backdrop-blur-md">
+              <span className="font-display rounded-full bg-canvas-950/40 px-4 py-1.5 text-xs font-bold tracking-wide text-white backdrop-blur-md dark:bg-black/50">
                 {project.category}
               </span>
             )}
             {project.status && (
-              <span className="font-display rounded-full border border-emerald-400/30 bg-emerald-400/20 px-4 py-1.5 text-xs font-semibold tracking-wide text-emerald-400 backdrop-blur-md shadow-[0_0_15px_rgba(52,211,153,0.3)]">
+              <span className="font-display rounded-full border border-emerald-400/30 bg-emerald-500/20 px-4 py-1.5 text-xs font-bold tracking-wide text-emerald-300 backdrop-blur-md">
                 {project.status}
-              </span>
-            )}
-            {project.caseStudyUrl && (
-              <span className="font-display rounded-full border border-accent-400/50 bg-accent-500/90 px-4 py-1.5 text-xs font-bold tracking-wide text-white backdrop-blur-md shadow-[0_0_20px_rgba(var(--color-accent-500),0.6)] flex items-center gap-2">
-                <i className="fas fa-microscope"></i>
-                Case Study
               </span>
             )}
           </div>
         </button>
 
-        {/* Content */}
-        <div className={`relative flex flex-col justify-center p-8 md:p-12 lg:p-16 ${index % 2 === 1 ? 'lg:col-start-1 lg:row-start-1' : ''}`}>
+        {/* Content Half */}
+        <div className={`relative flex flex-col justify-center bg-white p-6 dark:bg-canvas-900 md:p-10 lg:p-12 ${index % 2 === 1 ? 'lg:col-start-1 lg:row-start-1' : ''}`}>
           
-          {/* Subtle Glow Behind Content */}
-          <div className="absolute top-0 right-0 -mr-20 -mt-20 h-64 w-64 rounded-full bg-accent-500/10 blur-[100px] pointer-events-none" />
-
-          <motion.p variants={itemVariants} className="font-display text-sm font-bold tracking-widest uppercase text-accent-500 dark:text-accent-400">
+          <motion.p variants={itemVariants} className="font-display text-[11px] font-bold tracking-[0.15em] uppercase text-blue-500 dark:text-blue-400">
             {project.role} {project.year ? `• ${project.year}` : ''}
           </motion.p>
           
-          <motion.h3 variants={itemVariants} className="mt-4 font-display text-4xl font-bold tracking-tight text-canvas-950 dark:text-white lg:text-5xl">
+          <motion.h3 variants={itemVariants} className="mt-3 font-display text-3xl font-black tracking-tight text-canvas-950 dark:text-white md:text-4xl lg:text-[2.5rem] lg:leading-tight">
             {project.title}
           </motion.h3>
           
-          <motion.p variants={itemVariants} className="mt-6 font-display text-lg leading-relaxed text-canvas-500 dark:text-canvas-300">
+          <motion.p variants={itemVariants} className="mt-4 font-display text-[15px] leading-relaxed text-canvas-500 dark:text-canvas-400">
             {project.shortDescription ?? project.description}
           </motion.p>
 
           {/* Metrics */}
           {project.metrics && project.metrics.length > 0 && (
-            <motion.div variants={itemVariants} className="mt-10 flex flex-wrap gap-10">
+            <motion.div variants={itemVariants} className="mt-6 flex flex-wrap gap-8">
               {project.metrics.slice(0, 3).map((m) => (
                 <div key={m.label} className="flex flex-col">
-                  <span className="font-display text-4xl font-bold text-canvas-950 dark:text-white">{m.value}</span>
-                  <span className="font-display mt-2 text-[10px] font-semibold uppercase tracking-widest text-canvas-400">{m.label}</span>
+                  <span className="font-display text-2xl font-black text-canvas-950 dark:text-white lg:text-3xl">{m.value}</span>
+                  <span className="font-display mt-1.5 text-[10px] font-bold uppercase tracking-widest text-canvas-400">{m.label}</span>
                 </div>
               ))}
             </motion.div>
           )}
 
           {/* Tags */}
-          <motion.div variants={itemVariants} className="mt-10 flex flex-wrap gap-3">
+          <motion.div variants={itemVariants} className="mt-6 flex flex-wrap gap-2">
             {project.technologies.slice(0, 5).map((tech) => (
-              <span key={tech} className="font-display rounded-full border border-canvas-200/40 bg-canvas-100/50 px-4 py-2 text-xs font-semibold text-canvas-600 transition-colors hover:border-accent-500/30 hover:bg-accent-500/10 hover:text-accent-500 dark:border-white/10 dark:bg-white/[0.03] dark:text-canvas-300 dark:hover:border-accent-400/30 dark:hover:bg-accent-400/10 dark:hover:text-accent-400">
+              <span key={tech} className="rounded-full bg-canvas-50 px-3.5 py-1.5 font-display text-[11px] font-bold text-canvas-600 dark:bg-white/[0.05] dark:text-canvas-300">
                 {tech}
               </span>
             ))}
           </motion.div>
 
           {/* Actions */}
-          <motion.div variants={itemVariants} className="mt-10 flex flex-wrap items-center gap-4">
+          <motion.div variants={itemVariants} className="mt-8 flex flex-wrap items-center gap-4">
             {project.caseStudyUrl && (
-              <Link href={project.caseStudyUrl} className="btn-primary font-display px-6 py-3 text-sm shadow-[0_0_20px_rgba(var(--color-accent-500),0.3)] transition-all hover:shadow-[0_0_30px_rgba(var(--color-accent-500),0.6)]">
-                <span>Explore Case Study</span>
+              <Link href={project.caseStudyUrl} className="flex items-center gap-2 rounded-full bg-blue-500 px-5 py-2.5 font-display text-sm font-bold text-white transition-transform hover:scale-[1.02] active:scale-[0.98]">
+                <span>Case Study</span>
                 <i className="fas fa-microscope"></i>
               </Link>
             )}
-            <Link href={`/projects/${project.id}`} className={`${project.caseStudyUrl ? 'btn-secondary' : 'btn-primary shadow-[0_0_20px_rgba(var(--color-accent-500),0.3)] hover:shadow-[0_0_30px_rgba(var(--color-accent-500),0.6)]'} font-display px-6 py-3 text-sm transition-all`}>
+            <Link href={`/projects/${project.id}`} className="flex items-center gap-2 rounded-full bg-canvas-950 px-5 py-2.5 font-display text-sm font-bold text-white transition-transform hover:scale-[1.02] active:scale-[0.98] dark:bg-white dark:text-canvas-950">
               <span>View Details</span>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M7 17L17 7M17 7H7M17 7V17" /></svg>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M7 17L17 7M17 7H7M17 7V17" /></svg>
             </Link>
-            <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="btn-secondary font-display px-6 py-3 text-sm">
+            <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 font-display text-sm font-bold text-canvas-700 transition-colors hover:text-canvas-950 dark:text-canvas-300 dark:hover:text-white">
               <span>Source</span>
-              <i className="fab fa-github" />
+              <i className="fab fa-github text-lg" />
             </a>
           </motion.div>
         </div>

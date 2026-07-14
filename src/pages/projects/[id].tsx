@@ -119,20 +119,20 @@ export default function ProjectDetails({ project }: Props) {
         </div>
 
         {/* Hero Section */}
-        <section ref={heroRef} className="relative min-h-[82vh] overflow-hidden pt-28">
-          <motion.div style={{ y: heroY, opacity: heroOpacity }} className="absolute inset-0">
+        <section ref={heroRef} className="relative min-h-[85vh] overflow-hidden pt-32 lg:pt-40">
+          <motion.div style={{ y: heroY, opacity: heroOpacity }} className="absolute inset-0 pointer-events-none">
             <Image
               src={cover}
-              alt={`${project.title} cover`}
+              alt={`${project.title} cover blur`}
               fill
               priority
-              className="object-cover opacity-20 dark:opacity-20"
+              className="object-cover opacity-10 dark:opacity-[0.15] blur-2xl scale-110"
               sizes="100vw"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-white via-white/80 to-white/40 dark:from-canvas-950 dark:via-canvas-950/80 dark:to-canvas-950/40"></div>
           </motion.div>
 
-          <div className="section-container relative z-10 pb-16">
+          <div className="section-container relative z-10 pb-20">
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
@@ -140,47 +140,49 @@ export default function ProjectDetails({ project }: Props) {
             >
               <Link
                 href="/#projects"
-                className="group inline-flex items-center gap-2 text-sm font-bold text-canvas-600 transition-colors hover:text-accent-600 dark:text-canvas-400 dark:hover:text-accent-400"
+                className="group inline-flex items-center gap-3 rounded-full border border-canvas-200/50 bg-white/60 px-5 py-2.5 font-display text-[11px] font-bold uppercase tracking-[0.15em] text-canvas-600 shadow-sm backdrop-blur-md transition-all hover:-translate-y-0.5 hover:border-canvas-300 hover:bg-white hover:text-canvas-950 hover:shadow-md dark:border-white/10 dark:bg-canvas-900/60 dark:text-canvas-300 dark:hover:border-white/20 dark:hover:bg-canvas-800 dark:hover:text-white"
               >
                 <i className="fas fa-arrow-left transition-transform group-hover:-translate-x-1"></i>
                 Back to Projects
               </Link>
             </motion.div>
 
-            <div className="mt-10 grid gap-10 items-end lg:grid-cols-[1.05fr_0.95fr]">
+            <div className="mt-12 grid gap-16 items-center lg:grid-cols-[1fr_1fr]">
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.1 }}
+                className="relative z-10"
               >
                 <div className="flex flex-wrap items-center gap-3">
                   {project.category && (
-                    <span className="font-display rounded-full border border-canvas-200/40 bg-white/50 px-4 py-2 text-xs font-bold uppercase tracking-widest text-canvas-700 backdrop-blur-md dark:border-white/10 dark:bg-white/[0.05] dark:text-canvas-300">
+                    <span className="font-display rounded-full border border-canvas-200/40 bg-white px-4 py-1.5 text-[10px] font-bold uppercase tracking-widest text-canvas-600 shadow-sm dark:border-white/10 dark:bg-canvas-900 dark:text-canvas-400">
                       {project.category}
                     </span>
                   )}
                   {project.status && (
-                    <span className="font-display rounded-full border border-emerald-400/30 bg-emerald-400/20 px-4 py-2 text-xs font-bold uppercase tracking-widest text-emerald-500 backdrop-blur-md shadow-[0_0_15px_rgba(52,211,153,0.3)]">
+                    <span className="font-display rounded-full border border-emerald-400/30 bg-emerald-50 px-4 py-1.5 text-[10px] font-bold uppercase tracking-widest text-emerald-600 shadow-sm dark:bg-emerald-500/10 dark:text-emerald-400">
                       {project.status}
                     </span>
                   )}
                 </div>
 
-                <h1 className="mt-6 max-w-4xl font-display text-5xl font-bold tracking-tight text-canvas-950 dark:text-white md:text-7xl">
+                <h1 className="mt-6 font-display text-5xl font-black tracking-tight text-canvas-950 dark:text-white md:text-7xl lg:text-[5rem] lg:leading-[1.1]">
                   {project.title}
                 </h1>
-                <p className="mt-5 max-w-2xl font-display text-lg leading-relaxed text-canvas-600 dark:text-canvas-300 md:text-xl">
+                
+                <p className="mt-6 max-w-2xl font-display text-lg leading-relaxed text-canvas-600 dark:text-canvas-400 md:text-xl">
                   {project.shortDescription ?? project.description}
                 </p>
 
-                <div className="mt-10 flex flex-wrap gap-4">
+                <div className="mt-12 flex flex-wrap items-center gap-5">
                   {project.caseStudyUrl && (
                     <Link
                       href={project.caseStudyUrl}
-                      className="btn-primary font-display px-7 py-3.5 shadow-[0_0_20px_rgba(var(--color-accent-500),0.3)] hover:shadow-[0_0_30px_rgba(var(--color-accent-500),0.6)]"
+                      className="flex items-center gap-3 rounded-full bg-blue-500 px-7 py-3.5 font-display text-sm font-bold text-white transition-transform hover:scale-[1.02] active:scale-[0.98]"
                     >
                       <span>Deep Dive Case Study</span>
-                      <i className="fas fa-microscope"></i>
+                      <i className="fas fa-microscope text-lg"></i>
                     </Link>
                   )}
                   {project.liveUrl && (
@@ -188,7 +190,7 @@ export default function ProjectDetails({ project }: Props) {
                       href={project.liveUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className={`${project.caseStudyUrl ? 'btn-secondary' : 'btn-primary shadow-[0_0_20px_rgba(var(--color-accent-500),0.3)] hover:shadow-[0_0_30px_rgba(var(--color-accent-500),0.6)]'} font-display px-7 py-3.5`}
+                      className="flex items-center gap-3 rounded-full bg-canvas-950 px-7 py-3.5 font-display text-sm font-bold text-white transition-transform hover:scale-[1.02] active:scale-[0.98] dark:bg-white dark:text-canvas-950"
                     >
                       <span>Live Demo</span>
                       <i className="fas fa-arrow-up-right-from-square"></i>
@@ -198,10 +200,10 @@ export default function ProjectDetails({ project }: Props) {
                     href={project.githubUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="btn-secondary font-display px-7 py-3.5"
+                    className="group flex items-center gap-2 font-display text-sm font-bold text-canvas-600 transition-colors hover:text-canvas-950 dark:text-canvas-400 dark:hover:text-white"
                   >
                     <span>Source Code</span>
-                    <i className="fab fa-github"></i>
+                    <i className="fab fa-github text-xl transition-transform group-hover:scale-110"></i>
                   </a>
                 </div>
               </motion.div>
@@ -209,26 +211,25 @@ export default function ProjectDetails({ project }: Props) {
               <motion.button
                 type="button"
                 onClick={() => openGallery(cover)}
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-                className="group relative min-h-[420px] overflow-hidden rounded-3xl shadow-glow ring-1 ring-canvas-200/50 dark:ring-white/10"
+                initial={{ opacity: 0, scale: 0.9, rotateY: 10 }}
+                animate={{ opacity: 1, scale: 1, rotateY: 0 }}
+                transition={{ duration: 0.8, delay: 0.2, type: "spring", stiffness: 100 }}
+                className="group relative block aspect-[4/3] w-full overflow-hidden rounded-[2rem] shadow-[0_20px_50px_-15px_rgba(0,0,0,0.2)] transition-transform duration-700 hover:-translate-y-4 hover:shadow-[0_40px_70px_-15px_rgba(0,0,0,0.2)] lg:aspect-[1/1] xl:aspect-[4/3]"
                 aria-label={`Open ${project.title} image preview`}
               >
                 <Image
                   src={cover}
                   alt={`${project.title} product preview`}
                   fill
-                  className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  className="object-cover transition-transform duration-1000 group-hover:scale-105"
                   sizes="(max-width: 1024px) 100vw, 50vw"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-canvas-950/60 via-transparent to-transparent"></div>
-                <div className="absolute bottom-5 left-5 right-5 flex items-center justify-between gap-4">
-                  <span className="font-display text-sm font-bold text-white">
-                    Click to preview gallery
-                  </span>
-                  <span className="flex h-12 w-12 items-center justify-center rounded-full bg-white/20 text-white backdrop-blur-md transition-colors group-hover:bg-white group-hover:text-canvas-950">
-                    <i className="fas fa-expand"></i>
+                
+                <div className="absolute inset-0 bg-canvas-950/0 transition-colors duration-500 group-hover:bg-canvas-950/20"></div>
+                
+                <div className="absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+                  <span className="flex h-16 w-16 items-center justify-center rounded-full bg-white/90 text-canvas-950 shadow-2xl backdrop-blur-md transition-transform duration-300 group-hover:scale-110">
+                    <i className="fas fa-expand text-xl"></i>
                   </span>
                 </div>
               </motion.button>
@@ -237,9 +238,9 @@ export default function ProjectDetails({ project }: Props) {
         </section>
 
         {/* Meta Bar */}
-        <section className="border-y border-canvas-200/50 bg-canvas-50/50 py-6 dark:border-white/5 dark:bg-white/[0.02] backdrop-blur-sm">
+        <section className="relative z-20 border-y border-canvas-200/50 bg-white/80 py-8 backdrop-blur-xl dark:border-white/5 dark:bg-canvas-950/80">
           <div className="section-container">
-            <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
+            <div className="grid grid-cols-2 gap-6 md:grid-cols-4">
               <MetaTile label="Role" value={project.role ?? "Developer"} delay={0.1} />
               <MetaTile label="Year" value={project.year ?? "Recent"} delay={0.2} />
               <MetaTile label="Type" value={project.category ?? "Project"} delay={0.3} />
