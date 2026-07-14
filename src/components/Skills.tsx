@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'motion/react';
+import { motion, useScroll, useTransform, useSpring } from 'motion/react';
 import SectionHeader from '@/components/SectionHeader';
 
 const allSkills = [
@@ -50,7 +50,14 @@ const ScrollRow = ({
     target: ref,
     offset: ['start end', 'end start'],
   });
-  const x = useTransform(scrollYProgress, [0, 1], xRange);
+  
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 70,
+    damping: 20,
+    restDelta: 0.001
+  });
+
+  const x = useTransform(smoothProgress, [0, 1], xRange);
 
   const sizeClasses = {
     lg: 'h-20 w-20 rounded-2xl',
