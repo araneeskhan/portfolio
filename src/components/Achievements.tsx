@@ -76,19 +76,19 @@ const Achievements = () => {
                     {achievement.title}
                   </h3>
                   <div className="mt-4 flex flex-wrap gap-2">
-                    <span className="rounded-full border border-canvas-200/30 bg-canvas-50/50 px-3 py-1.5 text-sm font-medium text-canvas-600 dark:border-white/5 dark:bg-white/[0.03] dark:text-canvas-300">
+                    <span className="font-display rounded-full border border-canvas-200/30 bg-canvas-50/50 px-3 py-1.5 text-sm font-medium text-canvas-600 dark:border-white/5 dark:bg-white/[0.03] dark:text-canvas-300">
                       {achievement.category}
                     </span>
-                    <span className="rounded-full border border-canvas-200/30 bg-canvas-50/50 px-3 py-1.5 text-sm font-medium text-canvas-600 dark:border-white/5 dark:bg-white/[0.03] dark:text-canvas-300">
+                    <span className="font-display rounded-full border border-canvas-200/30 bg-canvas-50/50 px-3 py-1.5 text-sm font-medium text-canvas-600 dark:border-white/5 dark:bg-white/[0.03] dark:text-canvas-300">
                       {achievement.date}
                     </span>
                   </div>
-                  <p className="mt-6 leading-relaxed text-canvas-500 dark:text-canvas-300">
+                  <p className="font-display mt-6 leading-relaxed text-canvas-500 dark:text-canvas-300">
                     {achievement.description}
                   </p>
                   <div className="mt-8 grid grid-cols-2 gap-3">
                     <div className="rounded-xl border border-canvas-200/20 bg-canvas-50/40 p-4 dark:border-white/5 dark:bg-white/[0.02]">
-                      <p className="text-[10px] font-semibold uppercase tracking-wider text-canvas-400">
+                      <p className="font-display text-[10px] font-semibold uppercase tracking-wider text-canvas-400">
                         Recognition
                       </p>
                       <p className="mt-2 font-display text-lg font-bold text-canvas-950 dark:text-white">
@@ -96,7 +96,7 @@ const Achievements = () => {
                       </p>
                     </div>
                     <div className="rounded-xl border border-canvas-200/20 bg-canvas-50/40 p-4 dark:border-white/5 dark:bg-white/[0.02]">
-                      <p className="text-[10px] font-semibold uppercase tracking-wider text-canvas-400">
+                      <p className="font-display text-[10px] font-semibold uppercase tracking-wider text-canvas-400">
                         Project
                       </p>
                       <p className="mt-2 font-display text-lg font-bold text-canvas-950 dark:text-white">
