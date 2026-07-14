@@ -89,37 +89,39 @@ const CertCard = ({
     >
       <motion.div
         style={{ scale, opacity, rotateX }}
-        className={`relative overflow-hidden rounded-2xl border border-canvas-200/40 bg-white/90 p-6 shadow-elevated backdrop-blur-3xl transition-shadow duration-500 hover:shadow-glow dark:border-white/10 dark:bg-canvas-950/90 md:p-8`}
+        className="relative overflow-hidden rounded-[2rem] bg-white p-3.5 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.1)] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_30px_60px_-12px_rgba(0,0,0,0.15)] dark:bg-canvas-900 dark:shadow-[0_20px_50px_-12px_rgba(0,0,0,0.5)]"
       >
-        <div className={`pointer-events-none absolute inset-0 ${cert.bgTint}`} />
-
-        <div className="relative z-10">
-          <div className="flex items-start justify-between gap-4">
-            <div>
-              <span className="text-[10px] font-bold uppercase tracking-widest text-canvas-400 dark:text-canvas-500">
-                Certificate — 0{index + 1}
-              </span>
-              <h3 className="mt-3 font-display text-xl font-bold text-canvas-950 dark:text-white md:text-2xl">
-                {cert.name}
-              </h3>
-              <p className="mt-2 font-display text-sm font-bold text-accent-500 dark:text-accent-400">
-                {cert.issuer}
-              </p>
-            </div>
-            <div className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br ${cert.gradient} text-white shadow-lg`}>
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <polyline points="20 6 9 17 4 12" />
-              </svg>
-            </div>
+        <div className={`relative flex flex-col justify-between overflow-hidden rounded-2xl bg-gradient-to-br from-canvas-50 to-white p-6 dark:from-canvas-950 dark:to-canvas-900 md:flex-row md:items-center`}>
+          {/* Subtle gradient wash */}
+          <div className={`pointer-events-none absolute inset-0 ${cert.bgTint} opacity-50`} />
+          <div className="relative z-10 flex flex-col">
+            <span className="font-display text-[10px] font-bold uppercase tracking-[0.1em] text-canvas-400 dark:text-canvas-500">
+              Certificate — 0{index + 1}
+            </span>
+            <h3 className="mt-3 font-display text-2xl font-black text-canvas-950 dark:text-white md:text-3xl">
+              {cert.name}
+            </h3>
+            <p className="mt-2 font-display text-[13px] font-bold uppercase tracking-[0.05em] text-canvas-500">
+              {cert.issuer}
+            </p>
           </div>
-
-          <p className="mt-4 max-w-2xl font-display font-medium leading-relaxed text-canvas-600 dark:text-canvas-300">
-            {cert.description}
-          </p>
+          <div className={`relative z-10 mt-6 flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br ${cert.gradient} text-white shadow-[0_10px_25px_-5px_currentColor] md:mt-0`}>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <polyline points="20 6 9 17 4 12" />
+            </svg>
+          </div>
         </div>
 
-        {/* Bottom gradient line */}
-        <div className={`absolute bottom-0 left-0 h-[4px] w-full bg-gradient-to-r ${cert.gradient}`} />
+        <div className="p-3 pt-6 pb-2">
+          <p className="font-display text-[15px] leading-relaxed text-canvas-600 dark:text-canvas-400">
+            {cert.description}
+          </p>
+          <div className="mt-6 flex items-center gap-3">
+            <span className="flex items-center justify-center rounded-full bg-canvas-950 px-5 py-2 font-display text-xs font-bold text-white dark:bg-white dark:text-canvas-950">
+              Verified
+            </span>
+          </div>
+        </div>
       </motion.div>
     </div>
   );

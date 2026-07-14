@@ -224,7 +224,7 @@ const FeaturedProjectCard = ({
   return (
     <motion.article
       ref={cardRef}
-      className="group overflow-hidden rounded-[2.5rem] border border-canvas-200/20 bg-white/40 shadow-2xl backdrop-blur-md transition-colors hover:border-accent-500/30 dark:border-white/10 dark:bg-canvas-950/40 dark:shadow-[0_0_50px_rgba(0,0,0,0.5)]"
+      className="group overflow-hidden rounded-3xl border border-canvas-200/40 bg-white/50 shadow-xl backdrop-blur-xl transition-colors hover:border-accent-500/40 dark:border-white/10 dark:bg-canvas-950/50 dark:shadow-[0_0_30px_rgba(0,0,0,0.4)]"
       initial="hidden"
       whileInView="show"
       viewport={{ once: true, margin: '-100px' }}
@@ -261,15 +261,21 @@ const FeaturedProjectCard = ({
           </motion.span>
 
           {/* Badges */}
-          <div className="absolute left-8 top-8 flex flex-wrap gap-3">
+          <div className="absolute left-6 top-6 flex flex-wrap gap-2">
             {project.category && (
-              <span className="font-display rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-xs font-semibold tracking-wide text-white backdrop-blur-md">
+              <span className="font-display rounded-full border border-white/20 bg-white/20 px-4 py-1.5 text-xs font-semibold tracking-wide text-white backdrop-blur-md">
                 {project.category}
               </span>
             )}
             {project.status && (
-              <span className="font-display rounded-full border border-emerald-400/30 bg-emerald-400/10 px-4 py-1.5 text-xs font-semibold tracking-wide text-emerald-400 backdrop-blur-md shadow-[0_0_15px_rgba(52,211,153,0.3)]">
+              <span className="font-display rounded-full border border-emerald-400/30 bg-emerald-400/20 px-4 py-1.5 text-xs font-semibold tracking-wide text-emerald-400 backdrop-blur-md shadow-[0_0_15px_rgba(52,211,153,0.3)]">
                 {project.status}
+              </span>
+            )}
+            {project.caseStudyUrl && (
+              <span className="font-display rounded-full border border-accent-400/50 bg-accent-500/90 px-4 py-1.5 text-xs font-bold tracking-wide text-white backdrop-blur-md shadow-[0_0_20px_rgba(var(--color-accent-500),0.6)] flex items-center gap-2">
+                <i className="fas fa-microscope"></i>
+                Case Study
               </span>
             )}
           </div>
@@ -315,13 +321,19 @@ const FeaturedProjectCard = ({
           </motion.div>
 
           {/* Actions */}
-          <motion.div variants={itemVariants} className="mt-12 flex flex-wrap items-center gap-4">
-            <Link href={`/projects/${project.id}`} className="btn-primary font-display px-7 py-3.5 text-sm shadow-[0_0_20px_rgba(var(--color-accent-500),0.3)] transition-all hover:shadow-[0_0_30px_rgba(var(--color-accent-500),0.6)]">
-              <span>Explore Case Study</span>
+          <motion.div variants={itemVariants} className="mt-10 flex flex-wrap items-center gap-4">
+            {project.caseStudyUrl && (
+              <Link href={project.caseStudyUrl} className="btn-primary font-display px-6 py-3 text-sm shadow-[0_0_20px_rgba(var(--color-accent-500),0.3)] transition-all hover:shadow-[0_0_30px_rgba(var(--color-accent-500),0.6)]">
+                <span>Explore Case Study</span>
+                <i className="fas fa-microscope"></i>
+              </Link>
+            )}
+            <Link href={`/projects/${project.id}`} className={`${project.caseStudyUrl ? 'btn-secondary' : 'btn-primary shadow-[0_0_20px_rgba(var(--color-accent-500),0.3)] hover:shadow-[0_0_30px_rgba(var(--color-accent-500),0.6)]'} font-display px-6 py-3 text-sm transition-all`}>
+              <span>View Details</span>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M7 17L17 7M17 7H7M17 7V17" /></svg>
             </Link>
-            <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="btn-secondary font-display px-7 py-3.5 text-sm">
-              <span>View Source</span>
+            <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="btn-secondary font-display px-6 py-3 text-sm">
+              <span>Source</span>
               <i className="fab fa-github" />
             </a>
           </motion.div>
@@ -329,9 +341,7 @@ const FeaturedProjectCard = ({
       </div>
     </motion.article>
   );
-};
-
-/* Archive card with hover lift */
+};/* Archive card with hover lift */
 const ArchiveProjectCard = ({
   project,
   index,
@@ -345,35 +355,45 @@ const ArchiveProjectCard = ({
 
   return (
     <motion.article
-      className="group overflow-hidden rounded-2xl border border-canvas-200/15 bg-white/30 backdrop-blur-sm transition-all duration-500 hover:border-accent-500/20 hover:shadow-glow dark:border-white/5 dark:bg-white/[0.015]"
+      className="group overflow-hidden rounded-[2rem] bg-white p-3.5 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.1)] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_30px_60px_-12px_rgba(0,0,0,0.15)] dark:bg-canvas-900 dark:shadow-[0_20px_50px_-12px_rgba(0,0,0,0.5)]"
     >
       <button
         type="button"
         onClick={() => onPreview(cover)}
-        className="relative block h-44 w-full overflow-hidden text-left"
+        className="relative block h-56 w-full overflow-hidden rounded-2xl cursor-zoom-in bg-canvas-50 dark:bg-canvas-950"
         aria-label={`Preview ${project.title}`}
       >
-        <Image src={cover} alt={`${project.title} cover`} fill className="object-cover transition-transform duration-700 ease-out group-hover:scale-105" sizes="(max-width: 768px) 100vw, 25vw" />
+        <Image 
+          src={cover} 
+          alt={`${project.title} cover`} 
+          fill 
+          className="object-cover transition-transform duration-700 ease-out group-hover:scale-105" 
+          sizes="(max-width: 768px) 100vw, 25vw" 
+        />
+        <div className="absolute inset-0 bg-canvas-950/0 transition-colors duration-500 group-hover:bg-canvas-950/10" />
       </button>
 
-      <div className="p-5">
-        <div className="mb-3 flex items-center justify-between gap-3">
-          <span className="text-xs font-semibold uppercase tracking-wider text-accent-500 dark:text-accent-400">{project.category}</span>
-          {project.year && <span className="text-xs font-medium text-canvas-400 dark:text-canvas-500">{project.year}</span>}
+      <div className="p-3 pt-6 pb-2">
+        <div className="mb-4 flex items-center justify-between gap-3">
+          <span className="font-display text-xs font-bold uppercase tracking-[0.1em] text-blue-500 dark:text-blue-400">{project.category}</span>
+          {project.year && <span className="font-display text-[13px] font-bold text-canvas-400 dark:text-canvas-500">{project.year}</span>}
         </div>
-        <h3 className="font-display text-base font-bold text-canvas-950 dark:text-white">{project.title}</h3>
-        <p className="mt-2 min-h-[4.5rem] font-display text-sm leading-relaxed text-canvas-500 dark:text-canvas-400">{project.shortDescription ?? project.description}</p>
+        
+        <h3 className="font-display text-2xl font-black text-canvas-950 dark:text-white">{project.title}</h3>
+        <p className="mt-3 min-h-[4.5rem] font-display text-[15px] leading-relaxed text-canvas-500 dark:text-canvas-400">{project.shortDescription ?? project.description}</p>
 
-        <div className="mt-4 flex flex-wrap gap-2">
+        <div className="mt-5 flex flex-wrap gap-2">
           {project.technologies.slice(0, 3).map((tech) => (
-            <span key={tech} className="rounded-full bg-canvas-100/60 px-2.5 py-1 font-display text-xs font-medium text-canvas-500 dark:bg-white/[0.04] dark:text-canvas-400">{tech}</span>
+            <span key={tech} className="rounded-full border border-canvas-200/50 bg-canvas-50 px-4 py-1.5 font-display text-xs font-bold text-canvas-600 dark:border-white/5 dark:bg-white/[0.05] dark:text-canvas-300">{tech}</span>
           ))}
         </div>
 
-        <div className="mt-5 flex gap-2">
-          <Link href={`/projects/${project.id}`} className="btn-primary font-display flex-1 px-4 py-2.5 text-xs"><span>Details</span></Link>
-          <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="flex h-10 w-10 items-center justify-center rounded-full border border-canvas-200/30 text-canvas-500 transition-all duration-300 hover:border-accent-500/30 hover:text-accent-500 dark:border-white/5 dark:text-canvas-400" aria-label={`View ${project.title} source`}>
-            <i className="fab fa-github" />
+        <div className="mt-8 flex gap-3">
+          <Link href={`/projects/${project.id}`} className="flex flex-1 items-center justify-center rounded-full bg-canvas-950 py-3.5 font-display text-sm font-bold text-white transition-transform hover:scale-[1.02] active:scale-[0.98] dark:bg-white dark:text-canvas-950">
+            Details
+          </Link>
+          <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="flex h-12 w-12 items-center justify-center rounded-full border border-canvas-200/60 text-canvas-700 transition-all hover:bg-canvas-50 hover:text-canvas-950 dark:border-white/10 dark:text-canvas-300 dark:hover:bg-white/10 dark:hover:text-white" aria-label={`View ${project.title} source`}>
+            <i className="fab fa-github text-[1.1rem]" />
           </a>
         </div>
       </div>

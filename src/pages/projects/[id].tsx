@@ -155,12 +155,12 @@ export default function ProjectDetails({ project }: Props) {
               >
                 <div className="flex flex-wrap items-center gap-3">
                   {project.category && (
-                    <span className="rounded-full bg-accent-500/10 px-4 py-2 font-display text-xs font-bold uppercase tracking-widest text-accent-600 dark:bg-accent-500/20 dark:text-accent-400">
+                    <span className="font-display rounded-full border border-canvas-200/40 bg-white/50 px-4 py-2 text-xs font-bold uppercase tracking-widest text-canvas-700 backdrop-blur-md dark:border-white/10 dark:bg-white/[0.05] dark:text-canvas-300">
                       {project.category}
                     </span>
                   )}
                   {project.status && (
-                    <span className="rounded-full bg-canvas-100 px-4 py-2 font-display text-xs font-bold uppercase tracking-widest text-canvas-700 dark:bg-white/10 dark:text-canvas-300">
+                    <span className="font-display rounded-full border border-emerald-400/30 bg-emerald-400/20 px-4 py-2 text-xs font-bold uppercase tracking-widest text-emerald-500 backdrop-blur-md shadow-[0_0_15px_rgba(52,211,153,0.3)]">
                       {project.status}
                     </span>
                   )}
@@ -173,36 +173,36 @@ export default function ProjectDetails({ project }: Props) {
                   {project.shortDescription ?? project.description}
                 </p>
 
-                <div className="mt-8 flex flex-wrap gap-3">
-                  <a
-                    href={project.githubUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn-secondary font-display"
-                  >
-                    <span>Source Code</span>
-                    <i className="fab fa-github"></i>
-                  </a>
+                <div className="mt-10 flex flex-wrap gap-4">
+                  {project.caseStudyUrl && (
+                    <Link
+                      href={project.caseStudyUrl}
+                      className="btn-primary font-display px-7 py-3.5 shadow-[0_0_20px_rgba(var(--color-accent-500),0.3)] hover:shadow-[0_0_30px_rgba(var(--color-accent-500),0.6)]"
+                    >
+                      <span>Deep Dive Case Study</span>
+                      <i className="fas fa-microscope"></i>
+                    </Link>
+                  )}
                   {project.liveUrl && (
                     <a
                       href={project.liveUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="btn-primary font-display"
+                      className={`${project.caseStudyUrl ? 'btn-secondary' : 'btn-primary shadow-[0_0_20px_rgba(var(--color-accent-500),0.3)] hover:shadow-[0_0_30px_rgba(var(--color-accent-500),0.6)]'} font-display px-7 py-3.5`}
                     >
                       <span>Live Demo</span>
                       <i className="fas fa-arrow-up-right-from-square"></i>
                     </a>
                   )}
-                  {project.caseStudyUrl && (
-                    <Link
-                      href={project.caseStudyUrl}
-                      className="btn-secondary font-display"
-                    >
-                      <span>Case Study</span>
-                      <i className="fas fa-microscope"></i>
-                    </Link>
-                  )}
+                  <a
+                    href={project.githubUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-secondary font-display px-7 py-3.5"
+                  >
+                    <span>Source Code</span>
+                    <i className="fab fa-github"></i>
+                  </a>
                 </div>
               </motion.div>
 
@@ -273,9 +273,9 @@ export default function ProjectDetails({ project }: Props) {
                       <motion.div
                         variants={{ hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0 } }}
                         key={highlight}
-                        className="group rounded-2xl border border-canvas-200/40 bg-canvas-50 p-5 transition-all hover:border-accent-500/30 hover:bg-white dark:border-white/5 dark:bg-white/[0.03] dark:hover:bg-white/[0.06]"
+                        className="group rounded-2xl border border-canvas-200/40 bg-white/50 p-6 shadow-sm backdrop-blur-md transition-all hover:-translate-y-1 hover:border-accent-500/30 hover:shadow-lg dark:border-white/5 dark:bg-white/[0.03] dark:hover:bg-white/[0.06]"
                       >
-                        <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-xl bg-accent-500/10 text-accent-600 transition-transform duration-300 group-hover:scale-110 group-hover:bg-accent-500/20 dark:bg-accent-500/20 dark:text-accent-400">
+                        <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-accent-500/10 text-accent-600 transition-transform duration-300 group-hover:scale-110 group-hover:bg-accent-500/20 group-hover:shadow-[0_0_20px_rgba(var(--color-accent-500),0.3)] dark:bg-accent-500/20 dark:text-accent-400">
                           <i className="fas fa-check"></i>
                         </div>
                         <p className="font-display text-sm font-semibold leading-relaxed text-canvas-800 dark:text-canvas-200">
@@ -297,12 +297,12 @@ export default function ProjectDetails({ project }: Props) {
                       <motion.div
                         variants={{ hidden: { opacity: 0, x: -20 }, show: { opacity: 1, x: 0 } }}
                         key={feature}
-                        className="group flex gap-3 rounded-2xl border border-canvas-200/40 bg-canvas-50 p-4 transition-colors hover:border-emerald-500/30 hover:bg-white dark:border-white/5 dark:bg-white/[0.03] dark:hover:bg-white/[0.06]"
+                        className="group flex items-start gap-4 rounded-2xl border border-canvas-200/40 bg-white/50 p-5 shadow-sm backdrop-blur-md transition-colors hover:border-emerald-500/30 hover:bg-white dark:border-white/5 dark:bg-white/[0.03] dark:hover:bg-white/[0.06]"
                       >
-                        <span className="mt-1 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-emerald-500/20 text-xs text-emerald-600 transition-transform duration-300 group-hover:scale-110 dark:text-emerald-400">
+                        <span className="mt-1 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-xl bg-emerald-500/10 text-xs text-emerald-600 transition-transform duration-300 group-hover:scale-110 group-hover:shadow-[0_0_15px_rgba(52,211,153,0.3)] dark:text-emerald-400">
                           <i className="fas fa-check"></i>
                         </span>
-                        <p className="font-display text-sm leading-relaxed text-canvas-700 dark:text-canvas-300">
+                        <p className="font-display text-sm font-semibold leading-relaxed text-canvas-800 dark:text-canvas-200">
                           {feature}
                         </p>
                       </motion.div>
@@ -355,10 +355,10 @@ export default function ProjectDetails({ project }: Props) {
                       <motion.div
                         variants={{ hidden: { opacity: 0, x: 20 }, show: { opacity: 1, x: 0 } }}
                         key={metric.label}
-                        className="rounded-2xl border border-white/10 bg-white/5 p-4 transition-colors hover:bg-white/10"
+                        className="group rounded-2xl border border-white/10 bg-white/5 p-5 transition-colors hover:border-accent-500/30 hover:bg-white/10"
                       >
-                        <p className="font-display text-2xl font-bold">{metric.value}</p>
-                        <p className="mt-1 font-display text-xs font-bold uppercase tracking-widest text-canvas-400">
+                        <p className="font-display text-3xl font-bold transition-transform duration-300 group-hover:scale-105 group-hover:text-accent-400">{metric.value}</p>
+                        <p className="mt-2 font-display text-[10px] font-bold uppercase tracking-widest text-canvas-400">
                           {metric.label}
                         </p>
                       </motion.div>
