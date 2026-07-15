@@ -69,7 +69,6 @@ export const projectsData: Record<string, Project> = {
       "Implemented clinical-style alert rules that escalate risky symptom combinations",
     ],
     metrics: [
-      { label: "Database", value: "11 Tables" },
       { label: "Severity Engine", value: "4 Tiers" },
       { label: "Stack", value: "Mobile + API" },
     ],
