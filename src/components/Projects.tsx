@@ -137,7 +137,7 @@ const HorizontalArchive = ({ projects, onPreview }: { projects: ProjectWithId[],
       `}</style>
       <div className="archive-stack sticky top-0 flex h-[100dvh] flex-col items-center justify-center py-20">
         
-        <div className="absolute top-4 md:top-12 w-full px-5 text-center sm:px-8 z-0 md:z-50 pointer-events-none">
+        <div className="absolute top-4 md:top-12 w-full px-5 text-center sm:px-8 z-10 pointer-events-none">
           <div className="inline-block rounded-3xl bg-canvas-50/70 px-6 py-4 backdrop-blur-xl dark:bg-canvas-950/70 shadow-[0_8px_30px_rgb(0,0,0,0.12)] border border-white/10">
             <p className="eyebrow mb-4 inline-flex bg-canvas-50/80 backdrop-blur-md dark:bg-canvas-950/80">
               <span className="h-1.5 w-1.5 rounded-full bg-accent-500" />
@@ -152,7 +152,7 @@ const HorizontalArchive = ({ projects, onPreview }: { projects: ProjectWithId[],
           </div>
         </div>
 
-        <div className="relative z-10 mt-40 md:mt-24 flex w-full max-w-sm items-center justify-center transition-transform duration-500" style={{ transform: 'scale(var(--scale))' }}>
+        <motion.div className="relative mt-40 md:mt-24 flex w-full max-w-sm items-center justify-center transition-transform duration-500" style={{ transform: 'scale(var(--scale))', zIndex: useTransform(smoothProgress, [0, 0.15, 1], [0, 20, 20]) }}>
           {projects.map((project, index) => {
             const center = (projects.length - 1) / 2;
             const offset = index - center;
@@ -202,7 +202,7 @@ const HorizontalArchive = ({ projects, onPreview }: { projects: ProjectWithId[],
               </motion.div>
             );
           })}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
