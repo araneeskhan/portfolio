@@ -64,10 +64,10 @@ const Contact = () => {
           {/* Left column */}
           <motion.aside
             className="flex flex-col gap-5"
-            initial={{ opacity: 0, x: -30 }}
+            initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.7 }}
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
           >
             {/* Response time premium card */}
             <div className="relative overflow-hidden rounded-2xl border border-canvas-200/40 bg-white/90 p-8 shadow-elevated backdrop-blur-3xl dark:border-white/10 dark:bg-canvas-950/90">
@@ -128,10 +128,10 @@ const Contact = () => {
           {/* Right: Form */}
           <motion.div
             className="relative overflow-hidden rounded-3xl border border-canvas-200/50 bg-white/95 p-8 shadow-2xl shadow-canvas-200/50 backdrop-blur-3xl dark:border-white/10 dark:bg-canvas-950/95 dark:shadow-none sm:p-10 lg:p-12"
-            initial={{ opacity: 0, x: 30 }}
+            initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.7, delay: 0.1 }}
+            transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
           >
             {/* Top right gradient accent */}
             <div className="absolute -right-20 -top-20 h-40 w-40 rounded-full bg-accent-500/20 blur-3xl dark:bg-accent-500/10" />

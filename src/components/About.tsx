@@ -124,7 +124,7 @@ const About = () => {
             <motion.div
               key={area.title}
               className="group relative border-b border-canvas-200/20 py-8 dark:border-white/5 md:px-8"
-              initial={{ opacity: 0, x: i % 2 === 0 ? -30 : 30 }}
+              initial={{ opacity: 0, x: i % 2 === 0 ? -16 : 16 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: '-60px' }}
               transition={{ duration: 0.7, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] }}

@@ -259,6 +259,22 @@ const Navbar = () => {
                 >
                   <Link
                     href={link.href}
+                    onClick={(e) => {
+                      if (link.href.startsWith('/#') && router.pathname === '/') {
+                        e.preventDefault();
+                        const sectionId = link.href.split('#')[1];
+                        const element = document.getElementById(sectionId);
+                        if (element) {
+                          setIsMenuOpen(false);
+                          setTimeout(() => {
+                            element.scrollIntoView({ behavior: 'smooth' });
+                            window.history.pushState(null, '', `/#${sectionId}`);
+                          }, 300);
+                        }
+                      } else {
+                        setIsMenuOpen(false);
+                      }
+                    }}
                     className="flex items-center gap-4 rounded-xl px-4 py-4 font-display text-lg font-medium text-canvas-800 transition-colors hover:bg-canvas-100/80 hover:text-canvas-950 dark:text-canvas-200 dark:hover:bg-white/10 dark:hover:text-white"
                   >
                     {link.name}
@@ -309,6 +325,7 @@ const Navbar = () => {
 
 const NavLinks = ({ isScrolled }: { isScrolled: boolean }) => {
   const [activeSection, setActiveSection] = useState('');
+  const router = useRouter();
 
   useEffect(() => {
     const updateActiveSection = () => {
@@ -341,6 +358,17 @@ const NavLinks = ({ isScrolled }: { isScrolled: boolean }) => {
           <Link
             key={link.name}
             href={link.href}
+            onClick={(e) => {
+              if (link.href.startsWith('/#') && router.pathname === '/') {
+                e.preventDefault();
+                const sectionId = link.href.split('#')[1];
+                const element = document.getElementById(sectionId);
+                if (element) {
+                  element.scrollIntoView({ behavior: 'smooth' });
+                  window.history.pushState(null, '', `/#${sectionId}`);
+                }
+              }
+            }}
             className={`group relative rounded-full px-4 py-2 text-[14px] font-display font-medium transition-colors duration-300 ${
               isActive
                 ? 'text-canvas-950 dark:text-white'

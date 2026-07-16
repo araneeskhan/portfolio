@@ -40,9 +40,19 @@
 }
 
 html {
-  scroll-behavior: smooth;
   text-rendering: optimizeLegibility;
   -webkit-tap-highlight-color: transparent;
+}
+
+@media (pointer: fine) {
+  * {
+    cursor: none !important;
+  }
+}
+
+/* Smooth anchor offset for fixed navbar */
+[id] {
+  scroll-margin-top: 100px;
 }
 
 body {
@@ -199,6 +209,7 @@ body {
     display: flex;
     width: max-content;
     animation: marquee-scroll 30s linear infinite;
+    will-change: transform;
   }
   .marquee-track:hover {
     animation-play-state: paused;

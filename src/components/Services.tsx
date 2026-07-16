@@ -57,8 +57,8 @@ const ServiceCard = ({
     offset: ['start end', 'start start'],
   });
 
-  const scale = useTransform(scrollYProgress, [0, 1], [0.9, 1]);
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [0.4, 1]);
+  const scale = useTransform(scrollYProgress, [0, 1], [0.94, 1]);
+  const opacity = useTransform(scrollYProgress, [0, 0.5], [0.5, 1]);
 
   return (
     <div

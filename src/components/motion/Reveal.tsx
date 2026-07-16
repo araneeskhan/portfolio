@@ -13,7 +13,7 @@ interface RevealProps {
   once?: boolean;
 }
 
-const offset = 28;
+const offset = 20;
 
 const buildVariants = (direction: Direction, duration: number): Variants => {
   const transition = { duration, ease: [0.22, 1, 0.36, 1] as const };

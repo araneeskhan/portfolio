@@ -106,8 +106,8 @@ const HorizontalArchive = ({ projects, onPreview }: { projects: ProjectWithId[],
   });
 
   const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 70,
-    damping: 20,
+    stiffness: 80,
+    damping: 24,
     restDelta: 0.001
   });
 
@@ -182,9 +182,9 @@ const HorizontalArchive = ({ projects, onPreview }: { projects: ProjectWithId[],
                   zIndex: activeCard === index ? 100 : Math.round(20 - Math.abs(offset)),
                 }}
                 whileHover={{
-                  scale: 1.08,
+                  scale: 1.05,
                   rotate: 0,
-                  y: -20,
+                  y: -16,
                   zIndex: 50,
                 }}
                 transition={{
@@ -232,7 +232,7 @@ const FeaturedProjectCard = ({
     offset: ['start end', 'end start'],
   });
 
-  const smoothProgress = useSpring(scrollYProgress, { stiffness: 70, damping: 20, restDelta: 0.001 });
+  const smoothProgress = useSpring(scrollYProgress, { stiffness: 80, damping: 24, restDelta: 0.001 });
   const imgY = useTransform(smoothProgress, [0, 1], ["-10%", "10%"]);
   const imgScale = useTransform(smoothProgress, [0, 0.5, 1], [1.1, 1, 1.1]);
 

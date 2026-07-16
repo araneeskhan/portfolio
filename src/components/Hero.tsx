@@ -19,7 +19,7 @@ const container = {
 };
 
 const item = {
-  hidden: { opacity: 0, y: 40, filter: 'blur(10px)' },
+  hidden: { opacity: 0, y: 24, filter: 'blur(6px)' },
   visible: {
     opacity: 1,
     y: 0,
@@ -36,7 +36,7 @@ const SplitText = ({ text, className, delay = 0 }: { text: string; className?: s
         <span key={i} className="inline-block overflow-hidden">
           <motion.span
             className="inline-block"
-            initial={{ y: '120%', rotateX: 40 }}
+            initial={{ y: '100%', rotateX: 20 }}
             animate={{ y: 0, rotateX: 0 }}
             transition={{
               duration: 0.8,
@@ -64,7 +64,7 @@ const Hero = () => {
     target: sectionRef,
     offset: ['start start', 'end start'],
   });
-  const smooth = useSpring(scrollYProgress, { stiffness: 100, damping: 30 });
+  const smooth = useSpring(scrollYProgress, { stiffness: 80, damping: 24 });
   const imageY = useTransform(smooth, [0, 1], [0, 150]);
   const imageScale = useTransform(smooth, [0, 1], [1, 0.85]);
   const imageRotate = useTransform(smooth, [0, 1], [0, -5]);

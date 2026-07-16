@@ -46,9 +46,9 @@ const AchievementCard = ({
     offset: ['start end', 'start start'],
   });
 
-  const scale = useTransform(scrollYProgress, [0, 1], [0.88, 1]);
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [0.3, 1]);
-  const rotateX = useTransform(scrollYProgress, [0, 1], [8, 0]);
+  const scale = useTransform(scrollYProgress, [0, 1], [0.94, 1]);
+  const opacity = useTransform(scrollYProgress, [0, 0.5], [0.5, 1]);
+  const rotateX = useTransform(scrollYProgress, [0, 1], [4, 0]);
 
   return (
     <div

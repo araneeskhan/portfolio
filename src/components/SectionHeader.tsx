@@ -19,7 +19,7 @@ export default function SectionHeader({
     <div className={`${isCentered ? 'mx-auto text-center' : ''} mb-16 max-w-3xl`}>
       <motion.p
         className="eyebrow"
-        initial={{ opacity: 0, y: 16, filter: 'blur(6px)' }}
+        initial={{ opacity: 0, y: 16, filter: 'blur(4px)' }}
         whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
         viewport={{ once: true, margin: '-60px' }}
         transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
@@ -30,7 +30,7 @@ export default function SectionHeader({
 
       <motion.h2
         className="mt-5 font-display text-3xl font-bold tracking-tight text-canvas-950 dark:text-white sm:text-4xl md:text-[2.8rem] md:leading-tight"
-        initial={{ opacity: 0, y: 24, filter: 'blur(8px)' }}
+        initial={{ opacity: 0, y: 24, filter: 'blur(4px)' }}
         whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
         viewport={{ once: true, margin: '-60px' }}
         transition={{ duration: 0.8, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}

@@ -52,8 +52,8 @@ const ScrollRow = ({
   });
   
   const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 70,
-    damping: 20,
+    stiffness: 80,
+    damping: 24,
     restDelta: 0.001
   });
 

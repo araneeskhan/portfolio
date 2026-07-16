@@ -56,9 +56,9 @@ const CertCard = ({
     offset: ['start end', 'start start'],
   });
 
-  const scale = useTransform(scrollYProgress, [0, 1], [0.88, 1]);
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [0.3, 1]);
-  const rotateX = useTransform(scrollYProgress, [0, 1], [8, 0]);
+  const scale = useTransform(scrollYProgress, [0, 1], [0.94, 1]);
+  const opacity = useTransform(scrollYProgress, [0, 0.5], [0.5, 1]);
+  const rotateX = useTransform(scrollYProgress, [0, 1], [4, 0]);
 
   return (
     <div
@@ -174,7 +174,7 @@ const Certifications = () => {
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.7 }}
+              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
             >
               <p className="text-xs font-bold uppercase tracking-widest text-accent-400 dark:text-accent-600">
                 Hands-On Learning
@@ -193,7 +193,7 @@ const Certifications = () => {
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.7, delay: 0.1 }}
+              transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
             >
               <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
                 <div>

@@ -6,25 +6,16 @@ import { MotionConfig } from 'motion/react';
 import { Analytics } from '@vercel/analytics/react';
 import FloatingBackToTop from '@/components/FloatingBackToTop';
 import ScrollProgress from '@/components/motion/ScrollProgress';
+import CustomCursor from '@/components/motion/CustomCursor';
 import personal from '@/config/personal';
 import { fontClass } from '@/styles/fonts';
-import 'aos/dist/aos.css';
+
 import '../styles/globals.css';
 
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
 
-  useEffect(() => {
-    import('aos').then((aos) => {
-      aos.init({
-        duration: 600,
-        once: true,
-        mirror: false,
-        easing: 'ease-out-cubic',
-        offset: 100,
-      });
-    });
-  }, []);
+
 
   useEffect(() => {
     const onStart = () => {
@@ -109,6 +100,7 @@ export default function App({ Component, pageProps }: AppProps) {
       <div className={fontClass}>
         <MotionConfig reducedMotion="user">
           <ScrollProgress />
+          <CustomCursor />
           <Component {...pageProps} />
           <FloatingBackToTop />
         </MotionConfig>
