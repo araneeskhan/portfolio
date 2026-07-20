@@ -15,6 +15,15 @@ interface Certification {
 
 const certifications: Certification[] = [
   {
+    name: 'Intermediate Machine Learning',
+    issuer: 'Kaggle',
+    gradient: 'from-emerald-400 to-teal-500',
+    bgTint: 'bg-emerald-500/[0.03] dark:bg-emerald-500/[0.03]',
+    link: 'https://www.kaggle.com/learn/certification/araneeskhan/intermediate-machine-learning',
+    image: '/assets/certificates/Intermediate Machine Learning.png',
+    description: 'Engineered and optimized robust machine learning workflows using Scikit-Learn and XGBoost on tabular datasets. Mastered advanced data preprocessing techniques, including handling missing values via multivariate and simple imputation, and encoding high-cardinality categorical variables using Ordinal and One-Hot Encoding. Implemented clean, production-ready architectures using Scikit-Learn Pipelines to prevent data leakage. Conducted rigorous hyperparameter optimization and model evaluation using K-Fold Cross-Validation, and tuned high-performance gradient boosting models using XGBoost with early stopping.',
+  },
+  {
     name: 'Intro to Machine Learning',
     issuer: 'Kaggle',
     gradient: 'from-sky-400 to-cyan-500',
