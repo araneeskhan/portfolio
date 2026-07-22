@@ -126,11 +126,11 @@ const HorizontalArchive = ({ projects, onPreview }: { projects: ProjectWithId[],
         }
         @media (min-width: 768px) {
           .archive-stack {
-            --spread-x: 14vw;
-            --spread-px: 35px;
-            --spread-y: 2.5rem;
-            --spread-y-dir: 0rem;
-            --rot: 7deg;
+            --spread-x: 8vw;
+            --spread-px: 0px;
+            --spread-y: 0rem;
+            --spread-y-dir: 10rem;
+            --rot: 5deg;
             --scale: 1;
           }
         }
@@ -258,12 +258,12 @@ const FeaturedProjectCard = ({
       viewport={{ once: true, margin: '-100px' }}
       variants={containerVariants}
     >
-      <div className="flex flex-col">
+      <div className={`grid lg:grid-cols-2`}>
         {/* Image Half */}
         <button
           type="button"
           onClick={() => onPreview(cover)}
-          className="relative block h-[300px] w-full overflow-hidden text-left sm:h-[400px] md:h-[500px] cursor-zoom-in bg-canvas-100 dark:bg-canvas-950"
+          className={`relative block h-[300px] w-full overflow-hidden text-left md:h-[400px] lg:h-full cursor-zoom-in bg-canvas-100 dark:bg-canvas-950 ${index % 2 === 1 ? 'lg:col-start-2 lg:row-start-1' : ''}`}
           aria-label={`Preview ${project.title}`}
         >
           <motion.div className="absolute inset-[-10%] h-[120%] w-[120%]" style={{ y: imgY, scale: imgScale }}>
@@ -272,7 +272,7 @@ const FeaturedProjectCard = ({
               alt={`${project.title} cover`}
               fill
               className="object-cover transition-transform duration-1000 ease-in-out group-hover:scale-105"
-              sizes="100vw"
+              sizes="(max-width: 1024px) 100vw, 50vw"
               priority={index === 0}
             />
           </motion.div>
@@ -295,7 +295,7 @@ const FeaturedProjectCard = ({
         </button>
 
         {/* Content Half */}
-        <div className="relative flex flex-col justify-center bg-white p-6 dark:bg-canvas-900 md:p-10 lg:p-12">
+        <div className={`relative flex flex-col justify-center bg-white p-6 dark:bg-canvas-900 md:p-10 lg:p-12 ${index % 2 === 1 ? 'lg:col-start-1 lg:row-start-1' : ''}`}>
           
           <motion.p variants={itemVariants} className="font-display text-[11px] font-bold tracking-[0.15em] uppercase text-blue-500 dark:text-blue-400">
             {project.role} {project.year ? `• ${project.year}` : ''}
