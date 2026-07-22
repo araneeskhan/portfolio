@@ -384,4 +384,45 @@ export const projectsData: Record<string, Project> = {
     githubUrl: "https://github.com/araneeskhan/MafiaEmpire",
     screenshots: [{ path: "/assets/mafiaempire/cover.png", type: "mobile" }],
   },
+  tourism_dsa: {
+    title: "AKKB Tourism Management",
+    coverImage: ["https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2070&auto=format&fit=crop"],
+    shortDescription:
+      "A production-grade C++ console travel booking system utilizing Dijkstra's algorithm, dynamic memory, and custom serialization.",
+    category: "Software Architecture",
+    status: "Console Application",
+    role: "C++ Developer",
+    year: "2024",
+    description:
+      "AKKB Tourism is a comprehensive, production-grade console travel booking and management application built in C++. The project goes beyond basic programming by showcasing practical implementations of fundamental Data Structures and Algorithms (DSA) to solve real-world logistical, persistence, and data-management problems. It features dynamic routing using Dijkstra's Algorithm, custom relational data trees using advanced linked lists, FIFO cancellation queues, strict anti-memory leak protocols with raw pointers, and a custom File I/O serialization engine for persistent state preservation across sessions.",
+    technologies: [
+      "C++",
+      "Data Structures",
+      "Algorithms",
+      "File I/O",
+      "Memory Management"
+    ],
+    features: [
+      "Dynamic routing using Dijkstra's Algorithm (O(V^2)) for shortest paths between cities",
+      "Relational Data Trees using advanced nested linked lists for user profiles and receipts",
+      "In-place Bubble Sort (O(N^2)) for dynamic memory node pointer swapping",
+      "Rapid Linear Search (O(N)) traversal for CNIC querying",
+      "FIFO Cancellation Queue with garbage collection and anti-memory-leak protocols",
+      "Persistent State Engine using custom serialization/deserialization to text database",
+      "Multi-stop itineraries and dynamic drop-off recalculation",
+      "Administrator dashboard for queue processing and database traversal"
+    ],
+    highlights: [
+      "Engineered a custom File I/O serialization engine to save complex pointer-based linked lists to disk",
+      "Implemented dynamic routing with Dijkstra's algorithm for optimal travel paths",
+      "Applied strict manual memory management with raw pointers ensuring zero memory leaks during list deletion"
+    ],
+    metrics: [
+      { label: "Algorithms", value: "Dijkstra, Sort" },
+      { label: "State", value: "Persistent I/O" },
+      { label: "Interface", value: "CLI" },
+    ],
+    githubUrl: "https://github.com/araneeskhan/tourism_dsaProject",
+    screenshots: [{ path: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2070&auto=format&fit=crop", type: "web" }],
+  },
 };
