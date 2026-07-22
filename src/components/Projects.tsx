@@ -126,11 +126,11 @@ const HorizontalArchive = ({ projects, onPreview }: { projects: ProjectWithId[],
         }
         @media (min-width: 768px) {
           .archive-stack {
-            --spread-x: 8vw;
-            --spread-px: 0px;
-            --spread-y: 0rem;
-            --spread-y-dir: 10rem;
-            --rot: 5deg;
+            --spread-x: 14vw;
+            --spread-px: 35px;
+            --spread-y: 2.5rem;
+            --spread-y-dir: 0rem;
+            --rot: 7deg;
             --scale: 1;
           }
         }
