@@ -17,7 +17,7 @@ const themeScript = `
 
 export default function Document() {
   return (
-    <Html lang="en" className="grain">
+    <Html lang="en">
       <Head>
         <link
           rel="stylesheet"
