@@ -22,7 +22,15 @@ const Navbar = () => {
   const router = useRouter();
 
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 20);
+    let ticking = false;
+    const handleScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        setIsScrolled(window.scrollY > 20);
+        ticking = false;
+      });
+    };
     handleScroll();
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
@@ -337,15 +345,26 @@ const NavLinks = ({ isScrolled }: { isScrolled: boolean }) => {
         const sectionTop = element.offsetTop;
         const sectionBottom = sectionTop + element.offsetHeight;
         if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
-          setActiveSection(sectionId);
+          setActiveSection((prev) => (prev === sectionId ? prev : sectionId));
           return;
         }
       }
-      setActiveSection('');
+      setActiveSection((prev) => (prev === '' ? prev : ''));
     };
+
+    let ticking = false;
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        updateActiveSection();
+        ticking = false;
+      });
+    };
+
     updateActiveSection();
-    window.addEventListener('scroll', updateActiveSection, { passive: true });
-    return () => window.removeEventListener('scroll', updateActiveSection);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
   return (

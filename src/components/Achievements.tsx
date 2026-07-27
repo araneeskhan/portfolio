@@ -87,7 +87,7 @@ const AchievementCard = ({
 
             {/* Preview Badge */}
             <motion.span
-              className="absolute bottom-6 left-6 flex items-center gap-2 rounded-full bg-white px-5 py-2.5 font-display text-sm font-bold text-canvas-950 shadow-xl backdrop-blur-md transition-all duration-500 group-hover:-translate-y-1 group-hover:shadow-2xl"
+              className="absolute bottom-6 left-6 flex items-center gap-2 rounded-full bg-white px-5 py-2.5 font-display text-sm font-bold text-canvas-950 shadow-xl transition-all duration-500 group-hover:-translate-y-1 group-hover:shadow-2xl"
               initial={false}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}

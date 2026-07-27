@@ -138,8 +138,8 @@ const HorizontalArchive = ({ projects, onPreview }: { projects: ProjectWithId[],
       <div className="archive-stack sticky top-0 flex h-[100dvh] flex-col items-center justify-center py-20">
         
         <div className="absolute top-4 md:top-12 w-full px-5 text-center sm:px-8 z-10 pointer-events-none">
-          <div className="inline-block rounded-3xl bg-canvas-50/70 px-6 py-4 backdrop-blur-xl dark:bg-canvas-950/70 shadow-[0_8px_30px_rgb(0,0,0,0.12)] border border-white/10">
-            <p className="eyebrow mb-4 inline-flex bg-canvas-50/80 backdrop-blur-md dark:bg-canvas-950/80">
+          <div className="inline-block rounded-3xl bg-canvas-50/95 px-6 py-4 dark:bg-canvas-950/95 shadow-[0_8px_30px_rgb(0,0,0,0.12)] border border-white/10">
+            <p className="eyebrow mb-4 inline-flex bg-canvas-50/95 dark:bg-canvas-950/95">
               <span className="h-1.5 w-1.5 rounded-full bg-accent-500" />
               Archive
             </p>
@@ -282,12 +282,12 @@ const FeaturedProjectCard = ({
           {/* Badges on Image */}
           <div className="absolute left-6 top-6 flex flex-wrap gap-2">
             {project.category && (
-              <span className="font-display rounded-full bg-canvas-950/40 px-4 py-1.5 text-xs font-bold tracking-wide text-white backdrop-blur-md dark:bg-black/50">
+              <span className="font-display rounded-full bg-canvas-950/70 px-4 py-1.5 text-xs font-bold tracking-wide text-white dark:bg-black/70">
                 {project.category}
               </span>
             )}
             {project.status && (
-              <span className="font-display rounded-full border border-emerald-400/30 bg-emerald-500/20 px-4 py-1.5 text-xs font-bold tracking-wide text-emerald-300 backdrop-blur-md">
+              <span className="font-display rounded-full border border-emerald-400/30 bg-emerald-500/40 px-4 py-1.5 text-xs font-bold tracking-wide text-emerald-200">
                 {project.status}
               </span>
             )}

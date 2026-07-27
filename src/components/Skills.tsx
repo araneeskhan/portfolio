@@ -74,7 +74,7 @@ const ScrollRow = ({
         {duplicated.map((skill, i) => (
           <motion.div
             key={`${skill.name}-${i}`}
-            className={`group relative flex shrink-0 ${sizeClasses[size]} items-center justify-center border border-canvas-200/20 bg-white/50 backdrop-blur-sm transition-all duration-500 hover:border-accent-500/30 hover:shadow-glow dark:border-white/5 dark:bg-white/[0.03] dark:hover:border-accent-400/20`}
+            className={`group relative flex shrink-0 ${sizeClasses[size]} items-center justify-center border border-canvas-200/20 bg-white/80 transition-all duration-500 hover:border-accent-500/30 hover:shadow-glow dark:border-white/5 dark:bg-canvas-900/60 dark:hover:border-accent-400/20`}
             style={{ opacity }}
             whileHover={{ scale: 1.2, rotate: 5, y: -4 }}
             transition={{ type: 'spring', stiffness: 400, damping: 15 }}
