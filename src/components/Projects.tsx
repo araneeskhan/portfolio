@@ -152,7 +152,7 @@ const HorizontalArchive = ({ projects, onPreview }: { projects: ProjectWithId[],
           </div>
         </div>
 
-        <motion.div className="relative mt-40 md:mt-24 flex w-full max-w-sm items-center justify-center transition-transform duration-500" style={{ transform: 'scale(var(--scale))', zIndex: useTransform(smoothProgress, [0, 0.15, 1], [0, 20, 20]) }}>
+        <motion.div className="relative z-20 mt-40 md:mt-24 flex w-full max-w-sm items-center justify-center transition-transform duration-500" style={{ transform: 'scale(var(--scale))' }}>
           {projects.map((project, index) => {
             const center = (projects.length - 1) / 2;
             const offset = index - center;
@@ -175,11 +175,13 @@ const HorizontalArchive = ({ projects, onPreview }: { projects: ProjectWithId[],
               <motion.div
                 key={project.id}
                 onClick={() => setActiveCard(activeCard === index ? null : index)}
+                initial={{ x: initialX, y: initialY, rotate: initialRotate }}
                 style={{
                   x,
                   y,
                   rotate,
                   zIndex: activeCard === index ? 100 : Math.round(20 - Math.abs(offset)),
+                  willChange: 'transform'
                 }}
                 whileHover={{
                   scale: 1.05,
@@ -266,7 +268,11 @@ const FeaturedProjectCard = ({
           className={`relative block h-[300px] w-full overflow-hidden text-left md:h-[400px] lg:h-full cursor-zoom-in bg-canvas-100 dark:bg-canvas-950 ${index % 2 === 1 ? 'lg:col-start-2 lg:row-start-1' : ''}`}
           aria-label={`Preview ${project.title}`}
         >
-          <motion.div className="absolute inset-[-10%] h-[120%] w-[120%]" style={{ y: imgY, scale: imgScale }}>
+          <motion.div 
+            initial={{ y: "-10%", scale: 1.1 }}
+            className="absolute inset-[-10%] h-[120%] w-[120%]" 
+            style={{ y: imgY, scale: imgScale, willChange: 'transform' }}
+          >
             <Image
               src={cover}
               alt={`${project.title} cover`}

@@ -40,7 +40,6 @@
 }
 
 html {
-  text-rendering: optimizeLegibility;
   -webkit-tap-highlight-color: transparent;
 }
 
@@ -61,6 +60,11 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+}
+
+/* Fix Chromium scroll text flashing safely */
+* {
+  backface-visibility: hidden;
 }
 
 ::selection {
@@ -243,7 +247,9 @@ body {
     border-radius: 9999px;
     filter: blur(120px);
     pointer-events: none;
-    will-change: transform;
+    will-change: transform, filter;
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
     animation: orb-float 20s ease-in-out infinite;
   }
 

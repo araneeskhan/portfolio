@@ -56,11 +56,11 @@ const ScrollWord = ({
   progress: ReturnType<typeof useScroll>['scrollYProgress'];
 }) => {
   const opacity = useTransform(progress, range, [0.15, 1]);
-  const y = useTransform(progress, range, [4, 0]);
 
   return (
     <motion.span
-      style={{ opacity, y }}
+      initial={{ opacity: 0.15 }}
+      style={{ opacity, willChange: 'opacity' }}
       className="mr-[0.3em] inline-block transition-colors duration-200"
     >
       {word}

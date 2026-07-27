@@ -457,7 +457,7 @@ const Services = () => {
                     {activeService.deliverables.map((item) => (
                       <div
                         key={item}
-                        className="flex items-center gap-2.5 rounded-xl border border-canvas-200/40 bg-canvas-50/60 p-2.5 text-xs font-bold text-canvas-800 dark:border-white/5 dark:bg-white/[0.03] dark:text-canvas-200"
+                        className="flex items-center gap-2.5 rounded-xl border border-canvas-200/40 bg-canvas-50/60 p-2.5 text-sm font-sans font-medium text-canvas-800 dark:border-white/5 dark:bg-white/[0.03] dark:text-canvas-200"
                       >
                         <div className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-gradient-to-r ${activeService.activeTabGradient} text-white`}>
                           <svg className="h-3 w-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">

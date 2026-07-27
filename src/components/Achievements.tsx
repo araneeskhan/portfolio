@@ -57,7 +57,8 @@ const AchievementCard = ({
       style={{ top: `${110 + index * 28}px` }}
     >
       <motion.div
-        style={{ scale, opacity, rotateX }}
+        initial={{ scale: 0.94, opacity: 0.5, rotateX: 4 }}
+        style={{ scale, opacity, rotateX, willChange: 'transform, opacity' }}
         className="group relative overflow-hidden rounded-[2rem] bg-white shadow-[0_20px_50px_-12px_rgba(0,0,0,0.1)] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_30px_60px_-12px_rgba(0,0,0,0.15)] dark:bg-canvas-900 dark:shadow-[0_20px_50px_-12px_rgba(0,0,0,0.5)]"
       >
         <div className="grid lg:grid-cols-[1.15fr_0.85fr]">
