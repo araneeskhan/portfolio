@@ -69,7 +69,7 @@ const Hero = () => {
   const imageScale = useTransform(smooth, [0, 1], [1, 0.85]);
   const imageRotate = useTransform(smooth, [0, 1], [0, -5]);
   const textY = useTransform(smooth, [0, 1], [0, -80]);
-  const opacity = useTransform(smooth, [0, 0.6], [1, 0]);
+  const opacity = useTransform(smooth, [0, 0.6, 1], [1, 0, 0]);
   const metricsY = useTransform(smooth, [0, 1], [0, 50]);
 
   useEffect(() => {
