@@ -137,7 +137,7 @@ const Skills = () => {
           {[
             { value: '23+', label: 'Technologies' },
             { value: '6+', label: 'Frameworks' },
-            { value: '8', label: 'Projects' },
+            { value: '10+', label: 'Projects' },
             { value: '24+', label: 'Months' },
           ].map((stat) => (
             <div key={stat.label} className="surface-card p-5 text-center">
