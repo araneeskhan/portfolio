@@ -13,8 +13,9 @@ const getCoverImage = (project: Project) =>
 const Projects = () => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const projects = Object.entries(projectsData).map(([id, project]) => ({ id, ...project }));
-  const featuredProjects = projects.filter((p) => p.featured);
-  const archiveProjects = projects.filter((p) => !p.featured);
+  const featuredProjects = projects.filter((p) => p.featured && p.category !== "Academic Research");
+  const archiveProjects = projects.filter((p) => !p.featured && p.category !== "Academic Research");
+  const researchProjects = projects.filter((p) => p.category === "Academic Research");
 
   return (
     <section id="projects" className="section-border-top relative pb-24 pt-24 md:pt-32">
@@ -60,6 +61,15 @@ const Projects = () => {
 
       <HorizontalArchive projects={archiveProjects} onPreview={setSelectedImage} />
 
+      {/* Research Papers */}
+      <HorizontalArchive 
+        id="research"
+        projects={researchProjects} 
+        onPreview={setSelectedImage} 
+        eyebrow="Publications" 
+        title="Academic Research" 
+      />
+
       {/* Lightbox */}
       <AnimatePresence>
         {selectedImage && (
@@ -98,7 +108,7 @@ const Projects = () => {
   );
 };
 
-const HorizontalArchive = ({ projects, onPreview }: { projects: ProjectWithId[], onPreview: (img: string) => void }) => {
+const HorizontalArchive = ({ projects, onPreview, title = "More shipped builds", eyebrow = "Archive", id }: { projects: ProjectWithId[], onPreview: (img: string) => void, title?: string, eyebrow?: string, id?: string }) => {
   const containerRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -113,8 +123,10 @@ const HorizontalArchive = ({ projects, onPreview }: { projects: ProjectWithId[],
 
   const [activeCard, setActiveCard] = useState<number | null>(null);
 
+  if (projects.length === 0) return null;
+
   return (
-    <section ref={containerRef} className="relative mt-16 h-[300vh]">
+    <section id={id} ref={containerRef} className="relative mt-16 h-[300vh]">
       <style>{`
         .archive-stack {
           --spread-x: 12vw;
@@ -138,13 +150,13 @@ const HorizontalArchive = ({ projects, onPreview }: { projects: ProjectWithId[],
       <div className="archive-stack sticky top-0 flex h-[100dvh] flex-col items-center justify-center py-20">
         
         <div className="absolute top-4 md:top-12 w-full px-5 text-center sm:px-8 z-10 pointer-events-none">
-          <div className="inline-block rounded-3xl bg-canvas-50/95 px-6 py-4 dark:bg-canvas-950/95 shadow-[0_8px_30px_rgb(0,0,0,0.12)] border border-white/10">
+          <div className="inline-block rounded-3xl bg-canvas-50/95 px-6 py-4 dark:bg-canvas-950/95 shadow-[0_8px_30px_rgb(0,0,0,0.12)] border border-white/10 backdrop-blur-md">
             <p className="eyebrow mb-4 inline-flex bg-canvas-50/95 dark:bg-canvas-950/95">
               <span className="h-1.5 w-1.5 rounded-full bg-accent-500" />
-              Archive
+              {eyebrow}
             </p>
             <h3 className="font-display text-4xl font-bold tracking-tight text-canvas-950 dark:text-white md:text-5xl lg:text-6xl">
-              More shipped builds
+              {title}
             </h3>
             <p className="mt-3 font-display text-sm font-medium text-canvas-500 dark:text-canvas-400">
               Keep scrolling to spread the deck

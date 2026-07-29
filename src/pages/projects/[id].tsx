@@ -147,25 +147,49 @@ export default function ProjectDetails({ project }: Props) {
         </section>
 
         {/* Floating Action Bar */}
-        <motion.div initial={{ y: 100, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.8, duration: 0.8, type: 'spring', damping: 25 }} className="fixed bottom-6 left-1/2 z-40 -translate-x-1/2 lg:bottom-10">
-          <div className="flex items-center gap-2 rounded-full border border-canvas-200/50 bg-white/80 p-2 shadow-elevated backdrop-blur-2xl dark:border-white/10 dark:bg-canvas-900/80">
+        <div className="fixed bottom-6 left-0 right-0 z-40 flex justify-center pointer-events-none lg:bottom-10">
+          <motion.div initial={{ y: 100, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.8, duration: 0.8, type: 'spring', damping: 25 }} className="pointer-events-auto flex w-[95vw] max-w-fit flex-wrap items-center justify-center gap-2 rounded-[2rem] border border-canvas-200/50 bg-white/80 p-2 shadow-elevated backdrop-blur-2xl dark:border-white/10 dark:bg-canvas-900/80">
             {project.caseStudyUrl && (
               <Link href={project.caseStudyUrl} className="group relative flex items-center gap-2 rounded-full bg-blue-500 px-6 py-3 font-display text-sm font-bold text-white transition-all hover:bg-blue-400">
                 <span>Case Study</span>
                 <i className="fas fa-microscope text-sm"></i>
               </Link>
             )}
+            {project.descriptionUrl && (
+              <a href={project.descriptionUrl} target="_blank" rel="noopener noreferrer" className="group relative flex items-center gap-2 rounded-full bg-canvas-950 px-6 py-3 font-display text-sm font-bold text-white transition-all hover:bg-canvas-800 dark:bg-white dark:text-canvas-950 dark:hover:bg-canvas-100">
+                <span>Read Description</span>
+                <i className="fas fa-file-alt text-sm"></i>
+              </a>
+            )}
+            {project.paperUrl && (
+              <a href={project.paperUrl} target="_blank" rel="noopener noreferrer" className="group relative flex items-center gap-2 rounded-full bg-canvas-950 px-6 py-3 font-display text-sm font-bold text-white transition-all hover:bg-canvas-800 dark:bg-white dark:text-canvas-950 dark:hover:bg-canvas-100">
+                <span>{project.category === 'AI Tools' ? 'Read Full Document Paper' : 'Read Full Paper'}</span>
+                <i className="fas fa-book-open text-sm"></i>
+              </a>
+            )}
+            {project.appVideoUrl && (
+              <a href={project.appVideoUrl} target="_blank" rel="noopener noreferrer" className="group relative flex items-center gap-2 rounded-full bg-canvas-950 px-6 py-3 font-display text-sm font-bold text-white transition-all hover:bg-canvas-800 dark:bg-white dark:text-canvas-950 dark:hover:bg-canvas-100">
+                <span>App Video</span>
+                <i className="fas fa-play text-sm"></i>
+              </a>
+            )}
+            {project.webVideoUrl && (
+              <a href={project.webVideoUrl} target="_blank" rel="noopener noreferrer" className="group relative flex items-center gap-2 rounded-full bg-canvas-950 px-6 py-3 font-display text-sm font-bold text-white transition-all hover:bg-canvas-800 dark:bg-white dark:text-canvas-950 dark:hover:bg-canvas-100">
+                <span>Web Video</span>
+                <i className="fas fa-play text-sm"></i>
+              </a>
+            )}
             {project.liveUrl && (
               <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="group relative flex items-center gap-2 rounded-full bg-canvas-950 px-6 py-3 font-display text-sm font-bold text-white transition-all hover:bg-canvas-800 dark:bg-white dark:text-canvas-950 dark:hover:bg-canvas-100">
-                <span>Live Site</span>
+                <span>{project.category === 'Academic Research' ? 'Read Paper' : 'Live Site'}</span>
                 <i className="fas fa-arrow-up-right-from-square text-sm"></i>
               </a>
             )}
             <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="flex h-11 w-11 items-center justify-center rounded-full bg-canvas-100 text-canvas-700 transition-colors hover:bg-canvas-200 dark:bg-canvas-800 dark:text-canvas-300 dark:hover:bg-canvas-700" aria-label="Source code">
               <i className="fab fa-github text-lg"></i>
             </a>
-          </div>
-        </motion.div>
+          </motion.div>
+        </div>
 
         {/* Content Layout */}
         <section className="relative z-20 pb-32 pt-10">
@@ -219,8 +243,8 @@ export default function ProjectDetails({ project }: Props) {
                   <div className="mb-10 grid grid-cols-2 gap-4">
                     {project.metrics.map((metric, i) => (
                       <div key={i} className="rounded-2xl border border-white/10 bg-white/5 p-5">
-                        <p className="font-display text-2xl font-black text-white xl:text-3xl">{metric.value}</p>
-                        <p className="mt-1 font-display text-[10px] font-bold uppercase tracking-widest text-canvas-400">{metric.label}</p>
+                        <p className="font-display text-xl font-black leading-tight text-white break-words xl:text-2xl">{metric.value}</p>
+                        <p className="mt-2 font-display text-[10px] font-bold uppercase tracking-widest text-canvas-400">{metric.label}</p>
                       </div>
                     ))}
                   </div>
