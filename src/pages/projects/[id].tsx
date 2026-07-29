@@ -212,6 +212,17 @@ export default function ProjectDetails({ project }: Props) {
                 <BentoStat label="Role" value={project.role ?? "Engineer"} delay={0.1} />
                 <BentoStat label="Timeline" value={project.year ?? "2024"} delay={0.2} />
                 <BentoStat label="Domain" value={project.category ?? "Web"} delay={0.3} />
+                {project.contributors && (
+                  <BentoStat label="Contributors" delay={0.4}>
+                    <div className="mt-2 flex flex-col gap-1">
+                      {project.contributors.map((c) => (
+                        <a key={c.name} href={c.linkedinUrl} target="_blank" rel="noopener noreferrer" className="font-display text-xl font-black tracking-tight text-canvas-950 hover:text-accent-500 dark:text-white dark:hover:text-accent-400 transition-colors">
+                          {c.name} <i className="fas fa-arrow-up-right-from-square text-sm opacity-50 ml-1"></i>
+                        </a>
+                      ))}
+                    </div>
+                  </BentoStat>
+                )}
               </div>
             </div>
 
@@ -311,9 +322,10 @@ export default function ProjectDetails({ project }: Props) {
   );
 }
 
-const BentoStat = ({ label, value, delay }: { label: string; value: string, delay: number }) => (
+const BentoStat = ({ label, value, delay, children }: { label: string; value?: string, delay: number, children?: React.ReactNode }) => (
   <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '-50px' }} transition={{ duration: 0.5, delay }} className="flex flex-1 flex-col justify-center rounded-[2rem] border border-canvas-200/40 bg-white p-8 shadow-sm dark:border-white/5 dark:bg-canvas-900/50">
     <p className="font-display text-[11px] font-bold uppercase tracking-[0.2em] text-canvas-400">{label}</p>
-    <p className="mt-2 font-display text-2xl font-black tracking-tight text-canvas-950 dark:text-white">{value}</p>
+    {value && <p className="mt-2 font-display text-2xl font-black tracking-tight text-canvas-950 dark:text-white">{value}</p>}
+    {children}
   </motion.div>
 );

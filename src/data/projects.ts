@@ -9,6 +9,11 @@ export interface ProjectMetric {
   value: string;
 }
 
+export interface Contributor {
+  name: string;
+  linkedinUrl: string;
+}
+
 export interface Project {
   title: string;
   coverImage: string | string[];
@@ -32,6 +37,7 @@ export interface Project {
   descriptionUrl?: string;
   appVideoUrl?: string;
   webVideoUrl?: string;
+  contributors?: Contributor[];
   screenshots?: Screenshot[];
 }
 
@@ -50,6 +56,9 @@ export const projectsData: Record<string, Project> = {
     paperUrl: "https://drive.google.com/file/d/1v8wteyrMVNfQpbVZvhI6xkNabBj2zr_s/view?usp=sharing",
     appVideoUrl: "https://www.linkedin.com/posts/araneeskhan_reactjs-reactnative-firebase-activity-7288565331617341440-kv2M/?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEASdPoBEDb5CexinceNfuHBACZ67_W9bOI",
     webVideoUrl: "https://www.linkedin.com/posts/araneeskhan_reactjs-reactnative-firebase-activity-7288566801569869825-E2s9/?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEASdPoBEDb5CexinceNfuHBACZ67_W9bOI",
+    contributors: [
+      { name: "Malaika Khan", linkedinUrl: "https://www.linkedin.com/in/maliaqakhan/" }
+    ],
     description:
       "A comprehensive automated sports management system combining React Native and React JS to digitize the entire sports ecosystem. It features an Intelligent NLP Chatbot built with Python Flask and Sentence Transformers trained on 4000+ Q/A pairs, a TensorFlow.js image recognition system to validate equipment uploads, and dynamic AI recommendation engines for ground slot booking based on real-time weather API data and Round Robin scheduling algorithms.",
     videoPath: "br6cqm",
