@@ -9,7 +9,6 @@ import personal from '@/config/personal';
 
 const links = [
   { name: 'About', href: '/#about' },
-  { name: 'Services', href: '/#services' },
   { name: 'Skills', href: '/#skills' },
   { name: 'Projects', href: '/#projects' },
   { name: 'Research', href: '/#research' },
