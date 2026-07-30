@@ -23,8 +23,7 @@ const techStack = [
   { name: "React", role: "Web Frontend", icon: "/assets/skills/react.svg" },
   { name: "React Native", role: "Mobile App", icon: "/assets/skills/reactnative.png" },
   { name: "Node.js", role: "Main API Server", icon: "/assets/skills/nodejs.png" },
-  { name: "Python", role: "ML Microservice", icon: "/assets/skills/python.svg" },
-  { name: "Flask", role: "ML API Layer", icon: "/assets/skills/expressjs.png" },
+  { name: "Flask (Python)", role: "ML Scheduling Microservice", icon: "/assets/skills/python.svg" },
   { name: "Firebase", role: "Real-time DB", icon: "/assets/skills/firebase.svg" },
   { name: "JavaScript", role: "Core Language", icon: "/assets/skills/javascript.svg" },
 ];
