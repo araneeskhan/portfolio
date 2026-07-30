@@ -1,5 +1,6 @@
 import { GetServerSideProps } from 'next';
 import { projectsData } from '@/data/projects';
+import { researchData } from '@/data/research';
 import personal from '@/config/personal';
 
 export const getServerSideProps: GetServerSideProps = async ({ res }) => {
@@ -8,7 +9,8 @@ export const getServerSideProps: GetServerSideProps = async ({ res }) => {
 
     const staticPaths = ['', '/resume', '/case-studies/campus-sports-sphere'];
     const projectPaths = Object.keys(projectsData).map((id) => `/projects/${id}`);
-    const all = [...staticPaths, ...projectPaths];
+    const researchPaths = Object.keys(researchData).map((id) => `/research/${id}`);
+    const all = [...staticPaths, ...projectPaths, ...researchPaths];
 
     const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">

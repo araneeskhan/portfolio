@@ -22,6 +22,20 @@ const nextConfig = {
       },
     ],
   },
+  async redirects() {
+    // Academic papers moved from /projects/[id] to /research/[id];
+    // keep old shared links working.
+    const movedToResearch = [
+      'rag-vs-rrf-research',
+      'dns-cache-poisoning',
+      'federated-learning-medical',
+    ];
+    return movedToResearch.map((id) => ({
+      source: `/projects/${id}`,
+      destination: `/research/${id}`,
+      permanent: true,
+    }));
+  },
 };
 
 module.exports = nextConfig;
