@@ -12,7 +12,6 @@ interface HorizontalArchiveProps {
   onPreview: (img: string) => void;
   title?: string;
   eyebrow?: string;
-  id?: string;
   /** Route prefix for the "Details" link, e.g. "/projects" or "/research" */
   basePath: string;
 }
@@ -22,7 +21,6 @@ const HorizontalArchive = ({
   onPreview,
   title = 'More shipped builds',
   eyebrow = 'Archive',
-  id,
   basePath,
 }: HorizontalArchiveProps) => {
   const containerRef = useRef<HTMLElement>(null);
@@ -42,7 +40,7 @@ const HorizontalArchive = ({
   if (items.length === 0) return null;
 
   return (
-    <section id={id} ref={containerRef} className="relative mt-16 h-[300vh]">
+    <section ref={containerRef} className="relative mt-16 h-[300vh]">
       <style>{`
         .archive-stack {
           --spread-x: 12vw;
