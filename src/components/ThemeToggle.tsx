@@ -1,7 +1,14 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useSyncExternalStore } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 
 type Theme = 'light' | 'dark';
+
+const listeners = new Set<() => void>();
+const subscribe = (listener: () => void) => {
+  listeners.add(listener);
+  return () => listeners.delete(listener);
+};
+const notify = () => listeners.forEach((listener) => listener());
 
 const getPreferredTheme = (): Theme => {
   if (typeof window === 'undefined') return 'light';
@@ -14,28 +21,35 @@ const getPreferredTheme = (): Theme => {
   return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
 };
 
+const getServerTheme = (): Theme => 'light';
+
 const applyTheme = (theme: Theme) => {
   document.documentElement.setAttribute('data-theme', theme);
   document.documentElement.classList.toggle('dark', theme === 'dark');
   document.documentElement.style.colorScheme = theme;
 };
 
-const ThemeToggle = () => {
-  const [theme, setTheme] = useState<Theme>('light');
-  const [mounted, setMounted] = useState(false);
+const setStoredTheme = (theme: Theme) => {
+  window.localStorage.setItem('theme', theme);
+  notify();
+};
 
+// Renders a placeholder until the client has hydrated, avoiding a theme flash.
+const subscribeNoop = () => () => {};
+const getIsClient = () => true;
+const getIsClientServer = () => false;
+
+const ThemeToggle = () => {
+  const mounted = useSyncExternalStore(subscribeNoop, getIsClient, getIsClientServer);
+  const theme = useSyncExternalStore(subscribe, getPreferredTheme, getServerTheme);
+
+  // Synchronize the DOM with the resolved theme — a legitimate effect, not derived state.
   useEffect(() => {
-    const initialTheme = getPreferredTheme();
-    setTheme(initialTheme);
-    applyTheme(initialTheme);
-    setMounted(true);
-  }, []);
+    if (mounted) applyTheme(theme);
+  }, [theme, mounted]);
 
   const toggleTheme = () => {
-    const nextTheme = theme === 'light' ? 'dark' : 'light';
-    setTheme(nextTheme);
-    window.localStorage.setItem('theme', nextTheme);
-    applyTheme(nextTheme);
+    setStoredTheme(theme === 'light' ? 'dark' : 'light');
   };
 
   if (!mounted) {

@@ -21,6 +21,14 @@ const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const router = useRouter();
 
+  // Close the mobile menu on route change — adjusted during render (React's
+  // recommended alternative to a setState-in-effect) rather than in a useEffect.
+  const [lastPath, setLastPath] = useState(router.asPath);
+  if (lastPath !== router.asPath) {
+    setLastPath(router.asPath);
+    setIsMenuOpen(false);
+  }
+
   useEffect(() => {
     let ticking = false;
     const handleScroll = () => {
@@ -35,10 +43,6 @@ const Navbar = () => {
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
-  useEffect(() => {
-    setIsMenuOpen(false);
-  }, [router.asPath]);
 
   useEffect(() => {
     document.body.style.overflow = isMenuOpen ? 'hidden' : '';

@@ -1,24 +1,27 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useSyncExternalStore } from 'react';
 import { motion, useMotionValue, useSpring } from 'motion/react';
+
+// No real external subscription needed — touch capability doesn't change at runtime.
+const subscribeNoop = () => () => {};
+const getIsTouchDevice = () => 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+const getServerSnapshot = () => false;
 
 export default function CustomCursor() {
   const [isHovered, setIsHovered] = useState(false);
-  const [isVisible, setIsVisible] = useState(false);
-  const [isTouchDevice, setIsTouchDevice] = useState(false);
+  // Starts visible: the mouse may already be inside the window when this mounts.
+  const [isVisible, setIsVisible] = useState(true);
+  // Reads browser-only capability without a hydration mismatch or a setState-in-effect cascade.
+  const isTouchDevice = useSyncExternalStore(subscribeNoop, getIsTouchDevice, getServerSnapshot);
 
   // Raw mouse coordinates
   const cursorX = useMotionValue(-100);
   const cursorY = useMotionValue(-100);
-  
+
   // Use raw motion values for zero-latency 1:1 native mouse tracking
   // We bypass the spring physics entirely so the cursor feels completely weightless.
 
   useEffect(() => {
-    // Detect touch devices to avoid rendering the cursor unnecessarily
-    if (typeof window !== 'undefined' && ('ontouchstart' in window || navigator.maxTouchPoints > 0)) {
-      setIsTouchDevice(true);
-      return;
-    }
+    if (isTouchDevice) return;
 
     const moveCursor = (e: MouseEvent) => {
       cursorX.set(e.clientX);
@@ -31,9 +34,6 @@ export default function CustomCursor() {
     window.addEventListener('mousemove', moveCursor);
     document.addEventListener('mouseenter', handleMouseEnter);
     document.addEventListener('mouseleave', handleMouseLeave);
-    
-    // Set initially visible since mouse might already be in window
-    setIsVisible(true);
 
     // Event delegation to detect hovering over interactive elements globally
     const handleMouseOver = (e: MouseEvent) => {
@@ -62,7 +62,7 @@ export default function CustomCursor() {
       document.removeEventListener('mouseover', handleMouseOver);
       document.removeEventListener('mouseout', handleMouseOut);
     };
-  }, [cursorX, cursorY]);
+  }, [cursorX, cursorY, isTouchDevice]);
 
   // Don't render anything on mobile/tablets
   if (isTouchDevice) return null;
