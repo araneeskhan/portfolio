@@ -120,7 +120,7 @@ export default function ResearchDetails({ paper }: Props) {
               </section>
 
               {/* Contributions & Findings */}
-              {(paper.features.length > 0 || paper.highlights.length > 0) && (
+              {(paper.features.length > 0 || (paper.highlights?.length ?? 0) > 0) && (
                 <div className="grid gap-16 md:grid-cols-2">
                   {paper.features.length > 0 && (
                     <section>
