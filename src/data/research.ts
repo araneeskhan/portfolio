@@ -12,7 +12,9 @@ export const researchData: Record<string, ResearchPaper> = {
     status: "Master's Research",
     role: "AI Researcher",
     year: "2026",
-    liveUrl: "https://drive.google.com/file/d/11SRyid9YWUwqnwWS7g3OTedsfh_uc9Q3/view?usp=sharing",
+    liveUrl: "https://zenodo.org/records/21813119",
+    doi: "10.5281/zenodo.21813119",
+    publisher: "Zenodo",
     description:
       "An academic research paper titled 'Evaluating Retrieval-Augmented Generation Strategies for Repository-Level Code Understanding'. It investigates the effectiveness of standard dense Semantic Retrieval against a Hybrid Reciprocal Rank Fusion (RRF) approach utilizing BM25. The study built a multi-lingual benchmark (Python, Java, C++) using Tree-sitter AST chunking and Chroma, then scored 100 synthetic technical queries with an automated Llama-3.1-8B responder judged by Llama-3.3-70B, finding Hybrid RRF reaches a mean score of 8.94/10 (σ=1.12) versus 8.15/10 (σ=2.05) for pure semantic retrieval.",
     technologies: [

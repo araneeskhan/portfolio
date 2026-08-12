@@ -40,7 +40,10 @@ export default function ResearchDetails({ paper }: Props) {
     );
   }
 
-  const citation = `${personal.name}. "${paper.title}." ${paper.year}. ${personal.siteUrl}/research/${paper.id}`;
+  const source = paper.doi
+    ? `${paper.publisher ?? 'Zenodo'}. https://doi.org/${paper.doi}`
+    : `${personal.siteUrl}/research/${paper.id}`;
+  const citation = `${personal.name}. "${paper.title}." ${paper.year}. ${source}`;
 
   return (
     <Layout title={`${paper.title} | Research`} description={paper.shortDescription ?? paper.description}>
@@ -92,6 +95,22 @@ export default function ResearchDetails({ paper }: Props) {
                 </div>
               )}
 
+              {paper.doi && (
+                <div>
+                  <p className="mb-3 font-display text-[10px] font-bold uppercase tracking-[0.2em] text-canvas-400">
+                    {paper.publisher ? `Archived on ${paper.publisher}` : 'Archived'}
+                  </p>
+                  <a
+                    href={`https://doi.org/${paper.doi}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-block border-b border-canvas-300 pb-0.5 font-mono text-sm text-canvas-950 transition-colors hover:border-accent-500 hover:text-accent-600 dark:border-white/20 dark:text-white dark:hover:border-accent-400 dark:hover:text-accent-400"
+                  >
+                    {paper.doi}
+                  </a>
+                </div>
+              )}
+
               {paper.liveUrl && (
                 <div className="pt-8 border-t border-canvas-200/60 dark:border-white/10">
                   <a href={paper.liveUrl} target="_blank" rel="noopener noreferrer" className="group flex items-center justify-between rounded-full border border-canvas-200 p-2 pr-6 transition-colors hover:border-canvas-950 dark:border-white/10 dark:hover:border-white">
@@ -99,7 +118,7 @@ export default function ResearchDetails({ paper }: Props) {
                       <i className="fas fa-arrow-right -rotate-45 text-sm transition-transform group-hover:rotate-0"></i>
                     </div>
                     <span className="font-display text-xs font-bold uppercase tracking-widest text-canvas-950 dark:text-white">
-                      Read Full Document
+                      {paper.publisher ? `Read on ${paper.publisher}` : 'Read Full Document'}
                     </span>
                   </a>
                 </div>

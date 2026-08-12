@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { motion, AnimatePresence } from 'motion/react';
@@ -16,9 +17,50 @@ const links = [
   { name: 'Contact', href: '/#contact' },
 ];
 
+/** Which section is under the scroll line — shared by the desktop bar and the
+ *  mobile drawer so both show the same active state. */
+const useActiveSection = () => {
+  const [activeSection, setActiveSection] = useState('');
+
+  useEffect(() => {
+    const updateActiveSection = () => {
+      const scrollPosition = window.scrollY + 120;
+      for (const link of links) {
+        const sectionId = link.href.split('#')[1];
+        const element = document.getElementById(sectionId);
+        if (!element) continue;
+        const sectionTop = element.offsetTop;
+        const sectionBottom = sectionTop + element.offsetHeight;
+        if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+          setActiveSection((prev) => (prev === sectionId ? prev : sectionId));
+          return;
+        }
+      }
+      setActiveSection((prev) => (prev === '' ? prev : ''));
+    };
+
+    let ticking = false;
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        updateActiveSection();
+        ticking = false;
+      });
+    };
+
+    updateActiveSection();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  return activeSection;
+};
+
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const activeSection = useActiveSection();
   const router = useRouter();
 
   // Close the mobile menu on route change — adjusted during render (React's
@@ -77,11 +119,20 @@ const Navbar = () => {
               <motion.span
                 whileHover={{ scale: 1.05, rotate: -3 }}
                 whileTap={{ scale: 0.95 }}
-                className="relative flex h-10 w-10 items-center justify-center overflow-hidden rounded-xl bg-canvas-950 font-display text-sm font-bold text-white dark:bg-white dark:text-canvas-950 shadow-md"
+                className="relative flex h-10 w-10 items-center justify-center overflow-hidden rounded-full bg-canvas-100 shadow-md ring-1 ring-canvas-200/70 dark:bg-canvas-900 dark:ring-white/15"
               >
-                <span className="text-gradient bg-none dark:bg-none dark:text-canvas-950">AR</span>
-                <div
-                  className="absolute inset-0 rounded-xl opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+                <Image
+                  src="/assets/avatar-mark.png"
+                  alt={personal.name}
+                  width={80}
+                  height={80}
+                  priority
+                  sizes="40px"
+                  className="h-full w-full object-cover"
+                />
+                <span
+                  aria-hidden
+                  className="absolute inset-0 rounded-full opacity-0 transition-opacity duration-500 group-hover:opacity-100"
                   style={{
                     background:
                       'linear-gradient(135deg, rgba(99,102,241,0.3), rgba(168,85,247,0.3))',
@@ -219,7 +270,7 @@ const Navbar = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-40 bg-canvas-950/60 backdrop-blur-sm md:hidden"
+            className="fixed inset-0 z-[60] bg-canvas-950/60 backdrop-blur-sm md:hidden"
             onClick={() => setIsMenuOpen(false)}
           />
         )}
@@ -233,7 +284,7 @@ const Navbar = () => {
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
             transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-            className="fixed right-0 top-0 z-50 flex h-full w-80 max-w-[86vw] flex-col bg-white/95 backdrop-blur-2xl dark:bg-canvas-950/95 md:hidden"
+            className="fixed right-0 top-0 z-[70] flex h-full w-80 max-w-[86vw] flex-col bg-white/95 backdrop-blur-2xl dark:bg-canvas-950/95 md:hidden"
           >
             <div className="flex items-center justify-between border-b border-canvas-200/20 p-6 dark:border-white/10">
               <span className="font-display text-lg font-bold text-canvas-950 dark:text-white">
@@ -287,9 +338,36 @@ const Navbar = () => {
                         setIsMenuOpen(false);
                       }
                     }}
-                    className="flex items-center gap-4 rounded-xl px-4 py-4 font-display text-lg font-medium text-canvas-800 transition-colors hover:bg-canvas-100/80 hover:text-canvas-950 dark:text-canvas-200 dark:hover:bg-white/10 dark:hover:text-white"
+                    className={`group flex items-center justify-between rounded-xl px-4 py-4 font-display text-lg font-medium transition-colors ${
+                      link.href.split('#')[1] === activeSection
+                        ? 'bg-canvas-100 text-canvas-950 dark:bg-white/10 dark:text-white'
+                        : 'text-canvas-800 hover:bg-canvas-100/80 hover:text-canvas-950 dark:text-canvas-200 dark:hover:bg-white/10 dark:hover:text-white'
+                    }`}
                   >
-                    {link.name}
+                    <span className="flex items-center gap-3">
+                      <span
+                        aria-hidden
+                        className={`h-1.5 w-1.5 shrink-0 rounded-full transition-colors ${
+                          link.href.split('#')[1] === activeSection
+                            ? 'bg-accent-500 dark:bg-accent-400'
+                            : 'bg-transparent'
+                        }`}
+                      />
+                      {link.name}
+                    </span>
+                    <svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="shrink-0 text-canvas-300 transition-transform duration-300 group-hover:translate-x-0.5 dark:text-canvas-600"
+                    >
+                      <path d="M9 18l6-6-6-6" />
+                    </svg>
                   </Link>
                 </motion.div>
               ))}
@@ -301,9 +379,26 @@ const Navbar = () => {
               >
                 <Link
                   href="/resume"
-                  className="flex items-center gap-4 rounded-xl px-4 py-4 font-display text-lg font-medium text-canvas-800 transition-colors hover:bg-canvas-100/80 hover:text-canvas-950 dark:text-canvas-200 dark:hover:bg-white/10 dark:hover:text-white"
+                  onClick={() => setIsMenuOpen(false)}
+                  className="group flex items-center justify-between rounded-xl px-4 py-4 font-display text-lg font-medium text-canvas-800 transition-colors hover:bg-canvas-100/80 hover:text-canvas-950 dark:text-canvas-200 dark:hover:bg-white/10 dark:hover:text-white"
                 >
-                  Resume
+                  <span className="flex items-center gap-3">
+                    <span aria-hidden className="h-1.5 w-1.5 shrink-0 rounded-full bg-transparent" />
+                    Resume
+                  </span>
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="shrink-0 text-canvas-300 transition-transform duration-300 group-hover:translate-x-0.5 dark:text-canvas-600"
+                  >
+                    <path d="M9 18l6-6-6-6" />
+                  </svg>
                 </Link>
               </motion.div>
             </div>
@@ -336,40 +431,8 @@ const Navbar = () => {
 };
 
 const NavLinks = ({ isScrolled }: { isScrolled: boolean }) => {
-  const [activeSection, setActiveSection] = useState('');
+  const activeSection = useActiveSection();
   const router = useRouter();
-
-  useEffect(() => {
-    const updateActiveSection = () => {
-      const scrollPosition = window.scrollY + 120;
-      for (const link of links) {
-        const sectionId = link.href.split('#')[1];
-        const element = document.getElementById(sectionId);
-        if (!element) continue;
-        const sectionTop = element.offsetTop;
-        const sectionBottom = sectionTop + element.offsetHeight;
-        if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
-          setActiveSection((prev) => (prev === sectionId ? prev : sectionId));
-          return;
-        }
-      }
-      setActiveSection((prev) => (prev === '' ? prev : ''));
-    };
-
-    let ticking = false;
-    const onScroll = () => {
-      if (ticking) return;
-      ticking = true;
-      requestAnimationFrame(() => {
-        updateActiveSection();
-        ticking = false;
-      });
-    };
-
-    updateActiveSection();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
 
   return (
     <>

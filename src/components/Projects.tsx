@@ -64,9 +64,9 @@ const Projects = () => {
 };
 
 const Signal = ({ value, label }: { value: string; label: string }) => (
-  <div className="border-r border-canvas-200/20 p-5 last:border-r-0 dark:border-white/5">
-    <p className="font-display text-xl font-bold text-canvas-950 dark:text-white">{value}</p>
-    <p className="mt-1 text-xs font-medium uppercase tracking-wider text-canvas-400 dark:text-canvas-500">{label}</p>
+  <div className="border-r border-canvas-200/20 p-3 last:border-r-0 dark:border-white/5 sm:p-5">
+    <p className="font-display text-base font-bold leading-tight text-canvas-950 dark:text-white sm:text-xl">{value}</p>
+    <p className="mt-1 text-[10px] font-medium uppercase leading-tight tracking-wide text-canvas-400 dark:text-canvas-500 sm:text-xs sm:tracking-wider">{label}</p>
   </div>
 );
 
@@ -139,14 +139,14 @@ const FeaturedProjectCard = ({
           <div className="absolute inset-0 bg-canvas-950/0 transition-colors duration-500 group-hover:bg-canvas-950/10" />
 
           {/* Badges on Image */}
-          <div className="absolute left-6 top-6 flex flex-wrap gap-2">
+          <div className="absolute left-4 top-4 right-4 flex flex-wrap gap-2 sm:left-6 sm:top-6 sm:right-6">
             {project.category && (
-              <span className="font-display rounded-full bg-canvas-950/70 px-4 py-1.5 text-xs font-bold tracking-wide text-white dark:bg-black/70">
+              <span className="font-display rounded-full bg-canvas-950/70 px-3 py-1 text-[11px] font-bold tracking-wide text-white dark:bg-black/70 sm:px-4 sm:py-1.5 sm:text-xs">
                 {project.category}
               </span>
             )}
             {project.status && (
-              <span className="font-display rounded-full border border-emerald-400/30 bg-emerald-500/40 px-4 py-1.5 text-xs font-bold tracking-wide text-emerald-200">
+              <span className="font-display rounded-full border border-emerald-400/30 bg-emerald-500/40 px-3 py-1 text-[11px] font-bold tracking-wide text-emerald-200 sm:px-4 sm:py-1.5 sm:text-xs">
                 {project.status}
               </span>
             )}

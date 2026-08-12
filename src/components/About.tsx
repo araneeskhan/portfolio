@@ -89,7 +89,7 @@ const About = () => {
         <div className="mx-auto max-w-4xl">
           <ScrollRevealText
             text="I am a full-stack developer focused on building responsive, user-friendly web and mobile applications. My work is shaped by a practical curiosity: understanding the problem deeply, designing a maintainable system around it, and shipping an experience people can use without friction."
-            className="font-display text-2xl font-medium leading-relaxed text-canvas-950 dark:text-white sm:text-3xl md:text-4xl md:leading-snug"
+            className="font-display text-lg font-medium leading-relaxed text-canvas-950 dark:text-white sm:text-3xl md:text-4xl md:leading-snug"
           />
 
           <div className="my-12 flex items-center gap-6">
@@ -114,7 +114,7 @@ const About = () => {
 
           <ScrollRevealText
             text="My core stack includes React, Next.js, React Native, Node.js, Python, and modern database systems. I am especially interested in products where strong engineering and intelligent automation meet to create experiences that feel effortless."
-            className="font-display text-xl font-medium leading-relaxed text-canvas-700 dark:text-canvas-200 sm:text-2xl md:text-3xl md:leading-snug"
+            className="font-display text-base font-medium leading-relaxed text-canvas-700 dark:text-canvas-200 sm:text-2xl md:text-3xl md:leading-snug"
           />
         </div>
 

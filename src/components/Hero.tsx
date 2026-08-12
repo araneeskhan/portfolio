@@ -107,7 +107,7 @@ const Hero = () => {
       </div>
 
       <div className="section-container">
-        <div className="grid items-center gap-16 lg:grid-cols-[1.1fr_0.9fr] lg:gap-20">
+        <div className="grid items-center gap-8 sm:gap-16 lg:grid-cols-[1.1fr_0.9fr] lg:gap-20">
           {/* Left: Text */}
           <motion.div
             className="order-2 max-w-3xl lg:order-1"
@@ -117,7 +117,7 @@ const Hero = () => {
             style={{ y: textY, opacity }}
           >
 
-            <motion.p variants={item} className="mt-8 text-sm font-medium uppercase tracking-[0.2em] text-canvas-400 dark:text-canvas-500">
+            <motion.p variants={item} className="text-xs font-medium uppercase tracking-[0.2em] text-canvas-400 dark:text-canvas-500 sm:mt-8 sm:text-sm">
               Hello, I&apos;m
             </motion.p>
 
@@ -140,19 +140,19 @@ const Hero = () => {
 
             {/* CTAs — now includes View Resume */}
             <motion.div variants={item} className="mt-8 flex flex-wrap gap-3">
-              <MagneticButton href={personal.resumePath} download={personal.resumeFileName} className="btn-primary font-display">
+              <MagneticButton href={personal.resumePath} download={personal.resumeFileName} className="btn-primary w-full justify-center font-display sm:w-auto">
                 <span>Download Resume</span>
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3" />
                 </svg>
               </MagneticButton>
-              <MagneticButton href="/resume" className="btn-secondary font-display">
+              <MagneticButton href="/resume" className="btn-secondary flex-1 justify-center whitespace-nowrap px-4 font-display sm:flex-none sm:px-7">
                 <span>View Resume</span>
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" /><circle cx="12" cy="12" r="3" />
                 </svg>
               </MagneticButton>
-              <MagneticButton href="#projects" className="btn-secondary font-display">
+              <MagneticButton href="#projects" className="btn-secondary flex-1 justify-center whitespace-nowrap px-4 font-display sm:flex-none sm:px-7">
                 <span>View Projects</span>
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M7 17L17 7M17 7H7M17 7V17" />
@@ -163,19 +163,19 @@ const Hero = () => {
             {/* Metrics */}
             <motion.div
               variants={item}
-              className="mt-12 grid max-w-xl grid-cols-3 gap-4"
+              className="mt-10 grid max-w-xl grid-cols-3 gap-2 sm:mt-12 sm:gap-4"
               style={{ y: metricsY }}
               onViewportEnter={() => setCounts(true)}
             >
               {metrics.map((metric) => (
                 <div
                   key={metric.label}
-                  className="group relative overflow-hidden rounded-2xl border border-canvas-200/30 bg-white/50 p-4 backdrop-blur-sm transition-all duration-500 hover:border-accent-500/20 hover:shadow-glow dark:border-white/5 dark:bg-white/[0.02] dark:hover:border-accent-400/20"
+                  className="group relative overflow-hidden rounded-2xl border border-canvas-200/30 bg-white/50 p-3 backdrop-blur-sm transition-all duration-500 hover:border-accent-500/20 hover:shadow-glow dark:border-white/5 dark:bg-white/[0.02] dark:hover:border-accent-400/20 sm:p-4"
                 >
-                  <p className="font-display text-2xl font-bold text-canvas-950 dark:text-white sm:text-3xl">
+                  <p className="font-display text-xl font-bold text-canvas-950 dark:text-white sm:text-3xl">
                     {counts ? <AnimatedValue value={metric.value} suffix={metric.suffix} /> : `0${metric.suffix}`}
                   </p>
-                  <p className="mt-1 text-xs font-medium uppercase tracking-wider text-canvas-400 dark:text-canvas-500">
+                  <p className="mt-1 text-[10px] font-medium uppercase leading-tight tracking-wide text-canvas-400 dark:text-canvas-500 sm:text-xs sm:tracking-wider">
                     {metric.label}
                   </p>
                   <div className="absolute inset-0 -z-10 rounded-2xl bg-gradient-to-br from-accent-500/[0.03] to-accent2-500/[0.03] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
@@ -195,7 +195,7 @@ const Hero = () => {
             <div className="relative">
               {/* Animated gradient ring */}
               <motion.div
-                className="absolute -inset-4 z-0 rounded-full"
+                className="absolute -inset-2 z-0 rounded-full sm:-inset-4"
                 style={{
                   background: 'conic-gradient(from 0deg, #6366f1, #a855f7, #ec4899, #6366f1)',
                   padding: '3px',
@@ -207,10 +207,10 @@ const Hero = () => {
               </motion.div>
 
               {/* Outer glow */}
-              <div className="absolute -inset-12 z-0 rounded-full bg-gradient-to-br from-accent-500/20 via-accent2-500/15 to-transparent blur-3xl" />
+              <div className="absolute -inset-6 z-0 rounded-full bg-gradient-to-br from-accent-500/20 via-accent2-500/15 to-transparent blur-3xl sm:-inset-12" />
 
               {/* Profile image — circular, clean */}
-              <div className="relative z-10 h-[320px] w-[320px] overflow-hidden rounded-full border-4 border-white/20 shadow-2xl sm:h-[380px] sm:w-[380px] lg:h-[420px] lg:w-[420px]">
+              <div className="relative z-10 h-[192px] w-[192px] overflow-hidden rounded-full border-4 border-white/20 shadow-2xl sm:h-[380px] sm:w-[380px] lg:h-[420px] lg:w-[420px]">
                 <Image
                   src="/assets/profile-pic.jpeg"
                   alt={`${personal.name} profile`}
@@ -218,7 +218,7 @@ const Hero = () => {
                   className="object-cover"
                   priority
                   quality={90}
-                  sizes="420px"
+                  sizes="(max-width: 639px) 192px, (max-width: 1023px) 380px, 420px"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-canvas-950/20 via-transparent to-transparent" />
               </div>

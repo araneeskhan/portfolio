@@ -34,6 +34,10 @@ export interface ContentItem {
   githubUrl?: string;
   caseStudyUrl?: string;
   paperUrl?: string;
+  /** Bare DOI, e.g. "10.5281/zenodo.21813119" — rendered as a resolvable citation link. */
+  doi?: string;
+  /** Where the record lives, e.g. "Zenodo" — shown next to the DOI. */
+  publisher?: string;
   descriptionUrl?: string;
   appVideoUrl?: string;
   webVideoUrl?: string;

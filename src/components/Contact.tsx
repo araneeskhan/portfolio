@@ -100,7 +100,7 @@ const Contact = () => {
                   href={item.href}
                   target={item.href.startsWith('http') ? '_blank' : undefined}
                   rel={item.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                  className="group relative flex items-center gap-5 overflow-hidden rounded-2xl border border-canvas-200/40 bg-white/80 p-5 shadow-sm backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-elevated dark:border-white/10 dark:bg-white/[0.03]"
+                  className="group relative flex items-center gap-3.5 overflow-hidden rounded-2xl border border-canvas-200/40 bg-white/80 p-4 shadow-sm backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-elevated dark:border-white/10 dark:bg-white/[0.03] sm:gap-5 sm:p-5"
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
@@ -109,14 +109,14 @@ const Contact = () => {
                   {/* Hover gradient background */}
                   <div className={`absolute inset-0 bg-gradient-to-r ${item.gradient} opacity-0 transition-opacity duration-300 group-hover:opacity-[0.03] dark:group-hover:opacity-[0.08]`} />
                   
-                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-canvas-100 text-canvas-700 transition-transform duration-300 group-hover:scale-110 group-hover:bg-white group-hover:text-canvas-950 group-hover:shadow-md dark:bg-white/10 dark:text-canvas-200 dark:group-hover:bg-white dark:group-hover:text-canvas-950">
+                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-canvas-100 text-canvas-700 transition-transform duration-300 group-hover:scale-110 group-hover:bg-white group-hover:text-canvas-950 group-hover:shadow-md dark:bg-white/10 dark:text-canvas-200 dark:group-hover:bg-white dark:group-hover:text-canvas-950 sm:h-12 sm:w-12">
                     {item.icon}
                   </div>
                   <div className="min-w-0 flex-1">
                     <p className="text-[11px] font-display font-medium uppercase tracking-widest text-canvas-400 dark:text-canvas-500">
                       {item.label}
                     </p>
-                    <p className="mt-1 truncate font-display text-lg font-medium text-canvas-950 transition-colors group-hover:text-accent-500 dark:text-white dark:group-hover:text-accent-400">
+                    <p className="mt-1 break-words font-display text-sm font-medium leading-snug text-canvas-950 transition-colors group-hover:text-accent-500 dark:text-white dark:group-hover:text-accent-400 sm:truncate sm:text-lg">
                       {item.value}
                     </p>
                   </div>
