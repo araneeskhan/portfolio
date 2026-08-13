@@ -1,11 +1,10 @@
 import Link from 'next/link';
 import { motion } from 'motion/react';
-import { researchData, type ResearchPaper } from '@/data/research';
+import { type ContentItem } from '@/data/types';
 
-type PaperWithId = ResearchPaper & { id: string };
+type PaperWithId = ContentItem & { id: string };
 
-const Research = () => {
-  const papers = Object.entries(researchData).map(([id, paper]) => ({ id, ...paper }));
+const Research = ({ papers = [] }: { papers: PaperWithId[] }) => {
   const archived = papers.filter((p) => p.doi).length;
 
   return (
@@ -106,7 +105,7 @@ const PublicationRow = ({ paper, index }: { paper: PaperWithId; index: number })
 
         {/* Methods — set as a keyword line, the way a paper prints them */}
         <p className="mt-5 max-w-2xl font-mono text-[11px] leading-relaxed text-canvas-500 dark:text-canvas-400">
-          {paper.technologies.slice(0, 5).join('  ·  ')}
+          {paper.technologies?.slice(0, 5).join('  ·  ')}
         </p>
 
         <div className="mt-6 flex flex-wrap items-center justify-between gap-4">

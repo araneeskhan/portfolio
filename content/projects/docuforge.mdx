@@ -1,0 +1,48 @@
+---
+title: "DocuForge"
+coverImage: "/assets/docuforge/cover.png"
+shortDescription: "A document formatting engine that turns raw text and badly formatted Word files into publication-ready DOCX and PDF, entirely offline."
+category: "Document Automation"
+status: "Formatting Engine"
+role: "Full-Stack & AI Engineer"
+year: "2026"
+featured: true
+technologies:
+  - "React"
+  - "Vite"
+  - "TypeScript"
+  - "Tailwind CSS"
+  - "Framer Motion"
+  - "FastAPI"
+  - "Python"
+  - "python-docx"
+  - "ReportLab"
+  - "spaCy"
+features:
+  - "Fully offline processing with no external model dependency"
+  - "Rule-based formatting for heading hierarchy, typography, spacing, smart quotes, and justification"
+  - "DOCX and PDF export from a single formatting pass"
+  - "Tolerant parsing for TXT, DOC, and DOCX inputs, including malformed files"
+  - "FastAPI service behind a React and TypeScript client"
+highlights:
+  - "Chose a deterministic rule pipeline over a generative one so output is reproducible and reviewable — the same document formats identically every run"
+  - "Split parsing, formatting rules, and export generation into independent stages, so a new output format costs one module rather than a rewrite"
+  - "Built for privacy-sensitive workflows where documents cannot leave the machine"
+metrics:
+  - 
+    label: "API Cost"
+    value: "$0"
+  - 
+    label: "Exports"
+    value: "DOCX + PDF"
+  - 
+    label: "Processing"
+    value: "Offline"
+githubUrl: "https://github.com/araneeskhan/docuforge"
+screenshots:
+  - 
+    path: "/assets/docuforge/cover.png"
+    type: "web"
+---
+
+DocuForge standardizes messy documents — raw text, legacy DOC, inconsistent DOCX — into publication-ready DOCX and PDF exports. The formatting is deterministic by design: a rule set handles heading hierarchy, typography, spacing, smart quotes, and justification, so the same input always produces the same output and nothing is rewritten without an explicit rule. Nothing leaves the machine and there is no model API in the path, which makes it usable on documents that cannot be sent to a third party. A FastAPI backend separates parsing, formatting, and export behind a React and TypeScript client.

@@ -1,8 +1,8 @@
 const personal = {
   name: 'Anees Ur Rehman',
-  title: 'Full-Stack Developer',
+  title: 'Full-Stack & AI Engineer',
   description:
-    'Full-Stack Developer specializing in React, Next.js, React Native, and AI/ML. Based in Paris, France. Available for freelance opportunities.',
+    'Full-Stack & AI Engineer specializing in React, Next.js, React Native, and AI/ML. Based in Paris, France. Available for freelance opportunities.',
   email: 'aneesurrehman1358@gmail.com',
   location: 'Paris, France',
   github: 'https://github.com/araneeskhan',

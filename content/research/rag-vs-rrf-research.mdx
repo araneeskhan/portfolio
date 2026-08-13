@@ -1,0 +1,44 @@
+---
+title: "Evaluating RAG Strategies for Code"
+coverImage: "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?q=80&w=2070&auto=format&fit=crop"
+shortDescription: "A CNAM Paris master's research paper evaluating Semantic RAG vs Hybrid Reciprocal Rank Fusion for repository-level code understanding using LLM-as-a-Judge."
+category: "Academic Research"
+status: "Master's Research"
+role: "AI Researcher"
+year: "2026"
+liveUrl: "https://zenodo.org/records/21813119"
+doi: "10.5281/zenodo.21813119"
+publisher: "Zenodo"
+technologies:
+  - "Python"
+  - "Sentence Transformers"
+  - "ChromaDB"
+  - "Llama-3.3-70B"
+  - "LangChain"
+  - "Tree-sitter"
+features:
+  - "Multi-lingual AST-aware codebase ingestion using Tree-sitter (Python, Java, C++)"
+  - "Hybrid RRF pipeline merging dense embeddings (all-MiniLM-L6-v2) with sparse lexical (BM25)"
+  - "Automated LLM-as-a-Judge pipeline: Llama-3.1-8B answers, Llama-3.3-70B (via Groq) grades"
+  - "t-SNE and PCA dimensionality reduction for vector space visualization"
+highlights:
+  - "Hybrid RRF outperformed pure semantic retrieval on exact-match, symbol-heavy queries (e.g. up to 9/10 vs 4/10 on a specific internal variable lookup)"
+  - "Parameter sensitivity ablation confirmed a 50/50 RRF weight split is the optimal balance between dense and sparse retrieval"
+  - "Latency profiling showed Hybrid RRF stays under 15ms end-to-end despite querying two indexes"
+metrics:
+  - 
+    label: "Dataset"
+    value: "3 Codebases"
+  - 
+    label: "Judge Model"
+    value: "Llama-3.3-70B"
+  - 
+    label: "Focus"
+    value: "RAG Architecture"
+screenshots:
+  - 
+    path: "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?q=80&w=2070&auto=format&fit=crop"
+    type: "web"
+---
+
+An academic research paper titled 'Evaluating Retrieval-Augmented Generation Strategies for Repository-Level Code Understanding'. It investigates the effectiveness of standard dense Semantic Retrieval against a Hybrid Reciprocal Rank Fusion (RRF) approach utilizing BM25. The study built a multi-lingual benchmark (Python, Java, C++) using Tree-sitter AST chunking and Chroma, then scored 100 synthetic technical queries with an automated Llama-3.1-8B responder judged by Llama-3.3-70B, finding Hybrid RRF reaches a mean score of 8.94/10 (σ=1.12) versus 8.15/10 (σ=2.05) for pure semantic retrieval.

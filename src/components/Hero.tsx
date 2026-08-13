@@ -5,7 +5,7 @@ import { motion, useScroll, useTransform, useSpring } from 'motion/react';
 import personal from '@/config/personal';
 import MagneticButton from './motion/MagneticButton';
 
-const roles = ['Full-Stack Developer', 'Software Engineer', 'AI Product Builder'];
+const roles = ['Full-Stack & AI Engineer', 'Software Engineer', 'AI Product Builder'];
 
 const metrics = [
   { value: 24, suffix: '+', label: 'Months Building' },

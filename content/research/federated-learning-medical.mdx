@@ -1,0 +1,42 @@
+---
+title: "Federated Learning on PathMNIST: A BatchNorm Root-Cause Audit"
+coverImage: "https://images.unsplash.com/photo-1530497610245-94d3c16cda28?q=80&w=2070&auto=format&fit=crop"
+shortDescription: "A federated learning study on PathMNIST that traces a near-random-accuracy, ResNet18-diverging pilot run to a BatchNorm synchronization bug in the FL client code, and fixes it."
+category: "Academic Research"
+status: "Distributed AI Research"
+role: "AI Researcher"
+year: "2026"
+liveUrl: "https://drive.google.com/file/d/1ajy7hcNnDw8FX4zwzEPz1f5T-V4xykzG/view?usp=sharing"
+technologies:
+  - "PyTorch"
+  - "Flower (flwr)"
+  - "Federated Learning"
+  - "ResNet18"
+  - "CNNs"
+  - "Google Colab (T4)"
+features:
+  - "Implementation of FedAvg and FedProx aggregation algorithms with proximal penalty terms"
+  - "Dirichlet distribution processing to simulate Non-IID clinical client data heterogeneity"
+  - "ResNet18 adaptation for small 28x28 medical images (removing max-pooling)"
+  - "Source-level audit of the Flower client/server code identifying a BatchNorm buffer desynchronization bug"
+highlights:
+  - "Diagnosed why ResNet18 (20 BatchNorm layers) diverged far worse than SimpleCNN (3 BatchNorm layers): running_mean/running_var buffers were never included in parameter federation"
+  - "Found and fixed a second bug where final test evaluation used a client's locally-drifted model instead of the server-aggregated global model"
+  - "Rebuilt parameter sync around full state_dict() serialization so BatchNorm statistics are now properly federated every round"
+metrics:
+  - 
+    label: "Framework"
+    value: "Flower (flwr)"
+  - 
+    label: "Dataset"
+    value: "PathMNIST"
+  - 
+    label: "Root Cause"
+    value: "BatchNorm Desync"
+screenshots:
+  - 
+    path: "https://images.unsplash.com/photo-1530497610245-94d3c16cda28?q=80&w=2070&auto=format&fit=crop"
+    type: "web"
+---
+
+An AI4CI research project implementing a federated learning system for colorectal cancer histology classification on PathMNIST, comparing SimpleCNN and ResNet18 under FedAvg and FedProx with the Flower (flwr) framework. A pilot run reported near-random accuracy and a validation loss for ResNet18 that diverged to 10^14. Rather than attributing this to too few rounds, a source-level code audit traced it to two concrete bugs: BatchNorm running statistics were excluded from parameter federation (so per-client normalization stats were never synchronized), and final test evaluation benchmarked a single client's locally-drifted model instead of the true aggregated global model. Both are fixed in the codebase; a full re-validation run on the 16-configuration grid (including the still-unmeasured non-IID comparisons) is the recommended next step.

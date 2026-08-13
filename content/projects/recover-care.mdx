@@ -1,0 +1,67 @@
+---
+title: "RecoverCare"
+coverImage: "/assets/recovercare/cover-recover_care.png"
+shortDescription: "A post-surgical recovery app combining daily patient check-ins, medication tracking, care-team messaging, and a tiered clinical alert engine."
+category: "HealthTech"
+status: "Full-Stack Mobile"
+role: "Product Engineer"
+year: "2026"
+featured: true
+technologies:
+  - "React Native"
+  - "Expo"
+  - "TypeScript"
+  - "Node.js"
+  - "Express"
+  - "PostgreSQL"
+  - "Prisma"
+  - "Docker"
+  - "Natural (NLP)"
+  - "ML-Regression"
+features:
+  - "Recovery dashboard covering progress, vitals, milestones, and upcoming tasks"
+  - "Guided daily check-in for mood, pain, symptoms, and vitals"
+  - "Care-team messaging with urgency scoring so time-critical messages surface first"
+  - "Recovery trend projection from logged vitals using local regression"
+  - "Medication tracker with dose schedules, adherence progress, and PRN support"
+  - "Four-tier alert engine spanning critical, high, medium, and low severity"
+  - "Wound photo journal, symptom glossary, appointments, and exportable health reports"
+highlights:
+  - "Modeled the alert rules on symptom combinations rather than single thresholds, so a mild fever with rising pain escalates where neither would alone"
+  - "Kept every model local to the stack, so patient data never leaves the deployment for a third-party inference service"
+  - "Designed one workflow across mobile client and API, from check-in capture through clinician-facing reporting"
+metrics:
+  - 
+    label: "Severity Tiers"
+    value: "4"
+  - 
+    label: "Data Store"
+    value: "PostgreSQL"
+  - 
+    label: "Surface"
+    value: "Mobile + API"
+githubUrl: "https://github.com/araneeskhan/recover-care"
+screenshots:
+  - 
+    path: "https://raw.githubusercontent.com/araneeskhan/recover-care/main/docs/screenshots/home.png"
+    type: "mobile"
+    alt: "RecoverCare home dashboard"
+  - 
+    path: "https://raw.githubusercontent.com/araneeskhan/recover-care/main/docs/screenshots/checkin.png"
+    type: "mobile"
+    alt: "RecoverCare daily check-in flow"
+  - 
+    path: "https://raw.githubusercontent.com/araneeskhan/recover-care/main/docs/screenshots/messages.png"
+    type: "mobile"
+    alt: "RecoverCare secure messaging screen"
+  - 
+    path: "https://raw.githubusercontent.com/araneeskhan/recover-care/main/docs/screenshots/medications.png"
+    type: "mobile"
+    alt: "RecoverCare medications tracker"
+  - 
+    path: "https://raw.githubusercontent.com/araneeskhan/recover-care/main/docs/screenshots/recovery.png"
+    type: "mobile"
+    alt: "RecoverCare recovery trends screen"
+---
+
+RecoverCare covers the period between surgical discharge and full recovery, when patients are managing their own care with the least supervision. Patients log a guided daily check-in — mood, pain, symptoms, and vitals — track medication doses, and message their care team directly. An alert engine grades every submission across four severity tiers and escalates risky symptom combinations rather than isolated readings. Incoming messages are scored for urgency so time-critical ones surface first, and logged vitals feed a local regression that projects a recovery trend. Built as a React Native client over an Express and PostgreSQL API with Prisma.

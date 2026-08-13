@@ -1,0 +1,44 @@
+---
+title: "Resurrecting DNS Cache Poisoning: ICMP Side-Channels + ML Detection"
+coverImage: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=2070&auto=format&fit=crop"
+shortDescription: "A network security research paper analyzing a Linux kernel ICMP side-channel that defeats DNS source-port randomization, proposing a deterministic 0x20 + TCP Hybrid Defense plus a machine learning detection layer."
+category: "Academic Research"
+status: "Cybersecurity Research"
+role: "Security Researcher"
+year: "2026"
+liveUrl: "https://drive.google.com/file/d/1dDXTXJaPmjgF5dOSJ9IZksL_hgoCNE-k/view?usp=sharing"
+technologies:
+  - "Linux Kernel"
+  - "UDP/TCP"
+  - "DNS Protocols"
+  - "ICMP"
+  - "Network Security"
+  - "Python"
+  - "scikit-learn"
+  - "Random Forest"
+features:
+  - "Analysis of Linux kernel fnhe (Next Hop Exception) side-channel leakage"
+  - "Critique of industry-standard mitigations regarding Path MTU Discovery DoS risks"
+  - "Proposal of a Deterministic 0x20 + TCP Hybrid Defense utilizing randomized capitalization"
+  - "ML detection layer: 6 traffic features (probe rate, port-guess spread, TTL anomaly, jitter, etc.) trained on a synthetic proof-of-concept dataset"
+highlights:
+  - "Identified critical flaws in 'security by obscurity' mitigations for cache poisoning"
+  - "Shifted defense paradigm from probabilistic races to deterministic TCP handshake guarantees"
+  - "Random Forest classifier reached 94.7% accuracy / 0.944 AUC detecting ICMP port-scanning reconnaissance on synthetic data, with port-guess spread and probe rate as the dominant features"
+metrics:
+  - 
+    label: "Domain"
+    value: "Network Security"
+  - 
+    label: "Detection AUC"
+    value: "0.944"
+  - 
+    label: "Institution"
+    value: "CNAM Paris"
+screenshots:
+  - 
+    path: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=2070&auto=format&fit=crop"
+    type: "web"
+---
+
+An in-depth network security paper analyzing 'DNS Cache Poisoning Attack: Resurrections with Side Channels' (CCS 2020), which shows the Linux kernel's ICMP error processing leaks a resolver's randomized UDP source port via the Next Hop Exception (fnhe) cache, collapsing 32 bits of entropy to 16. The paper critiques the original mitigations, proposes a deterministic '0x20 + TCP Hybrid Defense' that forces an unspoofable TCP retry on capitalization mismatch, and adds a machine learning detection layer: a Random Forest classifier trained on a synthetic, attack-mechanics-grounded dataset reaches 94.7% accuracy and 0.944 ROC-AUC at flagging the ICMP reconnaissance traffic itself, as a proof of concept.

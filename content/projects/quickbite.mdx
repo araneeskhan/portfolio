@@ -1,0 +1,50 @@
+---
+title: "QuickBite"
+coverImage: "/assets/quickbite/cover.png"
+shortDescription: "A React Native food ordering app whose search, recommendations, and delivery estimates all run client-side, with no inference API in the request path."
+category: "Food Delivery"
+status: "Mobile App"
+role: "React Native Developer"
+year: "2025"
+technologies:
+  - "React Native"
+  - "JavaScript"
+  - "Firebase"
+  - "Firestore"
+  - "Zustand"
+  - "React Navigation"
+  - "Lottie"
+  - "AsyncStorage"
+features:
+  - "TF-IDF menu search weighted across titles, descriptions, and ingredients"
+  - "Ingredient-set recommendations by Jaccard similarity, with a popularity fallback for new accounts"
+  - "Delivery estimates from a linear model over cart size, category mix, and base preparation time"
+  - "Basket-gap cross-selling that suggests the missing course rather than the highest-margin item"
+  - "Camera scanner flow for identifying menu items from a photo"
+  - "Meal customization with size, quantity, and kitchen instructions"
+  - "Live order tracking from confirmation through delivery"
+  - "Card, Apple Pay, Google Pay, and cash-on-delivery checkout"
+  - "Restaurant profiles with ratings, reviews, and rating submission"
+  - "Order history with itemised receipts and one-tap re-ordering"
+highlights:
+  - "Kept ranking and recommendation on-device, which removes per-query API cost and network latency and keeps order history off third-party servers"
+  - "Chose classical information-retrieval methods over a hosted model because the catalogue is small and bounded — TF-IDF and set similarity are enough, and they run in milliseconds"
+  - "Handled the cold-start case explicitly: a new account with no favorites falls back to popularity instead of returning nothing"
+metrics:
+  - 
+    label: "Inference"
+    value: "On-Device"
+  - 
+    label: "Screens"
+    value: "14+"
+  - 
+    label: "Ranking Calls"
+    value: "Zero API"
+githubUrl: "https://github.com/araneeskhan/QuickBite"
+screenshots:
+  - 
+    path: "/assets/quickbite/cover.png"
+    type: "web"
+---
+
+QuickBite is a food ordering app built around a deliberate constraint: every ranking and recommendation runs on the device. Menu search uses TF-IDF scoring weighted across titles, descriptions, and ingredients; recommendations compare ingredient sets by Jaccard similarity against a user's favorites, with a popularity fallback for new accounts; delivery estimates come from a linear model over cart size, category mix, and base preparation times; and cross-sell suggestions look for gaps in the basket rather than pushing the highest-margin item. The result is instant response with no per-query cost and no order data sent to a ranking service. Ordering covers meal customization, multiple payment methods, live order tracking, reviews, and re-ordering from history.

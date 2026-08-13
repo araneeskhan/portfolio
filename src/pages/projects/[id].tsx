@@ -4,31 +4,41 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence, useScroll, useTransform, useSpring } from "motion/react";
 import Layout from "@/components/Layout";
-import { projectsData, type Project } from "@/data/projects";
+import { type ContentItem } from "@/data/types";
+import { getPostBySlug, getAllPosts } from "@/lib/mdx";
+import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
+import { serialize } from "next-mdx-remote/serialize";
 
-type ProjectWithId = Project & { id: string };
+type ProjectWithId = ContentItem & { id: string };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const paths = Object.keys(projectsData).map((id) => ({
-    params: { id },
+  const posts = getAllPosts('projects');
+  const paths = posts.map((post) => ({
+    params: { id: post.id },
   }));
   return { paths, fallback: 'blocking' };
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const id = params?.id as string;
-  const project = projectsData[id] ?? null;
-  return { props: { project: project ? { id, ...project } : null } };
+  try {
+    const project = getPostBySlug('projects', id);
+    const mdxSource = await serialize(project.description || '');
+    return { props: { project, mdxSource } };
+  } catch (error) {
+    return { props: { project: null, mdxSource: null } };
+  }
 };
 
 interface Props {
   project: ProjectWithId | null;
+  mdxSource: MDXRemoteSerializeResult | null;
 }
 
-const getCoverImage = (project: Project) =>
+const getCoverImage = (project: ContentItem) =>
   Array.isArray(project.coverImage) ? project.coverImage[0] : project.coverImage;
 
-export default function ProjectDetails({ project }: Props) {
+export default function ProjectDetails({ project, mdxSource }: Props) {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const heroRef = useRef<HTMLElement>(null);
@@ -205,9 +215,9 @@ export default function ProjectDetails({ project }: Props) {
               <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '-50px' }} transition={{ duration: 0.6 }} className="relative overflow-hidden rounded-[2rem] border border-canvas-200/40 bg-white p-8 shadow-sm dark:border-white/5 dark:bg-canvas-900/50 lg:col-span-2 lg:p-12">
                 <div className="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-accent-500/10 blur-3xl" />
                 <h2 className="font-display text-xl font-bold text-canvas-950 dark:text-white">Project Scope</h2>
-                <p className="mt-6 font-display text-lg leading-loose text-canvas-600 dark:text-canvas-300 lg:text-xl">
-                  {project.description}
-                </p>
+                <div className="prose prose-lg prose-canvas mt-6 font-display dark:prose-invert">
+                  {mdxSource ? <MDXRemote {...mdxSource} /> : <p>{project.description}</p>}
+                </div>
               </motion.div>
 
               {/* Meta Stats Stack */}
@@ -236,7 +246,7 @@ export default function ProjectDetails({ project }: Props) {
               <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '-50px' }} transition={{ duration: 0.6, delay: 0.1 }} className="rounded-[2rem] border border-canvas-200/40 bg-white p-8 shadow-sm dark:border-white/5 dark:bg-canvas-900/50 lg:col-span-7 lg:p-10">
                 <h2 className="mb-8 font-display text-xl font-bold text-canvas-950 dark:text-white">Key Capabilities</h2>
                 <div className="flex flex-col gap-4">
-                  {project.features.map((feature, i) => (
+                  {project.features?.map((feature, i) => (
                     <motion.div key={i} initial={{ opacity: 0, x: -10 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 + 0.2 }} className="group flex items-start gap-4 rounded-2xl border border-transparent p-4 transition-colors hover:border-canvas-200/50 hover:bg-canvas-50 dark:hover:border-white/5 dark:hover:bg-white/[0.02]">
                       <span className="mt-0.5 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-accent-500/10 text-[10px] text-accent-600 dark:bg-accent-500/20 dark:text-accent-400">
                         <i className="fas fa-check"></i>
@@ -265,7 +275,7 @@ export default function ProjectDetails({ project }: Props) {
                 )}
 
                 <div className="mt-auto flex flex-wrap gap-2">
-                  {project.technologies.map((tech, i) => (
+                  {project.technologies?.map((tech, i) => (
                     <motion.span key={tech} initial={{ opacity: 0, scale: 0.8 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ delay: i * 0.05 + 0.3 }} className="rounded-full border border-white/10 bg-white/5 px-4 py-2 font-display text-xs font-bold text-canvas-300 backdrop-blur-sm transition-colors hover:bg-white/10 hover:text-white">
                       {tech}
                     </motion.span>

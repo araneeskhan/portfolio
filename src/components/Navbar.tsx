@@ -4,9 +4,10 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence, useMotionValueEvent } from 'motion/react';
 import ThemeToggle from './ThemeToggle';
 import personal from '@/config/personal';
+import { useGlobalScroll } from '@/lib/ScrollContext';
 
 const links = [
   { name: 'About', href: '/#about' },
@@ -21,38 +22,23 @@ const links = [
  *  mobile drawer so both show the same active state. */
 const useActiveSection = () => {
   const [activeSection, setActiveSection] = useState('');
+  const { scrollY } = useGlobalScroll();
 
-  useEffect(() => {
-    const updateActiveSection = () => {
-      const scrollPosition = window.scrollY + 120;
-      for (const link of links) {
-        const sectionId = link.href.split('#')[1];
-        const element = document.getElementById(sectionId);
-        if (!element) continue;
-        const sectionTop = element.offsetTop;
-        const sectionBottom = sectionTop + element.offsetHeight;
-        if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
-          setActiveSection((prev) => (prev === sectionId ? prev : sectionId));
-          return;
-        }
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    const scrollPosition = latest + 120;
+    for (const link of links) {
+      const sectionId = link.href.split('#')[1];
+      const element = document.getElementById(sectionId);
+      if (!element) continue;
+      const sectionTop = element.offsetTop;
+      const sectionBottom = sectionTop + element.offsetHeight;
+      if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+        setActiveSection((prev) => (prev === sectionId ? prev : sectionId));
+        return;
       }
-      setActiveSection((prev) => (prev === '' ? prev : ''));
-    };
-
-    let ticking = false;
-    const onScroll = () => {
-      if (ticking) return;
-      ticking = true;
-      requestAnimationFrame(() => {
-        updateActiveSection();
-        ticking = false;
-      });
-    };
-
-    updateActiveSection();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
+    }
+    setActiveSection((prev) => (prev === '' ? prev : ''));
+  });
 
   return activeSection;
 };
@@ -62,29 +48,18 @@ const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const activeSection = useActiveSection();
   const router = useRouter();
+  const { scrollY } = useGlobalScroll();
 
-  // Close the mobile menu on route change — adjusted during render (React's
-  // recommended alternative to a setState-in-effect) rather than in a useEffect.
+  // Close the mobile menu on route change
   const [lastPath, setLastPath] = useState(router.asPath);
   if (lastPath !== router.asPath) {
     setLastPath(router.asPath);
     setIsMenuOpen(false);
   }
 
-  useEffect(() => {
-    let ticking = false;
-    const handleScroll = () => {
-      if (ticking) return;
-      ticking = true;
-      requestAnimationFrame(() => {
-        setIsScrolled(window.scrollY > 20);
-        ticking = false;
-      });
-    };
-    handleScroll();
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    setIsScrolled(latest > 20);
+  });
 
   useEffect(() => {
     document.body.style.overflow = isMenuOpen ? 'hidden' : '';

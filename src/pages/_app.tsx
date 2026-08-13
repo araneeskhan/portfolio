@@ -9,6 +9,7 @@ import ScrollProgress from '@/components/motion/ScrollProgress';
 import CustomCursor from '@/components/motion/CustomCursor';
 import personal from '@/config/personal';
 import { fontClass } from '@/styles/fonts';
+import { ScrollProvider } from '@/lib/ScrollContext';
 
 import '../styles/globals.css';
 
@@ -99,10 +100,12 @@ export default function App({ Component, pageProps }: AppProps) {
       </Head>
       <div className={fontClass}>
         <MotionConfig reducedMotion="user">
-          <ScrollProgress />
-          <CustomCursor />
-          <Component {...pageProps} />
-          <FloatingBackToTop />
+          <ScrollProvider>
+            <ScrollProgress />
+            <CustomCursor />
+            <Component {...pageProps} />
+            <FloatingBackToTop />
+          </ScrollProvider>
         </MotionConfig>
         <Analytics />
       </div>

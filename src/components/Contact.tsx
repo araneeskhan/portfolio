@@ -85,9 +85,9 @@ const Contact = () => {
                 <h3 className="mt-5 font-display text-3xl font-bold text-canvas-950 dark:text-white">
                   Within 24 hours
                 </h3>
-                <p className="mt-4 font-medium leading-relaxed text-canvas-600 dark:text-canvas-300">
-                  Best fit for full-stack builds, React Native apps, AI-enhanced product features, and
-                  portfolio-grade interfaces.
+                <p className="mt-2 font-display text-sm leading-relaxed text-canvas-600 dark:text-canvas-400 max-w-[280px]">
+                  Best fit for full-stack & AI builds, React Native apps, intelligent product features, and
+                  technical architecture.
                 </p>
               </div>
             </div>

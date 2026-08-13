@@ -3,29 +3,39 @@ import type { GetStaticPaths, GetStaticProps } from "next";
 import Link from "next/link";
 import { motion } from "motion/react";
 import Layout from "@/components/Layout";
-import { researchData, type ResearchPaper } from "@/data/research";
+import { type ContentItem } from "@/data/types";
+import { getPostBySlug, getAllPosts } from "@/lib/mdx";
+import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
+import { serialize } from "next-mdx-remote/serialize";
 import personal from "@/config/personal";
 
-type PaperWithId = ResearchPaper & { id: string };
+type PaperWithId = ContentItem & { id: string };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const paths = Object.keys(researchData).map((id) => ({
-    params: { id },
+  const posts = getAllPosts('research');
+  const paths = posts.map((post) => ({
+    params: { id: post.id },
   }));
   return { paths, fallback: 'blocking' };
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const id = params?.id as string;
-  const paper = researchData[id] ?? null;
-  return { props: { paper: paper ? { id, ...paper } : null } };
+  try {
+    const paper = getPostBySlug('research', id);
+    const mdxSource = await serialize(paper.description || '');
+    return { props: { paper, mdxSource } };
+  } catch (error) {
+    return { props: { paper: null, mdxSource: null } };
+  }
 };
 
 interface Props {
   paper: PaperWithId | null;
+  mdxSource: MDXRemoteSerializeResult | null;
 }
 
-export default function ResearchDetails({ paper }: Props) {
+export default function ResearchDetails({ paper, mdxSource }: Props) {
   if (!paper) {
     return (
       <Layout title="Paper Not Found">
@@ -82,11 +92,11 @@ export default function ResearchDetails({ paper }: Props) {
                 <p className="mt-1 font-display text-sm text-canvas-600 dark:text-canvas-300">{paper.status}</p>
               </div>
 
-              {paper.technologies.length > 0 && (
+              {paper.technologies && paper.technologies.length > 0 && (
                 <div>
                   <p className="mb-4 font-display text-[10px] font-bold uppercase tracking-[0.2em] text-canvas-400">Methodology</p>
                   <div className="flex flex-col gap-3">
-                    {paper.technologies.map(tech => (
+                    {paper.technologies?.map(tech => (
                       <span key={tech} className="font-display text-sm font-medium text-canvas-700 dark:text-canvas-300">
                         — {tech}
                       </span>
@@ -131,23 +141,21 @@ export default function ResearchDetails({ paper }: Props) {
               {/* Abstract */}
               <section>
                 <h2 className="mb-8 font-display text-2xl font-black text-canvas-950 dark:text-white md:text-3xl">Abstract</h2>
-                <div className="prose prose-lg dark:prose-invert max-w-none text-canvas-700 dark:text-canvas-300">
-                  <p className="text-xl leading-relaxed md:text-2xl md:leading-[1.7] font-display">
-                    {paper.description}
-                  </p>
+                <div className="prose prose-lg dark:prose-invert max-w-none font-display">
+                  {mdxSource ? <MDXRemote {...mdxSource} /> : <p className="text-xl leading-relaxed md:text-2xl md:leading-[1.7] font-display">{paper.description}</p>}
                 </div>
               </section>
 
               {/* Contributions & Findings */}
-              {(paper.features.length > 0 || (paper.highlights?.length ?? 0) > 0) && (
+              {((paper.features?.length ?? 0) > 0 || (paper.highlights?.length ?? 0) > 0) && (
                 <div className="grid gap-16 md:grid-cols-2">
-                  {paper.features.length > 0 && (
+                  {paper.features && paper.features.length > 0 && (
                     <section>
                       <h2 className="mb-8 font-display text-xl font-bold text-canvas-950 dark:text-white pb-4 border-b border-canvas-200/60 dark:border-white/10">
                         Key Contributions
                       </h2>
                       <ul className="flex flex-col gap-6">
-                        {paper.features.map((feature, i) => (
+                        {paper.features?.map((feature, i) => (
                           <li key={i} className="flex items-start gap-4 text-canvas-700 dark:text-canvas-300 font-display text-lg">
                             <span className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-canvas-950 dark:bg-white" />
                             <span className="leading-relaxed">{feature}</span>

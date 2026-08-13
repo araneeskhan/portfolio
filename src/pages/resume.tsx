@@ -7,7 +7,7 @@ export default function Resume() {
   return (
     <Layout
       title="Resume | Anees Ur Rehman"
-      description="View the online resume of Anees Ur Rehman, Full-Stack Developer based in Paris."
+      description="View the online resume of Anees Ur Rehman, Full-Stack & AI Engineer based in Paris."
     >
       <div className="min-h-screen bg-slate-50 pt-28 pb-12 dark:bg-slate-950">
         <div className="section-container">

@@ -22,7 +22,28 @@ const projectMarquee = [
   'Design Systems', 'Full-Stack', 'Cloud Architecture', 'UI/UX',
 ];
 
-export default function Home() {
+import { getAllPosts } from '@/lib/mdx';
+import { type ContentItem } from '@/data/types';
+
+export const getStaticProps = async () => {
+  const projects = getAllPosts('projects');
+  const research = getAllPosts('research');
+  return {
+    props: {
+      projects,
+      research,
+    },
+  };
+};
+
+type ItemWithId = ContentItem & { id: string };
+
+interface HomeProps {
+  projects: ItemWithId[];
+  research: ItemWithId[];
+}
+
+export default function Home({ projects, research }: HomeProps) {
   return (
     <main className="grain">
       <Navbar />
@@ -41,8 +62,8 @@ export default function Home() {
       </div>
 
       <ErrorBoundary><Skills /></ErrorBoundary>
-      <ErrorBoundary><Projects /></ErrorBoundary>
-      <ErrorBoundary><Research /></ErrorBoundary>
+      <ErrorBoundary><Projects projects={projects} /></ErrorBoundary>
+      <ErrorBoundary><Research papers={research} /></ErrorBoundary>
       <ErrorBoundary><Achievements /></ErrorBoundary>
       <ErrorBoundary><Certifications /></ErrorBoundary>
       <ErrorBoundary><Contact /></ErrorBoundary>

@@ -1,0 +1,49 @@
+---
+title: "Bankee — Modern Mobile Banking"
+coverImage:
+  - "/assets/bankee/cover.png"
+shortDescription: "A mobile banking app covering biometric sign-in, card controls, split bills, expense analytics, savings goals, and P2P transfers over atomic Firestore transactions."
+category: "Fintech"
+status: "Mobile App"
+role: "React Native Developer"
+year: "2025"
+technologies:
+  - "React Native"
+  - "Expo"
+  - "Firebase"
+  - "Firestore"
+  - "TypeScript"
+  - "React Navigation"
+  - "AsyncStorage"
+features:
+  - "Face ID and fingerprint sign-in with encrypted local credentials"
+  - "Virtual cards with freeze and unfreeze control, and biometric-guarded CVV reveal"
+  - "Group bill splitting with per-person amounts and request tracking"
+  - "Categorised spending analytics across weekly, monthly, and yearly windows"
+  - "Goal-based savings vaults with live progress against target"
+  - "P2P transfers by account number, IBAN, or QR code"
+  - "Digital receipt export and native sharing"
+  - "Subscription management for recurring services"
+  - "Utility bill payment for electricity, water, gas, and internet"
+highlights:
+  - "Ran every transfer inside a Firestore transaction, so debit and credit commit together or not at all — the failure mode a naive two-write implementation gets wrong"
+  - "Put biometric confirmation in front of card number and CVV reveal, rather than treating sign-in as sufficient for the session"
+  - "Built spending analytics on category breakdowns over selectable periods, so the figures answer where the money went rather than only what the balance is"
+metrics:
+  - 
+    label: "SDK"
+    value: "Expo 54"
+  - 
+    label: "Sign-In"
+    value: "Biometric"
+  - 
+    label: "Transfers"
+    value: "Atomic"
+githubUrl: "https://github.com/araneeskhan/Bankee"
+screenshots:
+  - 
+    path: "/assets/bankee/cover.png"
+    type: "mobile"
+---
+
+Bankee is a mobile banking client built with React Native, Expo SDK 54, and Firebase. It covers the everyday surface of a retail bank: biometric sign-in with encrypted local credentials, virtual cards that can be frozen and unfrozen on the spot, peer-to-peer transfers by account number, IBAN, or QR code, group bill splitting with per-person amounts and request tracking, categorized spending analytics across weekly, monthly, and yearly windows, goal-based savings vaults, exportable receipts, and subscription and utility bill payment. Every balance-changing operation runs inside a Firestore transaction, so a transfer either completes on both sides or not at all.

@@ -5,22 +5,26 @@ import SectionHeader from '@/components/SectionHeader';
 const focusAreas = [
   {
     title: 'Frontend Systems',
-    description: 'Responsive interfaces, typed components, polished states, and accessible interaction patterns.',
+    description:
+      'Responsive interfaces, typed components, polished states, and accessible interaction patterns.',
     gradient: 'from-blue-500 to-cyan-500',
   },
   {
     title: 'Backend & APIs',
-    description: 'REST services, auth flows, relational and document databases, and deployable server architecture.',
+    description:
+      'REST services, auth flows, relational and document databases, and deployable server architecture.',
     gradient: 'from-violet-500 to-purple-500',
   },
   {
     title: 'Mobile Products',
-    description: 'React Native apps with clear navigation, persistent state, and production-minded user journeys.',
+    description:
+      'React Native apps with clear navigation, persistent state, and production-minded user journeys.',
     gradient: 'from-emerald-500 to-teal-500',
   },
   {
     title: 'AI Integration',
-    description: 'ML workflows, NLP features, deterministic automation, and intelligent product experiences.',
+    description:
+      'ML workflows, NLP features, deterministic automation, and intelligent product experiences.',
     gradient: 'from-orange-500 to-amber-500',
   },
 ];
@@ -80,15 +84,12 @@ const About = () => {
   return (
     <section ref={sectionRef} id="about" className="section-shell section-border-top">
       <div className="section-container">
-        <SectionHeader
-          label="About"
-          title="Engineering clean, useful digital products."
-        />
+        <SectionHeader label="About" title="Engineering clean, useful digital products." />
 
         {/* Main text - scroll reveals */}
         <div className="mx-auto max-w-4xl">
           <ScrollRevealText
-            text="I am a full-stack developer focused on building responsive, user-friendly web and mobile applications. My work is shaped by a practical curiosity: understanding the problem deeply, designing a maintainable system around it, and shipping an experience people can use without friction."
+            text="I am a full-stack developer and AI engineer, focused on building responsive web, mobile, and AI based applications. My work is shaped by a practical curiosity: understanding the problem deeply, designing a maintainable architecture, and shipping an experience people can use without friction."
             className="font-display text-lg font-medium leading-relaxed text-canvas-950 dark:text-white sm:text-3xl md:text-4xl md:leading-snug"
           />
 
@@ -113,7 +114,7 @@ const About = () => {
           </div>
 
           <ScrollRevealText
-            text="My core stack includes React, Next.js, React Native, Node.js, Python, and modern database systems. I am especially interested in products where strong engineering and intelligent automation meet to create experiences that feel effortless."
+            text="My core stack includes React, Next.js, React Native, Node.js, Python, Tensorflow, Neural Networks and modern database systems. I am especially interested in products where strong engineering and intelligent automation meet to create experiences that feel effortless."
             className="font-display text-base font-medium leading-relaxed text-canvas-700 dark:text-canvas-200 sm:text-2xl md:text-3xl md:leading-snug"
           />
         </div>
@@ -142,7 +143,9 @@ const About = () => {
               </p>
 
               {/* Animated gradient underline on hover */}
-              <div className={`absolute bottom-0 left-0 h-[2px] w-0 bg-gradient-to-r ${area.gradient} transition-all duration-700 group-hover:w-full`} />
+              <div
+                className={`absolute bottom-0 left-0 h-[2px] w-0 bg-gradient-to-r ${area.gradient} transition-all duration-700 group-hover:w-full`}
+              />
             </motion.div>
           ))}
         </div>

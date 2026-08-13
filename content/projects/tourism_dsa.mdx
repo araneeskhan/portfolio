@@ -1,0 +1,46 @@
+---
+title: "AKKB Tourism Management"
+coverImage:
+  - "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2070&auto=format&fit=crop"
+shortDescription: "A C++ travel booking system built directly on data structures — Dijkstra routing, nested linked lists, a cancellation queue, and a hand-written persistence layer."
+category: "Software Architecture"
+status: "Console Application"
+role: "C++ Developer"
+year: "2024"
+technologies:
+  - "C++"
+  - "Data Structures"
+  - "Algorithms"
+  - "File I/O"
+  - "Memory Management"
+features:
+  - "Shortest-path routing between cities using Dijkstra's algorithm (O(V²))"
+  - "Nested linked lists holding user profiles alongside their booking receipts"
+  - "In-place bubble sort (O(N²)) operating on node pointers rather than copied records"
+  - "Linear search (O(N)) for CNIC lookup across the record set"
+  - "FIFO cancellation queue with explicit memory reclamation"
+  - "Hand-written serialization and deserialization to a text-file store"
+  - "Multi-stop itineraries with drop-off recalculation"
+  - "Administrator view for queue processing and record traversal"
+highlights:
+  - "Wrote the persistence layer by hand: flattening pointer-based linked lists to text and rebuilding the links on load, without a serialization library"
+  - "Selected each structure against its access pattern — a queue for cancellations, a graph for routing, nested lists for one-to-many records — rather than defaulting to arrays throughout"
+  - "Managed memory manually with explicit teardown on every deletion path, so long sessions do not leak"
+metrics:
+  - 
+    label: "Routing"
+    value: "Dijkstra"
+  - 
+    label: "Persistence"
+    value: "Custom I/O"
+  - 
+    label: "Interface"
+    value: "CLI"
+githubUrl: "https://github.com/araneeskhan/tourism_dsaProject"
+screenshots:
+  - 
+    path: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2070&auto=format&fit=crop"
+    type: "web"
+---
+
+A console travel booking and management system written in C++ without a database or framework, where each requirement is met by choosing the right data structure. Routing between cities runs on Dijkstra's algorithm; user profiles and their receipts are held as nested linked lists; cancellations are processed FIFO through a queue with explicit reclamation; and state survives between sessions through a serialization layer written by hand, which is the difficult part — the records are pointer-based, so saving them means flattening a linked structure to text and rebuilding the links on load. Memory is managed manually with explicit teardown on every deletion path.

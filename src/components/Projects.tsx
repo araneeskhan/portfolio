@@ -2,19 +2,23 @@ import { useState, useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion, useScroll, useTransform, useSpring } from 'motion/react';
-import { projectsData, type Project } from '@/data/projects';
+import { type ContentItem } from '@/data/types';
 import SectionHeader from '@/components/SectionHeader';
 import HorizontalArchive from '@/components/motion/HorizontalArchive';
 import ImageLightbox from '@/components/motion/ImageLightbox';
 import { getCoverImage } from '@/lib/content';
 
-type ProjectWithId = Project & { id: string };
+type ProjectWithId = ContentItem & { id: string };
 
-const Projects = () => {
+const Projects = ({ projects }: { projects: ProjectWithId[] }) => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
-  const projects = Object.entries(projectsData).map(([id, project]) => ({ id, ...project }));
-  const featuredProjects = projects.filter((p) => p.featured);
-  const archiveProjects = projects.filter((p) => !p.featured);
+  
+  // Sort or handle projects if necessary, they are already passed down.
+  // We need to handle the case if they're not passed during a hot reload.
+  const safeProjects = projects || [];
+  
+  const featuredProjects = safeProjects.filter((p) => p.featured);
+  const archiveProjects = safeProjects.filter((p) => !p.featured);
 
   return (
     <section id="projects" className="section-border-top relative pb-24 pt-24 md:pt-32">

@@ -1,0 +1,46 @@
+---
+title: "AI Text Summarizer"
+coverImage: "/assets/text-summarizer/cover.jpg"
+shortDescription: "A cross-platform summarization tool with OCR text extraction, abstractive summaries, multi-language translation, and cloud-synced document management."
+category: "AI Tools"
+status: "Full-Stack AI Application"
+role: "Full-Stack & AI Developer"
+year: "2022"
+featured: true
+paperUrl: "https://drive.google.com/file/d/1KgIG3RLTqTGdZdCImI7lQHDEBoVmXKRv/view?usp=sharing"
+technologies:
+  - "Python"
+  - "Flutter"
+  - "Dart"
+  - "JavaScript"
+  - "Transformers (NLP)"
+  - "OpenCV"
+  - "Firebase"
+  - "Google Cloud APIs"
+features:
+  - "Abstractive summarization using Hugging Face Transformer models"
+  - "OCR pipeline built on OpenCV for extracting text from photographed and scanned pages"
+  - "Multi-language translation through the Google Cloud Translation API"
+  - "Cloud-synced document management with editing, archiving, and PDF/DOCX export"
+  - "Shared backend serving a Flutter mobile client and a Bootstrap web client"
+highlights:
+  - "Took the project through a full development lifecycle, from SRS requirements to grey-box test plans and results"
+  - "Combined hosted cloud APIs with locally run Python models behind one interface, so the source of a given result is invisible to the user"
+  - "Built cloud persistence on Firebase Authentication and Cloud Storage, keeping documents available across both clients"
+metrics:
+  - 
+    label: "Platforms"
+    value: "Web + Mobile"
+  - 
+    label: "Models"
+    value: "NLP + OCR"
+  - 
+    label: "Scope"
+    value: "Full SDLC"
+screenshots:
+  - 
+    path: "/assets/text-summarizer/cover.jpg"
+    type: "web"
+---
+
+A summarization tool delivered on both web and mobile, built to shorten long articles and documents without the user retyping them. Hugging Face Transformer models produce abstractive summaries rather than extracted sentences; an OpenCV OCR pipeline pulls text out of photographed or scanned pages so printed material can be summarised directly; and the Google Cloud Translation API extends it past English. Summaries are stored in a Firebase-backed document system where they can be edited, formatted, archived, and exported to PDF or DOCX. The mobile client is Flutter, the web client Bootstrap, over a shared Python service.
