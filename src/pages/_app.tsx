@@ -44,59 +44,64 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
-        <title>{`${personal.name} | ${personal.title}`}</title>
-        <meta name="description" content={personal.description} />
+        <title key="title">{`${personal.name} | ${personal.title}`}</title>
+        <meta key="description" name="description" content={personal.description} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="#f6f5f2" media="(prefers-color-scheme: light)" />
         <meta name="theme-color" content="#08090b" media="(prefers-color-scheme: dark)" />
         <link rel="icon" href="/favicon.ico" />
+        <link key="canonical" rel="canonical" href={personal.siteUrl} />
 
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content={personal.siteUrl} />
-        <meta property="og:title" content={`${personal.name} | ${personal.title}`} />
-        <meta property="og:description" content={personal.description} />
-        <meta property="og:image" content={`${personal.siteUrl}/assets/profile-pic.jpeg`} />
+        <meta key="og:type" property="og:type" content="website" />
+        <meta key="og:url" property="og:url" content={personal.siteUrl} />
+        <meta key="og:title" property="og:title" content={`${personal.name} | ${personal.title}`} />
+        <meta key="og:description" property="og:description" content={personal.description} />
+        <meta key="og:image" property="og:image" content={`${personal.siteUrl}/assets/profile-pic.jpeg`} />
         <meta property="og:image:width" content="800" />
         <meta property="og:image:height" content="800" />
         <meta property="og:locale" content="en_US" />
 
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={`${personal.name} | ${personal.title}`} />
-        <meta name="twitter:description" content={personal.description} />
-        <meta name="twitter:image" content={`${personal.siteUrl}/assets/profile-pic.jpeg`} />
+        <meta key="twitter:card" name="twitter:card" content="summary_large_image" />
+        <meta key="twitter:title" name="twitter:title" content={`${personal.name} | ${personal.title}`} />
+        <meta key="twitter:description" name="twitter:description" content={personal.description} />
+        <meta key="twitter:image" name="twitter:image" content={`${personal.siteUrl}/assets/profile-pic.jpeg`} />
 
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              '@context': 'https://schema.org',
-              '@type': 'Person',
-              name: personal.name,
-              jobTitle: personal.title,
-              url: personal.siteUrl,
-              email: personal.email,
-              image: `${personal.siteUrl}/assets/profile-pic.jpeg`,
-              sameAs: [personal.linkedin, personal.github],
-              address: {
-                '@type': 'PostalAddress',
-                addressLocality: 'Paris',
-                addressCountry: 'FR',
-              },
-              knowsAbout: [
-                'React',
-                'Next.js',
-                'Node.js',
-                'TypeScript',
-                'React Native',
-                'Python',
-                'TensorFlow',
-                'Firebase',
-                'MongoDB',
-                'Express.js',
-              ],
-            }),
-          }}
-        />
+        {router.pathname === '/' && (
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify({
+                '@context': 'https://schema.org',
+                '@type': 'Person',
+                name: personal.name,
+                jobTitle: personal.title,
+                url: personal.siteUrl,
+                email: personal.email,
+                image: `${personal.siteUrl}/assets/profile-pic.jpeg`,
+                sameAs: [personal.linkedin, personal.github],
+                address: {
+                  '@type': 'PostalAddress',
+                  addressLocality: 'Paris',
+                  addressCountry: 'FR',
+                },
+                knowsAbout: [
+                  'React',
+                  'Next.js',
+                  'Node.js',
+                  'TypeScript',
+                  'React Native',
+                  'Python',
+                  'TensorFlow',
+                  'Firebase',
+                  'MongoDB',
+                  'Express.js',
+                  'Artificial Intelligence',
+                  'Machine Learning',
+                ],
+              }),
+            }}
+          />
+        )}
       </Head>
       <div className={fontClass}>
         <MotionConfig reducedMotion="user">

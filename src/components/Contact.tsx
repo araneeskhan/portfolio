@@ -175,6 +175,16 @@ const Contact = () => {
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                 >
+                  {/* Formspree spam honeypot - invisible to humans, caught by bots */}
+                  <input
+                    type="text"
+                    name="_gotcha"
+                    tabIndex={-1}
+                    autoComplete="off"
+                    aria-hidden="true"
+                    style={{ display: 'none' }}
+                  />
+
                   <div className="grid gap-6 md:grid-cols-2">
                     <FieldLabel label="Your Name" htmlFor="name" required>
                       <input
@@ -232,6 +242,8 @@ const Contact = () => {
                     />
                     <ValidationError prefix="Message" field="message" errors={state.errors} className="mt-2 text-sm font-semibold text-red-500" />
                   </FieldLabel>
+
+                  <ValidationError errors={state.errors} className="mt-2 text-sm font-semibold text-red-500" />
 
                   <div className="flex flex-col gap-4 pt-4 sm:flex-row sm:items-center">
                     <button

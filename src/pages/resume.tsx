@@ -6,11 +6,13 @@ const resumePath = "/assets/Resume.pdf";
 export default function Resume() {
   return (
     <Layout
-      title="Resume | Anees Ur Rehman"
+      title="Resume"
       description="View the online resume of Anees Ur Rehman, Full-Stack & AI Engineer based in Paris."
+      canonicalPath="/resume"
     >
       <div className="min-h-screen bg-slate-50 pt-28 pb-12 dark:bg-slate-950">
         <div className="section-container">
+          <h1 className="sr-only">Resume — Anees Ur Rehman</h1>
           <div className="mx-auto mb-6 flex max-w-5xl flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <Link href="/" className="btn-secondary w-fit">
               <i className="fas fa-arrow-left" />

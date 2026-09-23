@@ -136,6 +136,16 @@ const StackedCard = ({
   return (
     <motion.div
       onClick={onActivate}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          onActivate();
+        }
+      }}
+      tabIndex={0}
+      role="button"
+      aria-label={`Card: ${item.title}`}
+      aria-pressed={isActive}
       initial={{ x: initialX, y: initialY, rotate: initialRotate }}
       style={{
         x,
@@ -156,7 +166,7 @@ const StackedCard = ({
         damping: 20,
         mass: 0.8,
       }}
-      className="absolute w-[85vw] sm:w-[380px] rounded-2xl shadow-[0_20px_60px_-15px_rgba(0,0,0,0.2)] will-change-transform dark:shadow-[0_20px_60px_-15px_rgba(0,0,0,0.7)] cursor-pointer"
+      className="absolute w-[85vw] sm:w-[380px] rounded-2xl shadow-[0_20px_60px_-15px_rgba(0,0,0,0.2)] will-change-transform dark:shadow-[0_20px_60px_-15px_rgba(0,0,0,0.7)] cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-500 focus-visible:ring-offset-4 focus-visible:ring-offset-canvas-50 dark:focus-visible:ring-offset-canvas-950"
     >
       <div className="h-full w-full rounded-2xl bg-canvas-50 dark:bg-canvas-950">
         <ArchiveItemCard item={item} basePath={basePath} onPreview={onPreview} />

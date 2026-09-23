@@ -6,6 +6,7 @@ import { motion, AnimatePresence, useScroll, useTransform, useSpring } from "mot
 import Layout from "@/components/Layout";
 import { type ContentItem } from "@/data/types";
 import { getPostBySlug, getAllPosts } from "@/lib/mdx";
+import { getCoverImage } from "@/lib/content";
 import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
 import { serialize } from "next-mdx-remote/serialize";
 
@@ -34,9 +35,6 @@ interface Props {
   project: ProjectWithId | null;
   mdxSource: MDXRemoteSerializeResult | null;
 }
-
-const getCoverImage = (project: ContentItem) =>
-  Array.isArray(project.coverImage) ? project.coverImage[0] : project.coverImage;
 
 export default function ProjectDetails({ project, mdxSource }: Props) {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
@@ -104,7 +102,13 @@ export default function ProjectDetails({ project, mdxSource }: Props) {
   };
 
   return (
-    <Layout title={`${project.title} | Case Study`} description={project.shortDescription ?? project.description}>
+    <Layout
+      title={`${project.title} | Case Study`}
+      description={project.shortDescription ?? project.description}
+      canonicalPath={`/projects/${project.id}`}
+      ogImage={cover}
+      ogType="article"
+    >
       <article ref={containerRef} className="relative min-h-screen bg-canvas-50 dark:bg-canvas-950 selection:bg-accent-500/30">
         
         {/* Immersive Cinematic Hero */}
@@ -122,8 +126,8 @@ export default function ProjectDetails({ project, mdxSource }: Props) {
           <div className="section-container relative z-20 mx-auto max-w-6xl">
             {/* Breadcrumb */}
             <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }} className="mb-10 flex items-center gap-4">
-              <Link href="/#projects" className="group flex h-10 w-10 items-center justify-center rounded-full border border-canvas-200/50 bg-white/50 text-canvas-600 backdrop-blur-md transition-all hover:border-canvas-300 hover:bg-white hover:text-canvas-950 dark:border-white/10 dark:bg-canvas-900/50 dark:text-canvas-400 dark:hover:border-white/20 dark:hover:bg-canvas-800 dark:hover:text-white">
-                <i className="fas fa-arrow-left transition-transform group-hover:-translate-x-0.5"></i>
+              <Link href="/#projects" aria-label="Back to projects" className="group flex h-10 w-10 items-center justify-center rounded-full border border-canvas-200/50 bg-white/50 text-canvas-600 backdrop-blur-md transition-all hover:border-canvas-300 hover:bg-white hover:text-canvas-950 dark:border-white/10 dark:bg-canvas-900/50 dark:text-canvas-400 dark:hover:border-white/20 dark:hover:bg-canvas-800 dark:hover:text-white">
+                <i className="fas fa-arrow-left transition-transform group-hover:-translate-x-0.5" aria-hidden="true"></i>
               </Link>
               <div className="flex items-center gap-3">
                 <span className="font-display text-[10px] font-bold uppercase tracking-[0.2em] text-canvas-500 dark:text-canvas-400">Projects</span>
@@ -309,17 +313,17 @@ export default function ProjectDetails({ project, mdxSource }: Props) {
         <AnimatePresence>
           {selectedImage && (
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }} className="fixed inset-0 z-50 flex items-center justify-center bg-canvas-950/95 backdrop-blur-xl" onClick={() => setSelectedImage(null)}>
-              <button type="button" onClick={() => setSelectedImage(null)} className="absolute right-6 top-6 z-50 flex h-12 w-12 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20">
-                <i className="fas fa-times text-xl"></i>
+              <button type="button" onClick={() => setSelectedImage(null)} aria-label="Close fullscreen preview" className="absolute right-6 top-6 z-50 flex h-12 w-12 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20">
+                <i className="fas fa-times text-xl" aria-hidden="true"></i>
               </button>
 
               {gallery.length > 1 && (
                 <>
-                  <button type="button" onClick={(e) => { e.stopPropagation(); prevImage(); }} className="absolute left-6 top-1/2 z-50 hidden h-14 w-14 -translate-y-1/2 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20 md:flex">
-                    <i className="fas fa-chevron-left text-xl"></i>
+                  <button type="button" onClick={(e) => { e.stopPropagation(); prevImage(); }} aria-label="Previous screenshot" className="absolute left-6 top-1/2 z-50 hidden h-14 w-14 -translate-y-1/2 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20 md:flex">
+                    <i className="fas fa-chevron-left text-xl" aria-hidden="true"></i>
                   </button>
-                  <button type="button" onClick={(e) => { e.stopPropagation(); nextImage(); }} className="absolute right-6 top-1/2 z-50 hidden h-14 w-14 -translate-y-1/2 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20 md:flex">
-                    <i className="fas fa-chevron-right text-xl"></i>
+                  <button type="button" onClick={(e) => { e.stopPropagation(); nextImage(); }} aria-label="Next screenshot" className="absolute right-6 top-1/2 z-50 hidden h-14 w-14 -translate-y-1/2 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20 md:flex">
+                    <i className="fas fa-chevron-right text-xl" aria-hidden="true"></i>
                   </button>
                 </>
               )}

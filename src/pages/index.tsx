@@ -10,6 +10,8 @@ import Footer from '@/components/Footer';
 import Navbar from '@/components/Navbar';
 import ErrorBoundary from '@/components/ErrorBoundary';
 import Marquee from '@/components/motion/Marquee';
+import { getAllPosts } from '@/lib/mdx';
+import { type ContentItem } from '@/data/types';
 
 const techMarquee = [
   'React', 'Next.js', 'TypeScript', 'Node.js', 'React Native',
@@ -22,18 +24,25 @@ const projectMarquee = [
   'Design Systems', 'Full-Stack', 'Cloud Architecture', 'UI/UX',
 ];
 
-import { getAllPosts } from '@/lib/mdx';
-import { type ContentItem } from '@/data/types';
-
 export const getStaticProps = async () => {
-  const projects = getAllPosts('projects');
-  const research = getAllPosts('research');
-  return {
-    props: {
-      projects,
-      research,
-    },
-  };
+  try {
+    const projects = getAllPosts('projects');
+    const research = getAllPosts('research');
+    return {
+      props: {
+        projects,
+        research,
+      },
+    };
+  } catch (error) {
+    console.error('Failed to load posts for index page:', error);
+    return {
+      props: {
+        projects: [],
+        research: [],
+      },
+    };
+  }
 };
 
 type ItemWithId = ContentItem & { id: string };
@@ -45,7 +54,10 @@ interface HomeProps {
 
 export default function Home({ projects, research }: HomeProps) {
   return (
-    <main className="grain">
+    <main id="main-content" className="grain">
+      <a href="#main-content" className="skip-link">
+        Skip to main content
+      </a>
       <Navbar />
       <ErrorBoundary><Hero /></ErrorBoundary>
 

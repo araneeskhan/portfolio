@@ -1,14 +1,17 @@
-import { useEffect, useState } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
+import { useState } from 'react';
+import { motion, AnimatePresence, useMotionValueEvent } from 'motion/react';
+import { useGlobalScroll } from '@/lib/ScrollContext';
 
 export default function FloatingBackToTop() {
+  const { scrollY } = useGlobalScroll();
   const [visible, setVisible] = useState(false);
 
-  useEffect(() => {
-    const onScroll = () => setVisible(window.scrollY > 400);
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
+  useMotionValueEvent(scrollY, 'change', (latest) => {
+    const shouldShow = latest > 400;
+    if (shouldShow !== visible) {
+      setVisible(shouldShow);
+    }
+  });
 
   return (
     <AnimatePresence>

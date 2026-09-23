@@ -8,6 +8,7 @@ import { getPostBySlug, getAllPosts } from "@/lib/mdx";
 import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
 import { serialize } from "next-mdx-remote/serialize";
 import personal from "@/config/personal";
+import Head from "next/head";
 
 type PaperWithId = ContentItem & { id: string };
 
@@ -56,7 +57,56 @@ export default function ResearchDetails({ paper, mdxSource }: Props) {
   const citation = `${personal.name}. "${paper.title}." ${paper.year}. ${source}`;
 
   return (
-    <Layout title={`${paper.title} | Research`} description={paper.shortDescription ?? paper.description}>
+    <Layout
+      title={`${paper.title} | Research`}
+      description={paper.shortDescription ?? paper.description}
+      canonicalPath={`/research/${paper.id}`}
+      ogType="article"
+    >
+      <Head>
+        <meta name="citation_title" content={paper.title} />
+        <meta name="citation_author" content={personal.name} />
+        {paper.contributors?.map((c) => (
+          <meta key={c.name} name="citation_author" content={c.name} />
+        ))}
+        {paper.year && <meta name="citation_publication_date" content={paper.year} />}
+        {paper.doi && <meta name="citation_doi" content={paper.doi} />}
+        {paper.paperUrl && <meta name="citation_pdf_url" content={paper.paperUrl} />}
+        {paper.publisher && <meta name="citation_journal_title" content={paper.publisher} />}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'ScholarlyArticle',
+              headline: paper.title,
+              description: paper.shortDescription ?? undefined,
+              author: [
+                {
+                  '@type': 'Person',
+                  name: personal.name,
+                  url: personal.siteUrl,
+                },
+                ...(paper.contributors?.map((c) => ({
+                  '@type': 'Person',
+                  name: c.name,
+                  url: c.linkedinUrl,
+                })) || []),
+              ],
+              datePublished: paper.year,
+              ...(paper.doi ? { identifier: `https://doi.org/${paper.doi}` } : {}),
+              ...(paper.publisher
+                ? {
+                    publisher: {
+                      '@type': 'Organization',
+                      name: paper.publisher,
+                    },
+                  }
+                : {}),
+            }),
+          }}
+        />
+      </Head>
       <article className="min-h-screen bg-white pt-32 pb-32 dark:bg-canvas-950 selection:bg-accent-500/30 selection:text-white">
         
         {/* Header Section */}

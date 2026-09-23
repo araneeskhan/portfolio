@@ -1,15 +1,15 @@
 import { GetServerSideProps } from 'next';
-import { projectsData } from '@/data/projects';
-import { researchData } from '@/data/research';
+import { getPostSlugs } from '@/lib/mdx';
 import personal from '@/config/personal';
 
 export const getServerSideProps: GetServerSideProps = async ({ res }) => {
   try {
     const base = personal.siteUrl;
+    const now = new Date().toISOString().split('T')[0];
 
     const staticPaths = ['', '/resume', '/case-studies/campus-sports-sphere'];
-    const projectPaths = Object.keys(projectsData).map((id) => `/projects/${id}`);
-    const researchPaths = Object.keys(researchData).map((id) => `/research/${id}`);
+    const projectPaths = getPostSlugs('projects').map((slug) => `/projects/${slug.replace(/\.mdx$/, '')}`);
+    const researchPaths = getPostSlugs('research').map((slug) => `/research/${slug.replace(/\.mdx$/, '')}`);
     const all = [...staticPaths, ...projectPaths, ...researchPaths];
 
     const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
@@ -18,7 +18,8 @@ ${all
   .map(
     (path) => `  <url>
     <loc>${base}${path}</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>${now}</lastmod>
+    <changefreq>${path === '' ? 'weekly' : 'monthly'}</changefreq>
     <priority>${path === '' ? '1.0' : '0.8'}</priority>
   </url>`
   )

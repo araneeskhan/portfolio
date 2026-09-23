@@ -33,6 +33,9 @@ export default function MagneticButton({
   const springY = useSpring(y, { stiffness: 220, damping: 16, mass: 0.4 });
 
   const handleMove = (e: React.MouseEvent) => {
+    if (typeof window !== 'undefined' && window.matchMedia('(pointer: coarse)').matches) {
+      return;
+    }
     const el = ref.current;
     if (!el) return;
     const rect = el.getBoundingClientRect();

@@ -119,8 +119,11 @@ export default function CampusSportsSphereCaseStudy() {
 
   return (
     <Layout
-      title="Campus Sports Sphere — Case Study | Anees Ur Rehman"
+      title="Campus Sports Sphere — Case Study"
       description="A deep-dive into the design, architecture, and development of Campus Sports Sphere."
+      canonicalPath="/case-studies/campus-sports-sphere"
+      ogImage="/assets/css/cover.png"
+      ogType="article"
     >
       <div className="relative min-h-screen overflow-hidden bg-canvas-50 dark:bg-canvas-950">
         
