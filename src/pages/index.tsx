@@ -2,6 +2,7 @@ import Hero from '@/components/Hero';
 import About from '@/components/About';
 import Skills from '@/components/Skills';
 import Projects from '@/components/Projects';
+import GameShowcase from '@/components/GameShowcase';
 import Research from '@/components/Research';
 import Achievements from '@/components/Achievements';
 import Certifications from '@/components/Certifications';
@@ -53,6 +54,8 @@ interface HomeProps {
 }
 
 export default function Home({ projects, research }: HomeProps) {
+  const standaloneProjects = projects.filter((project) => project.homepageSection === 'standalone');
+  const portfolioProjects = projects.filter((project) => project.homepageSection !== 'standalone');
   return (
     <main id="main-content" className="grain">
       <a href="#main-content" className="skip-link">
@@ -60,6 +63,9 @@ export default function Home({ projects, research }: HomeProps) {
       </a>
       <Navbar />
       <ErrorBoundary><Hero /></ErrorBoundary>
+      {standaloneProjects.map((project) => (
+        <ErrorBoundary key={project.id}><GameShowcase project={project} /></ErrorBoundary>
+      ))}
 
       {/* Tech marquee */}
       <div className="section-border-top py-8">
@@ -74,7 +80,7 @@ export default function Home({ projects, research }: HomeProps) {
       </div>
 
       <ErrorBoundary><Skills /></ErrorBoundary>
-      <ErrorBoundary><Projects projects={projects} /></ErrorBoundary>
+      <ErrorBoundary><Projects projects={portfolioProjects} /></ErrorBoundary>
       <ErrorBoundary><Research papers={research} /></ErrorBoundary>
       <ErrorBoundary><Achievements /></ErrorBoundary>
       <ErrorBoundary><Certifications /></ErrorBoundary>

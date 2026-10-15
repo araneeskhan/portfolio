@@ -2,6 +2,9 @@ export interface Screenshot {
   path: string;
   type: "mobile" | "web";
   alt?: string;
+  width?: number;
+  height?: number;
+  caption?: string;
 }
 
 export interface ItemMetric {
@@ -12,6 +15,17 @@ export interface ItemMetric {
 export interface Contributor {
   name: string;
   linkedinUrl: string;
+}
+
+export interface ShowcaseCover {
+  desktop: string;
+  width: number;
+  height: number;
+  mobile: string;
+  mobileWidth: number;
+  mobileHeight: number;
+  alt: string;
+  caption: string;
 }
 
 export interface ContentItem {
@@ -25,6 +39,16 @@ export interface ContentItem {
   year?: string;
   featured?: boolean;
   liveUrl?: string;
+  storeUrl?: string;
+  homepageSection?: 'standalone';
+  projectLayout?: 'product';
+  iconImage?: string;
+  socialImage?: string;
+  showcaseCover?: ShowcaseCover;
+  coverWidth?: number;
+  coverHeight?: number;
+  platform?: string;
+  releasedAt?: string;
   videoPath?: string;
   videoAspectRatio?: string;
   technologies: string[];

@@ -22,6 +22,13 @@
 * `year` (string) — e.g., "2025".
 * `featured` (boolean) — `true` pins item to featured sections.
 * `liveUrl` (string) — Production URL.
+* `storeUrl` (string) — App store destination; rendered as "Download on Google Play" for the Android product layout, separately from `liveUrl`.
+* `homepageSection` (`"standalone"`) — Gives a product its own homepage showcase. It is excluded from Featured Projects and Archive; omitted values retain the existing placement.
+* `projectLayout` (`"product"`) — Uses a compact product header and clear banner on the existing `/projects/<slug>` route. Omitted values retain the existing detail template.
+* `iconImage`, `socialImage` (string) — Local app icon and social-sharing cover paths.
+* `showcaseCover` (object) — Optional standalone-card artwork: `desktop`, `width`, `height`, `mobile`, `mobileWidth`, `mobileHeight`, `alt`, and `caption`. Use a 3:1 desktop composition and square mobile composition; `<picture>` selects the optimized asset. Keep `coverImage` for the existing detail/gallery artwork, and identify adapted promotional art truthfully in the caption.
+* `coverWidth`, `coverHeight` (number) — True cover dimensions used to reserve space and preserve proportions.
+* `platform`, `releasedAt` (string) — Product facts; include only verified values. A store update date is not a release date.
 * `githubUrl` (string) — GitHub repository link.
 * `caseStudyUrl` (string) — Link to internal deep-dive case study page.
 * `paperUrl` (string) — External link to published paper.
@@ -30,7 +37,7 @@
 * `highlights` (string[]) — Notable findings or milestones.
 * `metrics` (array of `{ label: string, value: string }`) — Real, verified metrics only. **Omit if none exist.**
 * `contributors` (array of `{ name: string, linkedinUrl: string }`)
-* `screenshots` (array of `{ path: string, type: "web" | "mobile", alt?: string }`)
+* `screenshots` (array of `{ path: string, type: "web" | "mobile", alt?: string, width?: number, height?: number, caption?: string }`) — Use true dimensions when known; existing projects retain their fallback dimensions. Captions must identify promotional artwork explicitly rather than describing it as an in-game capture.
 
 ---
 

@@ -10,6 +10,7 @@ import personal from '@/config/personal';
 import { useGlobalScroll } from '@/lib/ScrollContext';
 
 const links = [
+  { name: 'Game', href: '/#business-empire-underworld' },
   { name: 'About', href: '/#about' },
   { name: 'Skills', href: '/#skills' },
   { name: 'Projects', href: '/#projects' },
@@ -126,7 +127,7 @@ const Navbar = () => {
 
             {/* Desktop nav — pill container */}
             <motion.div
-              className={`hidden items-center gap-1 rounded-full border p-1 backdrop-blur-xl transition-all duration-500 md:flex ${
+              className={`hidden items-center gap-1 rounded-full border p-1 backdrop-blur-xl transition-all duration-500 xl:flex ${
                 isScrolled
                   ? 'border-transparent bg-transparent'
                   : 'border-canvas-200/30 bg-white/60 dark:border-white/10 dark:bg-white/[0.05]'
@@ -187,7 +188,7 @@ const Navbar = () => {
               {/* Mobile menu button */}
               <motion.button
                 type="button"
-                className="flex h-10 w-10 items-center justify-center rounded-xl text-canvas-950 transition-colors hover:text-accent-500 dark:text-white dark:hover:text-accent-400 md:hidden"
+                className="flex h-10 w-10 items-center justify-center rounded-xl text-canvas-950 transition-colors hover:text-accent-500 dark:text-white dark:hover:text-accent-400 xl:hidden"
                 onClick={() => setIsMenuOpen((v) => !v)}
                 aria-label="Toggle menu"
                 aria-expanded={isMenuOpen}
@@ -245,7 +246,7 @@ const Navbar = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-[60] bg-canvas-950/60 backdrop-blur-sm md:hidden"
+            className="fixed inset-0 z-[60] bg-canvas-950/60 backdrop-blur-sm xl:hidden"
             onClick={() => setIsMenuOpen(false)}
           />
         )}
@@ -259,7 +260,7 @@ const Navbar = () => {
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
             transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-            className="fixed right-0 top-0 z-[70] flex h-full w-80 max-w-[86vw] flex-col bg-white/95 backdrop-blur-2xl dark:bg-canvas-950/95 md:hidden"
+            className="fixed right-0 top-0 z-[70] flex h-full w-80 max-w-[86vw] flex-col bg-white/95 backdrop-blur-2xl dark:bg-canvas-950/95 xl:hidden"
           >
             <div className="flex items-center justify-between border-b border-canvas-200/20 p-6 dark:border-white/10">
               <span className="font-display text-lg font-bold text-canvas-950 dark:text-white">

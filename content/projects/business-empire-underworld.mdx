@@ -1,0 +1,192 @@
+---
+title: "Business Empire: Underworld"
+coverImage: "/assets/projects/business-empire-underworld/cover-desktop.webp"
+coverWidth: 2560
+coverHeight: 1429
+iconImage: "/assets/projects/business-empire-underworld/icon.webp"
+socialImage: "/assets/projects/business-empire-underworld/social-cover.webp"
+showcaseCover:
+  desktop: "/assets/projects/business-empire-underworld/showcase-wide.webp"
+  width: 2172
+  height: 724
+  mobile: "/assets/projects/business-empire-underworld/showcase-mobile.webp"
+  mobileWidth: 1254
+  mobileHeight: 1254
+  alt: "Business Empire: Underworld — properties and upgrades, markets and auctions, industry and transport, crime and strategy, offline earnings and cloud saves."
+  caption: "Promotional cover based on the game's Google Play artwork."
+shortDescription: "A published Android business simulation and strategy game combining property ownership, investments, industrial production, and transport management."
+category: "Mobile Game"
+status: "Published on Google Play"
+role: "Full-Stack & AI Engineer"
+platform: "Android"
+releasedAt: "September 23, 2026"
+year: "2026"
+homepageSection: "standalone"
+projectLayout: "product"
+storeUrl: "https://play.google.com/store/apps/details?id=com.businessempire.app"
+technologies:
+  - "React Native"
+  - "Expo"
+  - "TypeScript"
+  - "Zustand"
+  - "Supabase"
+features:
+  - "Property ownership and upgrades with offline earnings"
+  - "Investment markets and timed auctions"
+  - "Transport fleets and route management"
+  - "Crime, rival pressure, and military progression"
+  - "Guest play and account-based cloud saves"
+screenshots:
+  - path: "/assets/projects/business-empire-underworld/showcase-wide.webp"
+    type: "web"
+    width: 2172
+    height: 724
+    alt: "Business Empire: Underworld custom branded promotional cover"
+    caption: "Custom cover — promotional artwork adapted from the game's Google Play visuals."
+  - path: "/assets/projects/business-empire-underworld/cover-mobile.webp"
+    type: "mobile"
+    width: 804
+    height: 1440
+    alt: "Business Empire city skyline promotional artwork"
+    caption: "City skyline — official Google Play promotional artwork, not an in-game capture."
+  - path: "/assets/projects/business-empire-underworld/google-play-02.webp"
+    type: "mobile"
+    width: 804
+    height: 1440
+    alt: "Property upgrades with houses, a mansion, offices, and a gold tower"
+    caption: "Property upgrades — Google Play promotional artwork."
+  - path: "/assets/projects/business-empire-underworld/google-play-03.webp"
+    type: "mobile"
+    width: 804
+    height: 1440
+    alt: "Transport network with roads, rail, a cargo ship, and an aircraft"
+    caption: "Transport and logistics — Google Play promotional artwork."
+  - path: "/assets/projects/business-empire-underworld/google-play-04.webp"
+    type: "mobile"
+    width: 804
+    height: 1440
+    alt: "Underworld scene with neon streets, an armored van, and a fictional crew member"
+    caption: "Underworld operations — Google Play promotional artwork."
+  - path: "/assets/projects/business-empire-underworld/google-play-05.webp"
+    type: "mobile"
+    width: 804
+    height: 1440
+    alt: "Simulated markets illustrated with stock charts, gold bars, and an investor"
+    caption: "Markets and auctions — Google Play promotional artwork."
+  - path: "/assets/projects/business-empire-underworld/google-play-06.webp"
+    type: "mobile"
+    width: 804
+    height: 1440
+    alt: "Military strategy illustrated with a coastal base, vehicles, and a helicopter"
+    caption: "Military strategy — Google Play promotional artwork."
+  - path: "/assets/projects/business-empire-underworld/google-play-07.webp"
+    type: "mobile"
+    width: 804
+    height: 1440
+    alt: "Progression tiers illustrated as buildings ascending from a shop to advanced properties"
+    caption: "Long-term progression — Google Play promotional artwork."
+  - path: "/assets/projects/business-empire-underworld/cover-desktop.webp"
+    type: "web"
+    width: 2560
+    height: 1429
+    alt: "Business Empire property progression promotional artwork"
+    caption: "Property progression — official Google Play promotional artwork, not an in-game capture."
+  - path: "/assets/projects/business-empire-underworld/google-play-09.webp"
+    type: "web"
+    width: 2560
+    height: 1429
+    alt: "Landscape transport artwork showing aircraft, trucks, rail, and a container port"
+    caption: "Transport network, landscape edition — Google Play promotional artwork."
+  - path: "/assets/projects/business-empire-underworld/google-play-10.webp"
+    type: "web"
+    width: 2560
+    height: 1429
+    alt: "Landscape simulated-market artwork with an investor overlooking a city and stock charts"
+    caption: "Simulated markets, landscape edition — Google Play promotional artwork."
+---
+
+## Product overview
+
+Business Empire: Underworld is an Android business simulation and strategy game about growing an interconnected empire. Players acquire income-generating assets, reinvest earnings, develop production and transport operations, and weigh financial opportunities against competition and risk.
+
+The experience combines incremental progression with active management. Buying an asset is the beginning: upgrades, operating resources, production capacity, and the next investment all affect how the empire develops.
+
+The game is published on Google Play. The sections below describe the implemented product and engineering work; newer city and commerce systems are identified separately under current development.
+
+## Core progression
+
+**Earn income → acquire assets → improve operations → reinvest → expand.**
+
+Different systems offer different paths through that loop. Properties generate recurring income, industrial facilities turn raw materials into goods, transport fleets support logistics, and fictional investments create additional opportunities. Research and prestige extend progression beyond individual purchases.
+
+## Gameplay systems
+
+- **Properties and businesses:** acquire and upgrade income-generating assets, hire managers, and build a portfolio of businesses.
+- **Property operations:** manage maintenance, improvements, tenants, occupancy, and operating decisions. Properties have responsibilities beyond passive income.
+- **Simulated investments:** buy and sell fictional stocks, track holdings and returns, and pursue contracts, ventures, mergers, and auctions.
+- **Industrial production:** operate facilities that consume raw materials and produce finished goods. Warehouse stock, production requirements, and storage capacity constrain operations.
+- **Transportation:** develop fleets across land, sea, and air, with fuel reserves, storage, upgrades, and logistics to manage.
+- **Research:** complete timed projects that unlock capabilities and improve the empire's efficiency.
+- **Underworld operations:** build a crew and undertake fictional criminal activities while managing heat, preparation, cooldowns, and consequences.
+- **Legal and financial risk:** respond to legal matters, tax obligations, debt, and other pressures associated with expansion.
+- **Military strategy:** recruit and train troops, develop capabilities, manage deployments, and review battle outcomes.
+- **Shared world:** explore other players' estates and participate in supported alliance and military activities through authenticated online systems.
+- **Progression and rewards:** develop the empire through levels, achievements, challenges, and prestige.
+- **Offline progress:** calculate eligible progress between sessions from saved state and timestamps, subject to the game's limits.
+- **Account persistence:** start as a guest or use authenticated cloud-save workflows.
+
+## Architecture
+
+The application uses **React Native, Expo, TypeScript, Zustand, and Supabase**. The architecture connects several gameplay domains while keeping their responsibilities manageable.
+
+- **Modular state:** typed Zustand slices organize economic, industrial, transport, military, and progression systems. Domains can interact without placing every responsibility in one module.
+- **Versioned persistence:** saved state is normalized and migrated as the game evolves, with attention to preserving ownership, balances, inventory, and existing progress.
+- **Shared timing and settlement:** construction, upgrades, research, production, and other timed activities use common timing and settlement logic.
+- **Large numerical values:** a numerical library designed for incremental games handles large in-game balances as progression grows.
+- **Server authority:** supported multiplayer transactions and military commands are checked by the server. Editable local balances are not accepted as authoritative online state.
+- **Mobile interface:** reusable game-styled controls, light and dark appearances, animations, and responsive screen layouts help present the connected systems on small screens.
+- **Advertising integration:** Unity LevelPlay manages configured ad formats, including optional rewarded videos. React Native powers the application; Unity Ads serves as a monetization service.
+
+## My contribution
+
+As a **Full-Stack & AI Engineer**, my work spans gameplay-system development, economic progression, the mobile interface, local and cloud persistence, backend integration, testing, and Android publishing.
+
+The work involves both individual mechanics and their interactions: how assets affect income, how production consumes inventory, how timers settle progress, and how local actions connect to authenticated online operations.
+
+## Engineering challenges
+
+- **Preserving saves across updates:** changes to state structure need to retain players' existing assets, balances, inventory, and progress.
+- **Coordinating systems:** economy, industry, transport, and progression share resources and outcomes. Their interactions need consistent state transitions.
+- **Avoiding repeated rewards or charges:** timed settlement and transaction rules need to handle repeated actions without applying the same outcome twice.
+- **Handling interrupted requests:** online commands can lose their response while the server is processing them. Retry behavior must account for uncertain outcomes; persisted retry tokens are part of the newer commerce work below.
+- **Making complexity readable:** ownership, production, fuel, research, and risk all compete for space on a phone. Reusable controls and clear screen layouts help players understand the next decision.
+
+## Testing and release
+
+Testing covers gameplay logic, persistence, transaction rules, and UI behavior. Automated checks support that work, alongside device testing and verification of the specific build prepared for release.
+
+Release-specific verification is particularly important when the development codebase has moved ahead of the published Android build.
+
+## Screenshots and artwork
+
+The [image gallery](#product-visuals) presents promotional artwork with descriptive captions and accessible enlargement. These visuals illustrate the game's identity rather than documenting an in-game screen.
+
+{/* TODO: Add actual gameplay screenshots alongside the clearly labelled promotional artwork when supplied. */}
+
+## Current development
+
+The current development codebase also includes the following work. **Availability in the Google Play build has not yet been confirmed for these systems.**
+
+- **A more expressive city:** living districts, masterplans, recurring characters, and a city chronicle.
+- **Rival and recovery activities:** more visible rival strategies and district recovery work.
+- **Player-to-player goods trading:** escrow, partial purchases, expiry, and transaction receipts.
+- **Company acquisitions:** NPC company purchases with timed integration and collectible production.
+- **Recoverable commerce commands:** persisted retry tokens for interrupted online commerce requests.
+
+The commerce backend has been deployed and live data loading verified. That verifies the backend work; inclusion in a published Android release still needs to be confirmed.
+
+## Published status
+
+Published on Google Play for Android, with an initial release on September 23, 2026. The public listing describes offline earnings, guest play, cloud saves, and optional rewarded ads.
+
+See the [Google Play listing](https://play.google.com/store/apps/details?id=com.businessempire.app) for the currently published product.

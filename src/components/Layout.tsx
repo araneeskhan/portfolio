@@ -11,6 +11,8 @@ interface LayoutProps {
   description?: string;
   canonicalPath?: string;
   ogImage?: string;
+  ogImageWidth?: number;
+  ogImageHeight?: number;
   ogType?: 'website' | 'article';
 }
 
@@ -20,6 +22,8 @@ const Layout = ({
   description = '',
   canonicalPath = '',
   ogImage,
+  ogImageWidth,
+  ogImageHeight,
   ogType = 'website',
 }: LayoutProps) => {
   const pageTitle = title
@@ -43,6 +47,8 @@ const Layout = ({
         <meta key="og:title" property="og:title" content={pageTitle} />
         <meta key="og:description" property="og:description" content={pageDesc} />
         <meta key="og:image" property="og:image" content={image} />
+        {ogImageWidth && <meta key="og:image:width" property="og:image:width" content={String(ogImageWidth)} />}
+        {ogImageHeight && <meta key="og:image:height" property="og:image:height" content={String(ogImageHeight)} />}
 
         <meta key="twitter:card" name="twitter:card" content="summary_large_image" />
         <meta key="twitter:title" name="twitter:title" content={pageTitle} />

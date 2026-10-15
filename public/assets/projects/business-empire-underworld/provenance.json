@@ -1,0 +1,110 @@
+{
+  "source": "https://play.google.com/store/apps/details?id=com.businessempire.app",
+  "verifiedOn": "2026-10-13",
+  "kind": "Original Google Play promotional artwork and AI-adapted showcase variants; these are not gameplay captures",
+  "assets": [
+    {
+      "file": "icon.webp",
+      "width": 240,
+      "height": 240,
+      "sourceUrl": "https://play-lh.googleusercontent.com/iXk9Dw_qRoo5NlL-ZspU6Edfiv2-XXHD--fpgqSbPVwSUgizJENT3GL7wcdQUjB3K2XzJtitD78LnzbfbLODuA=w240-h480-rw"
+    },
+    {
+      "file": "cover-mobile.webp",
+      "width": 804,
+      "height": 1440,
+      "sourceUrl": "https://play-lh.googleusercontent.com/IBeL2h_4IiRMyZRm-htt81jC_N0L8JU2cN3r-xrbG58G8LdfU77_XljH-T2Hjr0hplUK9W7_EEUJMi20A_pp=w2560-h1440-rw"
+    },
+    {
+      "file": "cover-desktop.webp",
+      "width": 2560,
+      "height": 1429,
+      "sourceUrl": "https://play-lh.googleusercontent.com/UgZPNC8swDIfpK4Qo9FimlARZRUXcXhfRN7_4vzl-mW9pqi2xlxSgDpbrt3CNch28KqqBv4Lm6U1mZUQEe7X8g=w2560-h1440-rw"
+    },
+    {
+      "file": "social-cover.webp",
+      "width": 1200,
+      "height": 630,
+      "derivedFrom": "cover-desktop.webp",
+      "processing": "Resized with contain framing and canvas background; no artwork generated"
+    },
+    {
+      "file": "showcase-wide.webp",
+      "width": 2172,
+      "height": 724,
+      "derivedFrom": [
+        "cover-desktop.webp",
+        "icon.webp"
+      ],
+      "processing": "Built-in ImageGen adaptation: wide promotional composition with game title and five feature groups; WebP optimization"
+    },
+    {
+      "file": "showcase-mobile.webp",
+      "width": 1254,
+      "height": 1254,
+      "derivedFrom": "showcase-wide.webp",
+      "processing": "Built-in ImageGen adaptation: square mobile composition with the same title and five feature groups; WebP optimization"
+    },
+    {
+      "file": "google-play-02.webp",
+      "width": 804,
+      "height": 1440,
+      "sourceUrl": "https://play-lh.googleusercontent.com/tQl2PnHGktFpst0g7u8fi7mz247mLbxotvB2ciNTLR4f-t0MatYcalh-E2aCX6wjpdbT_kdAz6sGLbrWIO6acQ=w2560-h1440-rw",
+      "kind": "Official Google Play promotional artwork"
+    },
+    {
+      "file": "google-play-03.webp",
+      "width": 804,
+      "height": 1440,
+      "sourceUrl": "https://play-lh.googleusercontent.com/nkItYypc2UvDenY3v2321hHCxSDtJ3RMG4b9ovu4TuMz6skp0lakscMP14pO9r4-su09-hcaoDNG-lk0ycA4oQ=w2560-h1440-rw",
+      "kind": "Official Google Play promotional artwork"
+    },
+    {
+      "file": "google-play-04.webp",
+      "width": 804,
+      "height": 1440,
+      "sourceUrl": "https://play-lh.googleusercontent.com/zGEFrIrZKS4LOSgODb82sP6POZv9SXfELSdLSuJOode-VRCB1-CMTX3C6fACqKLiWh0S1_1Rf8msaKhpjaPwxg=w2560-h1440-rw",
+      "kind": "Official Google Play promotional artwork"
+    },
+    {
+      "file": "google-play-05.webp",
+      "width": 804,
+      "height": 1440,
+      "sourceUrl": "https://play-lh.googleusercontent.com/-6A99wbEVnS-XvzxnkR4SqIPtNUaL9hTKqZz4CTVjsREaqYmLOCEDZ7Z6j-LL1UxZBjsBVIWktLUzirXlt7oNmI=w2560-h1440-rw",
+      "kind": "Official Google Play promotional artwork"
+    },
+    {
+      "file": "google-play-06.webp",
+      "width": 804,
+      "height": 1440,
+      "sourceUrl": "https://play-lh.googleusercontent.com/Lj6BdI0jhiCoLDIMM9CKswj9ykghyp2uJNRkGCu63XjCMIi-14Zrfqr3rftr784f637SkbybSKHN8Lkyb5byYvI=w2560-h1440-rw",
+      "kind": "Official Google Play promotional artwork"
+    },
+    {
+      "file": "google-play-07.webp",
+      "width": 804,
+      "height": 1440,
+      "sourceUrl": "https://play-lh.googleusercontent.com/8ZvnG6xLI6BLG0aScI7hYcXKeGglMFnkJayze50ZY2ANr_VspUGLgGVXRCXKcUsXhgYddKkXWp8wGrNkY9qtFQ=w2560-h1440-rw",
+      "kind": "Official Google Play promotional artwork"
+    },
+    {
+      "file": "google-play-09.webp",
+      "width": 2560,
+      "height": 1429,
+      "sourceUrl": "https://play-lh.googleusercontent.com/YGkCSEAmXiPLz5o2-1cQVaF_OMgSecXQ__s_vOTQF4MsAQF_c9G45AflFMgNTYrjzj0ioPl-w16UscTQ9bEUvw=w2560-h1440-rw",
+      "kind": "Official Google Play promotional artwork"
+    },
+    {
+      "file": "google-play-10.webp",
+      "width": 2560,
+      "height": 1429,
+      "sourceUrl": "https://play-lh.googleusercontent.com/wGsCymOXqTZfwZrT_0SyEMOHMzeOpY-vI3Ixg9dLdIeaoCRqjeOKqKP9OwqlCCSfrQMX1NIXiQzteg4wj4AC=w2560-h1440-rw",
+      "kind": "Official Google Play promotional artwork"
+    }
+  ],
+  "storeGallery": {
+    "carouselEntries": 13,
+    "distinctImages": 10,
+    "duplicateEntries": 3
+  }
+}

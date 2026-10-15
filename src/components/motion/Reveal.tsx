@@ -1,5 +1,9 @@
-import { motion, type Variants } from 'motion/react';
-import type { ElementType, ReactNode } from 'react';
+import { motion, useReducedMotion, type Variants } from 'motion/react';
+import { useSyncExternalStore, type ElementType, type ReactNode } from 'react';
+
+const subscribeNoop = () => () => {};
+const getIsClient = () => true;
+const getServerSnapshot = () => false;
 
 type Direction = 'up' | 'down' | 'left' | 'right' | 'zoom' | 'fade';
 
@@ -63,19 +67,23 @@ export default function Reveal({
   delay = 0,
   duration = 0.7,
   className,
-  as,
+  as = 'div',
   once = true,
 }: RevealProps) {
+  const prefersReducedMotion = useReducedMotion();
+  // Keep the first client render identical to SSR, then apply the user's preference.
+  const mounted = useSyncExternalStore(subscribeNoop, getIsClient, getServerSnapshot);
+  const reducedMotion = mounted && prefersReducedMotion;
   const MotionTag = motion[as as keyof typeof motion] as typeof motion.div;
 
   return (
     <MotionTag
       className={className}
-      initial="hidden"
+      initial={reducedMotion ? false : 'hidden'}
       whileInView="visible"
       viewport={{ once, margin: '-60px' }}
-      variants={buildVariants(direction, duration)}
-      transition={{ delay }}
+      variants={buildVariants(reducedMotion ? 'fade' : direction, reducedMotion ? 0 : duration)}
+      transition={{ delay: reducedMotion ? 0 : delay }}
     >
       {children}
     </MotionTag>

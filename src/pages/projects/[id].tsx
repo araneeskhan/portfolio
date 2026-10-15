@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence, useScroll, useTransform, useSpring } from "motion/react";
 import Layout from "@/components/Layout";
+import ProductCaseStudy from "@/components/ProductCaseStudy";
 import { type ContentItem } from "@/data/types";
 import { getPostBySlug, getAllPosts } from "@/lib/mdx";
 import { getCoverImage } from "@/lib/content";
@@ -37,6 +38,13 @@ interface Props {
 }
 
 export default function ProjectDetails({ project, mdxSource }: Props) {
+  if (project?.projectLayout === 'product') {
+    return <ProductCaseStudy project={project} mdxSource={mdxSource} />;
+  }
+  return <CinematicProjectDetails project={project} mdxSource={mdxSource} />;
+}
+
+function CinematicProjectDetails({ project, mdxSource }: Props) {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const heroRef = useRef<HTMLElement>(null);
