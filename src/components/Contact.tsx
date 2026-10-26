@@ -38,7 +38,7 @@ const Contact = () => {
   const [focusedField, setFocusedField] = useState<string | null>(null);
 
   const fieldClass = (field: string) =>
-    `w-full rounded-xl border px-5 py-4 font-display text-[15px] font-medium text-canvas-950 outline-none transition-all duration-300 placeholder:text-canvas-400 dark:text-white ${
+    `w-full rounded-xl border px-5 py-4 font-display text-base font-medium text-canvas-950 outline-none transition-all duration-300 placeholder:text-canvas-400 dark:text-white ${
       focusedField === field
         ? 'border-accent-500 bg-white shadow-[0_0_0_4px_rgba(99,102,241,0.1)] dark:bg-canvas-900 dark:shadow-[0_0_0_4px_rgba(168,85,247,0.1)]'
         : 'border-canvas-200/50 bg-canvas-50/50 hover:bg-white dark:border-white/10 dark:bg-white/[0.02] dark:hover:bg-white/[0.04]'
@@ -56,8 +56,8 @@ const Contact = () => {
       <div className="section-container relative z-10">
         <SectionHeader
           label="Contact"
-          title="Let's build something precise, useful, and polished."
-          description="Share the goal, timeline, and product constraints. I'll respond with a clear next step."
+          title="Let’s discuss research and engineering opportunities."
+          description="I’m open to PhD opportunities in AI for software engineering and full-stack / AI engineering roles. Tell me about your research group, team, or position."
         />
 
         <div className="mt-16 grid gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:gap-12 xl:gap-16">
@@ -79,15 +79,14 @@ const Contact = () => {
                     <span className="relative inline-flex h-3 w-3 rounded-full bg-emerald-500" />
                   </span>
                   <p className="text-xs font-bold uppercase tracking-widest text-emerald-600 dark:text-emerald-400">
-                    Response Window
+                    Open to opportunities
                   </p>
                 </div>
                 <h3 className="mt-5 font-display text-3xl font-bold text-canvas-950 dark:text-white">
-                  Within 24 hours
+                  PhD & Engineering
                 </h3>
                 <p className="mt-2 font-display text-sm leading-relaxed text-canvas-600 dark:text-canvas-400 max-w-[280px]">
-                  Best fit for full-stack & AI builds, React Native apps, intelligent product features, and
-                  technical architecture.
+                  Research in AI for software engineering, LLMs, and trustworthy systems; engineering roles across web, mobile, and applied AI.
                 </p>
               </div>
             </div>
@@ -224,7 +223,7 @@ const Contact = () => {
                       onFocus={() => setFocusedField('subject')}
                       onBlur={() => setFocusedField(null)}
                       className={fieldClass('subject')}
-                      placeholder="Project inquiry or opportunity"
+                      placeholder="PhD opportunity or engineering role"
                     />
                     <ValidationError prefix="Subject" field="subject" errors={state.errors} className="mt-2 text-sm font-semibold text-red-500" />
                   </FieldLabel>
@@ -238,7 +237,7 @@ const Contact = () => {
                       onFocus={() => setFocusedField('message')}
                       onBlur={() => setFocusedField(null)}
                       className={`${fieldClass('message')} resize-none`}
-                      placeholder="Tell me about your goals, constraints, and timeline..."
+                      placeholder="Tell me about the research topic or role, your team, and the expected start date..."
                     />
                     <ValidationError prefix="Message" field="message" errors={state.errors} className="mt-2 text-sm font-semibold text-red-500" />
                   </FieldLabel>

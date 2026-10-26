@@ -178,11 +178,11 @@ const Certifications = () => {
 
         {/* Workshop section */}
         <div className="relative z-10 mx-auto mt-16 max-w-4xl">
-          <div className="grid gap-6 lg:grid-cols-[0.75fr_1.25fr]">
+          <div className="grid min-w-0 grid-cols-1 gap-6 lg:grid-cols-[0.75fr_1.25fr]">
             <motion.div
               className="rounded-2xl bg-canvas-950 p-6 text-white shadow-xl dark:bg-white dark:text-canvas-950"
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
             >
@@ -199,9 +199,9 @@ const Certifications = () => {
             </motion.div>
 
             <motion.div
-              className="surface-card border-canvas-200/40 p-6 shadow-md dark:border-white/10"
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              className="surface-card min-w-0 border-canvas-200/40 p-5 sm:p-6 shadow-md dark:border-white/10"
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
             >

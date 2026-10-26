@@ -51,7 +51,7 @@ export default function ProductCaseStudy({ project, mdxSource }: { project: Prod
           {!!gallery.length && (
             <section aria-labelledby="product-visuals" className="mt-16 border-t border-canvas-200 pt-10 dark:border-white/10">
               <h2 id="product-visuals" className="font-display text-2xl font-bold text-canvas-950 dark:text-white">A closer look</h2>
-              <p className="mt-3 text-sm leading-relaxed text-canvas-600 dark:text-canvas-300">The custom cover and complete Google Play promotional gallery. Select any image to enlarge it.</p>
+              <p className="mt-3 text-sm leading-relaxed text-canvas-600 dark:text-canvas-300">Current Google Play gameplay screenshots, including framed store screenshots, followed by the promotional cover. Select any image to enlarge it.</p>
               <div className="mt-7 columns-1 gap-7 sm:columns-2 lg:columns-3">
                 {gallery.map((shot, index) => (
                   <Reveal key={shot.path} as="div" direction="fade" delay={(index % 3) * 0.06} className={`mb-7 break-inside-avoid ${shot.path === project.showcaseCover?.desktop ? '[column-span:all]' : ''}`}>

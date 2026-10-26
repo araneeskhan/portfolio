@@ -17,7 +17,7 @@ const Research = ({ papers = [] }: { papers: PaperWithId[] }) => {
           {/* Masthead */}
           <div className="lg:sticky lg:top-40 lg:h-fit">
             <h2 className="font-display text-xs font-bold uppercase tracking-[0.2em] text-accent-500 dark:text-accent-400 mb-6">
-              Publications
+              Research &amp; Preprints
             </h2>
             <h3 className="font-display text-2xl font-black tracking-tight text-canvas-950 dark:text-white md:text-5xl lg:text-6xl lg:leading-[1.1]">
               Academic
@@ -25,8 +25,7 @@ const Research = ({ papers = [] }: { papers: PaperWithId[] }) => {
               Research
             </h3>
             <p className="mt-8 font-display text-lg leading-relaxed text-canvas-600 dark:text-canvas-400 max-w-sm">
-              Independent research papers spanning security, retrieval-augmented generation, and
-              distributed AI architectures.
+              A Zenodo preprint and academic research projects spanning security, retrieval-augmented generation, and distributed AI. A preprint is not a peer-reviewed publication.
             </p>
 
             <dl className="mt-10 flex gap-10 border-t border-canvas-200/70 pt-6 dark:border-white/10">
@@ -90,7 +89,7 @@ const PublicationRow = ({ paper, index }: { paper: PaperWithId; index: number })
           </span>
           <span className="text-accent-600 dark:text-accent-400">{paper.category}</span>
           <Rule className="hidden sm:block" />
-          <span className="hidden sm:inline">{paper.status}</span>
+          <span className="normal-case tracking-normal">{paper.status}</span>
           <Rule />
           <span className="tabular-nums">{paper.year}</span>
         </div>

@@ -4,7 +4,7 @@ import personal from '@/config/personal';
 
 const quickLinks = [
   { name: 'About', href: '/#about' },
-  { name: 'Services', href: '/#services' },
+  { name: 'Research', href: '/#research' },
   { name: 'Projects', href: '/#projects' },
   { name: 'Skills', href: '/#skills' },
   { name: 'Certifications', href: '/#certifications' },
@@ -31,13 +31,13 @@ const Footer = () => {
           transition={{ duration: 0.7 }}
         >
           <h2 className="font-display text-3xl font-bold text-canvas-950 dark:text-white sm:text-4xl md:text-5xl">
-            Let&apos;s create something
+            Let&apos;s discuss your
             <br />
-            <span className="text-gradient">remarkable together.</span>
+            <span className="text-gradient">research or engineering opportunity.</span>
           </h2>
-          <div className="mt-8 flex justify-center gap-3">
+          <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
             <Link href="/#contact" className="btn-primary">
-              <span>Start a Project</span>
+              <span>Discuss an Opportunity</span>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M7 17L17 7M17 7H7M17 7V17"/>
               </svg>

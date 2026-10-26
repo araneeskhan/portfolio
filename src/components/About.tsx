@@ -159,8 +159,8 @@ const About = () => {
           transition={{ duration: 0.6 }}
         >
           {[
-            { val: '2+', label: 'Years Experience' },
-            { val: 'AI', label: "Master's Degree" },
+            { val: 'Android', label: 'Published Game' },
+            { val: 'AI', label: "Master's In Progress" },
             { val: 'CS', label: "Bachelor's Degree" },
           ].map((cred, i) => (
             <motion.div

@@ -1,15 +1,15 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { useEffect, useRef, useState } from 'react';
+import { useRef } from 'react';
 import { motion, useScroll, useTransform, useSpring } from 'motion/react';
 import personal from '@/config/personal';
 import MagneticButton from './motion/MagneticButton';
 
 
 const metrics = [
-  { value: 24, suffix: '+', label: 'Months Building' },
-  { value: 8, suffix: '', label: 'Projects Shipped' },
-  { value: 100, suffix: '%', label: 'Delivery Focus' },
+  { value: 'Google Play', label: 'Published game' },
+  { value: 'AI Master’s', label: 'In progress · Cnam' },
+  { value: 'Preprint', label: 'RAG research' },
 ];
 
 const container = {
@@ -52,7 +52,6 @@ const SplitText = ({ text, className, delay = 0 }: { text: string; className?: s
 };
 
 const Hero = () => {
-  const [counts, setCounts] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
 
   const { scrollYProgress } = useScroll({
@@ -105,13 +104,15 @@ const Hero = () => {
             </motion.div>
 
             <motion.p variants={item} className="mt-6 max-w-xl font-display text-lg leading-relaxed text-canvas-500 dark:text-canvas-300">
-              I design and build polished web, mobile, and AI-powered products with
-              production-minded architecture, sharp interfaces, and clear user flows.
+              AI Master’s student at Cnam, Paris, building web, mobile, and AI products.
+              Seeking PhD opportunities in AI for software engineering and full-stack / AI engineering roles.
             </motion.p>
 
-            {/* CTAs — now includes View Resume */}
+            <motion.p variants={item} className="mt-4 text-sm font-semibold text-accent-600 dark:text-accent-300">{personal.availability}</motion.p>
+            {/* Direct paths for recruiters and research supervisors. */}
             <motion.div variants={item} className="mt-8 flex flex-wrap gap-3">
-              <MagneticButton href={personal.resumePath} download={personal.resumeFileName} className="btn-primary w-full justify-center font-display sm:w-auto">
+              <MagneticButton href="#contact" className="btn-primary w-full sm:w-auto"><span>Discuss an Opportunity</span></MagneticButton>
+              <MagneticButton href={personal.resumePath} download={personal.resumeFileName} className="btn-secondary w-full justify-center font-display sm:w-auto">
                 <span>Download Resume</span>
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3" />
@@ -136,7 +137,6 @@ const Hero = () => {
               variants={item}
               className="mt-10 grid max-w-xl grid-cols-3 gap-2 sm:mt-12 sm:gap-4"
               style={{ y: metricsY }}
-              onViewportEnter={() => setCounts(true)}
             >
               {metrics.map((metric) => (
                 <div
@@ -144,7 +144,7 @@ const Hero = () => {
                   className="group relative overflow-hidden rounded-2xl border border-canvas-200/30 bg-white/50 p-3 backdrop-blur-sm transition-all duration-500 hover:border-accent-500/20 hover:shadow-glow dark:border-white/5 dark:bg-white/[0.02] dark:hover:border-accent-400/20 sm:p-4"
                 >
                   <p className="font-display text-xl font-bold text-canvas-950 dark:text-white sm:text-3xl">
-                    {counts ? <AnimatedValue value={metric.value} suffix={metric.suffix} /> : `0${metric.suffix}`}
+                    {metric.value}
                   </p>
                   <p className="mt-1 text-[10px] font-medium uppercase leading-tight tracking-wide text-canvas-400 dark:text-canvas-500 sm:text-xs sm:tracking-wider">
                     {metric.label}
@@ -235,24 +235,6 @@ const Hero = () => {
       </motion.div>
     </section>
   );
-};
-
-const AnimatedValue = ({ value, suffix }: { value: number; suffix: string }) => {
-  const [display, setDisplay] = useState(0);
-  useEffect(() => {
-    let raf = 0;
-    const start = performance.now();
-    const duration = 1600;
-    const tick = (now: number) => {
-      const t = Math.min((now - start) / duration, 1);
-      const eased = 1 - Math.pow(1 - t, 4);
-      setDisplay(Math.round(eased * value));
-      if (t < 1) raf = requestAnimationFrame(tick);
-    };
-    raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
-  }, [value]);
-  return <span>{display}{suffix}</span>;
 };
 
 export default Hero;

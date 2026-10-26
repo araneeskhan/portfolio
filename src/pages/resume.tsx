@@ -24,6 +24,7 @@ export default function Resume() {
               <p className="eyebrow">Resume</p>
               <h1 className="mt-4 break-words font-display text-3xl font-bold tracking-tight text-canvas-950 dark:text-white sm:text-4xl">{personal.name}</h1>
               <p className="mt-2 text-lg font-semibold text-accent-600 dark:text-accent-300">{personal.title}</p>
+              <p className="mt-3 text-sm font-semibold text-accent-600 dark:text-accent-300">{personal.availability}</p>
               <p className="mt-2 text-canvas-600 dark:text-canvas-300">Master’s student in Artificial Intelligence · {personal.location}</p>
             </header>
             <div className="mb-6 grid gap-3 sm:flex sm:flex-wrap">

@@ -87,6 +87,7 @@ export default function GameShowcase({ project }: { project: ProductProject }) {
               <ul aria-label="Technology" className="mt-5 flex flex-wrap gap-2">
                 {project.technologies?.map((tech) => <li key={tech} className="rounded-full bg-canvas-100 px-3 py-1.5 text-xs font-medium text-canvas-700 dark:bg-white/5 dark:text-canvas-300">{tech}</li>)}
               </ul>
+              <Link href={`/projects/${project.id}#product-visuals`} className="mt-5 inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-accent-600 dark:text-accent-300">See gameplay screenshots <span aria-hidden="true">→</span></Link>
               <p className="mt-6 text-xs text-canvas-500 dark:text-canvas-400">{project.showcaseCover?.caption ?? 'Official Google Play promotional artwork.'}</p>
             </div>
           </article>

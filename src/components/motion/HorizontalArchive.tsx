@@ -19,7 +19,7 @@ interface HorizontalArchiveProps {
 const HorizontalArchive = ({
   items,
   onPreview,
-  title = 'More shipped builds',
+  title = 'More projects & prototypes',
   eyebrow = 'Archive',
   basePath,
 }: HorizontalArchiveProps) => {
@@ -40,7 +40,15 @@ const HorizontalArchive = ({
   if (items.length === 0) return null;
 
   return (
-    <section ref={containerRef} className="relative mt-16 h-[300vh]">
+    <>
+    <section className="section-container mt-16 md:hidden" aria-label="More projects and prototypes">
+      <p className="eyebrow">{eyebrow}</p>
+      <h3 className="mt-4 font-display text-2xl font-bold">{title}</h3>
+      <div className="mt-6 grid min-w-0 gap-6 sm:grid-cols-2">
+        {items.map(item => <ArchiveItemCard key={item.id} item={item} basePath={basePath} onPreview={onPreview} />)}
+      </div>
+    </section>
+    <section ref={containerRef} className="relative mt-16 hidden h-[300vh] md:block">
       <style>{`
         .archive-stack {
           --spread-x: 12vw;
@@ -69,7 +77,7 @@ const HorizontalArchive = ({
               <span className="h-1.5 w-1.5 rounded-full bg-accent-500" />
               {eyebrow}
             </p>
-            <h3 className="font-display text-4xl font-bold tracking-tight text-canvas-950 dark:text-white md:text-5xl lg:text-6xl">
+        <h3 className="font-display text-4xl font-bold tracking-tight text-canvas-950 dark:text-white md:text-5xl lg:text-6xl">
               {title}
             </h3>
             <p className="mt-3 font-display text-sm font-medium text-canvas-500 dark:text-canvas-400">
@@ -95,6 +103,7 @@ const HorizontalArchive = ({
         </motion.div>
       </div>
     </section>
+    </>
   );
 };
 
@@ -137,7 +146,7 @@ const StackedCard = ({
     <motion.div
       onClick={onActivate}
       onKeyDown={(e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
+        if (e.target === e.currentTarget && (e.key === 'Enter' || e.key === ' ')) {
           e.preventDefault();
           onActivate();
         }
@@ -191,7 +200,6 @@ const ArchiveItemCard = ({
       <button
         type="button"
         onClick={() => {
-          if (typeof window !== 'undefined' && window.innerWidth < 768) return;
           onPreview(cover);
         }}
         className="relative block h-56 w-full overflow-hidden rounded-2xl md:cursor-zoom-in bg-canvas-50 dark:bg-canvas-950"
@@ -213,11 +221,12 @@ const ArchiveItemCard = ({
           {item.year && <span className="font-display text-[13px] font-bold text-canvas-400 dark:text-canvas-500">{item.year}</span>}
         </div>
 
+        {item.status && <p className="mb-3 text-xs font-semibold text-accent-600 dark:text-accent-300">{item.status}</p>}
         <h3 className="font-display text-2xl font-black text-canvas-950 dark:text-white">{item.title}</h3>
         <p className="mt-3 min-h-[4.5rem] font-display text-[15px] leading-relaxed text-canvas-500 dark:text-canvas-400">{item.shortDescription ?? item.description}</p>
 
         <div className="mt-5 flex flex-wrap gap-2">
-          {item.technologies.slice(0, 3).map((tech) => (
+          {item.technologies?.slice(0, 3).map((tech) => (
             <span key={tech} className="rounded-full border border-canvas-200/50 bg-canvas-50 px-4 py-1.5 font-display text-xs font-bold text-canvas-600 dark:border-white/5 dark:bg-white/[0.05] dark:text-canvas-300">{tech}</span>
           ))}
         </div>

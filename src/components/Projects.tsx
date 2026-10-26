@@ -32,7 +32,7 @@ const Projects = ({ projects }: { projects: ProjectWithId[] }) => {
             align="left"
             label="Selected Work"
             title="Projects with product shape, architecture, and visual polish."
-            description="A curated set of builds across healthcare, university operations, document automation, commerce, fintech, and AI tooling."
+            description="Academic and portfolio projects across web, mobile, and applied AI. Status labels distinguish these builds from the published Google Play game."
           />
           <motion.div
             className="surface-card mb-14 grid grid-cols-3 gap-0 overflow-hidden"

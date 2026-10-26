@@ -37,72 +37,66 @@ features:
   - "Crime, rival pressure, and military progression"
   - "Guest play and account-based cloud saves"
 screenshots:
+  - path: "/assets/projects/business-empire-underworld/gameplay-09.webp"
+    type: "web"
+    width: 1080
+    height: 608
+    alt: "In-game city view in Business Empire: Underworld"
+    caption: "In-game city view — in-game screenshot from Google Play."
+  - path: "/assets/projects/business-empire-underworld/gameplay-01.webp"
+    type: "mobile"
+    width: 941
+    height: 1672
+    alt: "Empire overview and navigation in Business Empire: Underworld"
+    caption: "Empire overview and navigation — gameplay screenshot with promotional framing from Google Play."
+  - path: "/assets/projects/business-empire-underworld/gameplay-02.webp"
+    type: "mobile"
+    width: 941
+    height: 1672
+    alt: "Underworld operations in Business Empire: Underworld"
+    caption: "Underworld operations — gameplay screenshot with promotional framing from Google Play."
+  - path: "/assets/projects/business-empire-underworld/gameplay-03.webp"
+    type: "mobile"
+    width: 941
+    height: 1672
+    alt: "Empire capital and city map in Business Empire: Underworld"
+    caption: "Empire capital and city map — gameplay screenshot with promotional framing from Google Play."
+  - path: "/assets/projects/business-empire-underworld/gameplay-04.webp"
+    type: "mobile"
+    width: 941
+    height: 1672
+    alt: "Property management in Business Empire: Underworld"
+    caption: "Property management — gameplay screenshot with promotional framing from Google Play."
+  - path: "/assets/projects/business-empire-underworld/gameplay-05.webp"
+    type: "mobile"
+    width: 941
+    height: 1672
+    alt: "Transport network in Business Empire: Underworld"
+    caption: "Transport network — gameplay screenshot with promotional framing from Google Play."
+  - path: "/assets/projects/business-empire-underworld/gameplay-06.webp"
+    type: "mobile"
+    width: 941
+    height: 1672
+    alt: "Industrial production in Business Empire: Underworld"
+    caption: "Industrial production — gameplay screenshot with promotional framing from Google Play."
+  - path: "/assets/projects/business-empire-underworld/gameplay-07.webp"
+    type: "mobile"
+    width: 941
+    height: 1672
+    alt: "Town square activities in Business Empire: Underworld"
+    caption: "Town square activities — gameplay screenshot with promotional framing from Google Play."
+  - path: "/assets/projects/business-empire-underworld/gameplay-08.webp"
+    type: "mobile"
+    width: 940
+    height: 1672
+    alt: "Portfolio and progression in Business Empire: Underworld"
+    caption: "Portfolio and progression — gameplay screenshot with promotional framing from Google Play."
   - path: "/assets/projects/business-empire-underworld/showcase-wide.webp"
     type: "web"
     width: 2172
     height: 724
-    alt: "Business Empire: Underworld custom branded promotional cover"
-    caption: "Custom cover — promotional artwork adapted from the game's Google Play visuals."
-  - path: "/assets/projects/business-empire-underworld/cover-mobile.webp"
-    type: "mobile"
-    width: 804
-    height: 1440
-    alt: "Business Empire city skyline promotional artwork"
-    caption: "City skyline — official Google Play promotional artwork, not an in-game capture."
-  - path: "/assets/projects/business-empire-underworld/google-play-02.webp"
-    type: "mobile"
-    width: 804
-    height: 1440
-    alt: "Property upgrades with houses, a mansion, offices, and a gold tower"
-    caption: "Property upgrades — Google Play promotional artwork."
-  - path: "/assets/projects/business-empire-underworld/google-play-03.webp"
-    type: "mobile"
-    width: 804
-    height: 1440
-    alt: "Transport network with roads, rail, a cargo ship, and an aircraft"
-    caption: "Transport and logistics — Google Play promotional artwork."
-  - path: "/assets/projects/business-empire-underworld/google-play-04.webp"
-    type: "mobile"
-    width: 804
-    height: 1440
-    alt: "Underworld scene with neon streets, an armored van, and a fictional crew member"
-    caption: "Underworld operations — Google Play promotional artwork."
-  - path: "/assets/projects/business-empire-underworld/google-play-05.webp"
-    type: "mobile"
-    width: 804
-    height: 1440
-    alt: "Simulated markets illustrated with stock charts, gold bars, and an investor"
-    caption: "Markets and auctions — Google Play promotional artwork."
-  - path: "/assets/projects/business-empire-underworld/google-play-06.webp"
-    type: "mobile"
-    width: 804
-    height: 1440
-    alt: "Military strategy illustrated with a coastal base, vehicles, and a helicopter"
-    caption: "Military strategy — Google Play promotional artwork."
-  - path: "/assets/projects/business-empire-underworld/google-play-07.webp"
-    type: "mobile"
-    width: 804
-    height: 1440
-    alt: "Progression tiers illustrated as buildings ascending from a shop to advanced properties"
-    caption: "Long-term progression — Google Play promotional artwork."
-  - path: "/assets/projects/business-empire-underworld/cover-desktop.webp"
-    type: "web"
-    width: 2560
-    height: 1429
-    alt: "Business Empire property progression promotional artwork"
-    caption: "Property progression — official Google Play promotional artwork, not an in-game capture."
-  - path: "/assets/projects/business-empire-underworld/google-play-09.webp"
-    type: "web"
-    width: 2560
-    height: 1429
-    alt: "Landscape transport artwork showing aircraft, trucks, rail, and a container port"
-    caption: "Transport network, landscape edition — Google Play promotional artwork."
-  - path: "/assets/projects/business-empire-underworld/google-play-10.webp"
-    type: "web"
-    width: 2560
-    height: 1429
-    alt: "Landscape simulated-market artwork with an investor overlooking a city and stock charts"
-    caption: "Simulated markets, landscape edition — Google Play promotional artwork."
+    alt: "Business Empire: Underworld promotional cover"
+    caption: "Promotional cover artwork; separate from the gameplay captures above."
 ---
 
 ## Product overview
@@ -153,6 +147,12 @@ As a **Full-Stack & AI Engineer**, my work spans gameplay-system development, ec
 
 The work involves both individual mechanics and their interactions: how assets affect income, how production consumes inventory, how timers settle progress, and how local actions connect to authenticated online operations.
 
+## Engineering challenge: preserving progress across updates
+
+A game update can change the structure of saved data while players already own properties, hold balances, and have production in progress. My implementation uses versioned persistence, save normalization, and migrations to carry that progress into the updated state. Shared timing and settlement logic coordinates offline earnings and timed activities when a player returns.
+
+This work spans the mobile state model, backend integration, and tests for persistence and transaction behavior. It makes save compatibility a release concern rather than treating a new state schema as a fresh game.
+
 ## Engineering challenges
 
 - **Preserving saves across updates:** changes to state structure need to retain players' existing assets, balances, inventory, and progress.
@@ -169,9 +169,9 @@ Release-specific verification is particularly important when the development cod
 
 ## Screenshots and artwork
 
-The [image gallery](#product-visuals) presents promotional artwork with descriptive captions and accessible enlargement. These visuals illustrate the game's identity rather than documenting an in-game screen.
+The [image gallery](#product-visuals) starts with a direct in-game city capture, followed by gameplay screenshots with promotional framing from the current Google Play listing. The adapted promotional cover is labelled separately. Select any image to enlarge it.
 
-{/* TODO: Add actual gameplay screenshots alongside the clearly labelled promotional artwork when supplied. */}
+
 
 ## Current development
 

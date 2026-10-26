@@ -144,6 +144,8 @@ function CinematicProjectDetails({ project, mdxSource }: Props) {
               </div>
             </motion.div>
 
+            {project.status && <p className="mb-4 text-sm font-semibold text-accent-600 dark:text-accent-300">{project.status}</p>}
+
             {/* Title Block */}
             <div className="max-w-4xl">
               <motion.h1 initial={{ opacity: 0, y: 30, filter: 'blur(8px)' }} animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }} transition={{ duration: 0.8, delay: 0.1, ease: [0.22, 1, 0.36, 1] }} className="font-display text-5xl font-black tracking-tight text-canvas-950 dark:text-white md:text-7xl lg:text-[5.5rem] lg:leading-[1.05]">

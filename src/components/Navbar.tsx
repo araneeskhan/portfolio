@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -47,6 +47,8 @@ const useActiveSection = () => {
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const menuRef = useRef<HTMLElement>(null);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
   const activeSection = useActiveSection();
   const router = useRouter();
   const { scrollY } = useGlobalScroll();
@@ -63,9 +65,29 @@ const Navbar = () => {
   });
 
   useEffect(() => {
-    document.body.style.overflow = isMenuOpen ? 'hidden' : '';
+    if (!isMenuOpen) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    const trigger = menuButtonRef.current;
+    const focusable = () => Array.from(menuRef.current?.querySelectorAll<HTMLElement>('a[href], button:not([disabled])') ?? []);
+    focusable()[0]?.focus();
+    const handleKey = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') { event.preventDefault(); setIsMenuOpen(false); }
+      if (event.key !== 'Tab') return;
+      const items = focusable();
+      const first = items[0], last = items[items.length - 1];
+      if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last?.focus(); }
+      else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first?.focus(); }
+    };
+    const desktop = window.matchMedia('(min-width: 1280px)');
+    const closeOnDesktop = () => { if (desktop.matches) setIsMenuOpen(false); };
+    desktop.addEventListener('change', closeOnDesktop);
+    window.addEventListener('keydown', handleKey);
     return () => {
-      document.body.style.overflow = '';
+      document.body.style.overflow = previousOverflow;
+      desktop.removeEventListener('change', closeOnDesktop);
+      window.removeEventListener('keydown', handleKey);
+      trigger?.focus({ preventScroll: true });
     };
   }, [isMenuOpen]);
 
@@ -170,7 +192,7 @@ const Navbar = () => {
                 href="/#contact"
                 className="btn-primary hidden px-4 py-2 font-display text-xs font-bold shadow-md lg:inline-flex"
               >
-                <span>Let&apos;s Talk</span>
+                <span>Opportunities</span>
                 <svg
                   width="12"
                   height="12"
@@ -190,6 +212,8 @@ const Navbar = () => {
                 type="button"
                 className="flex h-10 w-10 items-center justify-center rounded-xl text-canvas-950 transition-colors hover:text-accent-500 dark:text-white dark:hover:text-accent-400 xl:hidden"
                 onClick={() => setIsMenuOpen((v) => !v)}
+                ref={menuButtonRef}
+                aria-controls="mobile-menu"
                 aria-label="Toggle menu"
                 aria-expanded={isMenuOpen}
                 whileTap={{ scale: 0.9 }}
@@ -256,11 +280,16 @@ const Navbar = () => {
       <AnimatePresence>
         {isMenuOpen && (
           <motion.aside
+            ref={menuRef}
+            id="mobile-menu"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Navigation menu"
             initial={{ x: '100%' }}
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
             transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-            className="fixed right-0 top-0 z-[70] flex h-full w-80 max-w-[86vw] flex-col bg-white/95 backdrop-blur-2xl dark:bg-canvas-950/95 xl:hidden"
+            className="fixed right-0 top-0 z-[70] flex h-[100dvh] w-80 max-w-[86vw] flex-col bg-white/95 backdrop-blur-2xl dark:bg-canvas-950/95 xl:hidden"
           >
             <div className="flex items-center justify-between border-b border-canvas-200/20 p-6 dark:border-white/10">
               <span className="font-display text-lg font-bold text-canvas-950 dark:text-white">
@@ -384,7 +413,7 @@ const Navbar = () => {
                 href="/#contact"
                 className="btn-primary w-full py-4 text-sm font-bold shadow-md"
               >
-                <span>Start a Project</span>
+                <span>Discuss an Opportunity</span>
                 <svg
                   width="14"
                   height="14"
