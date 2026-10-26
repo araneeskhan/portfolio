@@ -389,3 +389,14 @@ body {
   .grain::after { display: none; }
   .marquee-track { animation: none; }
 }
+
+/* Keep mobile reading stable and reduce full-screen compositing work. */
+@media (max-width: 639px) {
+  .hero-content, .hero-portrait { transform: none !important; opacity: 1 !important; }
+  .grain::after, .glow-orb { display: none; }
+  .section-shell { padding-top: 4rem; padding-bottom: 4rem; }
+  .surface-card { backdrop-filter: none; -webkit-backdrop-filter: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-content, .hero-portrait { transform: none !important; opacity: 1 !important; }
+}

@@ -5,7 +5,6 @@ import { motion, useScroll, useTransform, useSpring } from 'motion/react';
 import personal from '@/config/personal';
 import MagneticButton from './motion/MagneticButton';
 
-const roles = ['Full-Stack & AI Engineer', 'Software Engineer', 'AI Product Builder'];
 
 const metrics = [
   { value: 24, suffix: '+', label: 'Months Building' },
@@ -19,11 +18,10 @@ const container = {
 };
 
 const item = {
-  hidden: { opacity: 0, y: 24, filter: 'blur(6px)' },
+  hidden: { opacity: 0, y: 24 },
   visible: {
     opacity: 1,
     y: 0,
-    filter: 'blur(0px)',
     transition: { duration: 0.9, ease: [0.22, 1, 0.36, 1] as const },
   },
 };
@@ -54,9 +52,6 @@ const SplitText = ({ text, className, delay = 0 }: { text: string; className?: s
 };
 
 const Hero = () => {
-  const [currentRoleIndex, setCurrentRoleIndex] = useState(0);
-  const [currentRole, setCurrentRole] = useState('');
-  const [isDeleting, setIsDeleting] = useState(false);
   const [counts, setCounts] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
 
@@ -72,32 +67,9 @@ const Hero = () => {
   const opacity = useTransform(smooth, [0, 0.6, 1], [1, 0, 0]);
   const metricsY = useTransform(smooth, [0, 1], [0, 50]);
 
-  useEffect(() => {
-    const role = roles[currentRoleIndex];
-    const timeout = window.setTimeout(
-      () => {
-        if (!isDeleting && currentRole.length < role.length) {
-          setCurrentRole(role.substring(0, currentRole.length + 1));
-          return;
-        }
-        if (!isDeleting) {
-          window.setTimeout(() => setIsDeleting(true), 1400);
-          return;
-        }
-        if (currentRole.length > 0) {
-          setCurrentRole(currentRole.substring(0, currentRole.length - 1));
-          return;
-        }
-        setIsDeleting(false);
-        setCurrentRoleIndex((v) => (v + 1) % roles.length);
-      },
-      isDeleting ? 35 : 70
-    );
-    return () => window.clearTimeout(timeout);
-  }, [currentRole, currentRoleIndex, isDeleting]);
 
   return (
-    <section ref={sectionRef} id="home" className="relative flex min-h-screen items-center overflow-hidden pt-24">
+    <section ref={sectionRef} id="home" className="relative flex min-h-[100svh] items-center overflow-hidden pb-12 pt-24 sm:pb-20">
       {/* Background */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <div className="absolute inset-0 subtle-grid opacity-50 dark:opacity-20" />
@@ -110,7 +82,7 @@ const Hero = () => {
         <div className="grid items-center gap-8 sm:gap-16 lg:grid-cols-[1.1fr_0.9fr] lg:gap-20">
           {/* Left: Text */}
           <motion.div
-            className="order-2 max-w-3xl lg:order-1"
+            className="hero-content order-2 min-w-0 max-w-3xl lg:order-1"
             variants={container}
             initial="hidden"
             animate="visible"
@@ -128,8 +100,7 @@ const Hero = () => {
             <motion.div variants={item} className="mt-4 flex items-center gap-3">
               <div className="h-px w-8 bg-gradient-to-r from-accent-500 to-accent2-500" />
               <span className="font-display text-xl font-semibold text-gradient sm:text-2xl">
-                {currentRole}
-                <span className="ml-0.5 animate-blink text-accent-500">|</span>
+                {personal.title}
               </span>
             </motion.div>
 
@@ -186,9 +157,9 @@ const Hero = () => {
 
           {/* Right: Clean circular profile — NO floating cards */}
           <motion.div
-            className="order-1 flex justify-center lg:order-2"
-            initial={{ opacity: 0, scale: 0.8, filter: 'blur(20px)' }}
-            animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
+            className="hero-portrait order-1 flex justify-center lg:order-2"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1.2, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
             style={{ y: imageY, scale: imageScale, rotate: imageRotate }}
           >
@@ -217,7 +188,7 @@ const Hero = () => {
                   fill
                   className="object-cover"
                   priority
-                  quality={90}
+                  quality={80}
                   sizes="(max-width: 639px) 192px, (max-width: 1023px) 380px, 420px"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-canvas-950/20 via-transparent to-transparent" />

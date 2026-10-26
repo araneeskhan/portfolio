@@ -56,7 +56,7 @@ export function ShowcaseArtwork({ project }: { project: ContentItem }) {
   return (
     <picture className="block aspect-square sm:aspect-[3/1]">
       <source media="(min-width: 640px)" srcSet={desktop.srcSet} sizes={desktop.sizes} width={cover.width} height={cover.height} />
-      <Image src={cover.mobile} alt={cover.alt} width={cover.mobileWidth} height={cover.mobileHeight} sizes="calc(100vw - 40px)" className="block h-full w-full object-cover" loading="eager" />
+      <Image src={cover.mobile} alt={cover.alt} width={cover.mobileWidth} height={cover.mobileHeight} sizes="calc(100vw - 40px)" className="block h-full w-full object-cover" loading="lazy" />
     </picture>
   );
 }
